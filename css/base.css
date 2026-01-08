@@ -1,0 +1,212 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::first-letter {
+  text-transform: uppercase;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+body {
+  font-size: calc(16 * 100vw / var(--base-width));
+  font-family: var(--font-grotesque);
+  background-color: #000;
+  color: #fff;
+}
+
+/* ============================================
+   COMMON / UTILITY CLASSES
+   ============================================ */
+
+/* Section */
+.section {
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  max-width: 100%;
+  width: 100%;
+  padding: calc(40 * 100vw / var(--base-width));
+}
+
+/* Section Label */
+.section-label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2%;
+  line-height: 100%;
+  font-size: calc(14 * 100vw / var(--base-width));
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -2%;
+  color: #fff;
+}
+
+.card-title-32 {
+  font-size: calc(32 * 100vw / var(--base-width));
+}
+
+.card-title-28 {
+  font-size: calc(28 * 100vw / var(--base-width));
+}
+
+.card-title-24 {
+  font-size: calc(24 * 100vw / var(--base-width));
+}
+
+.card-title-22 {
+  font-size: calc(22 * 100vw / var(--base-width));
+}
+
+.card-title-20 {
+  font-size: calc(20 * 100vw / var(--base-width));
+}
+
+/* Section Title */
+.h1 {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  line-height: 100%;
+  color: #fff;
+  font-size: calc(62 * 100vw / var(--base-width));
+}
+
+.h1 .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -4%;
+  font-style: italic;
+  font-size: calc(75 * 100vw / var(--base-width));
+  line-height: calc(68 * 100vw / var(--base-width));
+}
+
+.h2 {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  line-height: 100%;
+  color: #fff;
+  font-size: calc(72 * 100vw / var(--base-width));
+  letter-spacing: -3%;
+}
+
+.h2 .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -3%;
+  font-style: italic;
+  font-size: calc(72 * 100vw / var(--base-width));
+  line-height: calc(72 * 100vw / var(--base-width));
+}
+
+.h2 .serif.serif-60 {
+  opacity: 0.6;
+}
+
+.h3 {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  line-height: 100%;
+  color: #fff;
+  font-size: calc(42 * 100vw / var(--base-width));
+  letter-spacing: -3%;
+}
+
+.h3 .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -3%;
+  font-style: italic;
+  font-size: calc(42 * 100vw / var(--base-width));
+  line-height: calc(42 * 100vw / var(--base-width));
+}
+
+.h3 .serif.serif-60 {
+  opacity: 0.6;
+}
+
+/* Section Text */
+.section-text-flex {
+  display: flex;
+  gap: calc(20 * 100vw / var(--base-width));
+}
+
+.section-text-col {
+  flex-direction: column;
+}
+
+.section-text-t-center {
+  text-align: center;
+}
+
+.section-text-align-center {
+  align-items: center;
+}
+
+.section-text-justify-center {
+  justify-content: center;
+}
+
+/* Text Styles */
+.body-txt {
+  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: calc(16 * 100vw / var(--base-width));
+  line-height: 130%;
+  letter-spacing: -1%;
+  color: #e9e9e9;
+}
+
+.body-txt-18 {
+  font-size: calc(18 * 100vw / var(--base-width));
+  line-height: 130%;
+  letter-spacing: -1%;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.link {
+  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: calc(20 * 100vw / var(--base-width));
+  line-height: 100%;
+  letter-spacing: -1%;
+  color: #e9e9e9;
+  text-decoration: underline;
+}
+
+.link.secondary {
+  color: #fff;
+  text-decoration: none;
+  font-size: calc(16 * 100vw / var(--base-width));
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: none;
+}
+
