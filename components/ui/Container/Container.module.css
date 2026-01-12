@@ -1,0 +1,12 @@
+.container {
+  max-width: 100%;
+  width: 100%;
+  padding: calc(40 * 100vw / var(--base-width));
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: calc(18 * 100vw / var(--base-width-mobile));
+    padding-right: calc(18 * 100vw / var(--base-width-mobile));
+  }
+}

@@ -1,0 +1,73 @@
+.title {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  line-height: 100%;
+  color: #fff;
+}
+
+.title.h1 {
+  font-size: calc(62 * 100vw / var(--base-width));
+}
+
+.title.h1 .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -4%;
+  font-style: italic;
+  font-size: calc(75 * 100vw / var(--base-width));
+  line-height: calc(68 * 100vw / var(--base-width));
+}
+
+.title.h2 {
+  font-size: calc(72 * 100vw / var(--base-width));
+  letter-spacing: -3%;
+}
+
+.title.h2 .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -3%;
+  font-style: italic;
+  font-size: calc(72 * 100vw / var(--base-width));
+  line-height: calc(72 * 100vw / var(--base-width));
+}
+
+.title.h3 {
+  font-size: calc(42 * 100vw / var(--base-width));
+  letter-spacing: -3%;
+}
+
+.title.h3 .serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -3%;
+  font-style: italic;
+  font-size: calc(42 * 100vw / var(--base-width));
+  line-height: calc(42 * 100vw / var(--base-width));
+}
+
+@media (max-width: 768px) {
+  .title.h1 {
+    font-size: calc(44 * 100vw / var(--base-width-mobile));
+    line-height: calc(48 * 100vw / var(--base-width-mobile));
+    letter-spacing: -5%;
+  }
+
+  .title.h1 .serif {
+    font-size: calc(52 * 100vw / var(--base-width-mobile));
+    line-height: calc(50 * 100vw / var(--base-width-mobile));
+    letter-spacing: -4%;
+  }
+
+  .title.h2 {
+    font-size: calc(44 * 100vw / var(--base-width-mobile));
+    line-height: calc(48 * 100vw / var(--base-width-mobile));
+    letter-spacing: -5%;
+  }
+
+  .title.h2 .serif {
+    font-size: calc(44 * 100vw / var(--base-width-mobile));
+    line-height: calc(48 * 100vw / var(--base-width-mobile));
+    letter-spacing: -5%;
+  }
+}

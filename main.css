@@ -230,8 +230,6 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 
-
-
 .link {
   font-weight: 500;
   font-family: var(--font-sans);
@@ -484,50 +482,8 @@ body {
   max-height: calc(440 * 100vw / var(--base-width));
   perspective: 1000px;
   transform-style: preserve-3d;
-  scale: 0.8;
   transform-origin: center left;
   pointer-events: none;
-}
-
-@media (min-width: 768px) and (min-height: 800px) {
-  .hero-cards-wrapper {
-    scale: 0.5 !important;
-    bottom: -15% !important;
-  }
-}
-
-@media (min-width: 768px) and (min-height: 850px) {
-  .hero-cards-wrapper {
-    scale: 0.6 !important;
-    bottom: -12% !important;
-  }
-}
-
-@media (min-width: 768px) and (min-height: 900px) {
-  .hero-cards-wrapper {
-    scale: 0.7 !important;
-    bottom: -5% !important;
-  }
-}
-
-@media (min-width: 768px) and (min-height: 1000px) {
-  .hero-cards-wrapper {
-    scale: 0.9 !important;
-    bottom: 0 !important;
-  }
-}
-
-@media (min-width: 768px) and (min-height: 1100px) {
-  .hero-cards-wrapper {
-    bottom: 5% !important;
-  }
-}
-
-@media (min-width: 768px) and (min-height: 1250px) {
-  .hero-cards-wrapper {
-    scale: 1 !important;
-    bottom: 10% !important;
-  }
 }
 
 /* Hero Main Card */
@@ -1237,8 +1193,6 @@ body {
     line-height: calc(21 * 100vw / var(--base-width-mobile));
     letter-spacing: -1%;
   }
-
-  
 
   .button {
     height: calc(44 * 100vw / var(--base-width-mobile));

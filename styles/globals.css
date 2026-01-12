@@ -1,0 +1,214 @@
+/* ============================================
+   FONTS
+   ============================================ */
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../fonts/Instrument_Serif/InstrumentSerif-Regular.ttf')
+    format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../fonts/Instrument_Serif/InstrumentSerif-Italic.ttf')
+    format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('../fonts/inter-display/ttf/InterDisplay-Regular.ttf')
+    format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('../fonts/inter-display/ttf/InterDisplay-Medium.ttf')
+    format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('../fonts/inter-display/ttf/InterDisplay-SemiBold.ttf')
+    format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  src: url('../fonts/inter-display/ttf/InterDisplay-Bold.ttf')
+    format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UXUM Grotesque';
+  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumlight.otf')
+    format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UXUM Grotesque';
+  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumregular.otf')
+    format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UXUM Grotesque';
+  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumbold.otf')
+    format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+  /* Base width for conversion (Figma design width) */
+  --base-width: 1440;
+  --base-width-mobile: 390;
+  /* Formula to convert px to vw: calc(px * 100vw / var(--base-width)) */
+  /* Usage: width: calc(200 * 100vw / var(--base-width)); for 200px */
+
+  /* Fonts */
+  --font-sans: 'Inter Display', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-grotesque: 'UXUM Grotesque', -apple-system, BlinkMacSystemFont,
+    sans-serif;
+
+  /* Font Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+body {
+  font-size: calc(16 * 100vw / var(--base-width));
+  font-family: var(--font-grotesque);
+  background-color: #000;
+  color: #fff;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: unset;
+  }
+}
+
+@media (min-width: 768px) {
+  .desktop-only {
+    display: unset;
+  }
+}
+
+/* ============================================
+   FULLPAGE.JS STYLES
+   ============================================ */
+#fullpage {
+  position: relative;
+}
+
+.fp-section {
+  position: relative;
+  width: 100%;
+  height: 100vh !important;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Навигация FullPage */
+#fp-nav {
+  z-index: 999;
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li:hover a.active span {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Убираем background-attachment: fixed для секций внутри FullPage,
+   так как это может конфликтовать с FullPage.js */
+.fp-section .section {
+  background-attachment: scroll !important;
+}
+
+/* Секции с normalScroll - используем авто-высоту через CSS */
+.fp-section[data-normal-scroll='true'] {
+  height: auto !important;
+  min-height: 100vh;
+}
+
+.fp-section[data-normal-scroll='true'] .section {
+  height: fit-content !important;
+  min-height: 100vh;
+}
+
+/* Контейнеры с normalScroll - позволяют нормальную прокрутку внутри */
+/* Эти элементы добавлены в normalScrollElements FullPage.js */
+.normal-scroll-container {
+  height: fit-content;
+  min-height: 100vh;
+}
+
+/* Оптимизация для Chrome - улучшаем производительность backdrop-filter */
+/* Chrome имеет проблемы с backdrop-filter + transform одновременно */
+.chrome-browser .fp-section .blured,
+.chrome-browser .fp-section .secondary {
+  /* Оптимизации для Chrome - создаем отдельный композитинг слой */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Используем GPU для backdrop-filter в Chrome */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}

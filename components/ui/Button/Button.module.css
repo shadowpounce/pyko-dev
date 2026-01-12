@@ -1,0 +1,106 @@
+.button {
+  height: calc(44 * 100vw / var(--base-width));
+  max-height: calc(44 * 100vw / var(--base-width));
+  min-height: calc(44 * 100vw / var(--base-width));
+  padding: calc(8 * 100vw / var(--base-width))
+    calc(16 * 100vw / var(--base-width));
+  border-radius: calc(14 * 100vw / var(--base-width));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(8 * 100vw / var(--base-width));
+
+  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: calc(16 * 100vw / var(--base-width));
+  line-height: 100%;
+  letter-spacing: -1%;
+  transition: opacity 0.2s ease;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button.primary {
+  background-color: #fff;
+  color: #000;
+}
+
+.button.secondary {
+  background-color: #040504;
+  color: #fff;
+}
+
+.button.secondary.withArrow .arrow {
+  background-color: #fff;
+}
+
+.button.withArrow {
+  padding: calc(8 * 100vw / var(--base-width))
+    calc(9 * 100vw / var(--base-width)) calc(8 * 100vw / var(--base-width))
+    calc(16 * 100vw / var(--base-width));
+}
+
+.button .arrow {
+  width: calc(21 * 100vw / var(--base-width));
+  height: calc(21 * 100vw / var(--base-width));
+  max-width: calc(21 * 100vw / var(--base-width));
+  min-width: calc(21 * 100vw / var(--base-width));
+  background-color: #000;
+  border-radius: calc(6 * 100vw / var(--base-width));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .arrow img {
+  width: calc(10 * 100vw / var(--base-width));
+  height: calc(10 * 100vw / var(--base-width));
+  min-width: calc(10 * 100vw / var(--base-width));
+  min-height: calc(10 * 100vw / var(--base-width));
+  max-width: calc(10 * 100vw / var(--base-width));
+  max-height: calc(10 * 100vw / var(--base-width));
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 768px) {
+  .button {
+    height: calc(44 * 100vw / var(--base-width-mobile));
+    max-height: calc(44 * 100vw / var(--base-width-mobile));
+    min-height: calc(44 * 100vw / var(--base-width-mobile));
+    padding: calc(6 * 100vw / var(--base-width-mobile))
+      calc(16 * 100vw / var(--base-width-mobile));
+    border-radius: calc(14 * 100vw / var(--base-width-mobile));
+    font-size: calc(16 * 100vw / var(--base-width-mobile));
+    line-height: calc(21 * 100vw / var(--base-width-mobile));
+    letter-spacing: -1%;
+  }
+
+  .button.withArrow .arrow {
+    width: calc(21 * 100vw / var(--base-width-mobile));
+    height: calc(21 * 100vw / var(--base-width-mobile));
+    max-width: calc(21 * 100vw / var(--base-width-mobile));
+    min-width: calc(21 * 100vw / var(--base-width-mobile));
+    border-radius: calc(6 * 100vw / var(--base-width-mobile));
+  }
+
+  .button.withArrow .arrow img {
+    width: calc(10 * 100vw / var(--base-width-mobile));
+    height: calc(10 * 100vw / var(--base-width-mobile));
+    max-width: calc(10 * 100vw / var(--base-width-mobile));
+    min-width: calc(10 * 100vw / var(--base-width-mobile));
+    max-height: calc(10 * 100vw / var(--base-width-mobile));
+    min-height: calc(10 * 100vw / var(--base-width-mobile));
+  }
+
+  .button.withArrow {
+    gap: calc(8 * 100vw / var(--base-width-mobile));
+    padding: calc(6 * 100vw / var(--base-width-mobile))
+      calc(9 * 100vw / var(--base-width-mobile))
+      calc(6 * 100vw / var(--base-width-mobile))
+      calc(16 * 100vw / var(--base-width-mobile));
+  }
+}

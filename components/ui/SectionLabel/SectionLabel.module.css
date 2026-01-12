@@ -1,0 +1,17 @@
+.label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2%;
+  line-height: 100%;
+  font-size: calc(14 * 100vw / var(--base-width));
+}
+
+@media (max-width: 768px) {
+  .label {
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
+    letter-spacing: -2%;
+    line-height: calc(110%);
+  }
+}

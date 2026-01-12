@@ -1,0 +1,17 @@
+.bodyText {
+  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: calc(18 * 100vw / var(--base-width));
+  line-height: 130%;
+  letter-spacing: -1%;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .bodyText {
+    font-size: calc(16 * 100vw / var(--base-width-mobile));
+    line-height: calc(21 * 100vw / var(--base-width-mobile));
+    max-width: 100%;
+    width: 100%;
+  }
+}
