@@ -12,17 +12,20 @@ import {
 } from '@/hooks/useSectionAnimationTrigger'
 import { PredictCards } from './PredictCards'
 import styles from './PredictSection.module.css'
+import clsx from 'clsx'
 
 interface PredictSectionProps {
   // Этот prop используется в FullPageProvider для нормальной прокрутки
   normalScroll?: boolean
+  sectionIndex: number
 }
 
 export const PredictSection: React.FC<PredictSectionProps> = ({
   normalScroll = false,
+  sectionIndex,
 }) => {
   // Индекс этой секции
-  const SECTION_INDEX = 2
+  const SECTION_INDEX = sectionIndex
 
   // Тайминг для начала анимаций в этой секции (в секундах)
   const START_DELAY = 0.3
@@ -54,6 +57,7 @@ export const PredictSection: React.FC<PredictSectionProps> = ({
             Operate With Intent
           </SectionLabel>
           <SectionTitle
+          className={styles.title}
             serifOnNewLine={true}
             level={2}
             serif="before you reach it."
@@ -64,6 +68,7 @@ export const PredictSection: React.FC<PredictSectionProps> = ({
           <BodyText
             animationDelay={bodyTextDelay}
             opacity={0.5}
+            className="desktop-only"
             maxWidth="calc(556 * 100vw / var(--base-width))"
           >
             Most students react after results. Pyko predicts them before they{' '}
@@ -71,6 +76,17 @@ export const PredictSection: React.FC<PredictSectionProps> = ({
             happen — analyzing your grades, focus, and habits to reveal what’s{' '}
             <br />
             next. You see shifts early and act with intention, not guesswork.
+          </BodyText>
+          <BodyText
+            className={clsx(styles.bodyText, 'mobile-only')}
+            animationDelay={bodyTextDelay}
+            opacity={0.5}
+            
+          >
+            Most students react after results. Pyko predicts  <br /> them before they{' '}
+           
+            happen — analyzing your grades,  <br /> focus, and habits to reveal what’s
+            next. You see  <br /> shifts early and act with intention, not guesswork.
           </BodyText>
         </div>
         <PredictCards animationDelay={cardsDelay} />

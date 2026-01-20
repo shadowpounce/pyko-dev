@@ -31,6 +31,15 @@
 @media (max-width: 768px) {
   .container {
     padding-top: calc(100 * 100vw / var(--base-width-mobile));
+    gap: calc(24 * 100vw / var(--base-width-mobile));
+  }
+
+  .title {
+    font-size: calc(38 * 100vw / var(--base-width-mobile)) !important;
+  }
+
+  .bodyText {
+    font-size: calc(14 * 100vw / var(--base-width-mobile)) !important;
   }
 
   .text {

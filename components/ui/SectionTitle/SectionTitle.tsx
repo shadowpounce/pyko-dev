@@ -8,7 +8,7 @@ interface SectionTitleProps {
   level?: 1 | 2 | 3
   children: React.ReactNode
   className?: string
-  serif?: string
+  serif?: string | string[]
   serifOpacity?: number
   serifOnNewLine?: boolean
   animationDelay?: number | null
@@ -32,7 +32,11 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   const hasAnimatedRef = useRef(false)
 
   useEffect(() => {
-    if (titleRef.current && animationDelay !== null && !hasAnimatedRef.current) {
+    if (
+      titleRef.current &&
+      animationDelay !== null &&
+      !hasAnimatedRef.current
+    ) {
       hasAnimatedRef.current = true
       animateWords(titleRef.current, animationDelay)
     }
@@ -45,7 +49,14 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
       {children}
       {serifOnNewLine ? <br /> : null}
       <span className={styles.serif} style={serifStyle}>
-        {serif}
+        {Array.isArray(serif)
+          ? serif.map((item, index) => (
+              <>
+                <span key={index}> {item}</span>
+                <br />
+              </>
+            ))
+          : serif}
       </span>
     </>
   ) : (
@@ -53,5 +64,9 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   )
 
   const Component = TitleTag as keyof React.JSX.IntrinsicElements
-  return React.createElement(Component, { ref: titleRef, className: titleClass }, content)
+  return React.createElement(
+    Component,
+    { ref: titleRef, className: titleClass },
+    content
+  )
 }

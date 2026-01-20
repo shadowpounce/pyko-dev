@@ -86,6 +86,7 @@
   .text {
     max-width: 100%;
     width: 100%;
+    gap: calc(10 * 100vw / var(--base-width-mobile));
   }
 
   .footer {

@@ -21,9 +21,13 @@ import {
 } from '@/hooks/useSectionAnimationTrigger'
 import styles from './HeroSection.module.css'
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  sectionIndex: number
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
   // Индекс этой секции
-  const SECTION_INDEX = 0
+  const SECTION_INDEX = sectionIndex
 
   // Тайминг для начала анимаций в этой секции (в секундах)
   const START_DELAY = 0.5
@@ -48,8 +52,11 @@ export const HeroSection: React.FC = () => {
     <Section className={styles.hero}>
       <Container className={styles.container}>
         <div className={styles.text}>
-          <SectionLabel animationDelay={labelDelay}>
+          <SectionLabel className="desktop-only" animationDelay={labelDelay}>
             For the students who refuse to be average.
+          </SectionLabel>
+          <SectionLabel className="mobile-only" animationDelay={labelDelay}>
+            For the students who refuse <br /> to be average.
           </SectionLabel>
           <SectionTitle
             level={1}
@@ -63,7 +70,7 @@ export const HeroSection: React.FC = () => {
           <SectionTitle
             level={1}
             className="mobile-only"
-            serif="version of yourself"
+            serif={['version', 'of yourself']}
             animationDelay={titleDelay}
           >
             Become the most aware{' '}

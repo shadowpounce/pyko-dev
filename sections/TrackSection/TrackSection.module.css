@@ -1,0 +1,127 @@
+.track {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+
+  background-image: url('/images/temp/track-bg.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.bodyText {
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0.5;
+}
+
+.text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 * 100vw / var(--base-width));
+  align-items: center;
+  justify-content: start;
+  margin-top: calc(140 * 100vw / var(--base-width));
+  text-align: center;
+
+  height: 100%;
+
+  z-index: 2;
+}
+
+.trackCardsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.trackCardsContainer>* {
+  position: absolute;
+}
+
+.trackCardWrapper {
+  position: absolute;
+  transition: transform 1s ease-out;
+  will-change: transform;
+}
+
+.trackCardsContainer>.trackCardWrapper:nth-child(1) {
+  top: 15%;
+  left: 5%;
+}
+
+.trackCardsContainer>.trackCardWrapper:nth-child(2) {
+  bottom: 15%;
+  right: 5%;
+}
+
+.swiper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.swiperDisabled {
+  pointer-events: none;
+}
+
+.swiperSlide {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-block: calc(120 * 100vw / var(--base-width-mobile)) calc(60 * 100vw / var(--base-width-mobile));
+    gap: calc(35 * 100vw / var(--base-width-mobile));
+  }
+
+  .text {
+    gap: calc(16 * 100vw / var(--base-width-mobile));
+    height: fit-content;
+  }
+
+  .trackCardsContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .trackCardsContainer>* {
+    left: unset;
+    right: unset;
+    bottom: unset;
+    top: unset;
+    translate: unset;
+  }
+
+
+
+  .trackCardWrapper {
+    left: unset !important;
+    right: unset !important;
+    bottom: unset !important;
+    top: unset !important;
+    translate: unset !important;
+  }
+}

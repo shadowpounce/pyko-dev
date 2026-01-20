@@ -9,6 +9,8 @@ interface SectionContextType {
   setTotalSections: (count: number) => void
   setFullpageApi: (api: any) => void
   setScrollLocked: (locked: boolean) => void
+  moveToNextSection: () => void
+  moveToPrevSection: () => void
 }
 
 const SectionContext = createContext<SectionContextType | undefined>(undefined)
@@ -48,6 +50,26 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({
     }
   }
 
+  const moveToNextSection = () => {
+    if (fullpageApiRef.current) {
+      try {
+        fullpageApiRef.current.moveSectionDown()
+      } catch (error) {
+        console.error('Error moving to next section:', error)
+      }
+    }
+  }
+
+  const moveToPrevSection = () => {
+    if (fullpageApiRef.current) {
+      try {
+        fullpageApiRef.current.moveSectionUp()
+      } catch (error) {
+        console.error('Error moving to prev section:', error)
+      }
+    }
+  }
+
   return (
     <SectionContext.Provider
       value={{
@@ -57,6 +79,8 @@ export const SectionProvider: React.FC<SectionProviderProps> = ({
         setTotalSections,
         setFullpageApi,
         setScrollLocked,
+        moveToNextSection,
+        moveToPrevSection,
       }}
     >
       {children}

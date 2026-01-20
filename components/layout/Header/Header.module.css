@@ -11,8 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: calc(30 * 100vw / var(--base-width))
-    calc(40 * 100vw / var(--base-width));
+  padding: calc(15 * 100vw / var(--base-width)) calc(15 * 100vw / var(--base-width));
 }
 
 .buttons {
@@ -69,7 +68,7 @@
   z-index: -1;
 }
 
-.menu > a {
+.menu>a {
   position: relative;
   z-index: 1;
 }
@@ -124,17 +123,13 @@
 }
 
 .burgerLineX:nth-child(3) {
-  width: 100%;
   transform-origin: right;
-  transform: rotate(45deg);
-  transition-delay: 0.3s;
+  transform: translate(-60%, 300%) rotate(45deg);
 }
 
 .burgerLineX:nth-child(4) {
-  width: 100%;
   transform-origin: left;
-  transform: rotate(-45deg);
-  transition-delay: 0.4s;
+  transform: translate(-30%, 300%) rotate(-45deg);
 }
 
 .burger.active .burgerLine:nth-child(1) {
@@ -148,14 +143,12 @@
 .burger.active .burgerLineX:nth-child(3) {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) rotate(45deg);
   transition-delay: 0.3s;
 }
 
 .burger.active .burgerLineX:nth-child(4) {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) rotate(-45deg);
   transition-delay: 0.4s;
 }
 
@@ -188,7 +181,7 @@
     display: flex;
   }
 
-  .buttons > *:first-child {
+  .buttons>*:first-child {
     display: none;
   }
 }

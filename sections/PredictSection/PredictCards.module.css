@@ -589,13 +589,13 @@
   }
 
   .card {
-    flex: 0 0 calc(100vw - 52 * 100vw / var(--base-width-mobile));
-    min-width: calc(100vw - 52 * 100vw / var(--base-width-mobile));
-    max-width: calc(100vw - 52 * 100vw / var(--base-width-mobile));
-    width: calc(100vw - 52 * 100vw / var(--base-width-mobile));
+    flex: 0 0 calc(335 * 100vw / var(--base-width-mobile));
+    min-width: calc(335 * 100vw / var(--base-width-mobile));
+    max-width: calc(335 * 100vw / var(--base-width-mobile));
+    width: calc(335 * 100vw / var(--base-width-mobile));
     border-radius: calc(16 * 100vw / var(--base-width-mobile));
     padding: calc(20 * 100vw / var(--base-width-mobile));
-    min-height: calc(400 * 100vw / var(--base-width-mobile));
+    min-height: calc(410 * 100vw / var(--base-width-mobile));
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }

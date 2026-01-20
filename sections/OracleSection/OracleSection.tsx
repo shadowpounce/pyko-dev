@@ -13,9 +13,13 @@ import {
 } from '@/hooks/useSectionAnimationTrigger'
 import styles from './OracleSection.module.css'
 
-export const OracleSection: React.FC = () => {
+interface OracleSectionProps {
+  sectionIndex: number
+}
+
+export const OracleSection: React.FC<OracleSectionProps> = ({ sectionIndex }) => {
   // Индекс этой секции
-  const SECTION_INDEX = 3
+  const SECTION_INDEX = sectionIndex
 
   // Тайминг для начала анимаций в этой секции (в секундах)
   const START_DELAY = 0.3
@@ -41,19 +45,18 @@ export const OracleSection: React.FC = () => {
               The Mind Behind Pyko
             </SectionLabel>
             <SectionTitle
+            className={styles.title}
               level={2}
               serif="your next move"
               serifOpacity={1}
               animationDelay={titleDelay}
+              serifOnNewLine={true}
             >
               Oracle understands
             </SectionTitle>
           </div>
           <div className={styles.textInner}>
-            <BodyText
-              animationDelay={bodyTextDelay}
-              maxWidth="calc(455 * 100vw / var(--base-width))"
-            >
+            <BodyText className={styles.bodyText} opacity={0.5} animationDelay={bodyTextDelay}>
               Oracle connects your grades, focus, and habits into one <br />{' '}
               adaptive system.It reads context, finds hidden patterns, <br />{' '}
               and guides you as you evolve.
