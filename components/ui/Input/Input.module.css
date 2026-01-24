@@ -1,0 +1,130 @@
+.input {
+    min-height: calc(55 * 100vw / var(--base-width));
+    max-height: calc(55 * 100vw / var(--base-width));
+    height: calc(55 * 100vw / var(--base-width));
+
+    font-size: calc(16 * 100vw / var(--base-width));
+    line-height: 100%;
+
+    position: relative;
+
+    padding: calc(12 * 100vw / var(--base-width));
+
+    display: flex;
+    align-items: stretch;
+
+    width: fit-content;
+}
+
+.inputFullWidth {
+    width: 100%;
+}
+
+
+.inputBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: calc(18 * 100vw / var(--base-width));
+
+    transition: width 0.2s ease;
+    z-index: 0;
+}
+
+.input input {
+    height: 100%;
+    z-index: 1;
+    flex: 0 0 auto;
+
+    color: rgba(0, 0, 0, 0.8);
+    font-size: calc(16 * 100vw / var(--base-width));
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    border: none;
+    outline: none;
+
+    width: 0;
+}
+
+.input input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: calc(16 * 100vw / var(--base-width));
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.inputButton {
+    width: calc(31 * 100vw / var(--base-width));
+    height: calc(31 * 100vw / var(--base-width));
+    min-width: calc(31 * 100vw / var(--base-width));
+    min-height: calc(31 * 100vw / var(--base-width));
+    max-width: calc(31 * 100vw / var(--base-width));
+    max-height: calc(31 * 100vw / var(--base-width));
+    background: #000;
+    border-radius: calc(8.86 * 100vw / var(--base-width));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    border: none;
+    outline: none;
+}
+
+.inputButton img {
+    width: calc(10 * 100vw / var(--base-width));
+    height: calc(10 * 100vw / var(--base-width));
+    min-width: calc(10 * 100vw / var(--base-width));
+    min-height: calc(10 * 100vw / var(--base-width));
+    max-width: calc(10 * 100vw / var(--base-width));
+    max-height: calc(10 * 100vw / var(--base-width));
+    object-fit: contain;
+    object-position: center;
+}
+
+@media (max-width: 768px) {
+    .input {
+        min-height: calc(48 * 100vw / var(--base-width-mobile));
+        max-height: calc(48 * 100vw / var(--base-width-mobile));
+        height: calc(48 * 100vw / var(--base-width-mobile));
+        padding: calc(10 * 100vw / var(--base-width-mobile));
+        padding-left: calc(16 * 100vw / var(--base-width-mobile));
+        gap: calc(6 * 100vw / var(--base-width-mobile));
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
+
+    .inputBg {
+        border-radius: calc(14 * 100vw / var(--base-width-mobile));
+    }
+
+    .input input {
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
+
+    .input input::placeholder {
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
+
+    .inputButton {
+        width: calc(28 * 100vw / var(--base-width-mobile));
+        height: calc(28 * 100vw / var(--base-width-mobile));
+        min-width: calc(28 * 100vw / var(--base-width-mobile));
+        min-height: calc(28 * 100vw / var(--base-width-mobile));
+        max-width: calc(28 * 100vw / var(--base-width-mobile));
+        max-height: calc(28 * 100vw / var(--base-width-mobile));
+        border-radius: calc(8 * 100vw / var(--base-width-mobile));
+    }
+
+    .inputButton img {
+        width: calc(10 * 100vw / var(--base-width-mobile));
+        height: calc(10 * 100vw / var(--base-width-mobile));
+        min-width: calc(10 * 100vw / var(--base-width-mobile));
+        min-height: calc(10 * 100vw / var(--base-width-mobile));
+        max-width: calc(10 * 100vw / var(--base-width-mobile));
+        max-height: calc(10 * 100vw / var(--base-width-mobile));
+    }
+}

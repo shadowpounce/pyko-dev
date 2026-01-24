@@ -40,6 +40,17 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
   // Состояние анимации: 0 - начальное, 1 - после первой анимации, 2 - после второй анимации
   const [animationState, setAnimationState] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+
+  const isCard1AnimationCompleteRef = useRef(false)
+  const isCard2AnimationCompleteRef = useRef(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
+
+
+
   const card1Ref = useRef<HTMLDivElement>(null)
   const card2Ref = useRef<HTMLDivElement>(null)
 
@@ -63,6 +74,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
     isActiveRef.current = isActive
   }, [animationState, isAnimating, isActive])
 
+
   // Получаем базовую задержку, когда секция становится активной
   const baseDelay = useSectionAnimationTrigger({
     sectionIndex: SECTION_INDEX,
@@ -77,8 +89,15 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
   // Длительность анимации в мс
   const ANIMATION_DURATION = 1000
 
+  useEffect(() => {
+    if (isMobile) {
+      gsap.to(card1Ref.current, { y: '100%', opacity: 0, scale: 0.6 })
+      gsap.to(card2Ref.current, { y: '100%', opacity: 0, scale: 0.6 })
+    }
+  }, [isMobile])
+
   // Функция для анимации карточек
-  const animateCards = React.useCallback((targetState: number) => {
+  const animateCards = React.useCallback((targetState: number, isMobile: boolean = false) => {
     if (!card1Ref.current || !card2Ref.current) return
 
     setIsAnimating(true)
@@ -88,22 +107,225 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
     const card1 = card1Ref.current
     const card2 = card2Ref.current
 
+
+
     // Вычисляем смещение в процентах (50% на каждую анимацию)
     // State 0: 0%, State 1: 50%, State 2: 100%
     const translateY = targetState * 50
 
     // Используем GSAP для плавной анимации translateY, сохраняя текущие inline стили opacity/scale
-    gsap.to(card1, {
-      y: `${translateY}%`,
-      duration: ANIMATION_DURATION / 1000,
-      ease: 'power2.out',
-    })
+    if (!isMobile) {
+      gsap.to(card1, {
+        y: `${translateY}%`,
+        duration: ANIMATION_DURATION / 1000,
+        ease: 'power2.out',
+      })
 
-    gsap.to(card2, {
-      y: `-${translateY}%`,
-      duration: ANIMATION_DURATION / 1000,
-      ease: 'power2.out',
-    })
+      gsap.to(card2, {
+        y: `-${translateY}%`,
+        duration: ANIMATION_DURATION / 1000,
+        ease: 'power2.out',
+      })
+    } else {
+
+      const textDelayInCard = 0.1 // Задержка между title и subtitle внутри карточки
+      const iconDelayAfterText = 0.15 // Задержка иконки после текста
+
+
+      if (targetState === 0) {
+        gsap.to(card1, {
+          opacity: 0,
+          y: '100%',
+          scale: 0.6,
+          duration: 1.6,
+          ease: 'back.out(1.4)',
+        })
+
+        gsap.to(card2, {
+          opacity: 0,
+          y: '100%',
+          scale: 0.6,
+          duration: 1.6,
+          ease: 'back.out(1.4)',
+        })
+
+      }
+      if (targetState === 1) {
+        gsap.to(
+          card1Ref.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.4)',
+            onComplete: () => {
+              if (!isCard1AnimationCompleteRef.current) {
+                isCard1AnimationCompleteRef.current = true
+
+
+                if (card1Ref.current) {
+                  gsap.to(card1Ref.current, {
+                    scale: 1,
+                    duration: 0.2,
+                    ease: 'power2.out',
+
+                  })
+                }
+
+                // Анимация текстов внутри первой карточки
+                if (card1TitleRef.current) {
+                  gsap.fromTo(
+                    card1TitleRef.current,
+                    { opacity: 0, y: 20 },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.6,
+                      ease: 'power3.out',
+                    }
+                  )
+                }
+
+                if (card1SubtitleRef.current) {
+                  gsap.fromTo(
+                    card1SubtitleRef.current,
+                    { opacity: 0, y: 20 },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.6,
+                      delay: textDelayInCard,
+                      ease: 'power3.out',
+                      onComplete: () => {
+                        // Анимация иконки после текста (пружинка из opacity 0 и rotation -15 → 0)
+                        if (card1IconRef.current) {
+                          gsap.fromTo(
+                            card1IconRef.current,
+                            { opacity: 0, rotation: -15 },
+                            {
+                              opacity: 1,
+                              rotation: 0,
+                              scale: 1.08,
+                              duration: 0.4,
+                              delay: iconDelayAfterText,
+                              ease: 'back.out(1.4)',
+                              onComplete: () => {
+                                if (card1IconRef.current) {
+                                  gsap.to(card1IconRef.current, {
+                                    scale: 1,
+                                    duration: 0.2,
+                                    ease: 'power2.out',
+                                  })
+                                }
+                              },
+                            }
+                          )
+                        }
+                      },
+                    }
+                  )
+                }
+
+
+
+              }
+            },
+          }
+        )
+
+        gsap.to(card2, {
+          opacity: 0,
+          y: '100%',
+          scale: 0.6,
+          duration: 1.6,
+          ease: 'back.out(1.4)',
+        })
+
+      }
+
+      if (targetState === 2) {
+        gsap.to(
+          card2Ref.current,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.4)',
+            onComplete: () => {
+              if (!isCard2AnimationCompleteRef.current) {
+                isCard2AnimationCompleteRef.current = true
+
+                if (card2Ref.current) {
+                  gsap.to(card2Ref.current, {
+                    scale: 1,
+                    duration: 0.2,
+                    ease: 'power2.out',
+
+                  })
+                }
+
+                // Анимация текстов внутри второй карточки
+                if (card2TitleRef.current) {
+                  gsap.fromTo(
+                    card2TitleRef.current,
+                    { opacity: 0, y: 20 },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.6,
+                      ease: 'power3.out',
+                    }
+                  )
+                }
+
+                if (card2SubtitleRef.current) {
+                  gsap.fromTo(
+                    card2SubtitleRef.current,
+                    { opacity: 0, y: 20 },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.6,
+                      delay: textDelayInCard,
+                      ease: 'power3.out',
+                      onComplete: () => {
+                        // Анимация иконки после текста (пружинка из opacity 0 и rotation -15 → 0)
+                        if (card2IconRef.current) {
+                          gsap.fromTo(
+                            card2IconRef.current,
+                            { opacity: 0, rotation: -15 },
+                            {
+                              opacity: 1,
+                              rotation: 0,
+                              scale: 1.08,
+                              duration: 0.4,
+                              delay: iconDelayAfterText,
+                              ease: 'back.out(1.4)',
+                              onComplete: () => {
+                                if (card2IconRef.current) {
+                                  gsap.to(card2IconRef.current, {
+                                    scale: 1,
+                                    duration: 0.2,
+                                    ease: 'power2.out',
+                                  })
+                                }
+                              },
+                            }
+                          )
+                        }
+                      },
+                    }
+                  )
+                }
+
+              }
+            },
+          }
+        )
+      }
+    }
 
     // После завершения анимации разрешаем скролл
     setTimeout(() => {
@@ -115,7 +337,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
 
   // Анимация карточек после появления текста в .text
   useEffect(() => {
-    if (!bodyTextDelay && bodyTextDelay !== 0) return
+    if (!bodyTextDelay && bodyTextDelay !== 0 || isMobile) return
 
     const cardsAnimationDelay = bodyTextDelay + 0.3 // Задержка после bodyText
     const cardDelayBetween = 0.15 // Задержка между карточками
@@ -290,7 +512,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
         }
       )
     }
-  }, [bodyTextDelay])
+  }, [bodyTextDelay, isMobile])
 
   // Сброс состояния при уходе с секции и возврате на секцию
   useEffect(() => {
@@ -472,6 +694,20 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
 
             const activeIndex = swiper.activeIndex
 
+            const slideActions: Record<number, { prev: string; next: string }> = {
+              0: { prev: '—', next: 'Slide 1 (начальное)' },
+              1: { prev: 'Slide 0 → prev section', next: 'Slide 2 → animation 1' },
+              2: { prev: 'Slide 1 (сброс)', next: 'Slide 3 → animation 2' },
+              3: { prev: 'Slide 2 (animation 1)', next: 'Slide 4 → next section' },
+              4: { prev: 'Slide 3 (animation 2)', next: '—' },
+            }
+            const actions = slideActions[activeIndex] || { prev: '?', next: '?' }
+            console.log(
+              `%c[Swiper] Active: ${activeIndex}%c | ← назад: ${actions.prev} | → вперед: ${actions.next} | animState: ${animationStateRef.current}`,
+              'color: #4CAF50; font-weight: bold',
+              'color: inherit'
+            )
+
             // Блокируем обработку на время выполнения
             // isProcessingSlideChangeRef.current = true
 
@@ -489,7 +725,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
             if (activeIndex === 1) {
               if (animationStateRef.current !== 0) {
                 // Сбрасываем анимацию если были на других слайдах
-                animateCards(0)
+                animateCards(0, isMobile)
                 setTimeout(() => {
                   isProcessingSlideChangeRef.current = false
                 }, ANIMATION_DURATION + 100)
@@ -503,7 +739,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
 
             // Слайд 2 - анимация 1 (state 0 -> 1)
             if (activeIndex === 2 && animationStateRef.current === 0 && !isAnimatingRef.current) {
-              animateCards(1)
+              animateCards(1, isMobile)
               setTimeout(() => {
                 isProcessingSlideChangeRef.current = false
               }, ANIMATION_DURATION + 100)
@@ -512,7 +748,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
 
             // Слайд 3 - анимация 2 (state 1 -> 2)
             if (activeIndex === 3 && animationStateRef.current === 1 && !isAnimatingRef.current) {
-              animateCards(2)
+              animateCards(2, isMobile)
               setTimeout(() => {
                 isProcessingSlideChangeRef.current = false
               }, ANIMATION_DURATION + 100)

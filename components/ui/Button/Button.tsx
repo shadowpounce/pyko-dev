@@ -8,6 +8,7 @@ import { animateButton } from '@/utils/animations'
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary'
   withArrow?: boolean
+  transparent?: boolean
   children: React.ReactNode
   animationDelay?: number | null
 }
@@ -15,6 +16,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   withArrow = false,
+  transparent = false,
   children,
   className = '',
   animationDelay = null,
@@ -39,7 +41,7 @@ export const Button: React.FC<ButtonProps> = ({
   }, [animationDelay])
 
   return (
-    <button ref={buttonRef} className={buttonClass} {...props}>
+    <button ref={buttonRef} data-transparent={transparent} className={buttonClass} {...props}>
       {children}
       {withArrow && (
         <div className={styles.arrow}>

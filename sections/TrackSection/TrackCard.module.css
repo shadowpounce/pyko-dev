@@ -31,55 +31,38 @@
   transition: opacity 0.3s ease;
 }
 
-/* Обводка верхнего левого угла */
-.trackCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 90%;
-  height: 90%;
-  border-top: calc(1 * 100vw / var(--base-width)) solid rgba(255, 255, 255, 0.2);
-  border-left: calc(1 * 100vw / var(--base-width)) solid rgba(255, 255, 255, 0.2);
-  border-top-left-radius: calc(20 * 100vw / var(--base-width));
-  pointer-events: none;
-  z-index: 1;
-  mask-image: linear-gradient(to bottom right,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 15%,
-      rgba(0, 0, 0, 0) 50%);
-  -webkit-mask-image: linear-gradient(to bottom right,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 15%,
-      rgba(0, 0, 0, 0) 50%);
-}
-
-/* Обводка нижнего правого угла */
-.trackCard::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 90%;
-  height: 90%;
-  border-bottom: calc(1 * 100vw / var(--base-width)) solid rgba(255, 255, 255, 0.2);
-  border-right: calc(1 * 100vw / var(--base-width)) solid rgba(255, 255, 255, 0.2);
-  border-bottom-right-radius: calc(20 * 100vw / var(--base-width));
-  pointer-events: none;
-  z-index: 1;
-  mask-image: linear-gradient(to top left,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 15%,
-      rgba(0, 0, 0, 0) 50%);
-  -webkit-mask-image: linear-gradient(to top left,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 15%,
-      rgba(0, 0, 0, 0) 50%);
-}
-
+/* SVG анимированная обводка с градиентом */
 .blured {
   backdrop-filter: blur(calc(7.5 * 100vw / var(--base-width)));
   cursor: none;
+}
+
+.borderSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(calc(0.5 * 100vw / var(--base-width)));
+}
+
+.borderLine {
+  stroke-dasharray: 250;
+  stroke-width: calc(0.75 * 100vw / var(--base-width));
+  fill: transparent;
+  animation: svgBorderAnimation 8s linear infinite;
+}
+
+@keyframes svgBorderAnimation {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: 1000;
+  }
 }
 
 .withBackground .trackCardContainer {
@@ -156,13 +139,19 @@
     backdrop-filter: blur(calc(7.5 * 100vw / var(--base-width-mobile)));
     cursor: none;
     background-color: rgba(0, 0, 0, 0.75);
+
+
   }
 
   .blured {
     background-color: transparent !important;
   }
 
-
+  .glow {
+    width: calc(200 * 100vw / var(--base-width-mobile));
+    height: calc(200 * 100vw / var(--base-width-mobile));
+    filter: blur(calc(15 * 100vw / var(--base-width-mobile)));
+  }
 
   .trackCardIcon {
     width: calc(44 * 100vw / var(--base-width-mobile));

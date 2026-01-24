@@ -78,7 +78,32 @@ export const TrackCard = forwardRef<HTMLDivElement, TrackCardProps>(
           backgroundImage ? styles.withBackground : styles.blured
         )}
       >
-        {!backgroundImage && <div className={styles.glow} ref={glowRef} />}
+        <>
+          <div className={styles.glow} ref={glowRef} />
+          <svg
+            className={styles.borderSvg}
+            height="100%"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(255, 255, 255, 0)" />
+                <stop offset="50%" stopColor="rgba(255, 255, 255, 0.6)" />
+                <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
+              </linearGradient>
+            </defs>
+            <rect
+              rx="20"
+              ry="20"
+              className={styles.borderLine}
+              height="100%"
+              width="100%"
+              strokeLinejoin="round"
+              stroke="url(#borderGradient)"
+            />
+          </svg>
+        </>
         <div className={styles.trackCardContainer}>
           <div ref={iconRef} className={styles.trackCardIcon}>
             <img src={icon} alt={title} />

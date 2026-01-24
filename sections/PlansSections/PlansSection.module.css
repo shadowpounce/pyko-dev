@@ -1,0 +1,109 @@
+.plans {
+    height: 100vh;
+
+    background-image: url('/images/temp/plans-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.desktopOnly {
+    display: flex;
+}
+
+.mobileOnly {
+    display: none;
+}
+
+.plansWrapper {
+    display: flex;
+    gap: calc(24 * 100vw / var(--base-width));
+}
+
+@media (max-width: 768px) {
+    .plansWrapper.desktopOnly {
+        display: none !important;
+    }
+
+    .mobileOnly {
+        display: flex !important;
+    }
+
+}
+
+.plansWrapperMobile {
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 calc(18 * 100vw / var(--base-width-mobile));
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    padding-bottom: calc(60 * 100vw / var(--base-width-mobile));
+    overflow: visible;
+}
+
+.swiperSlide {
+    width: calc(100% - calc(36 * 100vw / var(--base-width-mobile)));
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.swiperSlide>* {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Стили для пагинации Swiper */
+.swiper :global(.swiper-pagination) {
+    bottom: calc(20 * 100vw / var(--base-width-mobile)) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(8 * 100vw / var(--base-width-mobile));
+}
+
+.swiper :global(.swiper-pagination-bullet) {
+    width: calc(8 * 100vw / var(--base-width-mobile)) !important;
+    height: calc(8 * 100vw / var(--base-width-mobile)) !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 50% !important;
+    margin: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    opacity: 1 !important;
+}
+
+.swiper :global(.swiper-pagination-bullet-active) {
+    background: rgba(255, 255, 255, 1) !important;
+    width: calc(24 * 100vw / var(--base-width-mobile)) !important;
+    border-radius: calc(4 * 100vw / var(--base-width-mobile)) !important;
+}
+
+@media (max-width: 768px) {
+
+    /* Глобальные стили для пагинации на мобилке */
+    .swiper :global(.swiper-pagination) {
+        bottom: calc(20 * 100vw / var(--base-width-mobile)) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0;
+    }
+}

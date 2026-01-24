@@ -75,10 +75,6 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
       setIsLoaded(true)
     })
 
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-
     // Определяем Chrome для оптимизации (более надежный метод)
     const chromeDetected =
       /Chrome/.test(navigator.userAgent) &&
