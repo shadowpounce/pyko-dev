@@ -64,8 +64,9 @@
 
 @media (min-width: 769px) and (max-height: 870px) {
   .platformInfinityString {
-    max-height: calc(180 * 100vw / var(--base-width));
-    min-height: calc(180 * 100vw / var(--base-width));
+    max-height: calc(160 * 100vw / var(--base-width));
+    min-height: calc(160 * 100vw / var(--base-width));
+    top: calc(50 * 100vw / var(--base-width));
   }
 }
 
