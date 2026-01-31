@@ -106,6 +106,7 @@ export const VideosOverlay: React.FC = () => {
     const video4Ref = useRef<HTMLVideoElement>(null)
     const video5Ref = useRef<HTMLVideoElement>(null)
     const overlayToggleRef = useRef<HTMLDivElement>(null)
+    const video1TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
 
     const videoRefs = [video1Ref, video2Ref, video3Ref, video4Ref, video5Ref]
 
@@ -190,31 +191,64 @@ export const VideosOverlay: React.FC = () => {
 
     // video controller
     useEffect(() => {
-        let tween: gsap.core.Tween | undefined
-
-        if (currentVideoIndex === 0 && currentSectionIndex === 0) {
+        if (currentVideoIndex === 0) {
             const video = video1Ref.current
             if (video) {
-                video.pause() // Ensure native playback doesn't interfere
-                tween = gsap.fromTo(video,
-                    { currentTime: 0 },
-                    {
+                // Kill any existing tween for this video to ensure clean state or takeover
+                if (video1TweenRef.current) {
+                    video1TweenRef.current.kill()
+                }
+
+                if (currentSectionIndex === 0) {
+                    video.pause() // Ensure native playback doesn't interfere
+
+                    const tl = gsap.timeline()
+                    video1TweenRef.current = tl
+
+                    tl.to(video, {
                         currentTime: 1.4,
                         duration: 1.4,
                         ease: "none",
-                        repeat: -1,
-                        yoyo: true
-                    }
-                )
+                        onComplete: () => {
+                            tl.to(video, {
+                                currentTime: 0,
+                                duration: 2,
+                                ease: "none",
+                                repeat: -1,
+                                yoyo: true
+                            })
+                        }
+                    })
+                } else if (currentSectionIndex === 1) {
+                    video.pause() // Ensure native playback doesn't interfere
+
+                    const tl = gsap.timeline()
+                    video1TweenRef.current = tl
+
+                    tl.to(video, {
+                        currentTime: 7,
+                        duration: 1.5,
+                        ease: "none",
+                        onComplete: () => {
+                            tl.to(video, {
+                                currentTime: 8,
+                                duration: 2,
+                                ease: "none",
+                                repeat: -1,
+                                yoyo: true
+                            })
+                        }
+                    })
+
+                }
             }
         }
 
-        if (currentVideoIndex === 0 && currentSectionIndex === 1) {
-           
-        }
-
         return () => {
-            if (tween) tween.kill()
+            if (video1TweenRef.current) {
+                video1TweenRef.current.kill()
+                video1TweenRef.current = null
+            }
         }
     }, [currentVideoIndex, currentSectionIndex])
 
