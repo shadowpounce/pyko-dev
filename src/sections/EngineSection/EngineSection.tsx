@@ -163,6 +163,16 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
         }
       )
     }
+
+    // Cleanup: kill all tweens on unmount
+    return () => {
+      if (card1Ref.current) gsap.killTweensOf(card1Ref.current)
+      if (card2Ref.current) gsap.killTweensOf(card2Ref.current)
+      if (card1TitleRef.current) gsap.killTweensOf(card1TitleRef.current)
+      if (card1SubtitleRef.current) gsap.killTweensOf(card1SubtitleRef.current)
+      if (card2TitleRef.current) gsap.killTweensOf(card2TitleRef.current)
+      if (card2SubtitleRef.current) gsap.killTweensOf(card2SubtitleRef.current)
+    }
   }, [bodyTextDelay])
 
   return (

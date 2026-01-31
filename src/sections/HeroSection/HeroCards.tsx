@@ -26,6 +26,7 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
   const iconRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const hasAnimatedRef = useRef(false)
+  const timelineRef = useRef<gsap.core.Timeline | null>(null)
 
   // Объекты для хранения scale значений (доступны из обоих useEffect)
   const scalesRef = useRef({
@@ -55,8 +56,29 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
     let targetY = 0
     let isMouseInside = false
     let animationId: number | null = null
+    let isVisible = true
+    let isTabActive = true
+
+    // Mobile check
+    let isMobile = false
+    const mediaQuery = window.matchMedia('(max-width: 768px)')
+
+    const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      isMobile = e.matches
+      if (isMobile) {
+        targetX = 0
+        targetY = 0
+        isMouseInside = false
+      }
+    }
+
+    // Initialize mobile state
+    handleMediaChange(mediaQuery)
+    mediaQuery.addEventListener('change', handleMediaChange)
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (isMobile) return
+
       const heroRect = heroSectionElement.getBoundingClientRect()
       const x = e.clientX
       const y = e.clientY
@@ -85,6 +107,7 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
 
     // Для Safari нужно добавить mousedown/mouseenter для активации отслеживания
     const handleMouseEnter = () => {
+      if (isMobile) return
       isMouseInside = true
     }
 
@@ -104,6 +127,12 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
     })
 
     const animateCards = () => {
+      // Skip animation if not visible or tab not active
+      if (!isVisible || !isTabActive) {
+        animationId = requestAnimationFrame(animateCards)
+        return
+      }
+
       const lerpFactor = isMouseInside ? 0.03 : 0.05
 
       cardX += (targetX - cardX) * lerpFactor
@@ -132,15 +161,33 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
       animationId = requestAnimationFrame(animateCards)
     }
 
+    // Visibility change handler - pause when tab not active
+    const handleVisibilityChange = () => {
+      isTabActive = document.visibilityState === 'visible'
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    // IntersectionObserver - pause when section not visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? false
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(heroSectionElement)
+
     animateCards()
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       heroSectionElement.removeEventListener('mouseenter', handleMouseEnter)
       heroSectionElement.removeEventListener('mouseleave', handleMouseLeave)
+      observer.disconnect()
       if (animationId !== null) {
         cancelAnimationFrame(animationId)
       }
+      mediaQuery.removeEventListener('change', handleMediaChange)
     }
   }, [])
 
@@ -162,6 +209,7 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
     hasAnimatedRef.current = true
 
     const timeline = gsap.timeline({ delay: animationDelay })
+    timelineRef.current = timeline
 
     const mainCard = mainCardRef.current
     const leftCard = leftCardRef.current
@@ -341,13 +389,21 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
         '-=2.0' // Начинаем немного раньше
       )
     }
+
+    // Cleanup: kill timeline on unmount
+    return () => {
+      if (timelineRef.current) {
+        timelineRef.current.kill()
+        timelineRef.current = null
+      }
+    }
   }, [animationDelay])
 
   return (
     <div ref={heroSectionRef} className={styles.wrapper}>
       <div ref={mainCardRef} className={styles.mainCard}>
         <Image
-          src="/images/temp/hero-main-card-img.png"
+          src="/images/sections/hero/card-main.png"
           alt="Hero Main Card Image"
           className={styles.mainCardImg}
           fill

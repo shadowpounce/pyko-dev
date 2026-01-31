@@ -67,7 +67,7 @@
 .footerDescription {
     font-size: calc(16 * 100vw / var(--base-width));
     line-height: 122%;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--color-text-subtle);
 }
 
 .footerWrapper {
@@ -98,7 +98,7 @@
     font-weight: 400;
     font-size: calc(20 * 100vw / var(--base-width));
     line-height: 130%;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--color-text-faint);
     text-transform: capitalize;
 
 

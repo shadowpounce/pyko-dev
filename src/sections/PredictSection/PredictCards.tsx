@@ -495,6 +495,28 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
         },
       })
     })
+
+    // Cleanup: kill all tweens on unmount
+    return () => {
+      const allRefs = [
+        card1Ref, card2Ref, card3Ref, card1BluredRef,
+        card2SecondaryMainRef, card2SecondaryAddRef, card3BluredRef,
+        card1HeaderTextRef, card1TitleRef, card1SubtitleRef,
+        card2TitleRef, card2SubtitleRef, card2PercentRef, card2FooterRef,
+        card3HeaderTextRef, card3PercentRef, card3BodyRef,
+        card3TitleRef, card3SubtitleRef, card3ActiveLabelRef, card3BalancedLabelRef,
+        chartRef, circleRef
+      ]
+      allRefs.forEach(ref => {
+        if (ref.current) gsap.killTweensOf(ref.current)
+      })
+      chartLineDivsRef.current.forEach(el => {
+        if (el) gsap.killTweensOf(el)
+      })
+      card3PercentRefs.current.forEach(el => {
+        if (el) gsap.killTweensOf(el)
+      })
+    }
   }, [animationDelay])
 
   return (
@@ -502,7 +524,7 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       <div
         ref={card1Ref}
         className={styles.card}
-        style={{ backgroundImage: 'url(/images/temp/predict-1.png)' }}
+        style={{ backgroundImage: 'url(/images/sections/predict/card-1.png)' }}
       >
         <div className={styles.cardContent}>
           <div className={styles.graph}>
@@ -562,7 +584,7 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       <div
         ref={card2Ref}
         className={styles.card}
-        style={{ backgroundImage: 'url(/images/temp/predict-2.png)' }}
+        style={{ backgroundImage: 'url(/images/sections/predict/card-2.png)' }}
       >
         <div className={styles.cardContent}>
           <div className={styles.graph}>
@@ -684,7 +706,7 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       <div
         ref={card3Ref}
         className={styles.card}
-        style={{ backgroundImage: 'url(/images/temp/predict-3.png)' }}
+        style={{ backgroundImage: 'url(/images/sections/predict/card-3.png)' }}
       >
         <div className={styles.cardContent}>
           <div className={styles.graph}>

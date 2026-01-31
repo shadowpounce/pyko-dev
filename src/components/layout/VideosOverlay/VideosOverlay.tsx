@@ -1,352 +1,301 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useSectionIndex } from '../FullPageProvider/SectionContext'
 import styles from './VideosOverlay.module.css'
+import { useSectionIndex } from '../FullPageProvider/SectionContext'
+import clsx from 'clsx'
+import gsap from 'gsap'
 
-// Флаг для включения/выключения логики видео и блокировки скролла
-const ENABLE_VIDEO_CONTROL = false // Установите true для включения
+const activeSectionIndexAndVideosActions = [
+    {
+        // когда секция 0 активна - запускается видео с айди 0
+        activeSectionIndex: 0,
+        videoId: 0,
+        // когда видео доходит до 1.4 секунды - видео начинает с этого момента проигрываться назад до 0.0 и затем снова до 1.4 и так циклично "ping pong"
+        pingPong: { from: 0.0, to: 1.4 },
+        // когда мы переходим к следующей секции - видео с текущего кадра, с которого выполняется переход, проигрывается со скоростью 2 секунды до следующего этапа
+        moveToNextSectionSpeed: 2,
+        // когда мы переходим к этой секции с какой-то другой секции(кроме секции с индексом 1, так как этот сценарий описал ниже для activeSectionIndex: 1) - то видео начинает проигрываться с 0.0 до 1.4 и затем снова до 0.0 и так циклично "ping pong".
 
-// Константы таймингов (в миллисекундах)
-const SECTION_0_STOP_TIME = 1.5 // Остановка на 2 секунде для первой секции
-const SECTION_1_STOP_TIME = 8.5 // Остановка на 7 секунде (2 + 5) для второй секции
-const TRANSITION_TO_SECTION_2_DURATION = 5000 // 3 секунды затемнения
-const TRANSITION_TO_SECTION_2_FADE_DELAY = 100 // 0.5 сек задержка перед исчезновением затемнения
+    },
+    {
+        // сейчас активаня секция уже 1
+        activeSectionIndex: 1,
+        // видео всё тоже,
+        videoId: 0,
+        // видео проигрывается со скоростью 2х с предыдущего этапа до секунды 7.0 и включается обычная скорость 1х. С 7.0 доходит до 8.0 и затем снова до 7.0 и так циклично "ping pong"
+        pingPong: { from: 7.0, to: 8.0 },
+        // когда мы переходим к следующей секции - видео с текущего кадра, с которого выполняется переход, проигрывается со скоростью 3x вперёд до последнего кадра и паралельно включается переключатель overlay (overlayToggle)
+        moveToNextSectionSpeed: 3,
+        // когда мы переходим к предыдущей секции - видео с текущего кадра, с которого выполняется переход, проигрывается со скоростью 1x назад до 1.4 и уже на 0 секции снова включается пинг-понг
+        moveToPrevSectionSpeed: 1,
+        // если мы переходим с какой-то секции на эту секцию - то видео начинает проигрываться пинг понгом с 7.0 до 8.0
+    },
+    // так как дальше видео активное будет - video id 1, то включается оверлей переключатель, далее по такой логике буду просто писать *оверлей переключатель*
+    {
+        // когда мы переходим к секции с индексом 2 - включается видео айди 1 и проигрывается до последнего кадра и останавливается
+        activeSectionIndex: 2,
+        videoId: 1,
+        stopAtLastFrame: true
+    },
+    // *оверлей переключатель включается, пока не дойдём до секции с индексом 5, между 2 и 5 будет просто черный экран оверлея*
+    {
+        // когда мы переходим к секции с индексом 5 - включается видео айди 2 и проигрывается в обычном режиме циклично
+        activeSectionIndex: 5,
+        videoId: 2,
+        loop: true,
+    },
+    // *оверлей переключатель*
+    {
+        // когда мы переходим к секции с индексом 6 - включается видео айди 3 и проигрывается пинг понгом с 5.0 до 7.0
+        activeSectionIndex: 6,
+        videoId: 3,
+        pingPong: { from: 5.0, to: 7.0 },
+        // если мы переходим к предыдущей или следующей секции - просто включается оверлей переключатель и видео стопается в любом тайминге между 5.0 и 7.0 так как включается пинг понг и за этот диапазон видео не может уйти. И если заново возвращаемся на эту секцию - то видео начинает проигрываться пинг понгом с 5.0 до 7.0 с того кадра, на котором остановилось
+    },
+    // *оверлей переключатель*
+    {
+        // каждый раз,когда мы переходим к секции с индексом 7, с какой-то другой секции, но не с 8! - включается видео айди 4 и проигрывается до 1.5 секунды и останавливается. Если же мы возвращаемся к секции 7 с секции 8 - то видео просто доходит с 2.5 секунды до 1.5 секунды реверсом и останавливается.
+        activeSectionIndex: 7,
+        videoId: 4,
+        stopAt: 1.5,
+    },
+    // каждый раз,когда мы переходим к секции с индексом 8, с какой-то другой секции, но не с 9 и 7! - включается видео айди 4 из оверлея с момента 1.5 секунды и проигрывается до 2.5 секунды и останавливается. Если же мы возвращаемся к секции 8 с секции 9 - то видео просто доходит с последнего кадра до 2.5 секунды реверсом и останавливается. Если же мы переходим к секции 8 с секции 7 - то видео просто доходит с 1.5 секунды до 2.5 секунды и останавливается.
+    {
+        activeSectionIndex: 8,
+        videoId: 4,
+        stopAt: 2.5,
+    },
+    // каждый раз,когда мы переходим к секции с индексом 9, с какой-то другой секции, но не с 8! - включается видео айди 4 из оверлея с момента 2.5 секунды и проигрывается до последней секунды и останавливается. Если же мы переходим к секции 9 с секции 8 - то видео просто доходит с 2.5 секунды до последнего кадра и останавливается.
+    {
+        activeSectionIndex: 9,
+        videoId: 4,
+        stopAtLastFrame: true,
+    }
+]
+
+
 
 export const VideosOverlay: React.FC = () => {
-  // Если логика отключена - ничего не рендерим
-  if (!ENABLE_VIDEO_CONTROL) {
-    return null
-  }
+    const videos = [
+        {
+            id: 0,
+            src: 'videos/sec1-2/sec1-2-720p.mp4',
+        },
+        {
+            id: 1,
+            src: 'videos/sec3/sec3-720p.mp4',
+        },
+        {
+            id: 2,
+            src: 'videos/sec6/sec6-720p.mp4',
+        },
+        {
+            id: 3,
+            src: 'videos/sec7/sec7-720p.mp4',
+        },
+        {
+            id: 4,
+            src: 'videos/sec8-9-10/sec8-9-10-720p.mp4',
+        },
+    ]
 
-  const { currentSectionIndex, setScrollLocked } = useSectionIndex()
-  const video1Ref = useRef<HTMLVideoElement>(null) // s1-2.mp4
-  const video2Ref = useRef<HTMLVideoElement>(null) // sec3.mp4
-  const [screenOpacity, setScreenOpacity] = useState(0) // 0 = прозрачный, 1 = черный
-  const prevSectionIndexRef = useRef<number | null>(null)
-  const isInitializedRef = useRef(false)
-  const timeoutRefs = useRef<NodeJS.Timeout[]>([])
-  const videoStopHandlerRef = useRef<(() => void) | null>(null)
-  const isStoppedAtSection0Ref = useRef(false) // Флаг остановки на секции 0
+    const video1Ref = useRef<HTMLVideoElement>(null)
+    const video2Ref = useRef<HTMLVideoElement>(null)
+    const video3Ref = useRef<HTMLVideoElement>(null)
+    const video4Ref = useRef<HTMLVideoElement>(null)
+    const video5Ref = useRef<HTMLVideoElement>(null)
+    const overlayToggleRef = useRef<HTMLDivElement>(null)
 
-  // Очистка всех таймеров
-  const clearAllTimeouts = () => {
-    timeoutRefs.current.forEach((timeout) => clearTimeout(timeout))
-    timeoutRefs.current = []
-  }
+    const videoRefs = [video1Ref, video2Ref, video3Ref, video4Ref, video5Ref]
 
-  // Удаление обработчика остановки видео
-  const removeVideoStopHandler = () => {
-    if (videoStopHandlerRef.current && video1Ref.current) {
-      video1Ref.current.removeEventListener(
-        'timeupdate',
-        videoStopHandlerRef.current
-      )
-      videoStopHandlerRef.current = null
+    const { currentSectionIndex } = useSectionIndex()
+
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+
+    // определение активного текущего активного видео
+    useEffect(() => {
+        if (currentSectionIndex >= 0 && currentSectionIndex <= 1) {
+            setCurrentVideoIndex(0)
+        }
+        if (currentSectionIndex === 2) {
+            setCurrentVideoIndex(1)
+        }
+        if (currentSectionIndex >= 5 && currentSectionIndex <= 5) {
+            setCurrentVideoIndex(2)
+        }
+        if (currentSectionIndex >= 6 && currentSectionIndex <= 6) {
+            setCurrentVideoIndex(3)
+        }
+        if (currentSectionIndex >= 7 && currentSectionIndex <= 9) {
+            setCurrentVideoIndex(4)
+        }
+
+        if (currentSectionIndex >= 3 && currentSectionIndex <= 4) {
+            setCurrentVideoIndex(-1)
+        }
+    }, [currentSectionIndex])
+
+
+    function hideVideos() {
+        gsap.to(video1Ref.current, {
+            opacity: 0,
+            duration: 0.5
+        })
+
+        gsap.to(video2Ref.current, {
+            opacity: 0,
+            duration: 0.5
+        })
+
+        gsap.to(video3Ref.current, {
+            opacity: 0,
+            duration: 0.5
+        })
+
+        gsap.to(video4Ref.current, {
+            opacity: 0,
+            duration: 0.5
+        })
+
+        gsap.to(video5Ref.current, {
+            opacity: 0,
+            duration: 0.5
+        })
     }
-  }
 
-  // Управление затемнением экрана
-  const setScreenTransition = (opacity: number, duration: number = 3000) => {
-    setScreenOpacity(opacity)
-    // CSS transition управляется через inline style
-  }
+    // video opacity controller
+    useEffect(() => {
+        if (currentVideoIndex === 0) {
+            hideVideos()
+            gsap.to(video1Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+        }
+        if (currentVideoIndex === 1) {
+            hideVideos()
+            gsap.to(video2Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+        }
+        if (currentVideoIndex === 2) {
+            hideVideos()
+            gsap.to(video3Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+        }
+        if (currentVideoIndex === 3) {
+            hideVideos()
+            gsap.to(video4Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+        }
+        if (currentVideoIndex === 4) {
+            hideVideos()
+            gsap.to(video5Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+        }
+    }, [currentVideoIndex])
 
-  // Инициализация при первой загрузке (секция 0)
-  useEffect(() => {
-    if (!isInitializedRef.current && video1Ref.current) {
-      isInitializedRef.current = true
-      const video = video1Ref.current
-      video.style.display = 'block'
+    // video controller
+    useEffect(() => {
+        let tween: gsap.core.Tween | undefined
 
-      // Запускаем видео и останавливаем на 1.5 секунде
-      video
-        .play()
-        .then(() => {
-          const stopVideo = () => {
-            if (video.currentTime >= SECTION_0_STOP_TIME) {
-              video.pause()
-              isStoppedAtSection0Ref.current = true
-              removeVideoStopHandler()
+        if (currentVideoIndex === 0 && currentSectionIndex === 0) {
+            const video = video1Ref.current
+            if (video) {
+                video.pause() // Ensure native playback doesn't interfere
+                tween = gsap.fromTo(video,
+                    { currentTime: 0 },
+                    {
+                        currentTime: 1.4,
+                        duration: 1.4,
+                        ease: "none",
+                        repeat: -1,
+                        yoyo: true
+                    }
+                )
             }
-          }
-          videoStopHandlerRef.current = stopVideo
-          video.addEventListener('timeupdate', stopVideo)
-        })
-        .catch((error) => {
-          console.error('Error playing initial video:', error)
-        })
+        }
 
-      // Скрываем второе видео
-      if (video2Ref.current) {
-        video2Ref.current.style.display = 'none'
-      }
-    }
-  }, [])
+        if (currentVideoIndex === 0 && currentSectionIndex === 1) {
+           
+        }
 
-  // Обработка перехода между секциями
-  useEffect(() => {
-    if (prevSectionIndexRef.current === null) {
-      prevSectionIndexRef.current = currentSectionIndex
-      return
-    }
+        return () => {
+            if (tween) tween.kill()
+        }
+    }, [currentVideoIndex, currentSectionIndex])
 
-    const prevIndex = prevSectionIndexRef.current
-    const currentIndex = currentSectionIndex
-    const direction = currentIndex > prevIndex ? 'forward' : 'backward'
-
-    clearAllTimeouts()
-
-    // Переход вперед
-    if (direction === 'forward') {
-      // Секция 0 -> Секция 1
-      if (prevIndex === 0 && currentIndex === 1 && video1Ref.current) {
-        const video = video1Ref.current
-        video.style.display = 'block'
-
-        // Удаляем старый обработчик остановки
-        removeVideoStopHandler()
-
-        // Если видео еще не остановилось на первом тайминге - сразу переходим ко второму таймингу
-        if (!isStoppedAtSection0Ref.current) {
-          // Пользователь скроллил до тайминга остановки - сразу переходим ко второму таймингу
-          video.currentTime = SECTION_0_STOP_TIME
+    // overlay toggle controller
+    useEffect(() => {
+        if (currentVideoIndex !== -1) {
+            gsap.fromTo(overlayToggleRef.current,
+                {
+                    opacity: 0
+                },
+                {
+                    opacity: 1, duration: 0.5,
+                    onComplete: () => {
+                        gsap.to(overlayToggleRef.current, {
+                            opacity: 0, duration: 1.5,
+                        })
+                    }
+                }
+            )
         } else {
-          // Видео уже остановилось - продолжаем с первого тайминга
-          video.currentTime = SECTION_0_STOP_TIME
+            gsap.fromTo(overlayToggleRef.current, {
+                opacity: 0,
+            }, {
+                opacity: 1,
+                duration: 0.5
+            })
         }
+    }, [currentVideoIndex])
 
-        // Запускаем видео до второго тайминга остановки
-        // Переход с секции 0 на 1 - скролл не блокируется (разрешен)
-        setScrollLocked(false)
 
-        video
-          .play()
-          .then(() => {
-            // Блокируем скролл пока видео играет до тайминга остановки
-            setScrollLocked(true)
 
-            const stopVideo = () => {
-              if (video.currentTime >= SECTION_1_STOP_TIME) {
-                video.pause()
-                removeVideoStopHandler()
-                // После остановки ждем 2 секунды (тайминг остановки), затем разблокируем скролл
-                const unlockTimeout = setTimeout(() => {
-                  setScrollLocked(false)
-                }, 2000)
-                timeoutRefs.current.push(unlockTimeout)
-              }
-            }
-            videoStopHandlerRef.current = stopVideo
-            video.addEventListener('timeupdate', stopVideo)
-          })
-          .catch((error) => {
-            console.error('Error playing video:', error)
-            setScrollLocked(false)
-          })
-      }
 
-      // Секция 1 -> Секция 2
-      if (prevIndex === 1 && currentIndex === 2) {
-        if (video1Ref.current && video2Ref.current) {
-          const video1 = video1Ref.current
-          const video2 = video2Ref.current
+    return (
+        <div className={styles.videosOverlay}>
+            <video
+                data-video-id={videos[0].id}
+                ref={video1Ref}
+                className={clsx(styles.video)}
+                playsInline
+                muted
+                loop
+                src={videos[0].src}
+            />
+            <video
+                data-video-id={videos[1].id}
+                ref={video2Ref}
+                className={clsx(styles.video)}
+                playsInline
+                muted
+                autoPlay
+                src={videos[1].src}
+            />
+            <video
+                data-video-id={videos[2].id}
+                ref={video3Ref}
+                className={clsx(styles.video)}
+                playsInline
+                muted
+                loop
+                src={videos[2].src}
+            />
+            <video
+                data-video-id={videos[3].id}
+                ref={video4Ref}
+                className={clsx(styles.video)}
+                playsInline
+                muted
+                loop
+                src={videos[3].src}
+            />
+            <video
+                data-video-id={videos[4].id}
+                ref={video5Ref}
+                className={clsx(styles.video)}
+                playsInline
+                muted
+                loop
+                src={videos[4].src}
+            />
 
-          // Разблокируем скролл при переходе на секцию 2
-          setScrollLocked(false)
-
-          // Возобновляем первое видео
-          video1.currentTime = SECTION_1_STOP_TIME
-          video1.play().catch((error) => {
-            console.error('Error playing video1:', error)
-          })
-
-          // Начинаем плавное затемнение (3 секунды)
-          setScreenTransition(1, TRANSITION_TO_SECTION_2_DURATION)
-
-          // Через 3 секунды (когда экран стал черным) - включаем второе видео
-          const timeout1 = setTimeout(() => {
-            if (video2) {
-              video2.style.display = 'block'
-
-              // Убираем старые обработчики, если есть
-              const handleVideoEnd = () => {
-                // Когда видео заканчивается, останавливаем его на последнем кадре
-                video2.pause()
-                // Убеждаемся, что показываем последний кадр
-                if (video2.duration) {
-                  video2.currentTime = video2.duration
-                }
-              }
-
-              // Удаляем старый обработчик перед добавлением нового
-              video2.removeEventListener('ended', handleVideoEnd)
-              video2.addEventListener('ended', handleVideoEnd)
-
-              // Сбрасываем и запускаем видео с начала
-              video2.currentTime = 0
-              video2.play().catch((error) => {
-                console.error('Error playing video2:', error)
-              })
-
-              // Останавливаем первое видео
-              video1.pause()
-              video1.style.display = 'none'
-            }
-          }, TRANSITION_TO_SECTION_2_DURATION)
-
-          // Через 3.5 секунды (3 + 0.5) начинаем исчезать затемнение
-          const timeout2 = setTimeout(() => {
-            setScreenTransition(0, TRANSITION_TO_SECTION_2_DURATION)
-          }, TRANSITION_TO_SECTION_2_DURATION + TRANSITION_TO_SECTION_2_FADE_DELAY)
-
-          timeoutRefs.current.push(timeout1, timeout2)
-        }
-      }
-
-      // Обработка прямого перехода на секцию 2 (например, через навигацию)
-      if (prevIndex !== 1 && currentIndex === 2) {
-        if (video2Ref.current) {
-          const video2 = video2Ref.current
-
-          // Разблокируем скролл
-          setScrollLocked(false)
-
-          // Затемняем экран
-          setScreenTransition(1, TRANSITION_TO_SECTION_2_DURATION)
-
-          const timeout1 = setTimeout(() => {
-            if (video2) {
-              video2.style.display = 'block'
-
-              const handleVideoEnd = () => {
-                video2.pause()
-                if (video2.duration) {
-                  video2.currentTime = video2.duration
-                }
-              }
-
-              video2.removeEventListener('ended', handleVideoEnd)
-              video2.addEventListener('ended', handleVideoEnd)
-
-              video2.currentTime = 0
-              video2.play().catch((error) => {
-                console.error('Error playing video2:', error)
-              })
-
-              // Скрываем первое видео, если оно видимо
-              if (video1Ref.current) {
-                video1Ref.current.pause()
-                video1Ref.current.style.display = 'none'
-              }
-            }
-          }, TRANSITION_TO_SECTION_2_DURATION)
-
-          const timeout2 = setTimeout(() => {
-            setScreenTransition(0, TRANSITION_TO_SECTION_2_DURATION)
-          }, TRANSITION_TO_SECTION_2_DURATION + TRANSITION_TO_SECTION_2_FADE_DELAY)
-
-          timeoutRefs.current.push(timeout1, timeout2)
-        }
-      }
-    }
-
-    // Переход назад
-    if (direction === 'backward') {
-      // Секция 2 -> Секция 1
-      if (prevIndex === 2 && currentIndex === 1) {
-        if (video1Ref.current && video2Ref.current) {
-          const video1 = video1Ref.current
-          const video2 = video2Ref.current
-
-          // Затемняем экран
-          setScreenTransition(1, TRANSITION_TO_SECTION_2_DURATION)
-
-          // Через 3 секунды переключаем на первое видео на нужном моменте
-          const timeout1 = setTimeout(() => {
-            // Останавливаем второе видео
-            video2.pause()
-            // Если видео закончилось, оставляем на последнем кадре, иначе сбрасываем
-            if (video2.ended) {
-              // Убеждаемся, что показываем последний кадр
-              if (video2.duration) {
-                video2.currentTime = video2.duration
-              }
-            } else {
-              video2.currentTime = 0
-            }
-            video2.style.display = 'none'
-
-            video1.style.display = 'block'
-            video1.currentTime = SECTION_1_STOP_TIME
-            video1.pause() // Останавливаем на нужном моменте
-            // Разблокируем скролл при возврате на секцию 1
-            setScrollLocked(false)
-          }, TRANSITION_TO_SECTION_2_DURATION)
-
-          // Убираем затемнение
-          const timeout2 = setTimeout(() => {
-            setScreenTransition(0, TRANSITION_TO_SECTION_2_DURATION)
-          }, TRANSITION_TO_SECTION_2_DURATION + TRANSITION_TO_SECTION_2_FADE_DELAY)
-
-          timeoutRefs.current.push(timeout1, timeout2)
-        }
-      }
-
-      // Секция 1 -> Секция 0
-      if (prevIndex === 1 && currentIndex === 0 && video1Ref.current) {
-        const video = video1Ref.current
-        video.style.display = 'block'
-        // Перематываем на 1.5 секунду и останавливаем
-        video.currentTime = SECTION_0_STOP_TIME
-        video.pause()
-        isStoppedAtSection0Ref.current = true
-        // Разблокируем скролл при возврате на секцию 0
-        setScrollLocked(false)
-      }
-    }
-
-    prevSectionIndexRef.current = currentIndex
-
-    return () => {
-      clearAllTimeouts()
-      // Разблокируем скролл при размонтировании
-      setScrollLocked(false)
-    }
-  }, [currentSectionIndex, setScrollLocked])
-
-  return (
-    <div className={styles.videosOverlay}>
-      {/* Экранный переключатель (черный экран для затемнения) */}
-      <div
-        className={styles.screenTransition}
-        style={{
-          opacity: screenOpacity,
-          transition: `opacity ${TRANSITION_TO_SECTION_2_DURATION}ms ease-in-out`,
-        }}
-      />
-
-      {/* Видео для секций 1-2 (s1-2.mp4) */}
-      <video
-        ref={video1Ref}
-        className={styles.video}
-        muted
-        playsInline
-        preload="auto"
-      >
-        <source src="/videos/s1-2.mp4" type="video/mp4" />
-      </video>
-
-      {/* Видео для секции 3 (sec3.mp4) */}
-      <video
-        ref={video2Ref}
-        className={styles.video}
-        muted
-        playsInline
-        preload="auto"
-      >
-        <source src="/videos/sec3.mp4" type="video/mp4" />
-      </video>
-    </div>
-  )
+            <div ref={overlayToggleRef} className={styles.overlayToggle} />
+        </div>
+    )
 }

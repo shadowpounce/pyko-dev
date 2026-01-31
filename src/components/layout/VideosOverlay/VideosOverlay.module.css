@@ -1,34 +1,62 @@
 .videosOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    cursor: none;
+}
+
+.videosOverlay>video:nth-child(1) {
+    z-index: 1;
+}
+
+.videosOverlay>video:nth-child(2) {
+    z-index: 2;
+}
+
+.videosOverlay>video:nth-child(3) {
+    z-index: 3;
+}
+
+.videosOverlay>video:nth-child(4) {
+    z-index: 4;
+}
+
+.videosOverlay>video:nth-child(5) {
+    z-index: 5;
 }
 
 .video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    opacity: 0;
+    transition: opacity 220ms ease;
+    will-change: opacity;
+    transform: translateZ(0);
+
+    /* base layer */
+    z-index: 0;
 }
 
-/* Экранный переключатель (черный экран для затемнения) */
-.screenTransition {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: 0;
-  z-index: 1;
-  pointer-events: none;
+.videoActive {
+    opacity: 1;
+    /* ensure active video is above other videos */
+    z-index: 1;
+}
+
+.overlayToggle {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+
+    background-color: #000;
+    opacity: 0;
+    /* transition: opacity 220ms ease; */
+    /* will-change: opacity; */
 }

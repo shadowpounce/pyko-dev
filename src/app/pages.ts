@@ -6,7 +6,7 @@ import { TrackSection } from '@/sections/TrackSection'
 import { EngineSection } from '@/sections/EngineSection'
 import { PlatformSection } from '@/sections/PlatformSection'
 import { WithYouSection } from '@/sections/WithYouSection/WithYouSection'
-import { PlansSection } from '@/sections/PlansSections/PlansSection'
+import { PlansSection } from '@/sections/PlansSection/PlansSection'
 import { FooterSection } from '@/sections/FooterSection/FooterSection'
 
 export const homeSections = [

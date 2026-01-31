@@ -14,6 +14,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload LCP hero background image */}
+        <link
+          rel="preload"
+          href="/images/sections/hero/bg.png"
+          as="image"
+          type="image/png"
+        />
+      </head>
       <body>{children}
         <SpeedInsights />
         <Analytics />

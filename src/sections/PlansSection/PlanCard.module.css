@@ -1,0 +1,279 @@
+.planCard {
+    min-width: calc(350 * 100vw / var(--base-width));
+    max-width: calc(350 * 100vw / var(--base-width));
+    width: calc(350 * 100vw / var(--base-width));
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(38 * 100vw / var(--base-width));
+
+}
+
+.planCardBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    backdrop-filter: blur(calc(3 * 100vw / var(--base-width)));
+    border-radius: calc(38 * 100vw / var(--base-width));
+    box-shadow: 0px 4px 4px 0px #00000040;
+    background-color: #63636329;
+}
+
+.glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(300 * 100vw / var(--base-width));
+    height: calc(300 * 100vw / var(--base-width));
+    border-radius: 100%;
+    background: radial-gradient(circle,
+            rgba(168, 224, 99, 0.4) 0%,
+            rgba(168, 224, 99, 0.2) 0%,
+            transparent 70%);
+    filter: blur(calc(20 * 100vw / var(--base-width)));
+    pointer-events: none;
+    z-index: 0.5;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.planCardContainer {
+    width: 100%;
+    padding: calc(30 * 100vw / var(--base-width));
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: calc(20 * 100vw / var(--base-width));
+    position: relative;
+    z-index: 1;
+}
+
+/* HEADER */
+
+.planCardHeader {
+    padding-bottom: calc(16 * 100vw / var(--base-width));
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: calc(22.35 * 100vw / var(--base-width));
+}
+
+.headerLine {
+    width: 100%;
+    height: calc(1 * 100vw / var(--base-width));
+    background: #FFFFFF1C;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.planCardName {
+    font-size: calc(22.35 * 100vw / var(--base-width));
+    line-height: 100%;
+    font-weight: 400;
+    font-family: var(--font-serif);
+    color: var(--color-text-muted); /* 0.6 closest to 0.7 */
+    opacity: 0;
+}
+
+.planCardPriceGroup {
+    display: flex;
+    align-items: end;
+    gap: calc(6.7 * 100vw / var(--base-width));
+}
+
+.planCardPriceMonthly {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: calc(72.5 * 100vw / var(--base-width));
+    line-height: 100%;
+    color: #fff;
+    opacity: 0;
+}
+
+.planCardPriceGroup span {
+    font-size: calc(18 * 100vw / var(--base-width));
+    color: var(--color-text-barely);
+    line-height: 100%;
+    text-transform: lowercase;
+    opacity: 0;
+}
+
+/* FEATURES */
+
+.planCardFeatures {
+    display: flex;
+    flex-direction: column;
+    gap: calc(13.4 * 100vw / var(--base-width));
+}
+
+.planCardFeature {
+    display: flex;
+    align-items: center;
+    gap: calc(6.7 * 100vw / var(--base-width));
+    opacity: 0;
+}
+
+.planCardFeatureIcon {
+    width: calc(14 * 100vw / var(--base-width));
+    height: calc(14 * 100vw / var(--base-width));
+    max-width: calc(14 * 100vw / var(--base-width));
+    min-width: calc(14 * 100vw / var(--base-width));
+    max-height: calc(14 * 100vw / var(--base-width));
+    min-height: calc(14 * 100vw / var(--base-width));
+    opacity: 0.18;
+}
+
+.planCardFeatureIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.planCardFeatureText {
+    font-size: calc(16 * 100vw / var(--base-width));
+    line-height: 140%;
+    color: var(--color-text-secondary);
+}
+
+/* FOOTER */
+
+.planCardFooter {
+    padding-top: calc(16 * 100vw / var(--base-width));
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: calc(40 * 100vw / var(--base-width));
+}
+
+.planCardFooterInner {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: calc(16 * 100vw / var(--base-width));
+}
+
+.footerLine {
+    width: 100%;
+    height: calc(1 * 100vw / var(--base-width));
+    background: #FFFFFF1C;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.planCardPlaceholder {
+    font-weight: 400;
+    font-size: calc(15.6 * 100vw / var(--base-width));
+    line-height: 140%;
+    color: #fff;
+    font-family: var(--font-serif);
+    opacity: 0;
+}
+
+.planCardButton button {
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .planCard {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        border-radius: calc(38 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardBg {
+        backdrop-filter: blur(calc(3 * 100vw / var(--base-width-mobile)));
+        border-radius: calc(38 * 100vw / var(--base-width-mobile));
+    }
+
+    .glow {
+        width: calc(300 * 100vw / var(--base-width-mobile));
+        height: calc(300 * 100vw / var(--base-width-mobile));
+        filter: blur(calc(20 * 100vw / var(--base-width-mobile)));
+    }
+
+    .planCardContainer {
+        padding: calc(30 * 100vw / var(--base-width-mobile));
+        gap: calc(20 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardHeader {
+        padding-bottom: calc(16 * 100vw / var(--base-width-mobile));
+        gap: calc(22.35 * 100vw / var(--base-width-mobile));
+    }
+
+    .headerLine {
+        height: calc(1 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardName {
+        font-size: calc(22.35 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardPriceGroup {
+        gap: calc(6.7 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardPriceMonthly {
+        font-size: calc(72.5 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardPriceGroup span {
+        font-size: calc(18 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardFeatures {
+        gap: calc(13.4 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardFeature {
+        gap: calc(6.7 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardFeatureIcon {
+        width: calc(14 * 100vw / var(--base-width-mobile));
+        height: calc(14 * 100vw / var(--base-width-mobile));
+        max-width: calc(14 * 100vw / var(--base-width-mobile));
+        min-width: calc(14 * 100vw / var(--base-width-mobile));
+        max-height: calc(14 * 100vw / var(--base-width-mobile));
+        min-height: calc(14 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardFeatureText {
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardFooter {
+        padding-top: calc(16 * 100vw / var(--base-width-mobile));
+        gap: calc(40 * 100vw / var(--base-width-mobile));
+    }
+
+    .footerLine {
+        height: calc(1 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardFooter>*:last-child {
+        width: 100%;
+        flex: 1;
+    }
+
+    .planCardFooter button {
+        width: 100%;
+    }
+
+    .planCardFooterInner {
+        gap: calc(16 * 100vw / var(--base-width-mobile));
+    }
+
+    .planCardPlaceholder {
+        font-size: calc(15.6 * 100vw / var(--base-width-mobile));
+    }
+}

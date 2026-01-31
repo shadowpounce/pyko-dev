@@ -512,6 +512,18 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
         }
       )
     }
+
+    // Cleanup: kill all tweens on unmount
+    return () => {
+      const refs = [
+        card1Ref, card2Ref,
+        card1TitleRef, card1SubtitleRef, card1IconRef,
+        card2TitleRef, card2SubtitleRef, card2IconRef
+      ]
+      refs.forEach(ref => {
+        if (ref.current) gsap.killTweensOf(ref.current)
+      })
+    }
   }, [bodyTextDelay, isMobile])
 
   // Сброс состояния при уходе с секции и возврате на секцию
@@ -638,7 +650,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
               title="Real-Time Grade Projection"
               subtitle="Ask questions about your finances in plain English and get instant, accurate answers."
               icon="images/icons/loader.svg"
-              backgroundImage="images/temp/track-card-01.png"
+              backgroundImage="/images/sections/track/card-01.png"
             />
           </div>
           <div className={styles.trackCardWrapper}>
@@ -693,20 +705,6 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
             }
 
             const activeIndex = swiper.activeIndex
-
-            const slideActions: Record<number, { prev: string; next: string }> = {
-              0: { prev: '—', next: 'Slide 1 (начальное)' },
-              1: { prev: 'Slide 0 → prev section', next: 'Slide 2 → animation 1' },
-              2: { prev: 'Slide 1 (сброс)', next: 'Slide 3 → animation 2' },
-              3: { prev: 'Slide 2 (animation 1)', next: 'Slide 4 → next section' },
-              4: { prev: 'Slide 3 (animation 2)', next: '—' },
-            }
-            const actions = slideActions[activeIndex] || { prev: '?', next: '?' }
-            console.log(
-              `%c[Swiper] Active: ${activeIndex}%c | ← назад: ${actions.prev} | → вперед: ${actions.next} | animState: ${animationStateRef.current}`,
-              'color: #4CAF50; font-weight: bold',
-              'color: inherit'
-            )
 
             // Блокируем обработку на время выполнения
             // isProcessingSlideChangeRef.current = true

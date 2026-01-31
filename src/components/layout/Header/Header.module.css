@@ -64,7 +64,7 @@
   border-radius: 50%;
   backdrop-filter: blur(calc(36 * 100vw / var(--base-width)));
   -webkit-backdrop-filter: blur(calc(36 * 100vw / var(--base-width)));
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--color-bg-glass);
   z-index: -1;
 }
 
@@ -86,7 +86,7 @@
   justify-content: center;
   padding: calc(10 * 100vw / var(--base-width-mobile));
   gap: calc(4 * 100vw / var(--base-width-mobile));
-  background-color: rgba(255, 255, 255, 0.11);
+  background-color: var(--color-bg-glass-light);
   border-radius: calc(14 * 100vw / var(--base-width-mobile));
   position: relative;
 }

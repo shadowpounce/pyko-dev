@@ -37,6 +37,8 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
         setEmail(e.target.value)
     }
 
+    const [inputAnimated, setInputAnimated] = useState(false)
+
     // Refs: .footerText
     const logoRef = useRef<HTMLDivElement>(null)
     const titleRef = useRef<HTMLHeadingElement>(null)
@@ -137,17 +139,14 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
             const wrapper = inputWrapperRef.current
             const input = emailInputRef.current
             if (!wrapper || !input) return
-            const btn = wrapper.querySelector<HTMLElement>('[class*="inputButton"]')
-            const style = getComputedStyle(wrapper)
-            const pl = parseFloat(style.paddingLeft) || 0
-            const pr = parseFloat(style.paddingRight) || 0
-            const btnW = btn ? btn.offsetWidth : 0
-            const maxW = Math.max(0, wrapper.offsetWidth - btnW - pl - pr)
             gsap.to(input, {
-                width: maxW,
-                duration: 0.5,
-                ease: 'power3.out',
+                width: `100%`,
+                duration: 1.25,
+                ease: 'power2.inOut',
                 overwrite: true,
+                onComplete: () => {
+                    setInputAnimated(true)
+                }
             })
         }
         gsap.delayedCall(inputWidthStart, runInputWidth)
@@ -156,6 +155,18 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
         const followDelay = inputWidthStart + 0.5
         animateEl(followTitleRef.current, followDelay)
         socialRefs.forEach((r, i) => animateEl(r.current, followDelay + DELAY_BETWEEN + i * DELAY_BETWEEN))
+
+        // Cleanup: kill all tweens on unmount
+        return () => {
+            const allRefs = [
+                logoRef, titleRef, descRef, contactBtnRef, exploreTitleRef,
+                stayInTouchRef, subscribeLabelRef, inputWrapperRef, emailInputRef, followTitleRef,
+                ...linkRefs, ...socialRefs
+            ]
+            allRefs.forEach(ref => {
+                if (ref.current) gsap.killTweensOf(ref.current)
+            })
+        }
     }, [baseDelay])
 
     return (
@@ -204,8 +215,8 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
                                         onChange={handleEmailChange}
                                         withButton={true}
                                         inputRef={emailInputRef}
-                                        fullWidth
                                         className={styles.footerAnimated}
+                                        animated={inputAnimated}
                                     />
                                 </div>
                             </div>

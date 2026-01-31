@@ -10,7 +10,7 @@ import React, {
   useRef,
 } from 'react'
 import { SectionProvider, useSectionIndex } from './SectionContext'
-import { VideosOverlay } from '../VideosOverlay'
+import { VideosOverlay } from '../VideosOverlay/VideosOverlay'
 
 interface FullPageProviderProps {
   children: React.ReactNode

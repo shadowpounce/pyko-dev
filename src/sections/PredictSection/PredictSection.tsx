@@ -44,7 +44,6 @@ export const PredictSection: React.FC<PredictSectionProps> = ({
 
   return (
     <Section
-      backgroundImage="/images/temp/predict-bg.png"
       className={styles.predict}
     >
       <Container

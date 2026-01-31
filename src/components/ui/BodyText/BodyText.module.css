@@ -4,7 +4,7 @@
   font-size: calc(18 * 100vw / var(--base-width));
   line-height: 130%;
   letter-spacing: -1%;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {
