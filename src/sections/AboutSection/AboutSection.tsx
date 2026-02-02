@@ -22,7 +22,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ sectionIndex }) => {
   const SECTION_INDEX = sectionIndex
 
   // Тайминг для начала анимаций в этой секции (в секундах)
-  const START_DELAY = 0.3
+  const START_DELAY = 1.25
 
   // Получаем базовую задержку, когда секция становится активной
   const baseDelay = useSectionAnimationTrigger({
@@ -68,8 +68,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ sectionIndex }) => {
             opacity={0.61}
           >
             Most students chase performance. Few <br />
-            understand what drives it. 
-            
+            understand what drives it.
+
             Pyko turns awareness <br /> into intelligence — revealing the hidden patterns <br />
             behind your focus, habits, and energy.When you <br /> see what truly drives
             results, you stop reacting  — <br /> and start leading.

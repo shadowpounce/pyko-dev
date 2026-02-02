@@ -675,18 +675,19 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
             }, 0)
           }}
           initialSlide={1}
+          // simulateTouch={true}
           direction="vertical"
           slidesPerView={1}
           slidesPerGroup={1}
           spaceBetween={0}
-          mousewheel={{
+          mousewheel={!isMobile && {
             enabled: true, // Включаем по умолчанию, управляем через API
             forceToAxis: true,
             sensitivity: 1, // Уменьшаем чувствительность для тачпада
             releaseOnEdges: false,
             thresholdDelta: 10, // Минимальное расстояние для переключения
           }}
-          keyboard={{
+          keyboard={!isMobile && {
             enabled: true, // Включаем по умолчанию, управляем через API
           }}
           allowTouchMove={true} // Разрешаем по умолчанию, управляем через API
@@ -694,15 +695,21 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
           allowSlidePrev={true} // Разрешаем назад, но на первом слайде событие пройдет к fullpage
           watchOverflow={true}
           speed={0}
-          resistance={true}
-          resistanceRatio={0}
+          resistance={isMobile ? false : true}
+          resistanceRatio={!isMobile ? 0.85 : 0}
+          observer={!isMobile && true}
+          observeParents={!isMobile && true}
           modules={[Mousewheel, Keyboard]}
-          className={styles.swiper}
+          className={clsx(styles.swiper)}
+          onTouchStart={() => {
+            // if (isMobile) alert('Swiper Touch Start')
+          }}
           onSlideChange={(swiper) => {
             // Защита от множественных переключений
-            if (isProcessingSlideChangeRef.current) {
+            if (!isMobile && isProcessingSlideChangeRef.current) {
               return
             }
+
 
             const activeIndex = swiper.activeIndex
 

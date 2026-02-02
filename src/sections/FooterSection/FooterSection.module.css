@@ -203,52 +203,53 @@
 
 @media (max-width: 768px) {
     .footer {
-        min-height: 100vh;
-        height: auto;
+        height: 100svh;
+        max-height: 100svh;
+        min-height: 100svh;
     }
 
     .container {
-        padding: calc(60 * 100vw / var(--base-width-mobile)) calc(18 * 100vw / var(--base-width-mobile));
-        align-items: start;
+        padding: calc(48 * 100vw / var(--base-width-mobile)) calc(18 * 100vw / var(--base-width-mobile));
+        align-items: center;
     }
 
     .footerWrapper {
         flex-direction: column;
-        gap: calc(40 * 100vw / var(--base-width-mobile));
-        padding: calc(30 * 100vw / var(--base-width-mobile));
-        border-radius: calc(39 * 100vw / var(--base-width-mobile));
-        backdrop-filter: blur(calc(40.3 * 100vw / var(--base-width-mobile)));
+        gap: calc(32 * 100vw / var(--base-width-mobile));
+        padding: calc(24 * 100vw / var(--base-width-mobile));
+        border-radius: calc(32 * 100vw / var(--base-width-mobile));
+        backdrop-filter: blur(calc(32 * 100vw / var(--base-width-mobile)));
         border: calc(1 * 100vw / var(--base-width-mobile)) solid #FFFFFF21;
     }
 
     .footerLogo {
-        width: calc(57 * 100vw / var(--base-width-mobile));
-        height: calc(22.8 * 100vw / var(--base-width-mobile));
-        max-width: calc(57 * 100vw / var(--base-width-mobile));
-        min-width: calc(57 * 100vw / var(--base-width-mobile));
-        max-height: calc(22.8 * 100vw / var(--base-width-mobile));
-        min-height: calc(22.8 * 100vw / var(--base-width-mobile));
+        width: calc(46 * 100vw / var(--base-width-mobile));
+        height: calc(18 * 100vw / var(--base-width-mobile));
+        max-width: calc(46 * 100vw / var(--base-width-mobile));
+        min-width: calc(46 * 100vw / var(--base-width-mobile));
+        max-height: calc(18 * 100vw / var(--base-width-mobile));
+        min-height: calc(18 * 100vw / var(--base-width-mobile));
     }
 
     .footerText {
-        gap: calc(20 * 100vw / var(--base-width-mobile));
+        gap: calc(16 * 100vw / var(--base-width-mobile));
         width: 100%;
     }
 
     .footerText>*:last-child {
-        margin-top: calc(40 * 100vw / var(--base-width-mobile));
+        margin-top: calc(32 * 100vw / var(--base-width-mobile));
     }
 
     .footerTitle {
-        font-size: calc(40 * 100vw / var(--base-width-mobile));
+        font-size: calc(32 * 100vw / var(--base-width-mobile));
     }
 
     .footerTitle span {
-        font-size: calc(42 * 100vw / var(--base-width-mobile));
+        font-size: calc(34 * 100vw / var(--base-width-mobile));
     }
 
     .footerDescription {
-        font-size: calc(13 * 100vw / var(--base-width-mobile));
+        font-size: calc(11 * 100vw / var(--base-width-mobile));
         line-height: 150% !important;
     }
 
@@ -259,7 +260,7 @@
 
     .footerColumns {
         flex-direction: column;
-        gap: calc(40 * 100vw / var(--base-width-mobile));
+        gap: calc(32 * 100vw / var(--base-width-mobile));
         width: 100%;
     }
 
@@ -268,73 +269,73 @@
     }
 
     .footerColumnTitle {
-        font-size: calc(20 * 100vw / var(--base-width-mobile));
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
     }
 
     .footerColumnLinks {
-        gap: calc(30 * 100vw / var(--base-width-mobile));
+        gap: calc(24 * 100vw / var(--base-width-mobile));
     }
 
     .footerList {
-        row-gap: calc(30 * 100vw / var(--base-width-mobile));
+        row-gap: calc(24 * 100vw / var(--base-width-mobile));
         column-gap: calc(0 * 100vw / var(--base-width-mobile));
         flex-direction: row;
         flex-wrap: wrap;
     }
 
     .footerListItem {
-        font-size: calc(17.8 * 100vw / var(--base-width-mobile));
+        font-size: calc(14 * 100vw / var(--base-width-mobile));
         /* нужно что бы в ряд вмещалось 2 элемента*/
         flex: 0 0 45%;
     }
 
     .footerEmail {
-        gap: calc(16 * 100vw / var(--base-width-mobile));
+        gap: calc(13 * 100vw / var(--base-width-mobile));
     }
 
     .footerEmailSubscription {
         min-width: 100%;
         max-width: 100%;
         width: 100%;
-        gap: calc(12 * 100vw / var(--base-width-mobile));
+        gap: calc(10 * 100vw / var(--base-width-mobile));
     }
 
     .footerEmailSubscriptionLabel {
-        font-size: calc(16 * 100vw / var(--base-width-mobile));
+        font-size: calc(13 * 100vw / var(--base-width-mobile));
     }
 
     .footerSocials {
-        gap: calc(20 * 100vw / var(--base-width-mobile));
+        gap: calc(16 * 100vw / var(--base-width-mobile));
         justify-content: center;
         align-items: center;
     }
 
     .footerSocialsButtons {
-        gap: calc(8 * 100vw / var(--base-width-mobile));
+        gap: calc(6 * 100vw / var(--base-width-mobile));
     }
 
     .footerSocialsButton {
-        width: calc(41.4 * 100vw / var(--base-width-mobile));
-        height: calc(41.4 * 100vw / var(--base-width-mobile));
-        max-width: calc(41.4 * 100vw / var(--base-width-mobile));
-        min-width: calc(41.4 * 100vw / var(--base-width-mobile));
-        max-height: calc(41.4 * 100vw / var(--base-width-mobile));
-        min-height: calc(41.4 * 100vw / var(--base-width-mobile));
-        border-radius: calc(13 * 100vw / var(--base-width-mobile));
-        backdrop-filter: blur(calc(30.11 * 100vw / var(--base-width-mobile)));
+        width: calc(33 * 100vw / var(--base-width-mobile));
+        height: calc(33 * 100vw / var(--base-width-mobile));
+        max-width: calc(33 * 100vw / var(--base-width-mobile));
+        min-width: calc(33 * 100vw / var(--base-width-mobile));
+        max-height: calc(33 * 100vw / var(--base-width-mobile));
+        min-height: calc(33 * 100vw / var(--base-width-mobile));
+        border-radius: calc(10 * 100vw / var(--base-width-mobile));
+        backdrop-filter: blur(calc(24 * 100vw / var(--base-width-mobile)));
     }
 
     .footerSocialsButton img {
-        width: calc(12.8 * 100vw / var(--base-width-mobile));
-        height: calc(12.8 * 100vw / var(--base-width-mobile));
-        max-width: calc(12.8 * 100vw / var(--base-width-mobile));
-        min-width: calc(12.8 * 100vw / var(--base-width-mobile));
-        max-height: calc(12.8 * 100vw / var(--base-width-mobile));
-        min-height: calc(12.8 * 100vw / var(--base-width-mobile));
+        width: calc(10 * 100vw / var(--base-width-mobile));
+        height: calc(10 * 100vw / var(--base-width-mobile));
+        max-width: calc(10 * 100vw / var(--base-width-mobile));
+        min-width: calc(10 * 100vw / var(--base-width-mobile));
+        max-height: calc(10 * 100vw / var(--base-width-mobile));
+        min-height: calc(10 * 100vw / var(--base-width-mobile));
     }
 
     .contactsColumn {
-        gap: calc(40 * 100vw / var(--base-width-mobile));
+        gap: calc(32 * 100vw / var(--base-width-mobile));
         justify-content: flex-start;
     }
 }

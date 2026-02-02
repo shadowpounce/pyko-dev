@@ -42,6 +42,12 @@
 }
 
 @media (max-width: 768px) {
+  .oracle {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+  }
+
   .container {
     padding-block: calc(120 * 100vw / var(--base-width-mobile)) calc(60 * 100vw / var(--base-width-mobile));
     gap: calc(24 * 100vw / var(--base-width-mobile));

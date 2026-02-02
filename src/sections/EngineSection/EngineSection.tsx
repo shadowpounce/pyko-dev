@@ -242,12 +242,16 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
           >
             <SwiperSlide className={styles.swiperSlide}>
               <EngineCard
+                titleRef={card1TitleRef}
+                subtitleRef={card1SubtitleRef}
                 title="Adaptive Foctis Sessions"
                 subtitle="Your sessions adapt in real time-adjusting length, ifficulty, and pacing basedon your tocus and energy"
               />
             </SwiperSlide>
             <SwiperSlide className={styles.swiperSlide}>
               <EngineCard
+                titleRef={card2TitleRef}
+                subtitleRef={card2SubtitleRef}
                 title="Instant Study Generation"
                 subtitle="Pyko converts lectures. notes, and course material into quizzes, flashcards: automatically"
               />

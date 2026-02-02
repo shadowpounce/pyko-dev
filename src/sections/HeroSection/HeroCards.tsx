@@ -147,7 +147,7 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
       const mainRotateX = rotateX * 0.5
       const mainRotateY = rotateY * 0.5
       const mainScale = scalesRef.current.main
-      mainCard.style.transform = `translateZ(-50px) scale(${mainScale}) rotateX(${mainRotateX}deg) rotateY(${mainRotateY}deg)`
+      mainCard.style.transform = `translateZ(-5px) scale(${mainScale}) rotateX(${mainRotateX}deg) rotateY(${mainRotateY}deg)`
 
       const sideRotateX = rotateX * 1.2
       const sideRotateY = rotateY * 1.2

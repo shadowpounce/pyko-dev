@@ -16,10 +16,18 @@
 
 .videosOverlay>video:nth-child(3) {
     z-index: 3;
+    width: 125%;
+    inset: unset;
+    left: 50%;
+    translate: -50% 0;
 }
 
 .videosOverlay>video:nth-child(4) {
     z-index: 4;
+    width: 125%;
+    inset: unset;
+    left: 50%;
+    translate: -50% 0;
 }
 
 .videosOverlay>video:nth-child(5) {

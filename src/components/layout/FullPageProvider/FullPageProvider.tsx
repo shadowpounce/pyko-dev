@@ -47,6 +47,9 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
   const [isChrome, setIsChrome] = useState(false)
   const fullpageApiRef = useRef<any>(null)
 
+  // Состояние для отслеживания загруженных секций
+  const [loadedSections, setLoadedSections] = useState<Set<number>>(new Set([0]))
+
   // Собираем селекторы для normalScrollElements
   // ВАЖНО: useMemo должен быть вызван до любых условных возвратов!
   const normalScrollSelectors = useMemo(() => {
@@ -122,8 +125,8 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
   const fullpageOptions = {
     licenseKey: 'gplv3-license', // Для коммерческого использования нужен платный ключ
     credits: { enabled: false, label: '', position: 'right' as const }, // Обязательное свойство
-    scrollingSpeed: isChrome ? 700 : 1000, // В Chrome используем меньшую скорость для плавности
-    navigation: true,
+    scrollingSpeed: isChrome ? 1500 : 1500, // В Chrome используем меньшую скорость для плавности
+    navigation: false,
     navigationPosition: 'right' as const,
     showActiveTooltip: false,
     slidesNavigation: false,
@@ -133,6 +136,7 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
     paddingBottom: '0',
     fixedElements: 'header, .mobile-menu',
     css3: true,
+    touchSensitivity: 1,
     scrollOverflow: true,
     normalScrollElements: normalScrollSelectors,
     normalScrollElementTouchThreshold: 5,
@@ -146,6 +150,16 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
       // Обновляем индекс также после полной загрузки секции
       const destinationIndex = destination.index
       setCurrentSectionIndex(destinationIndex)
+
+      // Отмечаем секцию как загруженную
+      setLoadedSections(prev => {
+        const newSet = new Set(prev)
+        if (!newSet.has(destinationIndex)) {
+          newSet.add(destinationIndex)
+          return newSet
+        }
+        return prev
+      })
     },
   }
 
@@ -170,13 +184,15 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
                 // Для секций с normalScroll добавляем data-атрибут
                 const props = (child as ReactElement).props as any
                 const hasNormalScroll = props?.normalScroll === true
+                const isLoaded = loadedSections.has(index)
 
                 return (
                   <div
                     key={index}
                     className="section fp-section"
-                    data-anchor={`section${index + 1}`}
+                    // data-anchor={`section${index + 1}`}
                     data-normal-scroll={hasNormalScroll ? 'true' : undefined}
+                    data-fp-loaded={isLoaded ? 'true' : undefined}
                   >
                     {child}
                   </div>

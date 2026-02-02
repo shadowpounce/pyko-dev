@@ -100,7 +100,7 @@ export const PlansSection: React.FC<PlansSectionProps> = ({ sectionIndex }) => {
 
         if (isNaN(targetValue)) return
 
-        const duration = 1.5 // секунды
+        const duration = 1 // секунды
         const startValue = 0
         const startTime = Date.now()
 
@@ -836,7 +836,7 @@ export const PlansSection: React.FC<PlansSectionProps> = ({ sectionIndex }) => {
                         placeholderRef={card1PlaceholderRef}
                         buttonRef={card1ButtonRef}
                         name='Core Intelligence'
-                        priceMonthly='$12.99'
+                        priceMonthly='$00.00'
                         features={['Real-time insights', 'Grade projections', 'Focus tracking']}
                         placeholder='Save 20% with yearly billing.'
                     />
@@ -851,7 +851,7 @@ export const PlansSection: React.FC<PlansSectionProps> = ({ sectionIndex }) => {
                         placeholderRef={card2PlaceholderRef}
                         buttonRef={card2ButtonRef}
                         name='Full Adaptive Intelligence'
-                        priceMonthly='$19.99'
+                        priceMonthly='$00.00'
                         features={['Oracle Intelligence System', 'Adaptive Platform personâltation', 'Study Engine automation']}
                         placeholder='Best value for long-term learning.'
                     />

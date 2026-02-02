@@ -30,6 +30,17 @@
 }
 
 @media (max-width: 768px) {
+
+    .plans {
+        height: 100svh;
+        max-height: 100svh;
+        min-height: 100svh;
+    }
+
+    .container {
+        padding-top: calc(100 * 100vw / var(--base-width-mobile));
+    }
+
     .plansWrapper.desktopOnly {
         display: none !important;
     }
@@ -49,7 +60,7 @@
 .swiper {
     width: 100%;
     height: 100%;
-    padding-bottom: calc(60 * 100vw / var(--base-width-mobile));
+    padding-bottom: calc(0 * 100vw / var(--base-width-mobile));
     overflow: visible;
 }
 
@@ -97,7 +108,7 @@
 
     /* Глобальные стили для пагинации на мобилке */
     .swiper :global(.swiper-pagination) {
-        bottom: calc(20 * 100vw / var(--base-width-mobile)) !important;
+        bottom: calc(40 * 100vw / var(--base-width-mobile)) !important;
     }
 }
 

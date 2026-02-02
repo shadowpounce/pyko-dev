@@ -6,76 +6,6 @@ import { useSectionIndex } from '../FullPageProvider/SectionContext'
 import clsx from 'clsx'
 import gsap from 'gsap'
 
-const activeSectionIndexAndVideosActions = [
-    {
-        // когда секция 0 активна - запускается видео с айди 0
-        activeSectionIndex: 0,
-        videoId: 0,
-        // когда видео доходит до 1.4 секунды - видео начинает с этого момента проигрываться назад до 0.0 и затем снова до 1.4 и так циклично "ping pong"
-        pingPong: { from: 0.0, to: 1.4 },
-        // когда мы переходим к следующей секции - видео с текущего кадра, с которого выполняется переход, проигрывается со скоростью 2 секунды до следующего этапа
-        moveToNextSectionSpeed: 2,
-        // когда мы переходим к этой секции с какой-то другой секции(кроме секции с индексом 1, так как этот сценарий описал ниже для activeSectionIndex: 1) - то видео начинает проигрываться с 0.0 до 1.4 и затем снова до 0.0 и так циклично "ping pong".
-
-    },
-    {
-        // сейчас активаня секция уже 1
-        activeSectionIndex: 1,
-        // видео всё тоже,
-        videoId: 0,
-        // видео проигрывается со скоростью 2х с предыдущего этапа до секунды 7.0 и включается обычная скорость 1х. С 7.0 доходит до 8.0 и затем снова до 7.0 и так циклично "ping pong"
-        pingPong: { from: 7.0, to: 8.0 },
-        // когда мы переходим к следующей секции - видео с текущего кадра, с которого выполняется переход, проигрывается со скоростью 3x вперёд до последнего кадра и паралельно включается переключатель overlay (overlayToggle)
-        moveToNextSectionSpeed: 3,
-        // когда мы переходим к предыдущей секции - видео с текущего кадра, с которого выполняется переход, проигрывается со скоростью 1x назад до 1.4 и уже на 0 секции снова включается пинг-понг
-        moveToPrevSectionSpeed: 1,
-        // если мы переходим с какой-то секции на эту секцию - то видео начинает проигрываться пинг понгом с 7.0 до 8.0
-    },
-    // так как дальше видео активное будет - video id 1, то включается оверлей переключатель, далее по такой логике буду просто писать *оверлей переключатель*
-    {
-        // когда мы переходим к секции с индексом 2 - включается видео айди 1 и проигрывается до последнего кадра и останавливается
-        activeSectionIndex: 2,
-        videoId: 1,
-        stopAtLastFrame: true
-    },
-    // *оверлей переключатель включается, пока не дойдём до секции с индексом 5, между 2 и 5 будет просто черный экран оверлея*
-    {
-        // когда мы переходим к секции с индексом 5 - включается видео айди 2 и проигрывается в обычном режиме циклично
-        activeSectionIndex: 5,
-        videoId: 2,
-        loop: true,
-    },
-    // *оверлей переключатель*
-    {
-        // когда мы переходим к секции с индексом 6 - включается видео айди 3 и проигрывается пинг понгом с 5.0 до 7.0
-        activeSectionIndex: 6,
-        videoId: 3,
-        pingPong: { from: 5.0, to: 7.0 },
-        // если мы переходим к предыдущей или следующей секции - просто включается оверлей переключатель и видео стопается в любом тайминге между 5.0 и 7.0 так как включается пинг понг и за этот диапазон видео не может уйти. И если заново возвращаемся на эту секцию - то видео начинает проигрываться пинг понгом с 5.0 до 7.0 с того кадра, на котором остановилось
-    },
-    // *оверлей переключатель*
-    {
-        // каждый раз,когда мы переходим к секции с индексом 7, с какой-то другой секции, но не с 8! - включается видео айди 4 и проигрывается до 1.5 секунды и останавливается. Если же мы возвращаемся к секции 7 с секции 8 - то видео просто доходит с 2.5 секунды до 1.5 секунды реверсом и останавливается.
-        activeSectionIndex: 7,
-        videoId: 4,
-        stopAt: 1.5,
-    },
-    // каждый раз,когда мы переходим к секции с индексом 8, с какой-то другой секции, но не с 9 и 7! - включается видео айди 4 из оверлея с момента 1.5 секунды и проигрывается до 2.5 секунды и останавливается. Если же мы возвращаемся к секции 8 с секции 9 - то видео просто доходит с последнего кадра до 2.5 секунды реверсом и останавливается. Если же мы переходим к секции 8 с секции 7 - то видео просто доходит с 1.5 секунды до 2.5 секунды и останавливается.
-    {
-        activeSectionIndex: 8,
-        videoId: 4,
-        stopAt: 2.5,
-    },
-    // каждый раз,когда мы переходим к секции с индексом 9, с какой-то другой секции, но не с 8! - включается видео айди 4 из оверлея с момента 2.5 секунды и проигрывается до последней секунды и останавливается. Если же мы переходим к секции 9 с секции 8 - то видео просто доходит с 2.5 секунды до последнего кадра и останавливается.
-    {
-        activeSectionIndex: 9,
-        videoId: 4,
-        stopAtLastFrame: true,
-    }
-]
-
-
-
 export const VideosOverlay: React.FC = () => {
     const videos = [
         {
@@ -107,12 +37,19 @@ export const VideosOverlay: React.FC = () => {
     const video5Ref = useRef<HTMLVideoElement>(null)
     const overlayToggleRef = useRef<HTMLDivElement>(null)
     const video1TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
-
-    const videoRefs = [video1Ref, video2Ref, video3Ref, video4Ref, video5Ref]
+    const video2TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const video3TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const video4TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const video5TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
 
     const { currentSectionIndex } = useSectionIndex()
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+    const [prevSectionIndex, setPrevSectionIndex] = useState(0)
+
+    useEffect(() => {
+        setPrevSectionIndex(currentSectionIndex)
+    }, [currentSectionIndex])
 
     // определение активного текущего активного видео
     useEffect(() => {
@@ -212,7 +149,7 @@ export const VideosOverlay: React.FC = () => {
                         onComplete: () => {
                             tl.to(video, {
                                 currentTime: 0,
-                                duration: 2,
+                                duration: 1.4,
                                 ease: "none",
                                 repeat: -1,
                                 yoyo: true
@@ -227,12 +164,12 @@ export const VideosOverlay: React.FC = () => {
 
                     tl.to(video, {
                         currentTime: 7,
-                        duration: 1.5,
+                        duration: 2,
                         ease: "none",
                         onComplete: () => {
                             tl.to(video, {
                                 currentTime: 8,
-                                duration: 2,
+                                duration: 1,
                                 ease: "none",
                                 repeat: -1,
                                 yoyo: true
@@ -240,7 +177,194 @@ export const VideosOverlay: React.FC = () => {
                         }
                     })
 
+                } else {
+                    video.pause()
                 }
+            }
+        }
+
+        if (currentVideoIndex === 1) {
+            const video = video2Ref.current
+
+            if (video) {
+
+                if (video2TweenRef.current) {
+                    video2TweenRef.current.kill()
+                }
+
+                if (currentSectionIndex === 2) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video2TweenRef.current = tl
+
+                    tl.fromTo(video, {
+                        currentTime: 0,
+                    }, {
+                        currentTime: 5.5,
+                        duration: 5.5,
+                        ease: "none",
+                        onComplete: () => {
+                            tl.to(video, {
+                                currentTime: video.duration,
+                                duration: video.duration - 5.5,
+                                ease: "none",
+                                repeat: -1,
+                                yoyo: true
+                            })
+                        }
+                    })
+                } else {
+                    video.pause()
+                }
+
+            }
+        }
+
+        if (currentVideoIndex === 2) {
+            const video = video3Ref.current
+
+            if (video) {
+
+                if (video3TweenRef.current) {
+                    video3TweenRef.current.kill()
+                }
+
+                if (currentSectionIndex === 5) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video3TweenRef.current = tl
+
+                    tl.fromTo(video, {
+                        currentTime: 0,
+                    }, {
+                        currentTime: video.duration,
+                        duration: video.duration,
+                        ease: "none",
+                        repeat: -1,
+                    })
+                } else {
+                    video.pause()
+                }
+
+            }
+        }
+
+        if (currentVideoIndex === 3) {
+            const video = video4Ref.current
+
+            if (video) {
+
+                if (video4TweenRef.current) {
+                    video4TweenRef.current.kill()
+                }
+
+                if (currentSectionIndex === 6) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video4TweenRef.current = tl
+
+                    tl.fromTo(video, {
+                        currentTime: 0,
+                    }, {
+                        currentTime: 4.2,
+                        duration: 4.2,
+                        ease: "none",
+                        onComplete: () => {
+                            tl.fromTo(video, {
+                                currentTime: 4.2,
+                            }, {
+                                currentTime: video.duration,
+                                duration: video.duration - 4.2,
+                                ease: "none",
+                                repeat: -1,
+                                yoyo: true
+                            })
+                        }
+                    })
+                } else {
+                    video.pause()
+                }
+
+            }
+        }
+
+        if (currentVideoIndex === 4) {
+            const video = video5Ref.current
+
+            if (video) {
+
+                if (video5TweenRef.current) {
+                    video5TweenRef.current.kill()
+                }
+
+                if (currentSectionIndex === 7) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video5TweenRef.current = tl
+
+                    if (prevSectionIndex > 7) {
+                        tl.to(video, {
+                            delay: 0,
+                            currentTime: 1,
+                            duration: 1,
+                            ease: "none",
+                            onComplete: () => {
+                                video.pause()
+                            }
+                        })
+                    } else {
+                        tl.fromTo(video, {
+                            currentTime: 0,
+                        }, {
+                            delay: 1,
+                            currentTime: 1,
+                            duration: 1,
+                            ease: "none",
+                            onComplete: () => {
+                                video.pause()
+                            }
+                        })
+                    }
+                }
+
+                if (currentSectionIndex === 8) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video5TweenRef.current = tl
+
+                    tl.to(video, {
+                        currentTime: 2,
+                        duration: prevSectionIndex < 8 ? 1 : 2,
+                        ease: "none",
+                        onComplete: () => {
+                            video.pause()
+                        }
+                    })
+                }
+
+                if (currentSectionIndex === 9) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video5TweenRef.current = tl
+
+                    tl.fromTo(video, {
+                        currentTime: 2
+                    }, {
+                        currentTime: video.duration,
+                        duration: video.duration - 2,
+                        ease: "none",
+                        onComplete: () => {
+                            video.pause()
+                        }
+                    })
+                }
+
             }
         }
 
@@ -248,6 +372,26 @@ export const VideosOverlay: React.FC = () => {
             if (video1TweenRef.current) {
                 video1TweenRef.current.kill()
                 video1TweenRef.current = null
+            }
+
+            if (video2TweenRef.current) {
+                video2TweenRef.current.kill()
+                video2TweenRef.current = null
+            }
+
+            if (video3TweenRef.current) {
+                video3TweenRef.current.kill()
+                video3TweenRef.current = null
+            }
+
+            if (video4TweenRef.current) {
+                video4TweenRef.current.kill()
+                video4TweenRef.current = null
+            }
+
+            if (video5TweenRef.current) {
+                video5TweenRef.current.kill()
+                video5TweenRef.current = null
             }
         }
     }, [currentVideoIndex, currentSectionIndex])
@@ -298,7 +442,6 @@ export const VideosOverlay: React.FC = () => {
                 className={clsx(styles.video)}
                 playsInline
                 muted
-                autoPlay
                 src={videos[1].src}
             />
             <video

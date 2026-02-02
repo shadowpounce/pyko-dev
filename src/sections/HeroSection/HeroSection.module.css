@@ -34,6 +34,14 @@
   text-align: center;
 }
 
+@media (min-width: 769px) {
+  .text {
+    scale: 0.85;
+    transform-origin: top center;
+    translate: 0 -2vw;
+  }
+}
+
 .footer {
   width: 100%;
   display: flex;

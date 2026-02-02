@@ -9,7 +9,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: start;
   justify-content: center;
   height: 100%;
   padding-top: calc(150 * 100vw / var(--base-width));
@@ -114,6 +114,12 @@
 }
 
 @media (max-width: 768px) {
+  .platform {
+    height: 100svh;
+    max-height: 100svh;
+    min-height: 100svh;
+  }
+
   .text {
     max-width: 100%;
     gap: calc(20 * 100vw / var(--base-width-mobile));

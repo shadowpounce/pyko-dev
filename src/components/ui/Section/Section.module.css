@@ -14,24 +14,7 @@
   background-attachment: scroll !important;
 }
 
-/* .section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(200 * 100vw / var(--base-width));
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.3) 50%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.section::after {
+/* .section::after {
   content: '';
   position: absolute;
   rotate: 180deg;
@@ -48,3 +31,27 @@
   pointer-events: none;
   z-index: 1;
 } */
+
+/* Скрываем контент если секция не активна (только для FullPage режима) */
+
+:global(.fp-section) .section>* {
+  transition-duration: 0.4s !important;
+  transition-property: opacity, scale !important;
+  transition-timing-function: ease-out !important;
+}
+
+:global(.fp-section:not(.active)) .section>* {
+  opacity: 0;
+  scale: 0.95;
+  pointer-events: none;
+}
+
+:global(.fp-section.active) .section>* {
+  opacity: 1;
+  scale: 1;
+  pointer-events: all;
+}
+
+:global(.fp-section.active)[data-fp-loaded="true"] .section>* {
+  transition-delay: 0.4s !important;
+}

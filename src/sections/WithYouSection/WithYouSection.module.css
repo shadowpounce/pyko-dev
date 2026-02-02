@@ -31,6 +31,12 @@
 }
 
 @media (max-width: 768px) {
+    .withYou {
+        height: 100svh;
+        max-height: 100svh;
+        min-height: 100svh;
+    }
+
     .title {
         max-width: 100%;
     }

@@ -100,6 +100,12 @@
 }
 
 @media (max-width: 768px) {
+  .engine {
+    height: 100svh;
+    max-height: 100svh;
+    min-height: 100svh;
+  }
+
   .desktopWrapper {
     display: none;
   }
@@ -109,15 +115,15 @@
   }
 
   .title {
-    font-size: calc(40 * 100vw / var(--base-width-mobile)) !important;
+    font-size: calc(34 * 100vw / var(--base-width-mobile)) !important;
   }
 
   .title>span:last-child {
-    font-size: calc(38 * 100vw / var(--base-width-mobile)) !important;
+    font-size: calc(32 * 100vw / var(--base-width-mobile)) !important;
   }
 
   .container {
-    padding-top: calc(120 * 100vw / var(--base-width-mobile));
+    padding-top: calc(100 * 100vw / var(--base-width-mobile));
     justify-content: start;
   }
 
@@ -133,7 +139,7 @@
   }
 
   .swiperSlide {
-    padding: 0 calc(18 * 100vw / var(--base-width-mobile));
+    padding: 0 calc(16 * 100vw / var(--base-width-mobile));
   }
 
   .swiperSlide>* {

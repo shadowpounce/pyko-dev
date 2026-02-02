@@ -58,32 +58,32 @@
 
 @media (max-width: 768px) {
   .engineCard {
-    max-height: calc(330 * 100vw / var(--base-width-mobile));
-    min-height: calc(330 * 100vw / var(--base-width-mobile));
-    height: calc(330 * 100vw / var(--base-width-mobile));
-    border-radius: calc(26 * 100vw / var(--base-width-mobile));
+    max-height: calc(280 * 100vw / var(--base-width-mobile));
+    min-height: calc(280 * 100vw / var(--base-width-mobile));
+    height: calc(280 * 100vw / var(--base-width-mobile));
+    border-radius: calc(22 * 100vw / var(--base-width-mobile));
   }
 
   .engineCardContainer {
-    padding: calc(16 * 100vw / var(--base-width-mobile));
-    gap: calc(16 * 100vw / var(--base-width-mobile));
+    padding: calc(14 * 100vw / var(--base-width-mobile));
+    gap: calc(14 * 100vw / var(--base-width-mobile));
     height: 100%;
   }
 
   .engineCardLottie {
-    max-height: calc(160 * 100vw / var(--base-width-mobile));
+    max-height: calc(136 * 100vw / var(--base-width-mobile));
   }
 
   .engineCardText {
-    gap: calc(6 * 100vw / var(--base-width-mobile));
+    gap: calc(5 * 100vw / var(--base-width-mobile));
   }
 
   .engineCardTitle {
-    font-size: calc(26 * 100vw / var(--base-width-mobile));
+    font-size: calc(22 * 100vw / var(--base-width-mobile));
     opacity: 0.8;
   }
 
   .engineCardSubtitle {
-    font-size: calc(16 * 100vw / var(--base-width-mobile));
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
   }
 }

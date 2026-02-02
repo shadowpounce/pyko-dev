@@ -2,7 +2,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 5%;
+  bottom: 1vw;
   z-index: 1;
   max-width: calc(340 * 100vw / var(--base-width));
   width: 100%;
@@ -16,24 +16,15 @@
   pointer-events: auto;
 }
 
-@media (min-width: 1280px) and (max-height: 800px) {
-  .wrapper {
-    scale: 0.8;
-    bottom: 0%;
-  }
+.wrapper:hover .mainCard {
+  transform: translateZ(0px) !important;
+  transition: transform 1s ease-in-out;
 }
 
-@media (min-width: 1440px) and (max-height: 800px) {
+@media (min-width: 769px) {
   .wrapper {
-    scale: 0.8;
-    bottom: -5%;
-  }
-}
-
-@media (min-width: 1620px) and (max-height: 1000px) {
-  .wrapper {
-    scale: 0.8;
-    bottom: -2%;
+    bottom: 0vw;
+    scale: 0.9;
   }
 }
 
@@ -49,6 +40,7 @@
   will-change: transform;
   z-index: 10;
   isolation: isolate;
+
 }
 
 .mainCardImg {
