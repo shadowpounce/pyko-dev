@@ -18,7 +18,7 @@ import {
 import styles from './EngineSection.module.css'
 import { EngineCard } from './EngineCard'
 import clsx from 'clsx'
-
+import { useIsMobile } from '@/hooks/useIsMobile'
 interface EngineSectionProps {
   sectionIndex: number
 }
@@ -43,6 +43,8 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
 
   // Состояние для активного слайда Swiper
   const [activeSlideIndex, setActiveSlideIndex] = useState(0)
+
+  const isMobile = useIsMobile()
 
   // Refs для карточек
   const card1Ref = useRef<HTMLDivElement>(null)
@@ -212,7 +214,7 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
             around.
           </BodyText>
         </div>
-        <div className={styles.desktopWrapper}>
+        {!isMobile ? <div className={styles.desktopWrapper}>
           <div className={styles.engineCards}>
             <EngineCard
               ref={card1Ref}
@@ -229,8 +231,7 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
               subtitle="Pyko converts lectures. notes, and course material into quizzes, flashcards: automatically"
             />
           </div>
-        </div>
-        <div className={styles.mobileWrapper}>
+        </div> : <div className={styles.mobileWrapper}>
           <Swiper
             modules={[Pagination]}
             spaceBetween={0}
@@ -271,7 +272,9 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
               )}
             ></div>
           </div>
-        </div>
+        </div>}
+
+
       </Container>
     </Section>
   )

@@ -17,6 +17,7 @@ import {
   useSectionAnimationTrigger,
   useElementAnimationDelay,
 } from '@/hooks/useSectionAnimationTrigger'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSectionIndex } from '@/components/layout/FullPageProvider/SectionContext'
 import styles from './TrackSection.module.css'
 import clsx from 'clsx'
@@ -40,14 +41,10 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
   // Состояние анимации: 0 - начальное, 1 - после первой анимации, 2 - после второй анимации
   const [animationState, setAnimationState] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const isMobile = useIsMobile()
 
   const isCard1AnimationCompleteRef = useRef(false)
   const isCard2AnimationCompleteRef = useRef(false)
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
-  }, [])
 
 
 
