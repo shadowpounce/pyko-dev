@@ -5,6 +5,7 @@ import styles from './VideosOverlay.module.css'
 import { useSectionIndex } from '../FullPageProvider/SectionContext'
 import clsx from 'clsx'
 import gsap from 'gsap'
+import { Sphere } from '../../ui/Sphere/Sphere'
 
 export const VideosOverlay: React.FC = () => {
     const videos = [
@@ -41,15 +42,22 @@ export const VideosOverlay: React.FC = () => {
     const video3TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
     const video4TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
     const video5TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const particleVideoRef = useRef<HTMLVideoElement>(null)
+    const particleWrapperRef = useRef<HTMLDivElement>(null)
 
     const { currentSectionIndex } = useSectionIndex()
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
     const [prevSectionIndex, setPrevSectionIndex] = useState(0)
+    const [prevVideoIndex, setPrevVideoIndex] = useState(0)
 
     useEffect(() => {
         setPrevSectionIndex(currentSectionIndex)
     }, [currentSectionIndex])
+
+    useEffect(() => {
+        setPrevVideoIndex(currentVideoIndex)
+    }, [currentVideoIndex])
 
     // определение активного текущего активного видео
     useEffect(() => {
@@ -106,23 +114,23 @@ export const VideosOverlay: React.FC = () => {
     useEffect(() => {
         if (currentVideoIndex === 0) {
             hideVideos()
-            gsap.to(video1Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+            gsap.to(video1Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
         }
         if (currentVideoIndex === 1) {
             hideVideos()
-            gsap.to(video2Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+            gsap.to(video2Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
         }
         if (currentVideoIndex === 2) {
             hideVideos()
-            gsap.to(video3Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+            gsap.to(video3Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
         }
         if (currentVideoIndex === 3) {
             hideVideos()
-            gsap.to(video4Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+            gsap.to(video4Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
         }
         if (currentVideoIndex === 4) {
             hideVideos()
-            gsap.to(video5Ref.current, { opacity: 1, duration: 1, delay: 0.5 })
+            gsap.to(video5Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
         }
     }, [currentVideoIndex])
 
@@ -180,6 +188,40 @@ export const VideosOverlay: React.FC = () => {
                 } else {
                     video.pause()
                 }
+            }
+        }
+
+        const particleVideo = particleVideoRef.current
+        const particleWrapper = particleWrapperRef.current
+        if (particleVideo && particleWrapper) {
+            if (currentSectionIndex >= 3 && currentSectionIndex <= 4) {
+                gsap.to(particleWrapper, {
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.5,
+                })
+                gsap.to(particleVideo, {
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: 0.5,
+                    onStart: () => {
+                        particleVideo.play().catch(e => console.warn("Particle play failed", e))
+                    }
+                })
+            } else {
+                gsap.to(particleWrapper, {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 0,
+                })
+                gsap.to(particleVideo, {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 0,
+                    onComplete: () => {
+                        particleVideo.pause()
+                    }
+                })
             }
         }
 
@@ -399,10 +441,8 @@ export const VideosOverlay: React.FC = () => {
     // overlay toggle controller
     useEffect(() => {
         if (currentVideoIndex !== -1) {
-            gsap.fromTo(overlayToggleRef.current,
-                {
-                    opacity: 0
-                },
+            gsap.to(overlayToggleRef.current,
+
                 {
                     opacity: 1, duration: 0.5,
                     onComplete: () => {
@@ -472,6 +512,20 @@ export const VideosOverlay: React.FC = () => {
                 src={videos[4].src}
             />
 
+            <div ref={particleWrapperRef} className={styles.particle}>
+                <video
+                    ref={particleVideoRef}
+                    className={styles.particleVideo}
+                    muted
+                    playsInline
+                    loop
+                    preload="auto"
+                >
+                    <source src="https://pub-7dc5e9025c7d46c7b4cf2b1b415b4068.r2.dev/movies/bg_particle_1.webm" type="video/webm" />
+                </video>
+            </div>
+
+            <Sphere active={currentSectionIndex >= 3 && currentSectionIndex <= 4} currentSectionIndex={currentSectionIndex} />
             <div ref={overlayToggleRef} className={styles.overlayToggle} />
         </div>
     )

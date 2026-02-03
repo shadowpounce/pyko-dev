@@ -1,0 +1,122 @@
+.sphereContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.planetaContainer {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    width: 540px;
+    height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    will-change: transform;
+}
+
+.planetaVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.particleContainer {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    width: 500px;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    will-change: transform;
+}
+
+.particleVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.orbitContainer {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    width: 450px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    will-change: transform, opacity;
+}
+
+.orbitVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.spiralContainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateZ(0);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    will-change: transform, opacity;
+    /* Bottom will be set dynamically or via JS, or specific % */
+    bottom: 0;
+}
+
+/* Specific z-indices for spirals if needed, from page.tsx: L=1, R=5 */
+.spiralLContainer {
+    z-index: 1;
+}
+
+.spiralRContainer {
+    z-index: 5;
+}
+
+.spiralVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.middleParticleContainer {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    will-change: opacity;
+    pointer-events: none;
+}
+
+.middleParticleVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

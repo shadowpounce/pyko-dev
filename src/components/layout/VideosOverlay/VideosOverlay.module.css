@@ -6,6 +6,23 @@
     cursor: none;
 }
 
+.particle {
+    position: absolute;
+    inset: 0;
+    z-index: 11;
+
+    background-image: url('/images/common/backgrounds/particle.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+}
+
+.particleVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .videosOverlay>video:nth-child(1) {
     z-index: 1;
 }
@@ -17,17 +34,15 @@
 .videosOverlay>video:nth-child(3) {
     z-index: 3;
     width: 125%;
-    inset: unset;
+    /* inset: unset; */
     left: 50%;
-    translate: -50% 0;
+    /* translate: -50% 0; */
 }
 
 .videosOverlay>video:nth-child(4) {
     z-index: 4;
     width: 125%;
-    inset: unset;
     left: 50%;
-    translate: -50% 0;
 }
 
 .videosOverlay>video:nth-child(5) {
@@ -36,18 +51,15 @@
 
 .video {
     position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    object-position: center;
-
     opacity: 0;
     transition: opacity 220ms ease;
     will-change: opacity;
-    transform: translateZ(0);
-
     /* base layer */
     z-index: 0;
 }
