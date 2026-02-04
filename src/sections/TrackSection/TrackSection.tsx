@@ -638,29 +638,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
           </BodyText>
         </div>
         <div className={styles.trackCardsContainer}>
-          <div className={styles.trackCardWrapper}>
-            <TrackCard
-              ref={card1Ref}
-              iconRef={card1IconRef}
-              titleRef={card1TitleRef}
-              subtitleRef={card1SubtitleRef}
-              title="Real-Time Grade Projection"
-              subtitle="Ask questions about your finances in plain English and get instant, accurate answers."
-              icon="images/icons/loader.svg"
-              backgroundImage="/images/sections/track/card-01.png"
-            />
-          </div>
-          <div className={styles.trackCardWrapper}>
-            <TrackCard
-              ref={card2Ref}
-              iconRef={card2IconRef}
-              titleRef={card2TitleRef}
-              subtitleRef={card2SubtitleRef}
-              title="Focus Stability Tracking"
-              subtitle="Measures how consistent and focused your study sessions are."
-              icon="images/icons/loader-2.svg"
-            />
-          </div>
+         
         </div>
         {/* Swiper для обработки свайпов - всегда в DOM */}
         <Swiper
@@ -784,6 +762,29 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
           <SwiperSlide className={styles.swiperSlide} /> {/* Слайд 3 - анимация 2 */}
           <SwiperSlide className={styles.swiperSlide} /> {/* Слайд 4 - переход вперед */}
         </Swiper>
+         <div className={clsx(styles.trackCardWrapper, styles.trackCardWrapper1)}>
+            <TrackCard
+              ref={card1Ref}
+              iconRef={card1IconRef}
+              titleRef={card1TitleRef}
+              subtitleRef={card1SubtitleRef}
+              title="Real-Time Grade Projection"
+              subtitle="Ask questions about your finances in plain English and get instant, accurate answers."
+              icon="images/icons/loader.svg"
+              // backgroundImage="/images/sections/track/card-01.png"
+            />
+          </div>
+          <div className={clsx(styles.trackCardWrapper, styles.trackCardWrapper2)}>
+            <TrackCard
+              ref={card2Ref}
+              iconRef={card2IconRef}
+              titleRef={card2TitleRef}
+              subtitleRef={card2SubtitleRef}
+              title="Focus Stability Tracking"
+              subtitle="Measures how consistent and focused your study sessions are."
+              icon="images/icons/loader-2.svg"
+            />
+          </div>
       </Container>
     </Section>
   )

@@ -19,6 +19,8 @@ import styles from './EngineSection.module.css'
 import { EngineCard } from './EngineCard'
 import clsx from 'clsx'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { useSectionIndex } from '@/components/layout/FullPageProvider/SectionContext'
+
 interface EngineSectionProps {
   sectionIndex: number
 }
@@ -26,6 +28,8 @@ interface EngineSectionProps {
 export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) => {
   // Индекс этой секции
   const SECTION_INDEX = sectionIndex
+  const { currentSectionIndex } = useSectionIndex()
+  const isActive = currentSectionIndex === SECTION_INDEX
 
   // Тайминг для начала анимаций в этой секции (в секундах)
   const START_DELAY = 0.3
@@ -222,6 +226,8 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
               subtitleRef={card1SubtitleRef}
               title="Adaptive Foctis Sessions"
               subtitle="Your sessions adapt in real time-adjusting length, ifficulty, and pacing basedon your tocus and energy"
+              isActive={isActive}
+              lottieSrc="/videos/lottie/lottie1.json"
             />
             <EngineCard
               ref={card2Ref}
@@ -229,6 +235,8 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
               subtitleRef={card2SubtitleRef}
               title="Instant Study Generation"
               subtitle="Pyko converts lectures. notes, and course material into quizzes, flashcards: automatically"
+              isActive={isActive}
+              lottieSrc="/videos/lottie/lottie2.json"
             />
           </div>
         </div> : <div className={styles.mobileWrapper}>
@@ -247,6 +255,8 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
                 subtitleRef={card1SubtitleRef}
                 title="Adaptive Foctis Sessions"
                 subtitle="Your sessions adapt in real time-adjusting length, ifficulty, and pacing basedon your tocus and energy"
+                isActive={isActive}
+                lottieSrc="/videos/lottie/lottie1.json"
               />
             </SwiperSlide>
             <SwiperSlide className={styles.swiperSlide}>
@@ -255,6 +265,8 @@ export const EngineSection: React.FC<EngineSectionProps> = ({ sectionIndex }) =>
                 subtitleRef={card2SubtitleRef}
                 title="Instant Study Generation"
                 subtitle="Pyko converts lectures. notes, and course material into quizzes, flashcards: automatically"
+                isActive={isActive}
+                lottieSrc="/videos/lottie/lottie2.json"
               />
             </SwiperSlide>
           </Swiper>

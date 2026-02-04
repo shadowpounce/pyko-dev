@@ -27,7 +27,7 @@
   gap: calc(20 * 100vw / var(--base-width));
   align-items: center;
   justify-content: start;
-  margin-top: calc(140 * 100vw / var(--base-width));
+  margin-top: calc(45 * 100vw / var(--base-width));
   text-align: center;
 
   height: 100%;
@@ -51,14 +51,17 @@
   position: absolute;
   transition: transform 1s ease-out;
   will-change: transform;
+  z-index: 1112;
+
 }
 
-.trackCardsContainer>.trackCardWrapper:nth-child(1) {
+.trackCardWrapper1 {
   top: 15%;
   left: 5%;
+  
 }
 
-.trackCardsContainer>.trackCardWrapper:nth-child(2) {
+.trackCardWrapper2 {
   bottom: 15%;
   right: 5%;
 }

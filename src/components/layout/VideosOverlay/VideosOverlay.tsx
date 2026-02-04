@@ -7,7 +7,19 @@ import clsx from 'clsx'
 import gsap from 'gsap'
 import { Sphere } from '../../ui/Sphere/Sphere'
 
+import { useVideoLoader } from '@/hooks/useVideoLoader'
+
+const VIDEO_SOURCES = [
+    'videos/sec1-2/sec1-2-720p.mp4',
+    'videos/sec3/sec3-720p.mp4',
+    'videos/sec6/sec6-720p.mp4',
+    'videos/sec7/sec7-720p.mp4',
+    'videos/sec8-9-10/sec8-9-10-720p.mp4',
+]
+
 export const VideosOverlay: React.FC = () => {
+    const { videoUrls } = useVideoLoader(VIDEO_SOURCES)
+
     const videos = [
         {
             id: 0,
@@ -44,6 +56,10 @@ export const VideosOverlay: React.FC = () => {
     const video5TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
     const particleVideoRef = useRef<HTMLVideoElement>(null)
     const particleWrapperRef = useRef<HTMLDivElement>(null)
+
+    const [video2Completed, setVideo2Completed] = useState(false)
+    const [video4Completed, setVideo4Completed] = useState(false)
+
 
     const { currentSectionIndex } = useSectionIndex()
 
@@ -193,6 +209,9 @@ export const VideosOverlay: React.FC = () => {
 
         const particleVideo = particleVideoRef.current
         const particleWrapper = particleWrapperRef.current
+
+
+
         if (particleVideo && particleWrapper) {
             if (currentSectionIndex >= 3 && currentSectionIndex <= 4) {
                 gsap.to(particleWrapper, {
@@ -209,32 +228,30 @@ export const VideosOverlay: React.FC = () => {
                     }
                 })
             } else {
-                gsap.to(particleWrapper, {
-                    opacity: 0,
-                    duration: 0.5,
-                    delay: 0,
-                })
-                gsap.to(particleVideo, {
-                    opacity: 0,
-                    duration: 0.5,
-                    delay: 0,
-                    onComplete: () => {
-                        particleVideo.pause()
-                    }
-                })
+                if (prevSectionIndex !== 0) {
+                    gsap.to(particleWrapper, {
+                        opacity: 0,
+                        duration: 0.5,
+                        delay: 0,
+                    })
+                    gsap.to(particleVideo, {
+                        opacity: 0,
+                        duration: 0.5,
+                        delay: 0,
+                        onComplete: () => {
+                            particleVideo.pause()
+                        }
+                    })
+                }
             }
         }
 
+        // video 2
         if (currentVideoIndex === 1) {
             const video = video2Ref.current
 
             if (video) {
-
-                if (video2TweenRef.current) {
-                    video2TweenRef.current.kill()
-                }
-
-                if (currentSectionIndex === 2) {
+                if (currentSectionIndex === 2 && !video2Completed) {
                     video.pause()
 
                     const tl = gsap.timeline()
@@ -243,23 +260,12 @@ export const VideosOverlay: React.FC = () => {
                     tl.fromTo(video, {
                         currentTime: 0,
                     }, {
-                        currentTime: 5.5,
-                        duration: 5.5,
+                        currentTime: 5.75,
+                        duration: 5.75,
                         ease: "none",
-                        onComplete: () => {
-                            tl.to(video, {
-                                currentTime: video.duration,
-                                duration: video.duration - 5.5,
-                                ease: "none",
-                                repeat: -1,
-                                yoyo: true
-                            })
-                        }
+                        onComplete: () => setVideo2Completed(true)
                     })
-                } else {
-                    video.pause()
                 }
-
             }
         }
 
@@ -267,11 +273,6 @@ export const VideosOverlay: React.FC = () => {
             const video = video3Ref.current
 
             if (video) {
-
-                if (video3TweenRef.current) {
-                    video3TweenRef.current.kill()
-                }
-
                 if (currentSectionIndex === 5) {
                     video.pause()
 
@@ -289,7 +290,6 @@ export const VideosOverlay: React.FC = () => {
                 } else {
                     video.pause()
                 }
-
             }
         }
 
@@ -298,15 +298,12 @@ export const VideosOverlay: React.FC = () => {
 
             if (video) {
 
-                if (video4TweenRef.current) {
-                    video4TweenRef.current.kill()
-                }
-
                 if (currentSectionIndex === 6) {
                     video.pause()
 
                     const tl = gsap.timeline()
                     video4TweenRef.current = tl
+
 
                     tl.fromTo(video, {
                         currentTime: 0,
@@ -336,17 +333,20 @@ export const VideosOverlay: React.FC = () => {
         if (currentVideoIndex === 4) {
             const video = video5Ref.current
 
+            const tl = gsap.timeline()
+            const tl2 = gsap.timeline()
+
+
             if (video) {
 
-                if (video5TweenRef.current) {
-                    video5TweenRef.current.kill()
-                }
+                // if (video5TweenRef.current) {
+                //     video5TweenRef.current.kill()
+                // }
 
                 if (currentSectionIndex === 7) {
                     video.pause()
 
-                    const tl = gsap.timeline()
-                    video5TweenRef.current = tl
+                    // video5TweenRef.current = tl
 
                     if (prevSectionIndex > 7) {
                         tl.to(video, {
@@ -354,9 +354,7 @@ export const VideosOverlay: React.FC = () => {
                             currentTime: 1,
                             duration: 1,
                             ease: "none",
-                            onComplete: () => {
-                                video.pause()
-                            }
+
                         })
                     } else {
                         tl.fromTo(video, {
@@ -366,76 +364,42 @@ export const VideosOverlay: React.FC = () => {
                             currentTime: 1,
                             duration: 1,
                             ease: "none",
-                            onComplete: () => {
-                                video.pause()
-                            }
+
                         })
                     }
                 }
 
                 if (currentSectionIndex === 8) {
+                    tl2.kill()
                     video.pause()
 
-                    const tl = gsap.timeline()
-                    video5TweenRef.current = tl
+                    // const tl = gsap.timeline()
+                    // video5TweenRef.current = tl
 
                     tl.to(video, {
                         currentTime: 2,
-                        duration: prevSectionIndex < 8 ? 1 : 2,
+                        duration: 1,
                         ease: "none",
-                        onComplete: () => {
-                            video.pause()
-                        }
+
                     })
                 }
 
                 if (currentSectionIndex === 9) {
                     video.pause()
 
-                    const tl = gsap.timeline()
-                    video5TweenRef.current = tl
+                    // video5TweenRef.current = tl
 
-                    tl.fromTo(video, {
-                        currentTime: 2
-                    }, {
-                        currentTime: video.duration,
-                        duration: video.duration - 2,
+                    tl2.to(video, {
+                        currentTime: 8,
+                        duration: 3,
                         ease: "none",
-                        onComplete: () => {
-                            video.pause()
-                        }
+
                     })
                 }
 
             }
         }
 
-        return () => {
-            if (video1TweenRef.current) {
-                video1TweenRef.current.kill()
-                video1TweenRef.current = null
-            }
-
-            if (video2TweenRef.current) {
-                video2TweenRef.current.kill()
-                video2TweenRef.current = null
-            }
-
-            if (video3TweenRef.current) {
-                video3TweenRef.current.kill()
-                video3TweenRef.current = null
-            }
-
-            if (video4TweenRef.current) {
-                video4TweenRef.current.kill()
-                video4TweenRef.current = null
-            }
-
-            if (video5TweenRef.current) {
-                video5TweenRef.current.kill()
-                video5TweenRef.current = null
-            }
-        }
     }, [currentVideoIndex, currentSectionIndex])
 
     // overlay toggle controller
@@ -474,7 +438,8 @@ export const VideosOverlay: React.FC = () => {
                 playsInline
                 muted
                 loop
-                src={videos[0].src}
+                preload="auto"
+                src={videoUrls[videos[0].src] || videos[0].src}
             />
             <video
                 data-video-id={videos[1].id}
@@ -482,7 +447,8 @@ export const VideosOverlay: React.FC = () => {
                 className={clsx(styles.video)}
                 playsInline
                 muted
-                src={videos[1].src}
+                preload="auto"
+                src={videoUrls[videos[1].src] || videos[1].src}
             />
             <video
                 data-video-id={videos[2].id}
@@ -491,7 +457,8 @@ export const VideosOverlay: React.FC = () => {
                 playsInline
                 muted
                 loop
-                src={videos[2].src}
+                preload="auto"
+                src={videoUrls[videos[2].src] || videos[2].src}
             />
             <video
                 data-video-id={videos[3].id}
@@ -500,7 +467,8 @@ export const VideosOverlay: React.FC = () => {
                 playsInline
                 muted
                 loop
-                src={videos[3].src}
+                preload="auto"
+                src={videoUrls[videos[3].src] || videos[3].src}
             />
             <video
                 data-video-id={videos[4].id}
@@ -509,7 +477,8 @@ export const VideosOverlay: React.FC = () => {
                 playsInline
                 muted
                 loop
-                src={videos[4].src}
+                preload="auto"
+                src={videoUrls[videos[4].src] || videos[4].src}
             />
 
             <div ref={particleWrapperRef} className={styles.particle}>
@@ -520,9 +489,8 @@ export const VideosOverlay: React.FC = () => {
                     playsInline
                     loop
                     preload="auto"
-                >
-                    <source src="https://pub-7dc5e9025c7d46c7b4cf2b1b415b4068.r2.dev/movies/bg_particle_1.webm" type="video/webm" />
-                </video>
+                    src="https://pub-7dc5e9025c7d46c7b4cf2b1b415b4068.r2.dev/movies/bg_particle_1.webm"
+                />
             </div>
 
             <Sphere active={currentSectionIndex >= 3 && currentSectionIndex <= 4} currentSectionIndex={currentSectionIndex} />

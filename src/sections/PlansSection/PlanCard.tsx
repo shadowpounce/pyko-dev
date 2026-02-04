@@ -110,7 +110,7 @@ export const PlanCard = forwardRef<HTMLDivElement, PlanCardProps>(
         }, [ref])
 
         return (
-            <div ref={ref} className={clsx(styles.planCard)}>
+            <div ref={ref} className={clsx(styles.planCard, 'gradient-border-mask')}>
                 <div className={styles.planCardBg}></div>
                 <div className={styles.glow} ref={glowRef}></div>
                 <div className={styles.planCardContainer}>

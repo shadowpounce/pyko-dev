@@ -14,6 +14,7 @@
   position: relative;
 }
 
+
 .glow {
   position: absolute;
   width: calc(300 * 100vw / var(--base-width));
@@ -24,53 +25,19 @@
       rgba(168, 224, 99, 0.2) 0%,
       transparent 70%);
   filter: blur(calc(20 * 100vw / var(--base-width)));
-  pointer-events: none;
+  /* pointer-events: none; */
   z-index: 1;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity var(--transition-base);
+
 }
 
-/* SVG анимированная обводка с градиентом */
 .blured {
   backdrop-filter: blur(calc(7.5 * 100vw / var(--base-width)));
-  cursor: none;
 }
 
-.borderSvg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  filter: blur(calc(0.5 * 100vw / var(--base-width)));
-}
 
-.borderLine {
-  stroke-dasharray: 250;
-  stroke-width: calc(0.75 * 100vw / var(--base-width));
-  fill: transparent;
-  animation: svgBorderAnimation 8s linear infinite;
-}
-
-@keyframes svgBorderAnimation {
-  from {
-    stroke-dashoffset: 0;
-  }
-
-  to {
-    stroke-dashoffset: 1000;
-  }
-}
-
-/* Reduce motion: pause infinite animations */
-@media (prefers-reduced-motion: reduce) {
-  .borderLine {
-    animation: none;
-  }
-}
 
 .withBackground .trackCardContainer {
   background-color: var(--color-bg-overlay-dark);
@@ -87,6 +54,46 @@
   padding: calc(20 * 100vw / var(--base-width));
   position: relative;
   z-index: 2;
+
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: calc(20 * 100vw / var(--base-width));
+  overflow: hidden;
+
+  transition-duration: 0.4s;
+  transition-property: scale, background-image;
+  transition-timing-function: ease-out;
+
+}
+
+.trackCardContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/sections/track/card-01.png");
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: calc(20 * 100vw / var(--base-width));
+  overflow: hidden;
+  z-index: 0;
+
+  transition: opacity var(--transition-base), scale 0.4s ease-out;
+
+  opacity: 0;
+  scale: 1;
+}
+
+.trackCard:hover .trackCardContainer {}
+
+.trackCard:hover .trackCardContainer::before {
+  opacity: 1;
+  scale: 0.98;
+
 }
 
 .trackCardIcon {

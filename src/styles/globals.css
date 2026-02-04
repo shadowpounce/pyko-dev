@@ -3,8 +3,7 @@
    ============================================ */
 @font-face {
   font-family: 'Instrument Serif';
-  src: url('../fonts/Instrument_Serif/InstrumentSerif-Regular.ttf')
-    format('truetype');
+  src: url('../fonts/Instrument_Serif/InstrumentSerif-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,8 +11,7 @@
 
 @font-face {
   font-family: 'Instrument Serif';
-  src: url('../fonts/Instrument_Serif/InstrumentSerif-Italic.ttf')
-    format('truetype');
+  src: url('../fonts/Instrument_Serif/InstrumentSerif-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -21,8 +19,7 @@
 
 @font-face {
   font-family: 'Inter Display';
-  src: url('../fonts/inter-display/ttf/InterDisplay-Regular.ttf')
-    format('truetype');
+  src: url('../fonts/inter-display/ttf/InterDisplay-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -30,8 +27,7 @@
 
 @font-face {
   font-family: 'Inter Display';
-  src: url('../fonts/inter-display/ttf/InterDisplay-Medium.ttf')
-    format('truetype');
+  src: url('../fonts/inter-display/ttf/InterDisplay-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -39,8 +35,7 @@
 
 @font-face {
   font-family: 'Inter Display';
-  src: url('../fonts/inter-display/ttf/InterDisplay-SemiBold.ttf')
-    format('truetype');
+  src: url('../fonts/inter-display/ttf/InterDisplay-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -48,8 +43,7 @@
 
 @font-face {
   font-family: 'Inter Display';
-  src: url('../fonts/inter-display/ttf/InterDisplay-Bold.ttf')
-    format('truetype');
+  src: url('../fonts/inter-display/ttf/InterDisplay-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -57,8 +51,7 @@
 
 @font-face {
   font-family: 'UXUM Grotesque';
-  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumlight.otf')
-    format('opentype');
+  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumlight.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -66,8 +59,7 @@
 
 @font-face {
   font-family: 'UXUM Grotesque';
-  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumregular.otf')
-    format('opentype');
+  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumregular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -75,8 +67,7 @@
 
 @font-face {
   font-family: 'UXUM Grotesque';
-  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumbold.otf')
-    format('opentype');
+  src: url('../fonts/uxum-grotesque-font-family-1762312633-0/uxumbold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -257,6 +248,7 @@ body {
    REDUCED MOTION - Accessibility & Performance
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -264,4 +256,47 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ============================================
+   ANIMATED BORDER (Ported from Sphere)
+   ============================================ */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.gradient-border-mask {
+  position: relative;
+  /* Ensure it works even if not set elsewhere */
+}
+
+.gradient-border-mask::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent !important;
+  border-radius: inherit;
+  background: repeating-conic-gradient(from var(--angle),
+      #ffffff 37.5%,
+      #ffffff 43.75%,
+      #000000 46.25% 78.75%,
+      #ffffff 81.25%,
+      #ffffff 87.5%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: rotate-border 8s linear infinite;
+  pointer-events: none;
+  /* Ensure clicks pass through */
+  z-index: 2;
+  /* Place on top of background but below interactive content if needed */
 }

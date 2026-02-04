@@ -25,7 +25,7 @@ const DELAY_BETWEEN = 0.15
 
 export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) => {
     const SECTION_INDEX = sectionIndex
-    const START_DELAY = 0.3
+    const START_DELAY = 1
 
     const baseDelay = useSectionAnimationTrigger({
         sectionIndex: SECTION_INDEX,

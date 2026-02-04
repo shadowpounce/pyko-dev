@@ -145,6 +145,19 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
       // Обновляем индекс текущей секции при переходе
       const destinationIndex = destination.index
       setCurrentSectionIndex(destinationIndex)
+
+      // Calculate total sections directly from children
+      const totalSections = Children.count(children)
+
+      // Если переходим на последнюю секцию - ставим скорость 3 секунды
+      // Иначе возвращаем стандартную (1500)
+      if (fullpageApiRef.current) {
+        if (destinationIndex === totalSections - 1) {
+          fullpageApiRef.current.setScrollingSpeed(3000)
+        } else {
+          fullpageApiRef.current.setScrollingSpeed(1500)
+        }
+      }
     },
     afterLoad: (origin: any, destination: any, direction: any) => {
       // Обновляем индекс также после полной загрузки секции
