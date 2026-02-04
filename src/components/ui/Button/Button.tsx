@@ -29,6 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
     styles[variant],
     withArrow ? styles.withArrow : '',
     className,
+    animationDelay !== null ? 'init-scale' : '',
   ]
     .filter(Boolean)
     .join(' ')

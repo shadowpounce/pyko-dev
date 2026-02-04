@@ -42,7 +42,7 @@
 .blured {
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(calc(50 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(25 * 100vw / var(--base-width)));
   border: calc(1 * 100vw / var(--base-width)) solid var(--color-border-light);
   border-radius: calc(24 * 100vw / var(--base-width));
 }
@@ -95,7 +95,7 @@
   padding: calc(10 * 100vw / var(--base-width)) calc(10 * 100vw / var(--base-width));
   border-radius: calc(46 * 100vw / var(--base-width));
   border: calc(0.5 * 100vw / var(--base-width)) solid rgba(255, 255, 255, 0.56);
-  backdrop-filter: blur(calc(44 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(22 * 100vw / var(--base-width)));
 }
 
 .bluredFooterLabel span {
@@ -129,7 +129,7 @@
   justify-content: center;
   border-radius: calc(24 * 100vw / var(--base-width));
   border: calc(1 * 100vw / var(--base-width)) solid #97cd068f;
-  backdrop-filter: blur(calc(44 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(22 * 100vw / var(--base-width)));
   font-weight: 500;
   font-size: calc(10 * 100vw / var(--base-width));
   line-height: 100%;
@@ -363,7 +363,7 @@
   border-radius: calc(19 * 100vw / var(--base-width));
   background: linear-gradient(to bottom, #ffffff, #eaffcf);
   border: calc(0.67 * 100vw / var(--base-width)) solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(calc(145.2 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(72.6 * 100vw / var(--base-width)));
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -449,7 +449,7 @@
   padding: calc(12 * 100vw / var(--base-width));
   border-radius: calc(16 * 100vw / var(--base-width));
   border: calc(1 * 100vw / var(--base-width)) solid var(--color-border-light);
-  backdrop-filter: blur(calc(50 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(25 * 100vw / var(--base-width)));
   box-shadow: 0 0 calc(15 * 100vw / var(--base-width)) rgba(0, 0, 0, 0.4);
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
@@ -603,7 +603,7 @@
   }
 
   .blured {
-    backdrop-filter: blur(calc(24 * 100vw / var(--base-width-mobile)));
+    backdrop-filter: blur(calc(12 * 100vw / var(--base-width-mobile)));
     border: calc(1 * 100vw / var(--base-width-mobile)) solid rgba(255, 255, 255, 0.2);
     border-radius: calc(13 * 100vw / var(--base-width-mobile));
   }
@@ -648,7 +648,7 @@
     min-height: calc(19 * 100vw / var(--base-width-mobile));
     border-radius: calc(16 * 100vw / var(--base-width-mobile));
     border: calc(1 * 100vw / var(--base-width-mobile)) solid #97cd068f;
-    backdrop-filter: blur(calc(24 * 100vw / var(--base-width-mobile)));
+    backdrop-filter: blur(calc(12 * 100vw / var(--base-width-mobile)));
     font-size: calc(7 * 100vw / var(--base-width-mobile));
   }
 
@@ -771,7 +771,7 @@
     padding: calc(6 * 100vw / var(--base-width-mobile)) calc(6 * 100vw / var(--base-width-mobile));
     border-radius: calc(32 * 100vw / var(--base-width-mobile));
     border: calc(0.5 * 100vw / var(--base-width-mobile)) solid rgba(255, 255, 255, 0.56);
-    backdrop-filter: blur(calc(24 * 100vw / var(--base-width-mobile)));
+    backdrop-filter: blur(calc(12 * 100vw / var(--base-width-mobile)));
   }
 
   .bluredFooterLabel span {

@@ -9,12 +9,13 @@ import { Sphere } from '../../ui/Sphere/Sphere'
 
 import { useVideoLoader } from '@/hooks/useVideoLoader'
 
+
 const VIDEO_SOURCES = [
-    'videos/sec1-2/sec1-2-720p.mp4',
-    'videos/sec3/sec3-720p.mp4',
-    'videos/sec6/sec6-720p.mp4',
-    'videos/sec7/sec7-720p.mp4',
-    'videos/sec8-9-10/sec8-9-10-720p.mp4',
+    'videos/sec1-2/sec1-2-480p.mp4',
+    'videos/sec3/sec3-480p.mp4',
+    'videos/sec6/sec6-480p.mp4',
+    'videos/sec7/sec7-480p.mp4',
+    'videos/sec8-9-10/sec8-9-10-480p.mp4',
 ]
 
 export const VideosOverlay: React.FC = () => {
@@ -65,6 +66,8 @@ export const VideosOverlay: React.FC = () => {
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
     const [prevSectionIndex, setPrevSectionIndex] = useState(0)
+
+
     const [prevVideoIndex, setPrevVideoIndex] = useState(0)
 
     useEffect(() => {

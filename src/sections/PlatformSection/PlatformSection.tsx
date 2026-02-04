@@ -180,7 +180,6 @@ export const PlatformSection: React.FC<PlatformSectionProps> = ({ sectionIndex }
                 src="/images/sections/platform/ticker.png"
                 alt="Platform Infinity String"
                 fill
-                priority
               />
             </div>
             <div ref={item2Ref} className={styles.tickerItem} data-copy="2">
@@ -188,7 +187,6 @@ export const PlatformSection: React.FC<PlatformSectionProps> = ({ sectionIndex }
                 src="/images/sections/platform/ticker.png"
                 alt="Platform Infinity String"
                 fill
-                priority
               />
             </div>
           </div>

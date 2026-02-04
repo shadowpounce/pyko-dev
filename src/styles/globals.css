@@ -160,6 +160,40 @@ body {
   display: none;
 }
 
+.init-hidden {
+  opacity: 0;
+}
+
+.init-blur-up {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(5px);
+}
+
+.init-slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.init-slide-up-sm {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.init-scale {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.init-scale-rotate {
+  opacity: 0;
+  transform: scale(0) rotate(-180deg);
+}
+
+.init-clip-right {
+  clip-path: inset(0 100% 0 0);
+}
+
 .desktop-only {
   display: none;
 }

@@ -23,9 +23,7 @@
 .container {
   height: 100%;
   width: 100%;
-  padding: calc(177 * 100vw / var(--base-width-mobile))
-    calc(20 * 100vw / var(--base-width-mobile))
-    calc(80 * 100vw / var(--base-width-mobile));
+  padding: calc(177 * 100vw / var(--base-width-mobile)) calc(20 * 100vw / var(--base-width-mobile)) calc(80 * 100vw / var(--base-width-mobile));
   position: relative;
   display: flex;
   flex-direction: column;
@@ -46,7 +44,7 @@
   justify-content: center;
   border-radius: calc(46 * 100vw / var(--base-width-mobile));
   background-color: var(--color-bg-glass-light);
-  backdrop-filter: blur(calc(30 * 100vw / var(--base-width-mobile)));
+  backdrop-filter: blur(calc(15 * 100vw / var(--base-width-mobile)));
   font-weight: 500;
   font-family: var(--font-sans);
   font-size: calc(10 * 100vw / var(--base-width-mobile));
@@ -106,7 +104,7 @@
   min-width: calc(41 * 100vw / var(--base-width-mobile));
   max-height: calc(41 * 100vw / var(--base-width-mobile));
   min-height: calc(41 * 100vw / var(--base-width-mobile));
-  backdrop-filter: blur(calc(30 * 100vw / var(--base-width-mobile)));
+  backdrop-filter: blur(calc(15 * 100vw / var(--base-width-mobile)));
   border-radius: calc(13 * 100vw / var(--base-width-mobile));
   background-color: var(--color-bg-glass-light);
   display: flex;

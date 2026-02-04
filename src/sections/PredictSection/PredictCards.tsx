@@ -152,19 +152,16 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
     const card2Delay = animationDelay + cardDelayBetween
     const card3Delay = animationDelay + cardDelayBetween * 2
 
-    gsap.fromTo(
+    gsap.to(
       card1Ref.current,
-      { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1.0, delay: card1Delay, ease: 'power2.out' }
     )
-    gsap.fromTo(
+    gsap.to(
       card2Ref.current,
-      { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1.0, delay: card2Delay, ease: 'power2.out' }
     )
-    gsap.fromTo(
+    gsap.to(
       card3Ref.current,
-      { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1.0, delay: card3Delay, ease: 'power2.out' }
     )
 
@@ -248,9 +245,8 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
 
     // Кастомная анимация для оболочек с более плавным пружинным эффектом
     const animateWrapper = (element: HTMLElement, delay: number) => {
-      gsap.fromTo(
+      gsap.to(
         element,
-        { opacity: 0, scale: 0 },
         {
           opacity: 1,
           scale: 1.08,
@@ -310,21 +306,24 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       })
     }
     // Анимация chartLine (поочередно) - через 0.75 сек после появления контента
+    const chartHeights = [65, 79, 93, 111, 130, 145, 160]
     const chartLineDelay = card1Delay + innerContentDelayOffset + 0.75
     chartLineDivsRef.current.forEach((lineDiv, index) => {
       if (!lineDiv) return
 
-      const currentHeight =
-        lineDiv.offsetHeight || parseFloat(getComputedStyle(lineDiv).height)
-      if (currentHeight > 0) {
-        gsap.set(lineDiv, { height: 0 })
-        gsap.to(lineDiv, {
-          height: currentHeight,
-          duration: 1.2,
-          delay: chartLineDelay + index * 0.08,
-          ease: 'power2.out',
-        })
-      }
+      const height = chartHeights[index]
+
+      // Calculate correct height using variable logic similar to styles but in JS if possible,
+      // OR better: use CSS var if supported in older browsers, but here we can just use the calc string
+      // However getting the value of CSS variable in JS for animation is tricky for 'to'.
+      // We will assume the element starts at height: 0 (from CSS)
+
+      gsap.to(lineDiv, {
+        height: `calc(${height} * 100vw / var(--base-width))`,
+        duration: 1.2,
+        delay: chartLineDelay + index * 0.08,
+        ease: 'power2.out',
+      })
     })
 
     // Карточка 2 - контент внутри .secondary
@@ -405,9 +404,8 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       const labels =
         card1LabelsRef.current.querySelectorAll<HTMLSpanElement>('span')
       labels.forEach((label, index) => {
-        gsap.fromTo(
+        gsap.to(
           label,
-          { opacity: 0, y: 10 },
           {
             opacity: 1,
             y: 0,
@@ -422,9 +420,8 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
     // Карточка 1: Dashed background анимация (chart) - используем clip-path
     if (card1ChartRef.current) {
       const dashDelay = card1Delay + innerContentDelayOffset + 0.5
-      gsap.fromTo(
+      gsap.to(
         card1ChartRef.current,
-        { clipPath: 'inset(0 100% 0 0)' },
         {
           clipPath: 'inset(0 0% 0 0)',
           duration: 1.5,
@@ -439,9 +436,8 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
     if (card2ArrowWrapperRef.current) {
       const arrowImg = card2ArrowWrapperRef.current.querySelector('img')
       if (arrowImg) {
-        gsap.fromTo(
+        gsap.to(
           arrowImg,
-          { opacity: 0, scale: 0, rotation: -180 },
           {
             opacity: 1,
             scale: 1,
@@ -457,9 +453,8 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
     // Карточка 3: Dashed background анимация (bluredFooter)
     if (card3FooterRef.current) {
       const dashDelay = card3Delay + innerContentDelayOffset + 0.5
-      gsap.fromTo(
+      gsap.to(
         card3FooterRef.current,
-        { clipPath: 'inset(0 100% 0 0)' },
         {
           clipPath: 'inset(0 0% 0 0)',
           duration: 1.5,
@@ -523,20 +518,36 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
     <div className={styles.wrapper}>
       <div
         ref={card1Ref}
-        className={styles.card}
+        className={clsx(
+          styles.card,
+          animationDelay !== null && hasAnimatedRef.current === false
+            ? 'init-slide-up'
+            : ''
+        )}
         style={{ backgroundImage: 'url(/images/sections/predict/card-1.png)' }}
       >
         <div className={styles.cardContent}>
           <div className={styles.graph}>
             <div
               ref={card1BluredRef}
-              className={clsx(styles.blured, styles.bluredFlex)}
+              className={clsx(
+                styles.blured,
+                styles.bluredFlex,
+                animationDelay !== null && hasAnimatedRef.current === false
+                  ? 'init-scale'
+                  : ''
+              )}
             >
               <div className={styles.bluredContainer}>
                 <div className={styles.bluredHeader}>
                   <div
                     ref={card1HeaderTextRef}
-                    className={styles.bluredHeaderText}
+                    className={clsx(
+                      styles.bluredHeaderText,
+                      animationDelay !== null && hasAnimatedRef.current === false
+                        ? 'init-blur-up'
+                        : ''
+                    )}
                   >
                     <span>Predicted GPA</span>
                     <span>3.8</span>
@@ -544,7 +555,15 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                   </div>
                 </div>
                 <div className={styles.chartModule}>
-                  <div ref={card1ChartRef} className={styles.chart}>
+                  <div
+                    ref={card1ChartRef}
+                    className={clsx(
+                      styles.chart,
+                      animationDelay !== null && hasAnimatedRef.current === false
+                        ? 'init-clip-right'
+                        : ''
+                    )}
+                  >
                     {[65, 79, 93, 111, 130, 145, 160].map((height, index) => (
                       <div key={index} className={styles.chartLine}>
                         <div
@@ -553,7 +572,8 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                           }}
                           style={
                             {
-                              height: `calc(${height} * 100vw / var(--base-width))`,
+                              height: 0,
+                              // height: `calc(${height} * 100vw / var(--base-width))`,
                               '--mobile-height': `${(height / 1440) * 390}`,
                             } as React.CSSProperties
                           }
@@ -561,9 +581,14 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                       </div>
                     ))}
                   </div>
-                  <div ref={card1LabelsRef} className={styles.labels}>
+                  <div
+                    ref={card1LabelsRef}
+                    className={clsx(
+                      styles.labels,
+                    )}
+                  >
                     {['w1', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7'].map((label) => (
-                      <span key={label}>{label}</span>
+                      <span key={label} className={animationDelay !== null ? 'init-slide-up-sm' : ''}>{label}</span>
                     ))}
                   </div>
                 </div>
@@ -571,7 +596,15 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
             </div>
           </div>
           <div className={styles.cardContentText}>
-            <p ref={card1TitleRef} className={styles.cardTitle}>
+            <p
+              ref={card1TitleRef}
+              className={clsx(
+                styles.cardTitle,
+                animationDelay !== null && hasAnimatedRef.current === false
+                  ? 'init-blur-up'
+                  : ''
+              )}
+            >
               Predicted GPA
             </p>
             <p ref={card1SubtitleRef} className={styles.cardSubtitle}>
@@ -583,13 +616,26 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       </div>
       <div
         ref={card2Ref}
-        className={styles.card}
+        className={clsx(
+          styles.card,
+          animationDelay !== null && hasAnimatedRef.current === false
+            ? 'init-slide-up'
+            : ''
+        )}
         style={{ backgroundImage: 'url(/images/sections/predict/card-2.png)' }}
       >
         <div className={styles.cardContent}>
           <div className={styles.graph}>
             <div className={styles.secondary}>
-              <div ref={card2SecondaryAddRef} className={styles.secondaryAdd}>
+              <div
+                ref={card2SecondaryAddRef}
+                className={clsx(
+                  styles.secondaryAdd,
+                  animationDelay !== null && hasAnimatedRef.current === false
+                    ? 'init-scale'
+                    : ''
+                )}
+              >
                 <div className={styles.icon}>
                   <Image
                     src="/images/icons/bolt.svg"
@@ -611,7 +657,15 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                 </span>
                 <span>Focus Stability</span>
               </div>
-              <div ref={card2SecondaryMainRef} className={styles.secondaryMain}>
+              <div
+                ref={card2SecondaryMainRef}
+                className={clsx(
+                  styles.secondaryMain,
+                  animationDelay !== null && hasAnimatedRef.current === false
+                    ? 'init-scale'
+                    : ''
+                )}
+              >
                 <div className={styles.secondaryMainHeader}>
                   <span>Next Focus Peak</span>
                   <div className={styles.percent}>
@@ -685,7 +739,12 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                 </div>
                 <div
                   ref={card2FooterRef}
-                  className={styles.secondaryMainFooter}
+                  className={clsx(
+                    styles.secondaryMainFooter,
+                    animationDelay !== null && hasAnimatedRef.current === false
+                      ? 'init-blur-up'
+                      : ''
+                  )}
                 >
                   Predicted productivity dip within the next 48 hours.
                 </div>
@@ -693,7 +752,15 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
             </div>
           </div>
           <div className={styles.cardContentText}>
-            <div ref={card2TitleRef} className={styles.cardTitle}>
+            <div
+              ref={card2TitleRef}
+              className={clsx(
+                styles.cardTitle,
+                animationDelay !== null && hasAnimatedRef.current === false
+                  ? 'init-blur-up'
+                  : ''
+              )}
+            >
               Next Focus Drop
             </div>
             <p ref={card2SubtitleRef} className={styles.cardSubtitle}>
@@ -705,20 +772,36 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
       </div>
       <div
         ref={card3Ref}
-        className={styles.card}
+        className={clsx(
+          styles.card,
+          animationDelay !== null && hasAnimatedRef.current === false
+            ? 'init-slide-up'
+            : ''
+        )}
         style={{ backgroundImage: 'url(/images/sections/predict/card-3.png)' }}
       >
         <div className={styles.cardContent}>
           <div className={styles.graph}>
             <div
               ref={card3BluredRef}
-              className={clsx(styles.blured, styles.heightFit)}
+              className={clsx(
+                styles.blured,
+                styles.heightFit,
+                animationDelay !== null && hasAnimatedRef.current === false
+                  ? 'init-scale'
+                  : ''
+              )}
             >
               <div className={styles.bluredContainer}>
                 <div className={styles.bluredHeader}>
                   <div
                     ref={card3HeaderTextRef}
-                    className={styles.bluredHeaderText}
+                    className={clsx(
+                      styles.bluredHeaderText,
+                      animationDelay !== null && hasAnimatedRef.current === false
+                        ? 'init-blur-up'
+                        : ''
+                    )}
                   >
                     <span>Predicted GPA</span>
                     <span ref={card3PercentRef}>0%</span>
@@ -728,12 +811,25 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                   </div>
                   <div
                     ref={card3ActiveLabelRef}
-                    className={styles.bluredHeaderLabel}
+                    className={clsx(
+                      styles.bluredHeaderLabel,
+                      animationDelay !== null && hasAnimatedRef.current === false
+                        ? 'init-scale'
+                        : ''
+                    )}
                   >
                     <span>active</span>
                   </div>
                 </div>
-                <div ref={card3BodyRef} className={styles.bluredBody}>
+                <div
+                  ref={card3BodyRef}
+                  className={clsx(
+                    styles.bluredBody,
+                    animationDelay !== null && hasAnimatedRef.current === false
+                      ? 'init-blur-up'
+                      : ''
+                  )}
+                >
                   <div className={styles.bluredBodyItem}>
                     <div className={styles.label}>
                       <div className={styles.labelCircle}></div>
@@ -779,10 +875,23 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                 </div>
               </div>
 
-              <div ref={card3FooterRef} className={styles.bluredFooter}>
+              <div
+                ref={card3FooterRef}
+                className={clsx(
+                  styles.bluredFooter,
+                  animationDelay !== null && hasAnimatedRef.current === false
+                    ? 'init-clip-right'
+                    : ''
+                )}
+              >
                 <div
                   ref={card3BalancedLabelRef}
-                  className={styles.bluredFooterLabel}
+                  className={clsx(
+                    styles.bluredFooterLabel,
+                    animationDelay !== null && hasAnimatedRef.current === false
+                      ? 'init-scale'
+                      : ''
+                  )}
                 >
                   <Image
                     src="/images/icons/balance.svg"
@@ -796,7 +905,15 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
             </div>
           </div>
           <div className={styles.cardContentText}>
-            <p ref={card3TitleRef} className={styles.cardTitle}>
+            <p
+              ref={card3TitleRef}
+              className={clsx(
+                styles.cardTitle,
+                animationDelay !== null && hasAnimatedRef.current === false
+                  ? 'init-blur-up'
+                  : ''
+              )}
+            >
               Stability Forecast
             </p>
             <p ref={card3SubtitleRef} className={styles.cardSubtitle}>

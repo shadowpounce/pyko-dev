@@ -1,5 +1,5 @@
 .engineCard {
-  backdrop-filter: blur(calc(13 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(6.5 * 100vw / var(--base-width)));
   border: calc(1 * 100vw / var(--base-width)) solid var(--color-border-medium);
   border-radius: calc(26 * 100vw / var(--base-width));
 

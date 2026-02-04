@@ -40,7 +40,7 @@ export const animationConfig = {
 
   // Настройки blur
   blur: {
-    from: 10, // Начальное значение blur
+    from: 5, // Начальное значение blur
     to: 0, // Конечное значение blur
   },
 

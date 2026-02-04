@@ -62,8 +62,8 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  backdrop-filter: blur(calc(36 * 100vw / var(--base-width)));
-  -webkit-backdrop-filter: blur(calc(36 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(18 * 100vw / var(--base-width)));
+  -webkit-backdrop-filter: blur(calc(18 * 100vw / var(--base-width)));
   background-color: var(--color-bg-glass);
   z-index: -1;
 }

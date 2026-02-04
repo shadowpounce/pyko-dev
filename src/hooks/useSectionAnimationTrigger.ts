@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useSectionIndex } from '@/components/layout/FullPageProvider/SectionContext'
+
 import { animationConfig } from '@/config/animations.config'
 
 interface UseSectionAnimationTriggerProps {
@@ -28,12 +29,12 @@ export const useSectionAnimationTrigger = ({
     if (currentSectionIndex === sectionIndex && !hasAnimatedRef.current) {
       hasAnimatedRef.current = true
       setAnimationDelay(startDelay)
-      
+
       if (onTrigger) {
         onTrigger()
       }
     }
-    
+
     // Сбрасываем при переходе на другую секцию (опционально, если нужна повторная анимация)
     // if (currentSectionIndex !== sectionIndex) {
     //   hasAnimatedRef.current = false

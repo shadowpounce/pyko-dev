@@ -34,7 +34,7 @@
 }
 
 .blured {
-  backdrop-filter: blur(calc(7.5 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(3.75 * 100vw / var(--base-width)));
 }
 
 
@@ -88,7 +88,7 @@
   scale: 1;
 }
 
-.trackCard:hover .trackCardContainer {}
+
 
 .trackCard:hover .trackCardContainer::before {
   opacity: 1;
@@ -150,7 +150,7 @@
 
     border-radius: calc(20 * 100vw / var(--base-width-mobile));
 
-    backdrop-filter: blur(calc(7.5 * 100vw / var(--base-width-mobile)));
+    backdrop-filter: blur(calc(3.75 * 100vw / var(--base-width-mobile)));
     cursor: none;
     background-color: var(--color-bg-overlay-dark);
 

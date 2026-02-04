@@ -132,8 +132,8 @@
   border-radius: calc(24.48 * 100vw / var(--base-width));
   border: calc(1.22 * 100vw / var(--base-width)) solid var(--color-border-light);
   background-color: var(--color-bg-glass);
-  backdrop-filter: blur(calc(137.07 * 100vw / var(--base-width)));
-  -webkit-backdrop-filter: blur(calc(137.07 * 100vw / var(--base-width)));
+  backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width)));
+  -webkit-backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width)));
   z-index: 0;
 }
 
@@ -286,14 +286,14 @@
     width: calc(175 * 100vw / var(--base-width-mobile));
     padding: calc(4 * 100vw / var(--base-width-mobile));
     border-radius: calc(17 * 100vw / var(--base-width-mobile));
-    backdrop-filter: blur(calc(137.07 * 100vw / var(--base-width-mobile)));
+    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
 
     scale: 0.9 !important;
   }
 
   .cardLeftBackground {
     border-radius: calc(17 * 100vw / var(--base-width-mobile));
-    backdrop-filter: blur(calc(137.07 * 100vw / var(--base-width-mobile)));
+    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
   }
 
   .cardLeftFirstDiv {

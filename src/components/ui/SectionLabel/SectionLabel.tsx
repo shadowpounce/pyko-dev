@@ -26,7 +26,11 @@ export const SectionLabel: React.FC<SectionLabelProps> = ({
   }, [animationDelay])
 
   return (
-    <label ref={labelRef} className={`${styles.label} ${className}`.trim()}>
+    <label
+      ref={labelRef}
+      className={`${styles.label} ${className} ${animationDelay !== null ? 'init-blur-up' : ''
+        }`.trim()}
+    >
       {children}
     </label>
   )

@@ -220,6 +220,8 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
   )
 }
 
+
+
 export const FullPageProvider: React.FC<FullPageProviderProps> = ({
   children,
 }) => {

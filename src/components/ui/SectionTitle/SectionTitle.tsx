@@ -24,7 +24,13 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   animationDelay = null,
 }) => {
   const TitleTag = `h${level}` as 'h1' | 'h2' | 'h3'
-  const titleClass = [styles.title, styles[`h${level}`], className]
+  /* eslint-disable-next-line react-hooks/rules-of-hooks */
+  const titleClass = [
+    styles.title,
+    styles[`h${level}`],
+    className,
+    animationDelay !== null ? 'init-hidden' : '',
+  ]
     .filter(Boolean)
     .join(' ')
 
@@ -51,11 +57,11 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
       <span className={styles.serif} style={serifStyle}>
         {Array.isArray(serif)
           ? serif.map((item, index) => (
-              <>
-                <span key={index}> {item}</span>
-                <br />
-              </>
-            ))
+            <>
+              <span key={index}> {item}</span>
+              <br />
+            </>
+          ))
           : serif}
       </span>
     </>

@@ -54,7 +54,11 @@ export const BodyText: React.FC<BodyTextProps> = ({
     Component,
     {
       ref: textRef,
-      className: clsx(styles.bodyText, className),
+      className: clsx(
+        styles.bodyText,
+        className,
+        animationDelay !== null ? 'init-hidden' : ''
+      ),
       style: Object.keys(style).length > 0 ? style : undefined,
     },
     children
