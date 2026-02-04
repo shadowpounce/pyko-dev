@@ -110,6 +110,14 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
     }
   }, [isLoaded, ReactFullpage, setCurrentSectionIndex])
 
+  // Здесь возвращаем ничего или же нужно
+  // пробросить в контекст статус загрузки fullpage
+  // и когда fullpage загружен только тогда и 1 раз
+  // проигрывать анимацию gsap во элементах
+  if (!isLoaded) {
+    return null;
+  }
+
   // На сервере и до монтирования - возвращаем одинаковую структуру
   // Это предотвращает hydration mismatch
   if (!isMounted) {
