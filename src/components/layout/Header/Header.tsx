@@ -5,6 +5,7 @@ import { Link } from '@/components/ui/Link'
 import { Button } from '@/components/ui/Button'
 import { animateHeader } from '@/utils/headerAnimations'
 import styles from './Header.module.css'
+import clsx from 'clsx'
 
 const menuItems = [
   { label: 'Home Page', href: '/' },
@@ -83,16 +84,16 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
         <nav className={styles.menu}>
           <div ref={menuBackgroundRef} className={styles.menuBackground}></div>
           {menuItems.map((item) => (
-            <Link key={item.href} href={item.href} variant="secondary">
+            <Link className={styles.menuLink} key={item.href} href={item.href} variant="secondary">
               {item.label}
             </Link>
           ))}
         </nav>
         <div className={styles.buttons}>
-          <Link href="/login" variant="secondary" className="desktop-only">
+          <Link href="/login" variant="secondary" className={clsx("desktop-only", styles.buttons_item)}>
             Login
           </Link>
-          <Button className="desktop-only">Get started</Button>
+          <Button className={clsx("desktop-only", styles.buttons_item)}>Get started</Button>
           <button
             className={`${styles.burger} ${isMenuOpen ? styles.active : ''}`}
             onClick={onMenuToggle}

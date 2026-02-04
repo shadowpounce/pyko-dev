@@ -40,6 +40,7 @@
   will-change: transform;
   z-index: 10;
   isolation: isolate;
+  opacity: 0;
 
 }
 
@@ -122,6 +123,7 @@
   background: transparent;
 
   padding: calc(5 * 100vw / var(--base-width));
+  opacity: 0;
 }
 
 .cardLeftBackground {
@@ -186,6 +188,7 @@
   transform-style: preserve-3d;
   will-change: transform;
   pointer-events: auto;
+  opacity: 0;
 }
 
 .cardRightContent {

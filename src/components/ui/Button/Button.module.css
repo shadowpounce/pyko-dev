@@ -16,6 +16,7 @@
   line-height: 100%;
   letter-spacing: -1%;
   transition: opacity var(--transition-fast);
+  opacity: 0;
 }
 
 .button[data-transparent="true"] {

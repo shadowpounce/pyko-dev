@@ -6,6 +6,7 @@
   letter-spacing: 2%;
   line-height: 100%;
   font-size: calc(14 * 100vw / var(--base-width));
+  opacity: 0;
 }
 
 @media (max-width: 768px) {

@@ -24,7 +24,7 @@ export const VideosOverlay: React.FC = () => {
     const videos = [
         {
             id: 0,
-            src: 'videos/sec1-2/sec1-2-720p.mp4',
+            src: 'videos/sec1-2/sec1-2-max-compressed.mp4',
         },
         {
             id: 1,
@@ -443,6 +443,7 @@ export const VideosOverlay: React.FC = () => {
                 loop
                 preload="auto"
                 src={videoUrls[videos[0].src] || videos[0].src}
+                poster='videos/sec1-2/sec1-2-poster.webp'
             />
             <video
                 data-video-id={videos[1].id}
