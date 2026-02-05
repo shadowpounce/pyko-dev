@@ -27,6 +27,7 @@ export const VideosOverlay: React.FC = () => {
         {
             id: 0,
             src: 'videos/sec1-2/sec1-2-max-compressed.mp4',
+            // src: 'videos/sec1-2/sec1-2-480p.mp4',
         },
         {
             id: 1,
@@ -60,9 +61,8 @@ export const VideosOverlay: React.FC = () => {
     const particleVideoRef = useRef<HTMLVideoElement>(null)
     const particleWrapperRef = useRef<HTMLDivElement>(null)
 
+    // проигрывать video2 один раз и все
     const [video2Completed, setVideo2Completed] = useState(false)
-    const [video4Completed, setVideo4Completed] = useState(false)
-
 
     const { currentSectionIndex } = useSectionIndex()
 
@@ -80,7 +80,7 @@ export const VideosOverlay: React.FC = () => {
         setPrevVideoIndex(currentVideoIndex)
     }, [currentVideoIndex])
 
-    // определение активного текущего активного видео
+    // определение активного текущего видео
     useEffect(() => {
         if (currentSectionIndex >= 0 && currentSectionIndex <= 1) {
             setCurrentVideoIndex(0)
