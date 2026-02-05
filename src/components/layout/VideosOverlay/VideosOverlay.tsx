@@ -31,15 +31,15 @@ export const VideosOverlay: React.FC = () => {
         },
         {
             id: 1,
-            src: 'videos/sec3/sec3-720p.mp4',
+            src: 'videos/sec3/sec3-480p.mp4',
         },
         {
             id: 2,
-            src: 'videos/sec6/sec6-720p.mp4',
+            src: 'videos/sec6/sec6-480p.mp4',
         },
         {
             id: 3,
-            src: 'videos/sec7/sec7-720p.mp4',
+            src: 'videos/sec7/sec7-480p.mp4',
         },
         {
             id: 4,
