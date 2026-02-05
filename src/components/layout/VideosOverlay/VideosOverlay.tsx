@@ -8,6 +8,8 @@ import gsap from 'gsap'
 import { Sphere } from '../../ui/Sphere/Sphere'
 
 import { useVideoLoader } from '@/hooks/useVideoLoader'
+import { isSafari } from 'react-device-detect';
+
 
 
 const VIDEO_SOURCES = [
@@ -486,7 +488,7 @@ export const VideosOverlay: React.FC = () => {
             />
 
             <div ref={particleWrapperRef} className={styles.particle}>
-                <video
+                {!isSafari ? <video
                     ref={particleVideoRef}
                     className={styles.particleVideo}
                     muted
@@ -494,7 +496,18 @@ export const VideosOverlay: React.FC = () => {
                     loop
                     preload="auto"
                     src="https://pub-7dc5e9025c7d46c7b4cf2b1b415b4068.r2.dev/movies/bg_particle_1.webm"
-                />
+                /> : <video
+                    ref={particleVideoRef}
+                    className={styles.particleVideo}
+                    muted
+                    playsInline
+                    loop
+                    preload="auto"
+                >
+                    <source src={`/videos/particles-safari.mov`} type='video/mp4; codecs="hvc1"' /></video>}
+
+
+
             </div>
 
             <Sphere active={currentSectionIndex >= 3 && currentSectionIndex <= 4} currentSectionIndex={currentSectionIndex} />

@@ -441,9 +441,9 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
                 }
             </div>
 
-            {!isSafari && <>
+            {<>
                 <div ref={spiralLRef} className={clsx(styles.spiralContainer, styles.spiralLContainer)}>
-                    <video
+                    {!isSafari ? <video
                         ref={spiralLVideoRef}
                         loop
                         muted
@@ -452,11 +452,20 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
                         className={styles.spiralVideo}
                     >
                         <source src={`${CDN_BASE_URL}/spiral_L.webm`} type="video/webm" />
-                    </video>
+                    </video> : <video
+                        ref={spiralLVideoRef}
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className={styles.spiralVideo}
+                    >
+                        <source src={`/videos/spiral_l-safari.mov`} type='video/mp4; codecs="hvc1"' />
+                    </video>}
                 </div>
 
                 <div ref={spiralRRef} className={clsx(styles.spiralContainer, styles.spiralRContainer)}>
-                    <video
+                    {!isSafari ? <video
                         ref={spiralRVideoRef}
                         loop
                         muted
@@ -465,7 +474,16 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
                         className={styles.spiralVideo}
                     >
                         <source src={`${CDN_BASE_URL}/spiral_R.webm`} type="video/webm" />
-                    </video>
+                    </video> : <video
+                        ref={spiralRVideoRef}
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className={styles.spiralVideo}
+                    >
+                        <source src={`/videos/spiral_r-safari.mov`} type='video/mp4; codecs="hvc1"' />
+                    </video>}
                 </div>
             </>}
 

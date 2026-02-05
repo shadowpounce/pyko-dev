@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 5;
+    z-index: 6;
     will-change: transform;
 
 
@@ -101,7 +101,7 @@
 
 /* Specific z-indices for spirals if needed, from page.tsx: L=1, R=5 */
 .spiralLContainer {
-    z-index: 1;
+    z-index: 5;
 }
 
 .spiralRContainer {
