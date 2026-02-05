@@ -34,9 +34,7 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
     const [videosReady, setVideosReady] = useState(false);
 
 
-    useEffect(() => {
-        alert(isSafari)
-    }, [isSafari]);
+  
 
     // Initial load and loop logic for planeta/orbit
     useEffect(() => {
