@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Sphere.module.css';
 import gsap from 'gsap';
 import clsx from 'clsx';
+import { isSafari } from 'react-device-detect';
+
 
 const CDN_BASE_URL = "https://pub-7dc5e9025c7d46c7b4cf2b1b415b4068.r2.dev/movies";
 
@@ -31,14 +33,21 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
 
     const [videosReady, setVideosReady] = useState(false);
 
+
     // Initial load and loop logic for planeta/orbit
     useEffect(() => {
+
+
         const planetaVideo = planetaVideoRef.current;
         const orbitVideo = orbitVideoRef.current;
 
         const handlePlanetaEnd = () => {
             if (planetaVideo) {
-                planetaVideo.src = `${CDN_BASE_URL}/planeta_looping.webm`;
+                if (!isSafari) {
+                    planetaVideo.src = `${CDN_BASE_URL}/planeta_looping.webm`;
+                } else {
+                    planetaVideo.src = `/videos/sphere-safari.mov`;
+                }
                 planetaVideo.loop = true;
                 const handleCanPlay = () => {
                     planetaVideo.play().catch(e => console.warn("Planeta play failed", e));
@@ -51,7 +60,7 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
 
         const handleOrbitEnd = () => {
             if (orbitVideo) {
-                orbitVideo.src = `${CDN_BASE_URL}/orbit_looping.webm`;
+                orbitVideo.src = !isSafari ? `${CDN_BASE_URL}/orbit_looping.webm` : `/videos/orbit-looping-safari.mov`;
                 orbitVideo.loop = true;
                 const handleCanPlay = () => {
                     orbitVideo.play().catch(e => console.warn("Orbit play failed", e));
@@ -62,7 +71,7 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
             }
         };
 
-        if (planetaVideo) planetaVideo.addEventListener("ended", handlePlanetaEnd);
+        if (planetaVideo && !isSafari) planetaVideo.addEventListener("ended", handlePlanetaEnd);
         if (orbitVideo) orbitVideo.addEventListener("ended", handleOrbitEnd);
 
         return () => {
@@ -73,17 +82,19 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
 
     // Preload videos
     useEffect(() => {
+
+
         const videoSources = [
-            `${CDN_BASE_URL}/planeta_start.webm`,
+            `${CDN_BASE_URL}/planeta-start.webm`,
             `${CDN_BASE_URL}/planeta_particle.webm`,
             `${CDN_BASE_URL}/orbit_start.webm`,
             `${CDN_BASE_URL}/planeta_looping.webm`,
             `${CDN_BASE_URL}/orbit_looping.webm`,
-            // Add new sources
+            `${CDN_BASE_URL}/middle_particle.webm`,
             `${CDN_BASE_URL}/spiral_L.webm`,
             `${CDN_BASE_URL}/spiral_R.webm`,
-            `${CDN_BASE_URL}/middle_particle.webm`
         ];
+
 
         let loadedCount = 0;
         const totalVideos = videoSources.length;
@@ -102,6 +113,10 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
             video.preload = "auto";
             video.muted = true;
             video.src = src;
+
+            // if (src === '/videos/sphere-safari.mov') {
+            //     video.setAttribute('type', 'video/mp4; codecs="hvc1')
+            // }
 
             const handleCanPlay = () => {
                 checkAllLoaded(src);
@@ -165,7 +180,8 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
         const spiralREl = spiralRRef.current;
         const middleParticleEl = middleParticleRef.current;
 
-        if (!planetaEl || !particleEl || !orbitEl || !spiralLEl || !spiralREl || !middleParticleEl) return;
+        // Essential elements check
+        if (!planetaEl || !particleEl || !orbitEl || !middleParticleEl) return;
 
         // Position spirals dynamically - initially and on resize/update
         const updateSpiralPositions = () => {
@@ -220,34 +236,17 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
             }, 0);
 
             // Spirals
-            // Need to ensure they are visible
-            // Also need to play them if they are not playing? (handled by active effect)
-
-            // Setup spirals position initially if they were hidden
-            // In hook: they fade in and move down
-
-            // Let's assume they mimic planeta movement roughly
-            // Hook logic: 
-            /*
-               tl.to([spiralLEl, spiralREl], {
-                   opacity: 1,
-                   y: downY + 14,
-                   scaleY: 1.02,
-                   duration: 1.0,
-                   ease: "power3.out",
-                   stagger: 0.06,
-                   overwrite: true
-               }, 0);
-            */
-            tl.to([spiralLEl, spiralREl], {
-                opacity: 1,
-                y: downY + 14,
-                scaleY: 1.02,
-                duration: 1.0,
-                ease: "power3.out",
-                stagger: 0.06,
-                overwrite: true
-            }, 0);
+            if (spiralLEl && spiralREl) {
+                tl.to([spiralLEl, spiralREl], {
+                    opacity: 1,
+                    y: downY + 14,
+                    scaleY: 1.02,
+                    duration: 1.0,
+                    ease: "power3.out",
+                    stagger: 0.06,
+                    overwrite: true
+                }, 0);
+            }
 
             // Middle Particle
             tl.to(middleParticleEl, {
@@ -276,7 +275,11 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
             // 3. Orbit appears
 
             // Spirals + Middle Particle Fade Out
-            tl.to([spiralLEl, spiralREl, middleParticleEl], {
+            const elementsToFadeOut = [middleParticleEl];
+            if (spiralLEl) elementsToFadeOut.push(spiralLEl);
+            if (spiralREl) elementsToFadeOut.push(spiralREl);
+
+            tl.to(elementsToFadeOut, {
                 opacity: 0,
                 duration: 0.5,
                 overwrite: true
@@ -304,7 +307,9 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
             }, 0.5); // Add slight delay to match "after others" feel
 
             // Reset transforms for spirals?
-            tl.set([spiralLEl, spiralREl], { y: 0, scaleY: 1.0 }, 0.5);
+            if (spiralLEl && spiralREl) {
+                tl.set([spiralLEl, spiralREl], { y: 0, scaleY: 1.0 }, 0.5);
+            }
         } else {
             // If neither 3 nor 4, what happens?
             // Since active=false, opacity is 0 controlled by other effect.
@@ -321,11 +326,15 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
     // We need to keep spirals at bottom = planeta center
     useEffect(() => {
         if (!videosReady) return;
+
         const updatePos = () => {
             const planetaEl = planetaContainerRef.current;
             const spiralLEl = spiralLRef.current;
             const spiralREl = spiralRRef.current;
-            if (!planetaEl || !spiralLEl || !spiralREl) return;
+
+            // Should exit if no planeta, but if spirals missing (safari) just return
+            if (!planetaEl) return;
+            if (!spiralLEl || !spiralREl) return;
 
             const planetaRect = planetaEl.getBoundingClientRect();
             // In the hook, spiral bottom = planeta center
@@ -364,7 +373,19 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
     return (
         <div className={styles.sphereContainer} style={containerStyle}>
             <div ref={planetaContainerRef} className={styles.planetaContainer}>
-                <video
+                {isSafari ? <video
+                    ref={planetaVideoRef}
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    width={540}
+                    height={540}
+                    className={styles.planetaVideo}
+                >
+
+                    <source src={`/videos/sphere-safari.mov`} type='video/mp4; codecs="hvc1"' />
+                </video> : <video
                     ref={planetaVideoRef}
                     muted
                     playsInline
@@ -374,7 +395,9 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
                     className={styles.planetaVideo}
                 >
                     <source src={`${CDN_BASE_URL}/planeta_start.webm`} type="video/webm" />
-                </video>
+
+                </video>}
+
             </div>
 
             <div ref={particleContainerRef} className={styles.particleContainer}>
@@ -392,7 +415,7 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
             </div>
 
             <div ref={orbitContainerRef} className={styles.orbitContainer}>
-                <video
+                {!isSafari ? <video
                     ref={orbitVideoRef}
                     muted
                     playsInline
@@ -402,34 +425,49 @@ export const Sphere: React.FC<SphereProps> = ({ active, currentSectionIndex }) =
                     className={styles.orbitVideo}
                 >
                     <source src={`${CDN_BASE_URL}/orbit_start.webm`} type="video/webm" />
-                </video>
+                </video> :
+
+                    <video
+                        ref={orbitVideoRef}
+                        muted
+                        playsInline
+                        preload="auto"
+                        width={450}
+                        height={200}
+                        className={styles.orbitVideo}
+                    >
+                        <source src={`/videos/orbit-start-safari.mov`} type='video/mp4; codecs="hvc1"' />
+                    </video>
+                }
             </div>
 
-            <div ref={spiralLRef} className={clsx(styles.spiralContainer, styles.spiralLContainer)}>
-                <video
-                    ref={spiralLVideoRef}
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className={styles.spiralVideo}
-                >
-                    <source src={`${CDN_BASE_URL}/spiral_L.webm`} type="video/webm" />
-                </video>
-            </div>
+            {!isSafari && <>
+                <div ref={spiralLRef} className={clsx(styles.spiralContainer, styles.spiralLContainer)}>
+                    <video
+                        ref={spiralLVideoRef}
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className={styles.spiralVideo}
+                    >
+                        <source src={`${CDN_BASE_URL}/spiral_L.webm`} type="video/webm" />
+                    </video>
+                </div>
 
-            <div ref={spiralRRef} className={clsx(styles.spiralContainer, styles.spiralRContainer)}>
-                <video
-                    ref={spiralRVideoRef}
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className={styles.spiralVideo}
-                >
-                    <source src={`${CDN_BASE_URL}/spiral_R.webm`} type="video/webm" />
-                </video>
-            </div>
+                <div ref={spiralRRef} className={clsx(styles.spiralContainer, styles.spiralRContainer)}>
+                    <video
+                        ref={spiralRVideoRef}
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className={styles.spiralVideo}
+                    >
+                        <source src={`${CDN_BASE_URL}/spiral_R.webm`} type="video/webm" />
+                    </video>
+                </div>
+            </>}
 
             <div ref={middleParticleRef} className={styles.middleParticleContainer}>
                 <video

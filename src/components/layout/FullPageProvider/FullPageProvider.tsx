@@ -211,7 +211,6 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
                   <div
                     key={index}
                     className="section fp-section"
-                    // data-anchor={`section${index + 1}`}
                     data-normal-scroll={hasNormalScroll ? 'true' : undefined}
                     data-fp-loaded={isLoaded ? 'true' : undefined}
                   >
