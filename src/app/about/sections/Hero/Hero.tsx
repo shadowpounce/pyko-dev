@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
 import { useEffect } from "react"
 import { animationConfig } from "@/config/animations.config"
+import { HeroFooter } from "../../components/HeroFooter"
 gsap.registerPlugin(SplitText)
 
 export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
@@ -70,20 +71,7 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 					</Button>
 				</div>
 			</div>
-			<div className={styles.footer}>
-				<p className={styles.footerTitle}>USED BY STUDENTS AT</p>
-				<div className={styles.logosMask}>
-					<div className={styles.universityLogos}>
-						<p>McGill</p>
-						<p>Stanford</p>
-						<p><span>university of</span><span>toronto</span></p>
-						<p><span>university of</span><span>waterloo</span></p>
-						<p><span>university of</span><span>toronto</span></p>
-						<p>Stanford</p>
-						<p>McGill</p>
-					</div>
-				</div>
-			</div>
+			<HeroFooter />
 		</Container>
 	</Section>
 }
