@@ -24,6 +24,10 @@ interface MobileMenuProps {
   onClose: () => void
 }
 
+/**
+ * Мобильное меню.
+ * Отображается поверх контента при isMenuOpen=true.
+ */
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   return (
     <div className={`${styles.mobileMenu} ${isOpen ? styles.active : ''}`}>

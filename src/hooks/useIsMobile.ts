@@ -17,7 +17,7 @@ export const useIsMobile = (breakpoint: number = MOBILE_BREAKPOINT): boolean => 
       setIsMobile(window.innerWidth < breakpoint)
     }
 
-    // Throttled resize handler (150ms)
+    // Обработчик изменения размера с задержкой (throttle 150ms)
     const handleResize = () => {
       if (timeoutRef.current) return
       timeoutRef.current = setTimeout(() => {

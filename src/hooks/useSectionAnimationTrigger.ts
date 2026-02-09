@@ -35,11 +35,7 @@ export const useSectionAnimationTrigger = ({
       }
     }
 
-    // Сбрасываем при переходе на другую секцию (опционально, если нужна повторная анимация)
-    // if (currentSectionIndex !== sectionIndex) {
-    //   hasAnimatedRef.current = false
-    //   setAnimationDelay(null)
-    // }
+
   }, [currentSectionIndex, sectionIndex, startDelay, onTrigger])
 
   return animationDelay

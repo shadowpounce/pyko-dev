@@ -1,491 +1,83 @@
-'use client'
-
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './VideosOverlay.module.css'
 import { useSectionIndex } from '../FullPageProvider/SectionContext'
 import clsx from 'clsx'
-import gsap from 'gsap'
 import { Sphere } from '../../ui/Sphere/Sphere'
-
 import { useVideoLoader } from '@/hooks/useVideoLoader'
 import { isSafari } from 'react-device-detect';
+import { useHomeVideos } from './logic/useHomeVideos'
+import { useAboutVideos } from './logic/useAboutVideos'
+import { VideosOverlayProps } from './types'
 
-
-
-const VIDEO_SOURCES = [
-    'videos/sec1-2/sec1-2-480p.mp4',
-    'videos/sec3/sec3-480p.mp4',
-    'videos/sec6/sec6-480p.mp4',
-    'videos/sec7/sec7-480p.mp4',
-    'videos/sec8-9-10/sec8-9-10-480p.mp4',
-]
-
-export const VideosOverlay: React.FC = () => {
-    const { videoUrls } = useVideoLoader(VIDEO_SOURCES)
-
-    const videos = [
-        {
-            id: 0,
-            src: 'videos/sec1-2/sec1-2-max-compressed.mp4',
-            // src: 'videos/sec1-2/sec1-2-480p.mp4',
-        },
-        {
-            id: 1,
-            src: 'videos/sec3/sec3-480p.mp4',
-        },
-        {
-            id: 2,
-            src: 'videos/sec6/sec6-480p.mp4',
-        },
-        {
-            id: 3,
-            src: 'videos/sec7/sec7-480p.mp4',
-        },
-        {
-            id: 4,
-            src: 'videos/sec8-9-10/sec8-9-10-720p.mp4',
-        },
-    ]
+export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) => { // Default to home if no page provided
+    const { currentSectionIndex } = useSectionIndex()
 
     const video1Ref = useRef<HTMLVideoElement>(null)
     const video2Ref = useRef<HTMLVideoElement>(null)
     const video3Ref = useRef<HTMLVideoElement>(null)
     const video4Ref = useRef<HTMLVideoElement>(null)
     const video5Ref = useRef<HTMLVideoElement>(null)
+
+    // Create an array of refs for easier access in hooks
+    const videoRefs = [video1Ref, video2Ref, video3Ref, video4Ref, video5Ref]
+
+
     const overlayToggleRef = useRef<HTMLDivElement>(null)
-    const video1TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
-    const video2TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
-    const video3TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
-    const video4TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
-    const video5TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
     const particleVideoRef = useRef<HTMLVideoElement>(null)
     const particleWrapperRef = useRef<HTMLDivElement>(null)
 
-    // проигрывать video2 один раз и все
-    const [video2Completed, setVideo2Completed] = useState(false)
 
-    const { currentSectionIndex } = useSectionIndex()
-
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-    const [prevSectionIndex, setPrevSectionIndex] = useState(0)
-
-
-    const [prevVideoIndex, setPrevVideoIndex] = useState(0)
-
-    useEffect(() => {
-        setPrevSectionIndex(currentSectionIndex)
-    }, [currentSectionIndex])
-
-    useEffect(() => {
-        setPrevVideoIndex(currentVideoIndex)
-    }, [currentVideoIndex])
-
-    // определение активного текущего видео
-    useEffect(() => {
-        if (currentSectionIndex >= 0 && currentSectionIndex <= 1) {
-            setCurrentVideoIndex(0)
-        }
-        if (currentSectionIndex === 2) {
-            setCurrentVideoIndex(1)
-        }
-        if (currentSectionIndex >= 5 && currentSectionIndex <= 5) {
-            setCurrentVideoIndex(2)
-        }
-        if (currentSectionIndex >= 6 && currentSectionIndex <= 6) {
-            setCurrentVideoIndex(3)
-        }
-        if (currentSectionIndex >= 7 && currentSectionIndex <= 9) {
-            setCurrentVideoIndex(4)
-        }
-
-        if (currentSectionIndex >= 3 && currentSectionIndex <= 4) {
-            setCurrentVideoIndex(-1)
-        }
-    }, [currentSectionIndex])
-
-
-    function hideVideos() {
-        gsap.to(video1Ref.current, {
-            opacity: 0,
-            duration: 0.5
-        })
-
-        gsap.to(video2Ref.current, {
-            opacity: 0,
-            duration: 0.5
-        })
-
-        gsap.to(video3Ref.current, {
-            opacity: 0,
-            duration: 0.5
-        })
-
-        gsap.to(video4Ref.current, {
-            opacity: 0,
-            duration: 0.5
-        })
-
-        gsap.to(video5Ref.current, {
-            opacity: 0,
-            duration: 0.5
-        })
+    // Select the logic hook based on the page
+    const HOOKS: Record<string, typeof useHomeVideos> = {
+        home: useHomeVideos,
+        about: useAboutVideos,
     }
 
-    // video opacity controller
+    const useVideoLogic = HOOKS[page] || useHomeVideos
+
+    const { videos, videoSources } = useVideoLogic(
+        videoRefs,
+        currentSectionIndex,
+        overlayToggleRef as React.RefObject<HTMLDivElement>,
+        particleVideoRef as React.RefObject<HTMLVideoElement>,
+        particleWrapperRef as React.RefObject<HTMLDivElement>
+    )
+
+    const { videoUrls } = useVideoLoader(videoSources)
+
+    // Helper to get ref by index
+    const getRef = (index: number) => {
+        switch (index) {
+            case 0: return video1Ref
+            case 1: return video2Ref
+            case 2: return video3Ref
+            case 3: return video4Ref
+            case 4: return video5Ref
+            default: return null
+        }
+    }
+
     useEffect(() => {
-        if (currentVideoIndex === 0) {
-            hideVideos()
-            gsap.to(video1Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
-        }
-        if (currentVideoIndex === 1) {
-            hideVideos()
-            gsap.to(video2Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
-        }
-        if (currentVideoIndex === 2) {
-            hideVideos()
-            gsap.to(video3Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
-        }
-        if (currentVideoIndex === 3) {
-            hideVideos()
-            gsap.to(video4Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
-        }
-        if (currentVideoIndex === 4) {
-            hideVideos()
-            gsap.to(video5Ref.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
-        }
-    }, [currentVideoIndex])
-
-    // video controller
-    useEffect(() => {
-        if (currentVideoIndex === 0) {
-            const video = video1Ref.current
-            if (video) {
-                // Kill any existing tween for this video to ensure clean state or takeover
-                if (video1TweenRef.current) {
-                    video1TweenRef.current.kill()
-                }
-
-                if (currentSectionIndex === 0) {
-                    video.pause() // Ensure native playback doesn't interfere
-
-                    const tl = gsap.timeline()
-                    video1TweenRef.current = tl
-
-                    tl.to(video, {
-                        currentTime: 1.4,
-                        duration: 1.4,
-                        ease: "none",
-                        onComplete: () => {
-                            tl.to(video, {
-                                currentTime: 0,
-                                duration: 1.4,
-                                ease: "none",
-                                repeat: -1,
-                                yoyo: true
-                            })
-                        }
-                    })
-                } else if (currentSectionIndex === 1) {
-                    video.pause() // Ensure native playback doesn't interfere
-
-                    const tl = gsap.timeline()
-                    video1TweenRef.current = tl
-
-                    tl.to(video, {
-                        currentTime: 7,
-                        duration: 2,
-                        ease: "none",
-                        onComplete: () => {
-                            tl.to(video, {
-                                currentTime: 8,
-                                duration: 1,
-                                ease: "none",
-                                repeat: -1,
-                                yoyo: true
-                            })
-                        }
-                    })
-
-                } else {
-                    video.pause()
-                }
-            }
-        }
-
-        const particleVideo = particleVideoRef.current
-        const particleWrapper = particleWrapperRef.current
-
-
-
-        if (particleVideo && particleWrapper) {
-            if (currentSectionIndex >= 3 && currentSectionIndex <= 4) {
-                gsap.to(particleWrapper, {
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 0.5,
-                })
-                gsap.to(particleVideo, {
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 0.5,
-                    onStart: () => {
-                        particleVideo.play().catch(e => console.warn("Particle play failed", e))
-                    }
-                })
-            } else {
-                if (prevSectionIndex !== 0) {
-                    gsap.to(particleWrapper, {
-                        opacity: 0,
-                        duration: 0.5,
-                        delay: 0,
-                    })
-                    gsap.to(particleVideo, {
-                        opacity: 0,
-                        duration: 0.5,
-                        delay: 0,
-                        onComplete: () => {
-                            particleVideo.pause()
-                        }
-                    })
-                }
-            }
-        }
-
-        // video 2
-        if (currentVideoIndex === 1) {
-            const video = video2Ref.current
-
-            if (video) {
-                if (currentSectionIndex === 2 && !video2Completed) {
-                    video.pause()
-
-                    const tl = gsap.timeline()
-                    video2TweenRef.current = tl
-
-                    tl.fromTo(video, {
-                        currentTime: 0,
-                    }, {
-                        currentTime: 5.75,
-                        duration: 5.75,
-                        ease: "none",
-                        onComplete: () => setVideo2Completed(true)
-                    })
-                }
-            }
-        }
-
-        if (currentVideoIndex === 2) {
-            const video = video3Ref.current
-
-            if (video) {
-                if (currentSectionIndex === 5) {
-                    video.pause()
-
-                    const tl = gsap.timeline()
-                    video3TweenRef.current = tl
-
-                    tl.fromTo(video, {
-                        currentTime: 0,
-                    }, {
-                        currentTime: video.duration,
-                        duration: video.duration,
-                        ease: "none",
-                        repeat: -1,
-                    })
-                } else {
-                    video.pause()
-                }
-            }
-        }
-
-        if (currentVideoIndex === 3) {
-            const video = video4Ref.current
-
-            if (video) {
-
-                if (currentSectionIndex === 6) {
-                    video.pause()
-
-                    const tl = gsap.timeline()
-                    video4TweenRef.current = tl
-
-
-                    tl.fromTo(video, {
-                        currentTime: 0,
-                    }, {
-                        currentTime: 4.2,
-                        duration: 4.2,
-                        ease: "none",
-                        onComplete: () => {
-                            tl.fromTo(video, {
-                                currentTime: 4.2,
-                            }, {
-                                currentTime: video.duration,
-                                duration: video.duration - 4.2,
-                                ease: "none",
-                                repeat: -1,
-                                yoyo: true
-                            })
-                        }
-                    })
-                } else {
-                    video.pause()
-                }
-
-            }
-        }
-
-        if (currentVideoIndex === 4) {
-            const video = video5Ref.current
-
-            const tl = gsap.timeline()
-            const tl2 = gsap.timeline()
-
-
-            if (video) {
-
-                // if (video5TweenRef.current) {
-                //     video5TweenRef.current.kill()
-                // }
-
-                if (currentSectionIndex === 7) {
-                    video.pause()
-
-                    // video5TweenRef.current = tl
-
-                    if (prevSectionIndex > 7) {
-                        tl.to(video, {
-                            delay: 0,
-                            currentTime: 1,
-                            duration: 1,
-                            ease: "none",
-
-                        })
-                    } else {
-                        tl.fromTo(video, {
-                            currentTime: 0,
-                        }, {
-                            delay: 1,
-                            currentTime: 1,
-                            duration: 1,
-                            ease: "none",
-
-                        })
-                    }
-                }
-
-                if (currentSectionIndex === 8) {
-                    tl2.kill()
-                    video.pause()
-
-                    // const tl = gsap.timeline()
-                    // video5TweenRef.current = tl
-
-                    tl.to(video, {
-                        currentTime: 2,
-                        duration: 1,
-                        ease: "none",
-
-                    })
-                }
-
-                if (currentSectionIndex === 9) {
-                    video.pause()
-
-                    // video5TweenRef.current = tl
-
-                    tl2.to(video, {
-                        currentTime: 8,
-                        duration: 3,
-                        ease: "none",
-
-                    })
-                }
-
-            }
-        }
-
-    }, [currentVideoIndex, currentSectionIndex])
-
-    // overlay toggle controller
-    useEffect(() => {
-        if (currentVideoIndex !== -1) {
-            gsap.to(overlayToggleRef.current,
-
-                {
-                    opacity: 1, duration: 0.5,
-                    onComplete: () => {
-                        gsap.to(overlayToggleRef.current, {
-                            opacity: 0, duration: 1.5,
-                        })
-                    }
-                }
-            )
-        } else {
-            gsap.fromTo(overlayToggleRef.current, {
-                opacity: 0,
-            }, {
-                opacity: 1,
-                duration: 0.5
-            })
-        }
-    }, [currentVideoIndex])
-
-
+        console.log(page)
+    }, [page])
 
 
     return (
         <div className={styles.videosOverlay}>
-            <video
-                data-video-id={videos[0].id}
-                ref={video1Ref}
-                className={clsx(styles.video)}
-                playsInline
-                muted
-                loop
-                preload="auto"
-                src={videoUrls[videos[0].src] || videos[0].src}
-                poster='videos/sec1-2/sec1-2-poster.webp'
-            />
-            <video
-                data-video-id={videos[1].id}
-                ref={video2Ref}
-                className={clsx(styles.video)}
-                playsInline
-                muted
-                preload="auto"
-                src={videoUrls[videos[1].src] || videos[1].src}
-            />
-            <video
-                data-video-id={videos[2].id}
-                ref={video3Ref}
-                className={clsx(styles.video)}
-                playsInline
-                muted
-                loop
-                preload="auto"
-                src={videoUrls[videos[2].src] || videos[2].src}
-            />
-            <video
-                data-video-id={videos[3].id}
-                ref={video4Ref}
-                className={clsx(styles.video)}
-                playsInline
-                muted
-                loop
-                preload="auto"
-                src={videoUrls[videos[3].src] || videos[3].src}
-            />
-            <video
-                data-video-id={videos[4].id}
-                ref={video5Ref}
-                className={clsx(styles.video)}
-                playsInline
-                muted
-                loop
-                preload="auto"
-                src={videoUrls[videos[4].src] || videos[4].src}
-            />
+            {videos.map((video, index) => (
+                <video
+                    key={video.id}
+                    data-video-id={video.id}
+                    ref={getRef(index)}
+                    className={clsx(styles.video)}
+                    playsInline
+                    muted
+                    loop={video.loop !== false} // Default to loop unless specified otherwise
+                    preload="auto"
+                    src={videoUrls[video.src] || video.src}
+                    poster={index === 0 ? 'videos/sec1-2/sec1-2-poster.webp' : undefined} // Keep poster for first video for now, maybe make configurable later
+                />
+            ))}
 
             <div ref={particleWrapperRef} className={styles.particle}>
                 {!isSafari ? <video
@@ -505,9 +97,6 @@ export const VideosOverlay: React.FC = () => {
                     preload="auto"
                 >
                     <source src={`/videos/particles-safari.mov`} type='video/mp4; codecs="hvc1"' /></video>}
-
-
-
             </div>
 
             <Sphere active={currentSectionIndex >= 3 && currentSectionIndex <= 4} currentSectionIndex={currentSectionIndex} />

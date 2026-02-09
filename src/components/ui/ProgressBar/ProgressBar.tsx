@@ -12,6 +12,9 @@ interface ProgressBarProps {
   onChange?: (value: number) => void
 }
 
+/**
+ * Прогресс-бар с настраиваемым диапазоном и цветом.
+ */
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   label,
   value,

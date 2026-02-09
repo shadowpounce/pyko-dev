@@ -9,19 +9,23 @@ import { WithYouSection } from '@/sections/WithYouSection/WithYouSection'
 import { PlansSection } from '@/sections/PlansSection/PlansSection'
 import { FooterSection } from '@/sections/FooterSection/FooterSection'
 
+/**
+ * Конфигурация секций для главной страницы.
+ * Порядок важен для FullPage.js.
+ */
 export const homeSections = [
-    {
-      path: '#hero',
-      component: HeroSection,
-    },
-    {
-      path: '#about',
-      component: AboutSection,
-    },
-    {
-      path: '#predict',
-      component: PredictSection,
-    },
+  {
+    path: '#hero',
+    component: HeroSection,
+  },
+  {
+    path: '#about',
+    component: AboutSection,
+  },
+  {
+    path: '#predict',
+    component: PredictSection,
+  },
   {
     path: '#oracle',
     component: OracleSection,

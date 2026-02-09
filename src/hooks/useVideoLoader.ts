@@ -21,15 +21,14 @@ export const useVideoLoader = (videoSources: string[]) => {
                         newUrls[src] = objectUrl
                         urlsRef.current.push(objectUrl)
                     } else {
-                        // If component unmounted during load, clean up immediately
+                        // Если компонент размонтирован, сразу очищаем ресурсы
                         URL.revokeObjectURL(objectUrl)
                     }
                 } catch (error) {
                     console.error(`Failed to load video ${src}`, error)
-                    // Fallback to original src if fetch fails? 
-                    // For now let's just log error. The component will probably use the original src if the key is missing or we can handle that logic there.
+                    // В случае ошибки используем исходный URL как запасной вариант
                     if (isMounted) {
-                        newUrls[src] = src // Fallback
+                        newUrls[src] = src
                     }
                 }
             })

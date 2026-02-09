@@ -13,6 +13,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	animationDelay?: number | null
 }
 
+/**
+ * Универсальная кнопка с поддержкой стилей и анимации.
+ * Может содержать стрелку и быть прозрачной.
+ */
 export const Button: React.FC<ButtonProps> = ({
 	variant = 'primary',
 	withArrow = false,

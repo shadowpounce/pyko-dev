@@ -9,6 +9,7 @@ import React, {
 	useMemo,
 	useRef,
 } from 'react'
+import { usePathname } from 'next/navigation'
 import { SectionProvider, useSectionIndex } from './SectionContext'
 import { VideosOverlay } from '../VideosOverlay/VideosOverlay'
 
@@ -110,10 +111,8 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
 		}
 	}, [isLoaded, ReactFullpage, setCurrentSectionIndex])
 
-	// Здесь возвращаем ничего или же нужно
-	// пробросить в контекст статус загрузки fullpage
-	// и когда fullpage загружен только тогда и 1 раз
-	// проигрывать анимацию gsap во элементах
+	// Не рендерим контент, пока FullPage не готов к работе
+	// Это предотвращает проблемы с гидратацией и инициализацией плагина
 	if (!isLoaded) {
 		return null;
 	}
@@ -154,7 +153,7 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
 			const destinationIndex = destination.index
 			setCurrentSectionIndex(destinationIndex)
 
-			// Calculate total sections directly from children
+			// Вычисляем количество секций напрямую из children
 			const totalSections = Children.count(children)
 
 			// Если переходим на последнюю секцию - ставим скорость 3 секунды
@@ -232,9 +231,12 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
 export const FullPageProvider: React.FC<FullPageProviderProps> = ({
 	children,
 }) => {
+	const pathname = usePathname()
+	const page = pathname === '/about' ? 'about' : 'home'
+
 	return (
 		<SectionProvider>
-			<VideosOverlay />
+			<VideosOverlay page={page} />
 			<FullPageProviderInner>{children}</FullPageProviderInner>
 		</SectionProvider>
 	)

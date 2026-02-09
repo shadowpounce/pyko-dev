@@ -10,6 +10,9 @@ interface SectionLabelProps {
   animationDelay?: number | null
 }
 
+/**
+ * Метка секции (маленький заголовок) с анимацией.
+ */
 export const SectionLabel: React.FC<SectionLabelProps> = ({
   children,
   className = '',

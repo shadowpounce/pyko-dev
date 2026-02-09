@@ -13,7 +13,7 @@ export const createBlurAnimation = (
 ) => {
   const { from = {}, to = {}, duration, delay = 0 } = options
 
-  // Утилиты для анимаций с blur эффектом
+
 
 
   const toProps: any = {
