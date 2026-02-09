@@ -9,6 +9,10 @@ interface AnimatedScrollIconProps {
   className?: string
 }
 
+/**
+ * Обертка для иконки с анимацией размытия при прокрутке.
+ * Запускает анимацию, когда передан animationDelay.
+ */
 export const AnimatedScrollIcon: React.FC<AnimatedScrollIconProps> = ({
   children,
   animationDelay = null,

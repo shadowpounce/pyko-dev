@@ -1,6 +1,9 @@
 import { Hero } from "./sections/Hero/Hero";
 
 
+/**
+ * Конфигурация секций для страницы "О нас".
+ */
 export const aboutSections = [
 	{
 		path: '#hero',

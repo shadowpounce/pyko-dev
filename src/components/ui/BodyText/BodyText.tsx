@@ -16,6 +16,10 @@ interface BodyTextProps {
   lineHeight?: string
 }
 
+/**
+ * Компонент основного текста с поддержкой анимации появления.
+ * Разбивает текст на строки и анимирует их, если передан animationDelay.
+ */
 export const BodyText: React.FC<BodyTextProps> = ({
   children,
   className = '',

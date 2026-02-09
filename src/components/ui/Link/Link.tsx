@@ -12,6 +12,9 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   animationDelay?: number | null
 }
 
+/**
+ * Обертка над NextLink с поддержкой анимации при скролле.
+ */
 export const Link: React.FC<LinkProps> = ({
   href,
   variant = 'default',
@@ -22,7 +25,7 @@ export const Link: React.FC<LinkProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const hasAnimatedRef = useRef(false)
-  
+
   const linkClass = [styles.link, styles[variant], className]
     .filter(Boolean)
     .join(' ')

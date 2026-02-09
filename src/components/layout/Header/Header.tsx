@@ -19,6 +19,11 @@ interface HeaderProps {
   isMenuOpen: boolean
 }
 
+/**
+ * Глобальный хедер сайта.
+ * Содержит логотип, навигацию и кнопки действий.
+ * Анимируется при появлении с помощью GSAP.
+ */
 export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
   const headerRef = useRef<HTMLElement>(null)
   const menuBackgroundRef = useRef<HTMLDivElement>(null)

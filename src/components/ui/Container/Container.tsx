@@ -6,6 +6,9 @@ interface ContainerProps {
   className?: string
 }
 
+/**
+ * Базовый контейнер для ограничения ширины контента.
+ */
 export const Container: React.FC<ContainerProps> = ({
   children,
   className = '',

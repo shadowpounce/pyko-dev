@@ -15,6 +15,10 @@ interface SectionTitleProps {
 	animationDelay?: number | null
 }
 
+/**
+ * Заголовок секции, с возможностью анимации по словам.
+ * Поддерживает стилизацию отдельных слов (serif шрифт).
+ */
 export const SectionTitle: React.FC<SectionTitleProps> = ({
 	level = 1,
 	children,

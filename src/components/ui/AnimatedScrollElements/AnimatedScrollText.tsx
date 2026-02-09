@@ -9,6 +9,10 @@ interface AnimatedScrollTextProps {
   className?: string
 }
 
+/**
+ * Обертка для текста с анимацией размытия при прокрутке.
+ * Запускает анимацию, когда передан animationDelay.
+ */
 export const AnimatedScrollText: React.FC<AnimatedScrollTextProps> = ({
   children,
   animationDelay = null,

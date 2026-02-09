@@ -16,7 +16,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				{/* Preload LCP hero background image */}
+				{/* Предзагрузка фонового изображения для LCP (Hero секция) */}
 				<link
 					rel="preload"
 					href="/images/sections/hero/bg.png"

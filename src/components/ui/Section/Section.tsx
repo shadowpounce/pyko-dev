@@ -7,6 +7,9 @@ interface SectionProps {
   backgroundImage?: string
 }
 
+/**
+ * Базовая секция страницы, может иметь фоновое изображение.
+ */
 export const Section: React.FC<SectionProps> = ({
   children,
   className = '',

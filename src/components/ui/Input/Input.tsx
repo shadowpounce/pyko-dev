@@ -17,6 +17,9 @@ interface InputProps {
     animated?: boolean
 }
 
+/**
+ * Поле ввода с поддержкой анимации и иконки-кнопки.
+ */
 export const Input = forwardRef<HTMLDivElement, InputProps>(
     ({ type, placeholder, value, onChange, withButton, inputRef, className, animated }, ref) => {
         return (
