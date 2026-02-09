@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Clear mission",
+        "subtitle": "End academic guesswork with a clarity‑first product.",
+        "icon": "/images/sections/whypyko/icon1.svg",
+        "bg": "/images/sections/whypyko/bg1.png"
+    },
+    {
+        "title": "Calm craft",
+        "subtitle": "Premium dark UI, minimal surfaces, high signal.",
+        "icon": "/images/sections/whypyko/icon2.svg",
+        "bg": "/images/sections/whypyko/bg2.png"
+    },
+    {
+        "title": "Small team",
+        "subtitle": "Own problems end‑to‑end; no heavy ceremony.",
+        "icon": "/images/sections/whypyko/icon3.svg",
+        "bg": "/images/sections/whypyko/bg3.png"
+    },
+    {
+        "title": "Student‑first",
+        "subtitle": "Privacy‑minded, accessibility‑focused decisions.",
+        "icon": "/images/sections/whypyko/icon4.svg",
+        "bg": "/images/sections/whypyko/bg4.png"
+    }
+]
