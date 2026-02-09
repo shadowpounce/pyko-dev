@@ -1,16 +1,16 @@
 'use client'
 import { Section } from "@/components/ui/Section/Section"
 import styles from "./Hero.module.css"
-import { BodyText, Button, Container, SectionLabel, SectionTitle } from "@/components/ui"
+import { Button, Container, SectionLabel, SectionTitle } from "@/components/ui"
 import { useElementAnimationDelay, useSectionAnimationTrigger } from "@/hooks/useSectionAnimationTrigger"
 import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { animationConfig } from "@/config/animations.config"
 import { HeroFooter } from "../../components/HeroFooter"
-gsap.registerPlugin(SplitText)
 
 export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
+	const descriptionText = useRef<HTMLParagraphElement>(null)
 	const SECTION_INDEX = sectionIndex
 
 	const START_DELAY = 0.5
@@ -26,7 +26,7 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 	const buttonDelay2 = useElementAnimationDelay(baseDelay, 5)
 
 	useEffect(() => {
-		SplitText.create('.' + styles.description, {
+		SplitText.create(descriptionText.current, {
 			type: "lines",
 			autoSplit: true,
 			onSplit(self) {
@@ -58,6 +58,7 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 					Built by students
 				</SectionTitle>
 				<p
+					ref={descriptionText}
 					className={styles.description}
 				>
 					We transform academic uncertainty into confident progress with clear, actionable insights.

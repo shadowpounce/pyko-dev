@@ -1,4 +1,5 @@
 import { Hero } from "./sections/Hero/Hero";
+import { Manifesto } from "./sections/Manifesto/Manifesto";
 
 
 export const aboutSections = [
@@ -9,6 +10,10 @@ export const aboutSections = [
 	{
 		path: '#filler',
 		component: Filler
+	},
+	{
+		path: '#manifesto',
+		component: Manifesto
 	}
 ]
 
