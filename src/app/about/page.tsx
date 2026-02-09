@@ -5,7 +5,7 @@ import { aboutSections } from "./pages";
  * Страница "О нас".
  * Использует FullPage.js для прокрутки секций.
  */
-export default function AboutPage({ sectionIndex }: { sectionIndex: number }) {
+export default function AboutPage() {
 	return <FullPageProvider>{
 		aboutSections.map((section, index) => (
 			<section.component key={section.path} sectionIndex={index} />
