@@ -8,6 +8,7 @@ import { isSafari } from 'react-device-detect';
 import { useHomeVideos } from './logic/useHomeVideos'
 import { useAboutVideos } from './logic/useAboutVideos'
 import { VideosOverlayProps } from './types'
+import { useCareersVideos } from './logic/useCareersVideos'
 
 export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) => { // Default to home if no page provided
 	const { currentSectionIndex } = useSectionIndex()
@@ -31,6 +32,7 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 	const HOOKS: Record<string, typeof useHomeVideos> = {
 		home: useHomeVideos,
 		about: useAboutVideos,
+		careers: useCareersVideos,
 	}
 
 	const useVideoLogic = HOOKS[page] || useHomeVideos
@@ -99,7 +101,8 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 					<source src={`/videos/particles-safari.mov`} type='video/mp4; codecs="hvc1"' /></video>}
 			</div>
 
-			<Sphere active={currentSectionIndex >= 3 && currentSectionIndex <= 4} currentSectionIndex={currentSectionIndex} />
+
+			{page === 'home' && <Sphere active={currentSectionIndex >= 3 && currentSectionIndex <= 4} currentSectionIndex={currentSectionIndex} />}
 			<div ref={overlayToggleRef} className={styles.overlayToggle} />
 		</div>
 	)

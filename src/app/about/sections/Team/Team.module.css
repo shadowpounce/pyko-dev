@@ -92,7 +92,7 @@
       & .slide {
          position: relative;
          width: 360px;
-         max-width: 100%;
+         max-width: calc(100% - 20px);
          aspect-ratio: 360/431;
          border-radius: 32px;
          overflow: clip;

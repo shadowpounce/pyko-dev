@@ -232,7 +232,9 @@ export const FullPageProvider: React.FC<FullPageProviderProps> = ({
 	children,
 }) => {
 	const pathname = usePathname()
-	const page = pathname === '/about' ? 'about' : 'home'
+	// Extract the first segment of the path as the page name (e.g., 'about' from '/about')
+	// If the path is just '/', the segment will be empty, so default to 'home'
+	const page = pathname?.split('/')[1] || 'home'
 
 	return (
 		<SectionProvider>
