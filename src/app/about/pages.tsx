@@ -1,6 +1,7 @@
 import { Hero } from "./sections/Hero/Hero";
 import { Manifesto } from "./sections/Manifesto/Manifesto";
 import { OurStory } from "./sections/OurStory/OurStory";
+import { Team } from "./sections/Team/Team";
 
 
 /**
@@ -11,10 +12,10 @@ export const aboutSections = [
 		path: '#hero',
 		component: Hero,
 	},
-	{
-		path: '#filler',
-		component: Filler
-	},
+	// {
+	// 	path: '#filler',
+	// 	component: Filler
+	// },
 	{
 		path: '#manifesto',
 		component: Manifesto
@@ -23,9 +24,13 @@ export const aboutSections = [
 		path: '#ourStory',
 		component: OurStory
 	},
+	// {
+	// 	path: '#filler',
+	// 	component: Filler
+	// },
 	{
-		path: '#filler',
-		component: Filler
+		path: '#team',
+		component: Team
 	},
 ]
 

@@ -15,6 +15,7 @@ export const ManifestoCards = () => {
 				slidesOffsetBefore: 10
 			},
 			390: {
+				spaceBetween: 8,
 				slidesOffsetAfter: 20,
 				slidesOffsetBefore: 20
 

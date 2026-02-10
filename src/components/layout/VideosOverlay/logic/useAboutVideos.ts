@@ -30,19 +30,19 @@ export const useAboutVideos = (
 
 	// определение активного текущего видео
 	useEffect(() => {
-		if ([0, 1].includes(currentSectionIndex)) {
+		if ([0].includes(currentSectionIndex)) {
 			setCurrentVideoIndex(0)
 			return
 		}
-		if ([2, 3, 4].includes(currentSectionIndex)) {
+		if ([1, 2].includes(currentSectionIndex)) {
 			setCurrentVideoIndex(1)
 			return
 		}
-		if ([7].includes(currentSectionIndex)) {
+		if ([5].includes(currentSectionIndex)) {
 			setCurrentVideoIndex(2)
 			return
 		}
-		if ([8].includes(currentSectionIndex)) {
+		if ([6].includes(currentSectionIndex)) {
 			setCurrentVideoIndex(3)
 			return
 		}
