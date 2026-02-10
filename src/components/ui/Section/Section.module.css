@@ -1,17 +1,18 @@
 .section {
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  overflow: hidden;
+   height: 100vh;
+   min-height: 100vh;
+   width: 100%;
+   position: relative;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-attachment: scroll;
+   overflow: hidden;
 }
 
 /* Для полноэкранных секций FullPage.js background-attachment должен быть scroll */
 .fp-section .section {
-  background-attachment: scroll !important;
+   background-attachment: scroll !important;
 }
 
 /* .section::after {
@@ -34,24 +35,24 @@
 
 /* Скрываем контент если секция не активна (только для FullPage режима) */
 
-:global(.fp-section) .section>* {
-  transition-duration: 0.4s !important;
-  transition-property: opacity, scale !important;
-  transition-timing-function: ease-out !important;
+:global(.fp-section) .section > * {
+   transition-duration: 0.4s !important;
+   transition-property: opacity, scale !important;
+   transition-timing-function: ease-out !important;
 }
 
-:global(.fp-section:not(.active)) .section>* {
-  opacity: 0;
-  scale: 0.95;
-  pointer-events: none;
+:global(.fp-section:not(.active)) .section > * {
+   opacity: 0;
+   scale: 0.95;
+   pointer-events: none;
 }
 
-:global(.fp-section.active) .section>* {
-  opacity: 1;
-  scale: 1;
-  pointer-events: all;
+:global(.fp-section.active) .section > * {
+   opacity: 1;
+   scale: 1;
+   pointer-events: all;
 }
 
-:global(.fp-section.active)[data-fp-loaded="true"] .section>* {
-  transition-delay: 0.4s !important;
+:global(.fp-section.active)[data-fp-loaded='true'] .section > * {
+   transition-delay: 0.4s !important;
 }

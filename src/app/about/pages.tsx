@@ -1,5 +1,6 @@
 import { Hero } from "./sections/Hero/Hero";
 import { Manifesto } from "./sections/Manifesto/Manifesto";
+import { OurStory } from "./sections/OurStory/OurStory";
 
 
 /**
@@ -17,7 +18,15 @@ export const aboutSections = [
 	{
 		path: '#manifesto',
 		component: Manifesto
-	}
+	},
+	{
+		path: '#ourStory',
+		component: OurStory
+	},
+	{
+		path: '#filler',
+		component: Filler
+	},
 ]
 
 export default function Filler() {
