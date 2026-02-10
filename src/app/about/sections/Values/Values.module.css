@@ -1,0 +1,159 @@
+@property --angle {
+   syntax: '<angle>';
+   initial-value: 0deg;
+   inherits: false;
+}
+
+@keyframes rotate-border {
+   to {
+      --angle: 360deg;
+   }
+}
+.container {
+   height: 100%;
+   padding-top: 86px;
+   & .marquee {
+      margin-bottom: 6.5vh;
+      @media (max-width: 1200px) {
+         margin-bottom: 4vh;
+      }
+      & .marqueeText {
+         background: linear-gradient(
+            270deg,
+            rgba(119, 153, 255, 1) 12.311%,
+            rgba(199.17, 230.17, 235.65, 1) 47.444%,
+            rgba(255, 255, 255, 1) 85.405%,
+            rgba(118.53, 153.19, 255, 1) 100.002%
+         );
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+         background-clip: text;
+         color: transparent;
+         font-family: var(--font-grotesque);
+         font-size: 230px;
+         font-weight: 400;
+         line-height: 1;
+         letter-spacing: -0.05em;
+         text-align: center;
+         margin-right: 150px;
+         user-select: none;
+         @media (max-width: 1200px) {
+            font-size: 12.5rem;
+         }
+      }
+   }
+   & .contentContainer {
+      display: flex;
+      justify-content: center;
+      gap: 7.5vw;
+      @media (max-width: 1200px) {
+         gap: 5vw;
+      }
+      & .videoWrapper {
+         display: flex;
+         justify-content: center;
+         height: 100%;
+
+         max-height: 50vh;
+         aspect-ratio: 1;
+         flex: 0 1 auto;
+         min-width: 0;
+         & video {
+            height: 100%;
+         }
+      }
+      & .content {
+         flex: 0 0 auto;
+         padding-right: 20px;
+         & .label {
+            display: block;
+            margin-bottom: 4.5vh;
+            font-size: clamp(0.625rem, 1.6vh, 0.875rem);
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            @media (max-width: 1200px) {
+               margin-bottom: 2.5vh;
+            }
+         }
+         & .title {
+            font-size: clamp(3rem, 8vh, 4.5rem);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-family: var(--font-serif);
+            font-style: italic;
+            margin-bottom: 6vh;
+            @media (max-width: 1200px) {
+               margin-bottom: 4.5vh;
+            }
+            @media (max-width: 768px) {
+               font-style: normal;
+               font-size: clamp(2.5rem, 6vh, 3.125rem);
+               letter-spacing: -0.05em;
+            }
+         }
+         & .cardsContainer {
+            --angle: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 257px);
+            gap: 13px;
+            & .card {
+               position: relative;
+               display: flex;
+               flex-direction: column;
+               justify-content: space-between;
+               padding: 20px;
+               padding-top: 14px;
+               border-radius: 21px;
+               aspect-ratio: 257/158;
+               &:before {
+                  content: '';
+                  position: absolute;
+                  inset: 0;
+                  border: 1px solid transparent !important;
+                  border-radius: inherit;
+                  background: repeating-conic-gradient(
+                        from var(--angle),
+                        #000000 0%,
+                        #000000 12%,
+                        #ffffff 25%,
+                        #000000 38%,
+                        #000000 50%
+                     )
+                     border-box;
+                  -webkit-mask:
+                     linear-gradient(#fff 0 0) padding-box,
+                     linear-gradient(#fff 0 0);
+                  mask:
+                     linear-gradient(#fff 0 0) padding-box,
+                     linear-gradient(#fff 0 0);
+                  -webkit-mask-composite: destination-out;
+                  mask-composite: exclude;
+                  animation: rotate-border 8s linear infinite;
+                  pointer-events: none;
+                  z-index: 2;
+               }
+               & .cardContent {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 8px;
+                  & .cardTitle {
+                     font-size: 1.25rem;
+                     font-family: var(--font-serif);
+                     font-style: italic;
+                     line-height: 1.2;
+                     letter-spacing: -0.02em;
+                  }
+                  & .cardDescription {
+                     font-size: 0.875rem;
+                     font-weight: 500;
+                     line-height: 1.35;
+                     letter-spacing: -0.01em;
+                     font-family: var(--font-sans);
+                     opacity: 0.33;
+                  }
+               }
+            }
+         }
+      }
+   }
+}

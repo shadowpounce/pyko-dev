@@ -2,6 +2,7 @@ import { Hero } from "./sections/Hero/Hero";
 import { Manifesto } from "./sections/Manifesto/Manifesto";
 import { OurStory } from "./sections/OurStory/OurStory";
 import { Team } from "./sections/Team/Team";
+import { Values } from "./sections/Values/Values";
 
 
 /**
@@ -31,6 +32,10 @@ export const aboutSections = [
 	{
 		path: '#team',
 		component: Team
+	},
+	{
+		path: '#values',
+		component: Values
 	},
 ]
 
