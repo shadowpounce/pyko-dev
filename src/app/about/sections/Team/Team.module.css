@@ -9,9 +9,10 @@
    }
    & .textContainer {
       --inline-padding: 16px;
-      --inner-width: 72 0px;
+      --inner-width: 720px;
       padding-top: max(20px, 9vh);
       padding-inline: var(--inline-padding);
+      width: 100%;
       max-width: calc(var(--inner-width) + var(--inline-padding) * 2);
       display: flex;
       flex-direction: column;
@@ -88,6 +89,12 @@
    }
    & .sliderContainer {
       margin-top: 4vh;
+      @media (max-width: 1200px) {
+         margin-top: 4.5vh;
+      }
+      @media (max-width: 768px) {
+         margin-top: 5.5vh;
+      }
       width: 100%;
       & .slide {
          position: relative;
