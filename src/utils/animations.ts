@@ -193,6 +193,46 @@ export const animateSectionLabel = (element: gsap.TweenTarget, delay: number = 0
   })
 }
 
+// Анимация текста по фрагментам (разделение по запятым)
+export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
+  const delayBetweenParts = animationConfig.delays.lineDelay
+  const originalHTML = element.innerHTML
+
+  // Если элемент был скрыт, показываем его
+  if (element.classList.contains('init-hidden')) {
+    element.classList.remove('init-hidden')
+    element.style.opacity = '1'
+  }
+
+  // Разбиваем по запятым
+  const parts = originalHTML.split(',')
+
+  if (parts.length === 1) {
+    return animateBodyText(element, delay)
+  }
+
+  element.innerHTML = parts
+    .map((part, index) => {
+      const isLast = index === parts.length - 1
+      const content = part.trim() + (isLast ? '' : ',')
+      return `<span class="init-blur-up" style="display: inline-block; margin-right: 0.3em;">${content}</span>`
+    })
+    .join('')
+
+  const partSpans = element.querySelectorAll('span')
+  partSpans.forEach((span, index) => {
+    createBlurAnimation(span, {
+      to: {
+        opacity: 1,
+        blur: animationConfig.blur.to,
+        y: animationConfig.y.to
+      },
+      duration: animationConfig.durations.body,
+      delay: delay + index * delayBetweenParts,
+    })
+  })
+}
+
 // Анимация body текста построчно (по <br /> разделителям)
 export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0) => {
   const delayBetweenLines = animationConfig.delays.lineDelay
@@ -202,16 +242,8 @@ export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0) 
 
   // Проверяем, есть ли <br /> теги
   if (!originalHTML.includes('<br')) {
-    // Если нет разделителей, используем простую анимацию
-    return createBlurAnimation(element, {
-      to: {
-        opacity: 1,
-        blur: animationConfig.blur.to,
-        y: animationConfig.y.to
-      },
-      duration: animationConfig.durations.body,
-      delay,
-    })
+    // Если нет разделителей строк, анимируем по запятым
+    return animateByCommas(element, delay)
   }
 
   // Разбиваем по <br />, <br/>, <br /> и т.д.

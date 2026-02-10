@@ -69,7 +69,9 @@ export const WhyPykoSection: React.FC<WhyPykoSectionProps> = ({
                         Work with purpose,
                     </SectionTitle>
                     <BodyText opacity={0.8} animationDelay={bodyTextDelay}>
-                        A small team with high ownership, clear priorities, and real student impact.
+                        A small team with high ownership,
+                        clear priorities, and real
+                        student impact.
                     </BodyText>
                 </div>
                 <div className={styles.content}>

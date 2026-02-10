@@ -1,0 +1,115 @@
+.wideCard {
+    min-width: calc(580 * 100vw / var(--base-width));
+    width: calc(580 * 100vw / var(--base-width));
+    max-width: calc(580 * 100vw / var(--base-width));
+    min-height: calc(310 * 100vw / var(--base-width));
+    height: calc(310 * 100vw / var(--base-width));
+    max-height: calc(310 * 100vw / var(--base-width));
+
+    position: relative;
+}
+
+.wideCardWrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(18.6 * 100vw / var(--base-width));
+}
+
+.wideCardWrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(160 * 100vw / var(--base-width));
+    background: linear-gradient(to top, #040504, rgba(4, 5, 4, 0));
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wideCardBg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.wideCardBg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.1);
+    transition: transform 1.2s ease;
+}
+
+.wideCardContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    padding: calc(24 * 100vw / var(--base-width));
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: start;
+    gap: calc(13 * 100vw / var(--base-width));
+}
+
+.label {
+    font-size: calc(12 * 100vw / var(--base-width));
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.title {
+    font-size: calc(28 * 100vw / var(--base-width));
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.subtitle {
+    font-size: calc(12 * 100vw / var(--base-width));
+    line-height: 140%;
+    color: var(--white);
+    max-width: calc(300 * 100vw / var(--base-width));
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+/* Active States */
+.active .label {
+    opacity: .8;
+    transform: none;
+    transition-delay: 0.8s;
+}
+
+.active .title {
+    opacity: 1;
+    transform: none;
+    transition-delay: 1.2s;
+}
+
+.active .subtitle {
+    opacity: .7;
+    transform: none;
+    transition-delay: 1.4s;
+}
+
+.active .wideCardBg img {
+    transform: scale(1);
+}

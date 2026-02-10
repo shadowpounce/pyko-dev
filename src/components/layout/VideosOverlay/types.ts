@@ -1,4 +1,4 @@
-export type PageType = 'home' | 'about';
+export type PageType = string;
 
 export interface VideoConfig {
     id: number;
