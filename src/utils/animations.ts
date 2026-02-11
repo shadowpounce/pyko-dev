@@ -193,7 +193,7 @@ export const animateSectionLabel = (element: gsap.TweenTarget, delay: number = 0
   })
 }
 
-// Анимация текста по фрагментам (разделение по запятым)
+// Анимация текста по фрагментам (разделение по запятым и другим знакам)
 export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
   const delayBetweenParts = animationConfig.delays.lineDelay
   const originalHTML = element.innerHTML
@@ -204,18 +204,49 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
     element.style.opacity = '1'
   }
 
-  // Разбиваем по запятым
-  const parts = originalHTML.split(',')
+  // Разбиваем по запятым, вопросительным знакам, дефисам и слешам
+  // Используем захватывающую группу, чтобы сохранить разделители
+  const regex = /([,?\-\/])/g
+  const rawParts = originalHTML.split(regex)
+  const parts: string[] = []
 
-  if (parts.length === 1) {
+  // Собираем части обратно, приклеивая разделители к предыдущему фрагменту
+  for (let i = 0; i < rawParts.length; i++) {
+    const part = rawParts[i]
+
+    // Если это разделитель
+    if (regex.test(part)) {
+      if (parts.length > 0) {
+        parts[parts.length - 1] += part
+      } else {
+        parts.push(part)
+      }
+    } else {
+      // Это текстовый фрагмент
+      // Если фрагмент не пустой (или содержит только пробелы, которые мы хотим схлопнуть/обработать)
+      // В текущей логике мы делаем trim()
+      const trimmed = part.trim()
+      if (trimmed) {
+        parts.push(trimmed)
+      }
+    }
+  }
+
+  if (parts.length === 0 && originalHTML.trim()) {
+    parts.push(originalHTML.trim())
+  }
+
+
+  if (parts.length <= 1) {
     return animateBodyText(element, delay)
   }
 
   element.innerHTML = parts
     .map((part, index) => {
-      const isLast = index === parts.length - 1
-      const content = part.trim() + (isLast ? '' : ',')
-      return `<span class="init-blur-up" style="display: inline-block; margin-right: 0.3em;">${content}</span>`
+      // const isLast = index === parts.length - 1
+      // В новой логике разделитель уже включен в part, если он был
+      // Но нам нужно убедиться, что мы не потеряли контент
+      return `<span class="init-blur-up" style="display: inline-block; margin-right: 0.3em;">${part}</span>`
     })
     .join('')
 
