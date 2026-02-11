@@ -11,6 +11,7 @@
     flex-direction: column;
     gap: calc(40 * 100vw / var(--base-width));
     height: 100%;
+    padding-inline: 0 !important;
 }
 
 .text {
@@ -24,6 +25,8 @@
 
     scale: 0.8;
     transform-origin: top center;
+
+    padding-inline: calc(40 * 100vw / var(--base-width))
 }
 
 .text p {

@@ -13,6 +13,7 @@ import {
 import styles from './RolesSection.module.css'
 import roles from './data.json'
 import { PykoHoverCard } from '@/components/ui/PykoHoverCard/PykoHoverCard'
+import { PykoHoverCardsSwiper } from '@/components/ui/PykoHoverCardsSwiper/PykoHoverCardsSwiper'
 
 
 interface RolesSectionProps {
@@ -48,16 +49,7 @@ export const RolesSection: React.FC<RolesSectionProps> = ({
                     </BodyText>
                 </div>
                 <div className={styles.content}>
-                    {roles.roles.map((role, index) => (
-                        <PykoHoverCard
-                            key={index}
-                            title={role.title}
-                            subtitle={role.subtitle}
-                            img={role.img}
-                            bg={role.bg}
-                            url={role.url}
-                        />
-                    ))}
+                    <PykoHoverCardsSwiper cards={roles.roles} animationDelay={contentDelay} />
                 </div>
             </Container>
         </Section>

@@ -1,6 +1,6 @@
 'use client'
 
-interface PykoHoverCardProps {
+export interface PykoHoverCardProps {
     title: string
     subtitle: string
     img: string
@@ -8,20 +8,90 @@ interface PykoHoverCardProps {
     url?: string
 }
 
-import Image from 'next/image'
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import styles from './PykoHoverCard.module.css'
+import { gsap } from 'gsap'
+import { createBlurAnimation } from '@/utils/animations'
 
-export const PykoHoverCard = ({ title, subtitle, img, bg, url }: PykoHoverCardProps) => {
+export const PykoHoverCard = ({ title, subtitle, img, bg, url, animationDelay = null }: PykoHoverCardProps & { animationDelay?: number | null }) => {
+    const cardRef = useRef<HTMLDivElement>(null)
+    const textRef = useRef<HTMLDivElement>(null)
+    const imageRef = useRef<HTMLDivElement>(null)
+    const hasAnimatedRef = useRef(false)
+
+    useEffect(() => {
+        if (
+            cardRef.current &&
+            textRef.current &&
+            imageRef.current &&
+            animationDelay !== null &&
+            !hasAnimatedRef.current
+        ) {
+            hasAnimatedRef.current = true
+
+            // Context for cleanup
+            const ctx = gsap.context(() => {
+                // 1. Initial State (Hidden, Shifted Right)
+                gsap.set(cardRef.current, {
+                    x: '120%', // Slide from right
+                    opacity: 0,
+                })
+
+                // 2. Animate In (Slide from Right + Fade In)
+                gsap.to(cardRef.current, {
+                    x: '0%',
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    delay: animationDelay,
+                })
+
+                // Text Content Animation (Blur Up)
+                const title = textRef.current?.querySelector(`.${styles.title}`)
+                const subtitle = textRef.current?.querySelector(`.${styles.subtitle}`)
+
+                if (title) {
+                    gsap.set(title, { opacity: 0, filter: 'blur(5px)', y: 10 })
+                    gsap.to(title, {
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        y: 0,
+                        duration: 0.8,
+                        delay: animationDelay + 0.3
+                    })
+                }
+
+                if (subtitle) {
+                    gsap.set(subtitle, { opacity: 0, filter: 'blur(5px)', y: 10 })
+                    gsap.to(subtitle, {
+                        opacity: 0.6,
+                        filter: 'blur(0px)',
+                        y: 0,
+                        duration: 0.8,
+                        delay: animationDelay + 0.4
+                    })
+                }
+
+            }, cardRef) // Scope to cardRef
+
+            return () => ctx.revert();
+        }
+    }, [animationDelay])
+
+
     return (
-        <div style={{
-            backgroundImage: `url(${bg})`,
-            backgroundSize: 'cover',
-            backgroundAttachment: 'fixed',
-        }} className={styles.pykoHoverCard}>
+        <div
+            ref={cardRef}
+            style={{
+                backgroundImage: `url(${bg})`,
+                backgroundSize: 'cover',
+                backgroundAttachment: 'fixed',
+            }}
+            className={`${styles.pykoHoverCard} ${animationDelay !== null ? 'init-hidden' : ''}`}
+        >
             <div className={styles.wrapper}>
-                <div className={styles.image}>
-                    {/* <Image src={img} alt={title} fill /> */}
+                <div className={styles.image} ref={imageRef}>
                     <img src={img} alt={title} />
                     {url && (
                         <div className={styles.link}>
@@ -31,7 +101,7 @@ export const PykoHoverCard = ({ title, subtitle, img, bg, url }: PykoHoverCardPr
                         </div>
                     )}
                 </div>
-                <div className={styles.text}>
+                <div className={styles.text} ref={textRef}>
                     <h4 className={styles.title}>{title}</h4>
                     <p className={styles.subtitle}>{subtitle}</p>
                 </div>

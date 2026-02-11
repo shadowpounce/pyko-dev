@@ -363,11 +363,11 @@ export const useHomeVideos = (
         videos: [
             {
                 id: 0,
-                src: 'videos/sec1-2/sec1-2-480p.mp4',
+                src: 'videos/sec1-2/sec1-2-720p.mp4',
             },
             {
                 id: 1,
-                src: 'videos/sec3/sec3-480p.mp4',
+                src: 'videos/sec3/sec3-720p.mp4',
             },
             {
                 id: 2,
@@ -383,8 +383,8 @@ export const useHomeVideos = (
             },
         ] as VideoConfig[],
         videoSources: [
-            'videos/sec1-2/sec1-2-480p.mp4',
-            'videos/sec3/sec3-480p.mp4',
+            'videos/sec1-2/sec1-2-720p.mp4',
+            'videos/sec3/sec3-720p.mp4',
             'videos/sec6/sec6-480p.mp4',
             'videos/sec7/sec7-480p.mp4',
             'videos/sec8-9-10/sec8-9-10-480p.mp4',

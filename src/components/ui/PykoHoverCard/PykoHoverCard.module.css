@@ -63,7 +63,7 @@
 }
 
 .pykoHoverCard:hover .text {
-    translate: 0 0;
+    translate: 0 -25%;
 }
 
 .pykoHoverCard:hover .image {
