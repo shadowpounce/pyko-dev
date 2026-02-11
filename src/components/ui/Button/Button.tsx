@@ -11,6 +11,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	transparent?: boolean
 	children: React.ReactNode
 	animationDelay?: number | null
+	isLink?: boolean
+	href?: string
 }
 
 /**
@@ -24,6 +26,8 @@ export const Button: React.FC<ButtonProps> = ({
 	children,
 	className = '',
 	animationDelay = null,
+	isLink = false,
+	href,
 	...props
 }) => {
 	const buttonRef = useRef<HTMLButtonElement>(null)
@@ -47,7 +51,11 @@ export const Button: React.FC<ButtonProps> = ({
 
 	return (
 		<button ref={buttonRef} data-transparent={transparent} className={buttonClass} {...props}>
-			{children}
+			{isLink && href ? (
+				<a href={href}>{children}</a>
+			) : (
+				children
+			)}
 			{withArrow && (
 				<div className={styles.arrow}>
 					<Image src={variant === 'primary' ? '/images/icons/btn-arrow-white.svg' : '/images/icons/btn-arrow-black.svg'} alt="Arrow" width={10} height={10} />

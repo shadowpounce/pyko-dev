@@ -59,13 +59,10 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 		}
 	}
 
-	useEffect(() => {
-		console.log(page)
-	}, [page])
 
 
 	return (
-		<div className={styles.videosOverlay}>
+		<div className={clsx(styles.videosOverlay, page === 'home' && styles.homeVideos, page === 'careers' && styles.careersVideos)}>
 			{videos.map((video, index) => (
 				<video
 					key={video.id}
@@ -77,7 +74,7 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 					loop={video.loop !== false} // Default to loop unless specified otherwise
 					preload="auto"
 					src={videoUrls[video.src] || video.src}
-					poster={index === 0 ? 'videos/sec1-2/sec1-2-poster.webp' : undefined} // Keep poster for first video for now, maybe make configurable later
+				// poster={index === 0 ? 'videos/sec1-2/sec1-2-poster.webp' : undefined} // Keep poster for first video for now, maybe make configurable later
 				/>
 			))}
 

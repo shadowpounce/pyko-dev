@@ -13,9 +13,17 @@ export const createBlurAnimation = (
 ) => {
   const { from = {}, to = {}, duration, delay = 0 } = options
 
+  // 1. Set initial state immediately
+  const initialY = from.y ?? animationConfig.y.from
+  const initialBlur = from.blur ?? animationConfig.blur.from
 
+  gsap.set(element, {
+    y: initialY,
+    filter: `blur(${initialBlur}px)`,
+    ...from // allow overriding other props
+  })
 
-
+  // 2. Animate to final state
   const toProps: any = {
     opacity: 1,
     y: to.y ?? animationConfig.y.to,
@@ -194,15 +202,9 @@ export const animateSectionLabel = (element: gsap.TweenTarget, delay: number = 0
 }
 
 // Анимация текста по фрагментам (разделение по запятым и другим знакам)
-export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
+export const animateByCommas = (element: HTMLElement, delay: number = 0, options: { opacity?: number } = {}) => {
   const delayBetweenParts = animationConfig.delays.lineDelay
   const originalHTML = element.innerHTML
-
-  // Если элемент был скрыт, показываем его
-  if (element.classList.contains('init-hidden')) {
-    element.classList.remove('init-hidden')
-    element.style.opacity = '1'
-  }
 
   // Разбиваем по запятым, вопросительным знакам, дефисам и слешам
   // Используем захватывающую группу, чтобы сохранить разделители
@@ -232,13 +234,20 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
     }
   }
 
-  if (parts.length === 0 && originalHTML.trim()) {
-    parts.push(originalHTML.trim())
+  // Если частей нет или всего одна (и это не разделитель), анимируем как цельный блок
+  if (parts.length === 0 || (parts.length === 1 && !regex.test(parts[0]))) {
+    return animateBodyText(element, delay, options)
   }
 
+  // Если текст просто не содержит разделителей, но не пустой
+  if (parts.length === 0 && originalHTML.trim()) {
+    return animateBodyText(element, delay, options)
+  }
 
-  if (parts.length <= 1) {
-    return animateBodyText(element, delay)
+  // Если элемент был скрыт, показываем его
+  if (element.classList.contains('init-hidden')) {
+    element.classList.remove('init-hidden')
+    element.style.opacity = '1'
   }
 
   element.innerHTML = parts
@@ -254,7 +263,7 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
   partSpans.forEach((span, index) => {
     createBlurAnimation(span, {
       to: {
-        opacity: 1,
+        opacity: options.opacity ?? 1,
         blur: animationConfig.blur.to,
         y: animationConfig.y.to
       },
@@ -265,7 +274,7 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0) => {
 }
 
 // Анимация body текста построчно (по <br /> разделителям)
-export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0) => {
+export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0, options: { opacity?: number } = {}) => {
   const delayBetweenLines = animationConfig.delays.lineDelay
 
   // Сохраняем исходный HTML
@@ -274,7 +283,7 @@ export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0) 
   // Проверяем, есть ли <br /> теги
   if (!originalHTML.includes('<br')) {
     // Если нет разделителей строк, анимируем по запятым
-    return animateByCommas(element, delay)
+    return animateByCommas(element, delay, options)
   }
 
   // Разбиваем по <br />, <br/>, <br /> и т.д.
@@ -302,7 +311,7 @@ export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0) 
   lineSpans.forEach((span, index) => {
     createBlurAnimation(span, {
       to: {
-        opacity: 1,
+        opacity: options.opacity ?? 1,
         blur: animationConfig.blur.to,
         y: animationConfig.y.to
       },
@@ -313,10 +322,10 @@ export const animateBodyTextByLines = (element: HTMLElement, delay: number = 0) 
 }
 
 // Анимация body текста (простая, без построчного разбиения)
-export const animateBodyText = (element: HTMLElement, delay: number = 0) => {
+export const animateBodyText = (element: HTMLElement, delay: number = 0, options: { opacity?: number } = {}) => {
   return createBlurAnimation(element, {
     to: {
-      opacity: 1,
+      opacity: options.opacity ?? 1,
       blur: animationConfig.blur.to,
       y: animationConfig.y.to
     },

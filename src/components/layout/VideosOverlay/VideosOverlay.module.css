@@ -6,6 +6,14 @@
     cursor: none;
 }
 
+.homeVideos>video:nth-child(2) {
+    width: 125%;
+}
+
+.careersVideos>video:nth-child(1) {
+    width: 125%;
+}
+
 .particle {
     position: absolute;
     inset: 0;

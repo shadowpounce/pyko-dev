@@ -36,12 +36,13 @@ export const BodyText: React.FC<BodyTextProps> = ({
   useEffect(() => {
     if (textRef.current && animationDelay !== null && !hasAnimatedRef.current) {
       hasAnimatedRef.current = true
-      animateBodyTextByLines(textRef.current, animationDelay)
+      animateBodyTextByLines(textRef.current, animationDelay, { opacity })
     }
-  }, [animationDelay])
+  }, [animationDelay, opacity])
 
   const style: React.CSSProperties = {}
-  if (opacity !== undefined) {
+  // Only apply opacity via style if NOT animating (otherwise animation controls it)
+  if (opacity !== undefined && animationDelay === null) {
     style.opacity = opacity
   }
   if (color) {
