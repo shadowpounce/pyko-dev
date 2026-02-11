@@ -6,6 +6,7 @@ import { useElementAnimationDelay, useSectionAnimationTrigger } from '@/hooks/us
 import { animationConfig } from '@/config/animations.config'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
+import { WideCardSwiper } from '@/components/ui/WideCardSwiper/WideCardSwiper'
 
 export const OurStory = ({ sectionIndex }: { sectionIndex: number }) => {
 	const descriptionText = useRef<HTMLParagraphElement>(null)
@@ -56,6 +57,30 @@ export const OurStory = ({ sectionIndex }: { sectionIndex: number }) => {
 				>
 					What started as two students tracking grades on paper became a movement for academic clarity.
 				</p>
+			</div>
+			<div className={s.sliderContainer}>
+				<WideCardSwiper
+					isActive={baseDelay !== null}
+					progressThumbColor='linear-gradient(90deg, rgba(230, 236, 255, 1), rgba(179, 197, 255, 1), rgba(48, 74, 153, 1))'
+					cards={[{
+						label: "2023 → SPARK",
+						title: "The problem",
+						subtitle: "We kept guessing our standing every term. Anxiety, spreadsheets, and uncertainty.",
+						bg: "/images/about/our-story-1.jpg"
+					},
+					{
+						label: "2024 → BUILD",
+						title: "The prototype",
+						subtitle: `A GPA engine, weight models, and live targets. 
+	Friends started asking for access.`,
+						bg: "/images/about/our-story-2.jpg"
+					},
+					{
+						label: "TODAY → MOMENTUM",
+						title: "The movement",
+						subtitle: `A clarity‑first platform shaped with students at top universities.`,
+						bg: "/images/about/our-story-3.jpg"
+					}]} />
 			</div>
 		</div>
 	</Section>
