@@ -22,9 +22,9 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 	})
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
-	const bodyTextDelay = useElementAnimationDelay(baseDelay, 3)
-	const buttonDelay1 = useElementAnimationDelay(baseDelay, 4)
-	const buttonDelay2 = useElementAnimationDelay(baseDelay, 5)
+	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
+	const buttonDelay1 = useElementAnimationDelay(baseDelay, 3)
+	const buttonDelay2 = useElementAnimationDelay(baseDelay, 4)
 
 	useGSAP(() => {
 		SplitText.create(descriptionText.current, {
@@ -32,11 +32,11 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 			autoSplit: true,
 			onSplit(self) {
 				return gsap.from(self.lines, {
-					duration: 0.5,
+					duration: 0.4,
 					y: animationConfig.y.from,
 					autoAlpha: 0,
 					filter: 'blur(5px)',
-					stagger: animationConfig.delays.lineDelay,
+					stagger: 0.1,
 					delay: bodyTextDelay || 1
 				});
 			}

@@ -96,76 +96,78 @@
          margin-top: 5.5vh;
       }
       width: 100%;
-      & .slide {
-         position: relative;
+      & .slideContainer {
          width: 360px;
          max-width: calc(100% - 20px);
          aspect-ratio: 360/431;
-         border-radius: 32px;
-         overflow: clip;
-         @media (max-width: 480px) {
-            width: 335px;
-            aspect-ratio: 335/420;
-         }
-         & .bg {
-            inset: 50% 0 0 65% !important;
-            width: auto !important;
-            height: auto !important;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-         }
-         & .slideContent {
-            display: flex;
-            gap: 12px;
-            flex-direction: column;
-            height: 100%;
+         & .slide {
             position: relative;
-            z-index: 1;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(25px);
-            padding: 18px;
+            border-radius: 32px;
+            overflow: clip;
             @media (max-width: 480px) {
-               padding: 8px;
-               gap: 20px;
+               width: 335px;
+               aspect-ratio: 335/420;
             }
-            & .image {
-               border-radius: 36px;
-               max-width: 100%;
-               height: auto;
-               object-fit: cover;
-               aspect-ratio: 324/239;
+            & .bg {
+               inset: 50% 0 0 65% !important;
+               width: auto !important;
+               height: auto !important;
+               transform: translate(-50%, -50%);
+               z-index: 0;
+            }
+            & .slideContent {
+               display: flex;
+               gap: 12px;
+               flex-direction: column;
+               height: 100%;
+               position: relative;
+               z-index: 1;
+               background: rgba(0, 0, 0, 0.25);
+               backdrop-filter: blur(25px);
+               padding: 18px;
                @media (max-width: 480px) {
-                  border-radius: 28px;
+                  padding: 8px;
+                  gap: 20px;
                }
-            }
-            & .slideTextContainer {
-               text-align: center;
-               & .name {
-                  font-family: var(--font-serif);
-                  font-style: italic;
-                  font-size: 1.5rem;
-                  line-height: 1.2;
-                  letter-spacing: -0.01em;
-                  color: var(--color-text-secondary);
+               & .image {
+                  border-radius: 36px;
+                  max-width: 100%;
+                  height: auto;
+                  object-fit: cover;
+                  aspect-ratio: 324/239;
+                  @media (max-width: 480px) {
+                     border-radius: 28px;
+                  }
                }
-               & .position {
-                  margin-top: 2px;
-                  font-family: var(--font-sans);
-                  font-weight: 500;
-                  text-transform: uppercase;
-                  color: var(--color-text-subtle);
-                  font-size: 0.75rem;
-                  letter-spacing: 0.02em;
-                  line-height: 1.15;
-               }
-               & .description {
-                  margin-top: 16px;
-                  font-family: var(--font-sans);
-                  font-weight: 500;
-                  color: var(--color-text-secondary);
-                  font-size: 1rem;
-                  line-height: 1.2;
-                  letter-spacing: -0.01em;
+               & .slideTextContainer {
+                  text-align: center;
+                  & .name {
+                     font-family: var(--font-serif);
+                     font-style: italic;
+                     font-size: 1.5rem;
+                     line-height: 1.2;
+                     letter-spacing: -0.01em;
+                     color: var(--color-text-secondary);
+                  }
+                  & .position {
+                     margin-top: 2px;
+                     font-family: var(--font-sans);
+                     font-weight: 500;
+                     text-transform: uppercase;
+                     color: var(--color-text-subtle);
+                     font-size: 0.75rem;
+                     letter-spacing: 0.02em;
+                     line-height: 1.15;
+                  }
+                  & .description {
+                     margin-top: 16px;
+                     font-family: var(--font-sans);
+                     font-weight: 500;
+                     color: var(--color-text-secondary);
+                     font-size: 1rem;
+                     line-height: 1.2;
+                     letter-spacing: -0.01em;
+                  }
                }
             }
          }

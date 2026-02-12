@@ -20,20 +20,21 @@ export const Team = ({ sectionIndex }: { sectionIndex: number }) => {
 		sectionIndex: SECTION_INDEX,
 		startDelay: START_DELAY,
 	})
+	const isInView = !!baseDelay
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
-	const bodyTextDelay = useElementAnimationDelay(Number(baseDelay) * 2, 2)
+	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
 	useGSAP(() => {
 		SplitText.create(descriptionText.current, {
 			type: "lines",
 			autoSplit: true,
 			onSplit(self) {
 				return gsap.from(self.lines, {
-					duration: 0.6,
+					duration: 0.4,
 					y: animationConfig.y.from,
 					autoAlpha: 0,
 					filter: 'blur(5px)',
-					stagger: animationConfig.delays.lineDelay,
+					stagger: 0.1,
 					delay: bodyTextDelay || 1
 				});
 			}
@@ -60,7 +61,7 @@ export const Team = ({ sectionIndex }: { sectionIndex: number }) => {
 						Two Computer Science students with a shared mission: eliminate academic guesswork
 					</p>
 				</div>
-				<TeamSlider />
+				<TeamSlider isInView={isInView} />
 			</div>
 		</Section>
 	)

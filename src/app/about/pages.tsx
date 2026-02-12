@@ -11,22 +11,22 @@ import { Values } from "./sections/Values/Values";
  * Конфигурация секций для страницы "О нас".
  */
 export const aboutSections = [
-	{
-		path: '#hero',
-		component: Hero,
-	},
+	// {
+	// 	path: '#hero',
+	// 	component: Hero,
+	// },
 	// {
 	// 	path: '#filler',
 	// 	component: Filler
 	// },
-	{
-		path: '#manifesto',
-		component: Manifesto
-	},
-	{
-		path: '#ourStory',
-		component: OurStory
-	},
+	// {
+	// 	path: '#manifesto',
+	// 	component: Manifesto
+	// },
+	// {
+	// 	path: '#ourStory',
+	// 	component: OurStory
+	// },
 	// {
 	// 	path: '#filler',
 	// 	component: Filler

@@ -22,7 +22,7 @@ export const OurStory = ({ sectionIndex }: { sectionIndex: number }) => {
 	})
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
-	const bodyTextDelay = useElementAnimationDelay(Number(baseDelay) * 2, 2)
+	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
 	useGSAP(() => {
 		SplitText.create(descriptionText.current, {
 			type: "lines",
