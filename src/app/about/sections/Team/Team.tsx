@@ -2,11 +2,12 @@
 import { Section, SectionLabel, SectionTitle } from "@/components/ui";
 import { animationConfig } from "@/config/animations.config";
 import { useElementAnimationDelay, useSectionAnimationTrigger } from "@/hooks/useSectionAnimationTrigger";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import s from './Team.module.css'
 import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { TeamSlider } from "../../components/TeamSlider";
+import { useGSAP } from "@gsap/react";
 
 export const Team = ({ sectionIndex }: { sectionIndex: number }) => {
 	const descriptionText = useRef<HTMLParagraphElement>(null)
@@ -22,7 +23,7 @@ export const Team = ({ sectionIndex }: { sectionIndex: number }) => {
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
 	const bodyTextDelay = useElementAnimationDelay(Number(baseDelay) * 2, 2)
-	useEffect(() => {
+	useGSAP(() => {
 		SplitText.create(descriptionText.current, {
 			type: "lines",
 			autoSplit: true,

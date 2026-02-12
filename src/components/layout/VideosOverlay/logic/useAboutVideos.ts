@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { VideoConfig } from '../types'
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 export const useAboutVideos = (
 	videoRefs: React.RefObject<HTMLVideoElement | null>[],
@@ -62,7 +63,7 @@ export const useAboutVideos = (
 	}
 
 	// video opacity controller
-	useEffect(() => {
+	useGSAP(() => {
 		if (currentVideoIndex !== -1 && videoRefs[currentVideoIndex]?.current) {
 			hideVideos()
 			gsap.to(videoRefs[currentVideoIndex]!.current, { opacity: 1, duration: 1, delay: prevVideoIndex === -1 ? 0.5 : 0.5 })
@@ -72,7 +73,7 @@ export const useAboutVideos = (
 	}, [currentVideoIndex])
 
 	// video controller
-	useEffect(() => {
+	useGSAP(() => {
 		if (currentVideoIndex === 0) {
 			const video = videoRefs[0]?.current
 			if (video) {
@@ -323,7 +324,7 @@ export const useAboutVideos = (
 	}, [currentVideoIndex, currentSectionIndex])
 
 	// overlay toggle controller
-	useEffect(() => {
+	useGSAP(() => {
 		if (currentVideoIndex !== -1) {
 			if (overlayToggleRef.current) {
 				gsap.to(overlayToggleRef.current,

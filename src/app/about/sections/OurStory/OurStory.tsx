@@ -1,12 +1,13 @@
 'use client'
 import { Section, SectionLabel, SectionTitle } from '@/components/ui'
 import s from './OurStory.module.css'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useElementAnimationDelay, useSectionAnimationTrigger } from '@/hooks/useSectionAnimationTrigger'
 import { animationConfig } from '@/config/animations.config'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import { WideCardSwiper } from '@/components/ui/WideCardSwiper/WideCardSwiper'
+import { useGSAP } from '@gsap/react'
 
 export const OurStory = ({ sectionIndex }: { sectionIndex: number }) => {
 	const descriptionText = useRef<HTMLParagraphElement>(null)
@@ -22,7 +23,7 @@ export const OurStory = ({ sectionIndex }: { sectionIndex: number }) => {
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
 	const bodyTextDelay = useElementAnimationDelay(Number(baseDelay) * 2, 2)
-	useEffect(() => {
+	useGSAP(() => {
 		SplitText.create(descriptionText.current, {
 			type: "lines",
 			autoSplit: true,

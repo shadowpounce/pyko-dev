@@ -91,7 +91,7 @@
             align-items: center;
             container-type: inline-size;
             & .slider {
-               width: 100%;
+               /* width: 100%; */
                /* --gap: 24px;
                --columns: 3;
                --aspect: calc(421 / 481);

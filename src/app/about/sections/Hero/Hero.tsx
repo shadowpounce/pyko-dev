@@ -5,9 +5,10 @@ import { Button, Container, SectionLabel, SectionTitle } from "@/components/ui"
 import { useElementAnimationDelay, useSectionAnimationTrigger } from "@/hooks/useSectionAnimationTrigger"
 import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { animationConfig } from "@/config/animations.config"
 import { HeroFooter } from "../../components/HeroFooter"
+import { useGSAP } from "@gsap/react"
 
 export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 	const descriptionText = useRef<HTMLParagraphElement>(null)
@@ -25,13 +26,13 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 	const buttonDelay1 = useElementAnimationDelay(baseDelay, 4)
 	const buttonDelay2 = useElementAnimationDelay(baseDelay, 5)
 
-	useEffect(() => {
+	useGSAP(() => {
 		SplitText.create(descriptionText.current, {
 			type: "lines",
 			autoSplit: true,
 			onSplit(self) {
 				return gsap.from(self.lines, {
-					duration: 0.6,
+					duration: 0.5,
 					y: animationConfig.y.from,
 					autoAlpha: 0,
 					filter: 'blur(5px)',
