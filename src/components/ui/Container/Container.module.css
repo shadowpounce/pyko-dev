@@ -4,6 +4,12 @@
   padding: calc(40 * 100vw / var(--base-width));
 }
 
+@media (max-width: 1024px) {
+  .container {
+    padding: calc(60 * 100vw / var(--base-width-tablet));
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding-left: calc(18 * 100vw / var(--base-width-mobile));

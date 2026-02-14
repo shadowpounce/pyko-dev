@@ -47,6 +47,42 @@
   line-height: calc(42 * 100vw / var(--base-width));
 }
 
+@media (max-width: 1024px) {
+  .title.h1 {
+    font-size: calc(62 * 100vw / var(--base-width-tablet));
+    line-height: calc(62 * 100vw / var(--base-width-tablet));
+    letter-spacing: -5%;
+  }
+
+  .title.h1 .serif {
+    font-size: calc(62 * 100vw / var(--base-width-tablet));
+    line-height: calc(62 * 100vw / var(--base-width-tablet));
+    letter-spacing: -4%;
+  }
+
+  .title.h2 {
+    font-size: calc(44 * 100vw / var(--base-width-tablet));
+    line-height: calc(48 * 100vw / var(--base-width-tablet));
+    letter-spacing: -5%;
+  }
+
+  .title.h2 .serif {
+    font-size: calc(44 * 100vw / var(--base-width-tablet));
+    line-height: calc(48 * 100vw / var(--base-width-tablet));
+    letter-spacing: -5%;
+  }
+
+  .title.h3 {
+    font-size: calc(42 * 100vw / var(--base-width-tablet));
+    letter-spacing: -3%;
+  }
+
+  .title.h3 .serif {
+    font-size: calc(42 * 100vw / var(--base-width-tablet));
+    letter-spacing: -3%;
+  }
+}
+
 @media (max-width: 768px) {
   .title.h1 {
     font-size: calc(44 * 100vw / var(--base-width-mobile));

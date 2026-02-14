@@ -19,6 +19,16 @@
   font-size: calc(16 * 100vw / var(--base-width));
 }
 
+@media (max-width: 1024px) {
+  .link {
+    font-size: calc(17 * 100vw / var(--base-width-tablet));
+  }
+
+  .link.secondary {
+    font-size: calc(17 * 100vw / var(--base-width-tablet));
+  }
+}
+
 @media (max-width: 768px) {
   .link {
     font-size: calc(16 * 100vw / var(--base-width-mobile));

@@ -90,7 +90,7 @@
   color: #fff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero {
     height: 100svh;
     min-height: 100svh;
@@ -98,10 +98,50 @@
   }
 
   .container {
-    padding-top: calc(120 * 100vw / var(--base-width-mobile)) !important;
+    padding-top: calc(120 * 100vw / var(--base-width-tablet)) !important;
     height: 100svh;
     min-height: 100svh;
     max-height: 100svh;
+  }
+
+  .text {
+    gap: calc(16 * 100vw / var(--base-width-tablet));
+  }
+
+  .footer {
+    order: 3;
+  }
+
+  .footerRight {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .scrollText {
+    font-size: calc(25 * 100vw / var(--base-width-tablet));
+  }
+
+  .scrollIcon {
+    width: calc(25 * 100vw / var(--base-width-tablet));
+    height: calc(25 * 100vw / var(--base-width-tablet));
+    max-width: calc(25 * 100vw / var(--base-width-tablet));
+    min-width: calc(25 * 100vw / var(--base-width-tablet));
+    max-height: calc(25 * 100vw / var(--base-width-tablet));
+    min-height: calc(25 * 100vw / var(--base-width-tablet));
+  }
+
+  .footerLeft {
+    gap: calc(16 * 100vw / var(--base-width-tablet));
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .container {
+    padding-top: calc(120 * 100vw / var(--base-width-mobile)) !important;
   }
 
   .text {

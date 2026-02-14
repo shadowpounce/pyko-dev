@@ -85,7 +85,7 @@
   color: #fff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero {
     height: 100svh;
     min-height: 100svh;
@@ -93,10 +93,20 @@
   }
 
   .container {
-    padding-top: calc(120 * 100vw / var(--base-width-mobile)) !important;
+    padding-top: calc(120 * 100vw / var(--base-width-tablet)) !important;
+    padding-bottom: calc(120 * 100vw / var(--base-width-tablet)) !important;
+
     height: 100svh;
     min-height: 100svh;
     max-height: 100svh;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    padding-top: calc(120 * 100vw / var(--base-width-mobile)) !important;
+
   }
 
   .text {

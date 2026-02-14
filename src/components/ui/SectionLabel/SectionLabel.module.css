@@ -9,6 +9,12 @@
   opacity: 0;
 }
 
+@media (max-width: 1024px) {
+  .label {
+    font-size: calc(14 * 100vw / var(--base-width-tablet));
+  }
+}
+
 @media (max-width: 768px) {
   .label {
     font-size: calc(14 * 100vw / var(--base-width-mobile));

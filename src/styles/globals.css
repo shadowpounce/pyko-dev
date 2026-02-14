@@ -79,6 +79,7 @@
 :root {
    /* Base width for conversion (Figma design width) */
    --base-width: 1440;
+   --base-width-tablet: 1024;
    --base-width-mobile: 390;
    /* Formula to convert px to vw: calc(px * 100vw / var(--base-width)) */
    /* Usage: width: calc(200 * 100vw / var(--base-width)); for 200px */
@@ -282,6 +283,7 @@ body {
    REDUCED MOTION - Accessibility & Performance
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+
    *,
    *::before,
    *::after {
@@ -317,15 +319,12 @@ body {
    inset: 0;
    border: 1px solid transparent !important;
    border-radius: inherit;
-   background: repeating-conic-gradient(
-         from var(--angle),
+   background: repeating-conic-gradient(from var(--angle),
          #ffffff 37.5%,
          #ffffff 43.75%,
          #000000 46.25% 78.75%,
          #ffffff 81.25%,
-         #ffffff 87.5%
-      )
-      border-box;
+         #ffffff 87.5%) border-box;
    -webkit-mask:
       linear-gradient(#fff 0 0) padding-box,
       linear-gradient(#fff 0 0);
@@ -339,4 +338,10 @@ body {
    /* Ensure clicks pass through */
    z-index: 2;
    /* Place on top of background but below interactive content if needed */
+}
+
+@media (max-width: 1024px) {
+   body {
+      font-size: calc(16 * 100vw / var(--base-width-tablet));
+   }
 }

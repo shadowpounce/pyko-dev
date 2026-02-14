@@ -73,6 +73,7 @@
     font-size: calc(16 * 100vw / var(--base-width));
     font-weight: 400;
     color: #fff;
+    opacity: .7 !important;
 }
 
 .init {

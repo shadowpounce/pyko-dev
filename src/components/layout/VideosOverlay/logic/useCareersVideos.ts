@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap'
 import { VideoConfig } from '../types'
+import { useGSAP } from '@gsap/react'
 
 export const useCareersVideos = (
     videoRefs: React.RefObject<HTMLVideoElement | null>[],
@@ -57,7 +58,7 @@ export const useCareersVideos = (
     }
 
     // video opacity controller
-    useEffect(() => {
+    useGSAP(() => {
         if (currentVideoIndex !== undefined) {
             if (currentVideoIndex !== -1 && videoRefs[currentVideoIndex]?.current) {
                 hideVideos()
@@ -73,7 +74,7 @@ export const useCareersVideos = (
     }, [currentVideoIndex])
 
     // video controller
-    useEffect(() => {
+    useGSAP(() => {
         if (currentVideoIndex === 0) {
             const video = videoRefs[0]?.current
 
@@ -167,7 +168,7 @@ export const useCareersVideos = (
 
 
     // overlay toggle controller
-    useEffect(() => {
+    useGSAP(() => {
         if (currentVideoIndex !== -1) {
             if (overlayToggleRef.current) {
                 gsap.to(overlayToggleRef.current,

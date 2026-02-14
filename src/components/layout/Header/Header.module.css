@@ -162,6 +162,39 @@
   transition-delay: 0.4s;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    padding-top: calc(20 * 100vw / var(--base-width-tablet));
+    padding-bottom: calc(20 * 100vw / var(--base-width-tablet));
+    padding-left: calc(25 * 100vw / var(--base-width-tablet));
+    padding-right: calc(25 * 100vw / var(--base-width-tablet));
+  }
+
+
+  .logo {
+    width: calc(87 * 100vw / var(--base-width-tablet));
+    height: calc(35 * 100vw / var(--base-width-tablet));
+    max-width: calc(87 * 100vw / var(--base-width-tablet));
+    min-width: calc(87 * 100vw / var(--base-width-tablet));
+    max-height: calc(35 * 100vw / var(--base-width-tablet));
+    min-height: calc(35 * 100vw / var(--base-width-tablet));
+  }
+
+  .menu {
+    gap: calc(24 * 100vw / var(--base-width-tablet));
+    width: fit-content;
+    max-width: fit-content;
+    min-width: fit-content;
+    min-height: calc(56 * 100vw / var(--base-width-tablet));
+    max-height: calc(56 * 100vw / var(--base-width-tablet));
+    padding: calc(24 * 100vw / var(--base-width-tablet));
+  }
+
+  .menuLink {
+    font-size: calc(16 * 100vw / var(--base-width-tablet));
+  }
+}
+
 @media (max-width: 768px) {
   .header {
     padding-top: calc(20 * 100vw / var(--base-width-mobile));
