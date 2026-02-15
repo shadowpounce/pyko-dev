@@ -20,6 +20,7 @@ import {
     useElementAnimationDelay,
 } from '@/hooks/useSectionAnimationTrigger'
 import styles from './HeroSection.module.css'
+import clsx from 'clsx'
 
 interface HeroSectionProps {
     sectionIndex: number
@@ -56,7 +57,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
                         For the students who refuse to be average.
                     </SectionLabel>
                     <SectionLabel className="mobile-only" animationDelay={labelDelay}>
-                        For students who want clarity, not chaos
+                        For students who want <br /> clarity, not chaos
                     </SectionLabel>
                     <SectionTitle
                         level={1}
@@ -69,7 +70,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
                     </SectionTitle>
                     <SectionTitle
                         level={1}
-                        className="mobile-only"
+                        serifOnNewLine={true}
+                        className={clsx("mobile-only", styles.title)}
                         serif={['millions of students']}
                         animationDelay={titleDelay}
                     >
@@ -93,9 +95,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
                 </div>
                 <div className={styles.footer}>
                     <div className={styles.footerLeft}>
-                        <BodyText animationDelay={bodyTextDelay} lineHeight="130%">
+                        <BodyText className={'desktop-only'} animationDelay={bodyTextDelay} lineHeight="130%">
                             We’re a small, product‑driven team crafting <br />
                             a calm system that turns academic uncertainty <br /> into confident progress..
+                        </BodyText>
+                        <BodyText className={'mobile-only'} animationDelay={bodyTextDelay} lineHeight="130%">
+                            We’re a small, product‑driven team crafting
+                            a calm system that turns academic uncertainty into confident progress..
                         </BodyText>
                         <Link href="/about" animationDelay={linkDelay}>
                             Email us

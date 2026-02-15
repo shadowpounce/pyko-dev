@@ -99,7 +99,7 @@
   background: linear-gradient(216.39deg, #DAFA78 13.55%, #E7F8E0 49.89%, #D9ECC9 77.1%, #DAFA78 83.38%, rgba(89, 113, 71, 0) 96.26%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .engine {
     height: 100svh;
     max-height: 100svh;

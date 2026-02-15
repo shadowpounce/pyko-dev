@@ -50,15 +50,43 @@
     flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .pykoList {
+        gap: calc(20 * 100vw / var(--base-width-tablet));
+    }
+
+    .item {
+        font-size: calc(20 * 100vw / var(--base-width-tablet));
+        line-height: 120%;
+        gap: calc(12 * 100vw / var(--base-width-tablet));
+    }
+
+    .item small {
+        font-size: calc(16 * 100vw / var(--base-width-tablet));
+
+    }
+
+    .circle {
+        width: calc(10 * 100vw / var(--base-width-tablet));
+        height: calc(10 * 100vw / var(--base-width-tablet));
+        min-width: calc(10 * 100vw / var(--base-width-tablet));
+        min-height: calc(10 * 100vw / var(--base-width-tablet));
+    }
+}
+
+@media (max-width: 767px) {
     .pykoList {
         gap: calc(20 * 100vw / var(--base-width-mobile));
     }
 
     .item {
-        font-size: calc(11 * 100vw / var(--base-width-mobile));
-        line-height: calc(18 * 100vw / var(--base-width-mobile));
+        font-size: calc(14 * 100vw / var(--base-width-mobile));
         gap: calc(8 * 100vw / var(--base-width-mobile));
+    }
+
+    .item small {
+        font-size: calc(11 * 100vw / var(--base-width-mobile));
+
     }
 
     .circle {

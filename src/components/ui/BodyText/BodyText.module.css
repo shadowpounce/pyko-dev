@@ -10,17 +10,16 @@
 
 @media (max-width: 1024px) {
   .bodyText {
-    font-size: calc(18 * 100vw / var(--base-width-tablet));
-    line-height: calc(21 * 100vw / var(--base-width-tablet));
+    font-size: calc(24 * 100vw / var(--base-width-tablet));
+    line-height: 150%;
     max-width: 100%;
     width: 100%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .bodyText {
     font-size: calc(16 * 100vw / var(--base-width-mobile));
-    line-height: calc(21 * 100vw / var(--base-width-mobile));
     max-width: 100%;
     width: 100%;
   }

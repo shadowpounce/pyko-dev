@@ -143,7 +143,6 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
 		paddingBottom: '0',
 		fixedElements: 'header, .mobile-menu',
 		css3: true,
-		touchSensitivity: 1,
 		scrollOverflow: true,
 		normalScrollElements: normalScrollSelectors,
 		normalScrollElementTouchThreshold: 5,

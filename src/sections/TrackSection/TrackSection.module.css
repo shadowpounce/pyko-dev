@@ -58,7 +58,7 @@
 .trackCardWrapper1 {
   top: 15%;
   left: 5%;
-  
+
 }
 
 .trackCardWrapper2 {
@@ -86,7 +86,7 @@
   /* pointer-events: none; */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .track {
     height: 100svh;
     min-height: 100svh;

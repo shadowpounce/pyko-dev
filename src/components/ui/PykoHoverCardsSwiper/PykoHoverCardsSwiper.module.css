@@ -18,3 +18,39 @@
     height: calc(245 * 100vw / var(--base-width));
     max-height: calc(382 * 100vw / var(--base-width));
 }
+
+@media (max-width: 1024px) {
+    .pykoHoverCardsSwiper {
+        min-height: calc(382 * 100vw / var(--base-width-tablet));
+        height: calc(382 * 100vw / var(--base-width-tablet));
+        max-height: calc(382 * 100vw / var(--base-width-tablet));
+    }
+
+    .slide {
+        min-width: calc(370 * 100vw / var(--base-width-tablet));
+        max-width: calc(370 * 100vw / var(--base-width-tablet));
+        width: calc(370 * 100vw / var(--base-width-tablet));
+        min-height: calc(245 * 100vw / var(--base-width-tablet));
+        height: calc(245 * 100vw / var(--base-width-tablet));
+        max-height: calc(382 * 100vw / var(--base-width-tablet));
+    }
+}
+
+@media (max-width: 767px) {
+    .pykoHoverCardsSwiper {
+        min-height: calc(382 * 100vw / var(--base-width-mobile));
+        height: calc(382 * 100vw / var(--base-width-mobile));
+        max-height: calc(382 * 100vw / var(--base-width-mobile));
+    }
+
+    .slide {
+        min-width: unset;
+        max-width: unset;
+        width: unset;
+        min-height: calc(245 * 100vw / var(--base-width-mobile));
+        height: calc(245 * 100vw / var(--base-width-mobile));
+        max-height: calc(382 * 100vw / var(--base-width-mobile));
+    }
+
+
+}

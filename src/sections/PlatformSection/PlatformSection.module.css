@@ -61,7 +61,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .platform {
     height: 100svh;
     max-height: 100svh;

@@ -199,13 +199,13 @@ body {
    display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
    .mobile-only {
       display: unset;
    }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
    .desktop-only {
       display: unset;
    }
@@ -225,6 +225,7 @@ body {
    min-height: 100vh;
    overflow: hidden;
 }
+
 
 /* Навигация FullPage */
 #fp-nav {
@@ -255,6 +256,7 @@ body {
    min-height: 100vh;
 }
 
+
 .fp-section[data-normal-scroll='true'] .section {
    height: fit-content !important;
    min-height: 100vh;
@@ -278,6 +280,27 @@ body {
    transform: translateZ(0);
    -webkit-transform: translateZ(0);
 }
+
+@media (max-width: 1024px) {
+   .fp-section {
+      height: 100svh !important;
+      min-height: 100svh;
+      max-height: 100svh;
+   }
+
+   .fp-section[data-normal-scroll='true'] {
+      min-height: 100svh;
+   }
+
+   .fp-section[data-normal-scroll='true'] .section {
+      min-height: 100svh;
+   }
+
+   .normal-scroll-container {
+      min-height: 100svh;
+   }
+}
+
 
 /* ============================================
    REDUCED MOTION - Accessibility & Performance

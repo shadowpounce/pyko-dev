@@ -564,7 +564,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .wrapper {
     overflow-x: auto;
     overflow-y: visible;

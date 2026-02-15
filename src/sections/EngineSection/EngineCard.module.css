@@ -56,7 +56,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .engineCard {
     max-height: calc(280 * 100vw / var(--base-width-mobile));
     min-height: calc(280 * 100vw / var(--base-width-mobile));
