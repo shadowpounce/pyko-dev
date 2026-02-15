@@ -2,6 +2,7 @@ import { FooterSection } from "@/sections/FooterSection";
 import { Hero } from "./sections/Hero/Hero";
 import path from "path";
 import { Principles } from "./sections/Principles/Principles";
+import { LiveStatus } from "./sections/LiveStatus/LiveStatus";
 
 
 /**
@@ -15,6 +16,10 @@ export const transparencySections = [
 	{
 		path: '#principles',
 		component: Principles
+	},
+	{
+		path: '#live-status',
+		component: LiveStatus
 	},
 	{
 		path: '#footer',
