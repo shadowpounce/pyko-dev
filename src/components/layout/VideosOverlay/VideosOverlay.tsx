@@ -71,6 +71,7 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 					className={clsx(styles.video)}
 					playsInline
 					muted
+					autoPlay={!!video.autoPlay}
 					loop={video.loop !== false} // Default to loop unless specified otherwise
 					preload="auto"
 					src={videoUrls[video.src] || video.src}

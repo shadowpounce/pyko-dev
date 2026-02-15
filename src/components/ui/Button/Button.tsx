@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './Button.module.css'
 import { animateButton } from '@/utils/animations'
+import Link from 'next/link'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: 'primary' | 'secondary' | 'tertiary'
@@ -52,7 +53,7 @@ export const Button: React.FC<ButtonProps> = ({
 	return (
 		<button ref={buttonRef} data-transparent={transparent} className={buttonClass} {...props}>
 			{isLink && href ? (
-				<a href={href}>{children}</a>
+				<Link href={href}>{children}</Link>
 			) : (
 				children
 			)}

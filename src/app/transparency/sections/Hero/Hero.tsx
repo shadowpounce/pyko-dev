@@ -3,17 +3,13 @@ import { Section } from "@/components/ui/Section/Section"
 import styles from "./Hero.module.css"
 import { Button, Container, SectionLabel, SectionTitle } from "@/components/ui"
 import { useElementAnimationDelay, useSectionAnimationTrigger } from "@/hooks/useSectionAnimationTrigger"
-import { HeroFooter } from "../../components/HeroFooter"
 import { useSplitText } from "@/hooks/useSplitText"
 
 export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
-	const SECTION_INDEX = sectionIndex
-
-	const START_DELAY = 0.5
 
 	const baseDelay = useSectionAnimationTrigger({
-		sectionIndex: SECTION_INDEX,
-		startDelay: START_DELAY,
+		sectionIndex: sectionIndex,
+		startDelay: 0.5,
 	})
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
@@ -34,27 +30,26 @@ export const Hero = ({ sectionIndex }: { sectionIndex: number }) => {
 					serifOnNewLine={true}
 					className={styles.title}
 					serifClassName={styles.serif}
-					serif="for students"
+					serif="Open by Default"
 					animationDelay={titleDelay}
 				>
-					Built by students
+					Radical Transparency:
 				</SectionTitle>
 				<p
 					ref={descriptionText}
 					className={styles.description}
 				>
-					We transform academic uncertainty into confident progress with clear, actionable insights.
+					We operate with full transparency, sharing how we work, what metrics we track, and the measures we take to protect students. This approach builds trust, ensures accountability, and fosters an open and ethical platform culture.
 				</p>
 				<div className={styles.buttonsWrapper}>
 					<Button variant="primary" className={styles.button} withArrow animationDelay={buttonDelay1}>
 						Get Started
 					</Button>
-					<Button isLink href="/transparency" variant="tertiary" className={styles.button} withArrow animationDelay={buttonDelay2}>
-						Transparency
+					<Button variant="tertiary" className={styles.button} withArrow animationDelay={buttonDelay2}>
+						Data room
 					</Button>
 				</div>
 			</div>
-			<HeroFooter />
 		</Container>
 	</Section>
 }

@@ -36,6 +36,7 @@ export const Values = ({ sectionIndex }: { sectionIndex: number }) => {
 	const marqueeRef = useRef<HTMLDivElement>(null)
 	const videoContainerRef = useRef<HTMLDivElement>(null)
 	const titleRef = useRef<HTMLParagraphElement>(null)
+	const videoRef = useRef<HTMLVideoElement>(null)
 	const baseDelay = useSectionAnimationTrigger({
 		sectionIndex: sectionIndex,
 		startDelay: 0.8,
@@ -45,10 +46,10 @@ export const Values = ({ sectionIndex }: { sectionIndex: number }) => {
 
 	useGSAP(() => {
 		if (isInView) {
+			videoRef.current?.play()
 			const split = SplitText.create(titleRef.current, { type: 'words' })
 			const cards = gsap.utils.toArray(`.${s.card}`)
 			const cardsTitle = gsap.utils.toArray<HTMLParagraphElement>(`.${s.cardTitle}`)
-			console.log('🚀 ~ Values ~ cardsTitle:', cardsTitle)
 			const cardsDescription = gsap.utils.toArray(`.${s.cardDescription}`)
 			const tl = gsap.timeline({
 				defaults: { duration: 0.6, ease: 'power2.out' }, delay: baseDelay || 1
@@ -78,7 +79,7 @@ export const Values = ({ sectionIndex }: { sectionIndex: number }) => {
 				<Marquee ref={marqueeRef} autoFill speed={150} className={s.marquee}><p className={s.marqueeText}>Pyko evolves — quietly, constantly, with you.</p></Marquee>
 				<div className={s.contentContainer}>
 					<div ref={videoContainerRef} className={s.videoWrapper}>
-						<video src='videos/about/sec-4/pyko2-sec4-720p_j3MclSyk.mp4' muted autoPlay loop controls={false}></video>
+						<video ref={videoRef} src='videos/about/sec-4/pyko2-sec4-720p.mp4' muted autoPlay loop preload="auto" controls={false}></video>
 					</div>
 					<div className={s.content}>
 						<SectionLabel animationDelay={labelDelay} className={s.label}>Values</SectionLabel>

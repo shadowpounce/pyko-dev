@@ -1,18 +1,19 @@
 export type PageType = string;
 
 export interface VideoConfig {
-    id: number;
-    src: string;
-    poster?: string;
-    loop?: boolean;
+	id: number;
+	src: string;
+	poster?: string;
+	loop?: boolean;
+	autoPlay?: boolean;
 }
 
 export interface VideosOverlayProps {
-    page: PageType;
+	page: PageType;
 }
 
 export interface VideoLogicProps {
-    videoRefs: React.RefObject<HTMLVideoElement | null>[];
-    currentSectionIndex: number;
-    overlayToggleRef: React.RefObject<HTMLDivElement>;
+	videoRefs: React.RefObject<HTMLVideoElement | null>[];
+	currentSectionIndex: number;
+	overlayToggleRef: React.RefObject<HTMLDivElement>;
 }

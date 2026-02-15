@@ -9,9 +9,9 @@ import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
 import { ManifestoCards } from '../../components/ManifestoCards'
 import { useGSAP } from '@gsap/react'
+import { useSplitText } from '@/hooks/useSplitText'
 
 export const Manifesto = ({ sectionIndex }: { sectionIndex: number }) => {
-	const descriptionText = useRef<HTMLParagraphElement>(null)
 	const baseDelay = useSectionAnimationTrigger({
 		sectionIndex,
 		startDelay: 0.8,
@@ -20,22 +20,7 @@ export const Manifesto = ({ sectionIndex }: { sectionIndex: number }) => {
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
 	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
-	useGSAP(() => {
-		SplitText.create(descriptionText.current, {
-			type: "lines",
-			autoSplit: true,
-			onSplit(self) {
-				return gsap.from(self.lines, {
-					duration: 0.5,
-					y: animationConfig.y.from,
-					autoAlpha: 0,
-					filter: 'blur(5px)',
-					stagger: 0.1,
-					delay: bodyTextDelay || 0.8
-				});
-			}
-		});
-	}, [bodyTextDelay])
+	const descriptionText = useSplitText({ animationDelay: bodyTextDelay })
 	return (
 		<Section className={s.manifesto}>
 			<Container className={s.container}>
