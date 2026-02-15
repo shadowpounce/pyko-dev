@@ -71,6 +71,7 @@
 
 .subtitle {
     font-size: calc(16 * 100vw / var(--base-width));
+    line-height: 120%;
     font-weight: 400;
     color: #fff;
     opacity: .7 !important;
@@ -88,4 +89,44 @@
 .init .pykoCardContent {
     opacity: 0;
     transform: translateY(calc(10 * 100vw / var(--base-width)));
+}
+
+@media (max-width: 1024px) {
+    .icon {
+        width: calc(40 * 100vw / var(--base-width-tablet));
+        height: calc(40 * 100vw / var(--base-width-tablet));
+        min-width: calc(40 * 100vw / var(--base-width-tablet));
+        min-height: calc(40 * 100vw / var(--base-width-tablet));
+    }
+
+    .subtitle {
+        font-size: calc(16 * 100vw / var(--base-width-tablet));
+    }
+
+
+}
+
+@media (max-width: 767px) {
+    .pykoCard {
+        border-radius: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .pykoCardContent {
+        padding: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .title {
+        font-size: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .subtitle {
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
+
+    .icon {
+        width: calc(32 * 100vw / var(--base-width-mobile));
+        height: calc(32 * 100vw / var(--base-width-mobile));
+        min-width: calc(32 * 100vw / var(--base-width-mobile));
+        min-height: calc(32 * 100vw / var(--base-width-mobile));
+    }
 }

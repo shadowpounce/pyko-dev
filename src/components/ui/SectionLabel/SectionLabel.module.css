@@ -4,21 +4,21 @@
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 2%;
-  line-height: 100%;
   font-size: calc(14 * 100vw / var(--base-width));
   opacity: 0;
 }
 
 @media (max-width: 1024px) {
   .label {
-    font-size: calc(14 * 100vw / var(--base-width-tablet));
+    font-size: calc(18 * 100vw / var(--base-width-tablet));
+    line-height: 140%;
+
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .label {
     font-size: calc(14 * 100vw / var(--base-width-mobile));
     letter-spacing: -2%;
-    line-height: calc(110%);
   }
 }

@@ -131,5 +131,20 @@ export const animateHeader = (
     )
   }
 
+  // 7. Burger button appears on mobile
+  const burger = buttons.querySelector('[class*="burger"]') as HTMLElement
+  if (burger) {
+    timeline.to(
+      burger,
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        ease: 'back.out(1.7)',
+      },
+      '-=0.2'
+    )
+  }
+
   return timeline
 }

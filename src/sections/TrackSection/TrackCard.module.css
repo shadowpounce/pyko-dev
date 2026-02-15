@@ -134,7 +134,7 @@
   opacity: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .trackCard {
     left: unset;
     right: unset;

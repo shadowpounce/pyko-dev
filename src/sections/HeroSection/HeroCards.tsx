@@ -61,7 +61,7 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
 
     // Mobile check
     let isMobile = false
-    const mediaQuery = window.matchMedia('(max-width: 768px)')
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
 
     const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
       isMobile = e.matches

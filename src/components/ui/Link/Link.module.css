@@ -21,15 +21,15 @@
 
 @media (max-width: 1024px) {
   .link {
-    font-size: calc(17 * 100vw / var(--base-width-tablet));
+    font-size: calc(24 * 100vw / var(--base-width-tablet));
   }
 
   .link.secondary {
-    font-size: calc(17 * 100vw / var(--base-width-tablet));
+    font-size: calc(24 * 100vw / var(--base-width-tablet));
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .link {
     font-size: calc(16 * 100vw / var(--base-width-mobile));
   }

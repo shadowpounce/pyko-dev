@@ -29,7 +29,7 @@
     gap: calc(24 * 100vw / var(--base-width));
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
     .plans {
         height: 100svh;
@@ -104,7 +104,7 @@
     border-radius: calc(4 * 100vw / var(--base-width-mobile)) !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
     /* Глобальные стили для пагинации на мобилке */
     .swiper :global(.swiper-pagination) {
@@ -112,7 +112,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .container {
         padding: 0;
     }

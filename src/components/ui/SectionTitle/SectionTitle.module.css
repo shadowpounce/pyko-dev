@@ -49,50 +49,50 @@
 
 @media (max-width: 1024px) {
   .title.h1 {
-    font-size: calc(62 * 100vw / var(--base-width-tablet));
-    line-height: calc(62 * 100vw / var(--base-width-tablet));
+    font-size: calc(82 * 100vw / var(--base-width-tablet));
+    line-height: calc(82 * 100vw / var(--base-width-tablet));
     letter-spacing: -5%;
   }
 
   .title.h1 .serif {
-    font-size: calc(62 * 100vw / var(--base-width-tablet));
-    line-height: calc(62 * 100vw / var(--base-width-tablet));
+    font-size: calc(82 * 100vw / var(--base-width-tablet));
+    line-height: calc(82 * 100vw / var(--base-width-tablet));
     letter-spacing: -4%;
   }
 
   .title.h2 {
-    font-size: calc(44 * 100vw / var(--base-width-tablet));
-    line-height: calc(48 * 100vw / var(--base-width-tablet));
+    font-size: calc(72 * 100vw / var(--base-width-tablet));
+    line-height: calc(72 * 100vw / var(--base-width-tablet));
     letter-spacing: -5%;
   }
 
   .title.h2 .serif {
-    font-size: calc(44 * 100vw / var(--base-width-tablet));
-    line-height: calc(48 * 100vw / var(--base-width-tablet));
+    font-size: calc(72 * 100vw / var(--base-width-tablet));
+    line-height: calc(72 * 100vw / var(--base-width-tablet));
     letter-spacing: -5%;
   }
 
   .title.h3 {
-    font-size: calc(42 * 100vw / var(--base-width-tablet));
+    font-size: calc(62 * 100vw / var(--base-width-tablet));
     letter-spacing: -3%;
   }
 
   .title.h3 .serif {
-    font-size: calc(42 * 100vw / var(--base-width-tablet));
+    font-size: calc(62 * 100vw / var(--base-width-tablet));
     letter-spacing: -3%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .title.h1 {
-    font-size: calc(44 * 100vw / var(--base-width-mobile));
-    line-height: calc(48 * 100vw / var(--base-width-mobile));
+    font-size: calc(40 * 100vw / var(--base-width-mobile));
+    line-height: calc(40 * 100vw / var(--base-width-mobile));
     letter-spacing: -5%;
   }
 
   .title.h1 .serif {
-    font-size: calc(52 * 100vw / var(--base-width-mobile));
-    line-height: calc(50 * 100vw / var(--base-width-mobile));
+    font-size: calc(40 * 100vw / var(--base-width-mobile));
+    line-height: calc(40 * 100vw / var(--base-width-mobile));
     letter-spacing: -4%;
   }
 

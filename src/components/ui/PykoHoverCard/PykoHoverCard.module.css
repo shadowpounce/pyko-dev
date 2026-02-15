@@ -50,28 +50,6 @@
     opacity: 0.6;
 }
 
-
-.pykoHoverCard:hover {
-    height: calc(382 * 100vw / var(--base-width));
-    transition-delay: 0s;
-}
-
-.pykoHoverCard:hover .link {
-    scale: 1;
-    opacity: 1;
-    transition-delay: 0.5s;
-}
-
-.pykoHoverCard:hover .text {
-    translate: 0 -25%;
-}
-
-.pykoHoverCard:hover .image {
-    opacity: 1;
-    height: calc(223 * 100vw / var(--base-width));
-
-}
-
 .bg {
     position: absolute;
     top: 0;
@@ -147,4 +125,181 @@
     min-height: calc(12 * 100vw / var(--base-width));
     max-width: calc(12 * 100vw / var(--base-width));
     max-height: calc(12 * 100vw / var(--base-width));
+}
+
+@media (max-width: 1024px) {
+    .pykoHoverCard {
+        min-width: calc(370 * 100vw / var(--base-width-tablet));
+        max-width: calc(370 * 100vw / var(--base-width-tablet));
+        width: calc(370 * 100vw / var(--base-width-tablet));
+        min-height: calc(245 * 100vw / var(--base-width-tablet));
+        height: calc(245 * 100vw / var(--base-width-tablet));
+        max-height: calc(382 * 100vw / var(--base-width-tablet));
+
+        border-radius: calc(24 * 100vw / var(--base-width-tablet));
+    }
+
+    .wrapper {
+        padding: calc(12 * 100vw / var(--base-width-tablet));
+    }
+
+    .image {
+        border-radius: calc(24 * 100vw / var(--base-width-tablet));
+    }
+
+    .link {
+        top: calc(12 * 100vw / var(--base-width-tablet));
+        right: calc(12 * 100vw / var(--base-width-tablet));
+        width: calc(43 * 100vw / var(--base-width-tablet));
+        height: calc(43 * 100vw / var(--base-width-tablet));
+        min-width: calc(43 * 100vw / var(--base-width-tablet));
+        min-height: calc(43 * 100vw / var(--base-width-tablet));
+        max-width: calc(43 * 100vw / var(--base-width-tablet));
+        max-height: calc(43 * 100vw / var(--base-width-tablet));
+
+        border-radius: calc(12 * 100vw / var(--base-width-tablet));
+    }
+
+    .link img {
+        width: calc(12 * 100vw / var(--base-width-tablet));
+        height: calc(12 * 100vw / var(--base-width-tablet));
+        min-width: calc(12 * 100vw / var(--base-width-tablet));
+        min-height: calc(12 * 100vw / var(--base-width-tablet));
+        max-width: calc(12 * 100vw / var(--base-width-tablet));
+        max-height: calc(12 * 100vw / var(--base-width-tablet));
+    }
+
+    .text {
+        gap: calc(12 * 100vw / var(--base-width-tablet));
+    }
+
+    .title {
+        font-size: calc(24 * 100vw / var(--base-width-tablet));
+    }
+
+    .subtitle {
+        font-size: calc(16 * 100vw / var(--base-width-tablet));
+    }
+}
+
+
+@media (min-width: 1025px) {
+    .pykoHoverCard:hover {
+        height: calc(382 * 100vw / var(--base-width));
+        transition-delay: 0s;
+    }
+
+    .pykoHoverCard:hover .image {
+        opacity: 1;
+        height: calc(223 * 100vw / var(--base-width));
+    }
+
+    .pykoHoverCard:hover .link {
+        scale: 1;
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
+
+    .pykoHoverCard:hover .text {
+        translate: 0 -25%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .pykoHoverCard:hover {
+        height: calc(382 * 100vw / var(--base-width-tablet));
+        transition-delay: 0s;
+    }
+
+    .pykoHoverCard:hover .image {
+        opacity: 1;
+        height: calc(223 * 100vw / var(--base-width-tablet));
+    }
+
+    .pykoHoverCard:hover .link {
+        scale: 1;
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
+
+    .pykoHoverCard:hover .text {
+        translate: 0 -25%;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .pykoHoverCard.active {
+        height: calc(382 * 100vw / var(--base-width-mobile));
+        transition-delay: 0s;
+    }
+
+    .pykoHoverCard.active .image {
+        opacity: 1;
+        height: calc(223 * 100vw / var(--base-width-mobile));
+    }
+
+    .pykoHoverCard.active .link {
+        scale: 1;
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
+
+    .pykoHoverCard.active .text {
+        translate: 0 -25%;
+    }
+
+    .pykoHoverCard {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        min-height: calc(245 * 100vw / var(--base-width-mobile));
+        height: calc(245 * 100vw / var(--base-width-mobile));
+        max-height: calc(382 * 100vw / var(--base-width-mobile));
+
+        border-radius: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .wrapper {
+        padding: calc(12 * 100vw / var(--base-width-mobile));
+    }
+
+    .image {
+        border-radius: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .link {
+        top: calc(12 * 100vw / var(--base-width-mobile));
+        right: calc(12 * 100vw / var(--base-width-mobile));
+        width: calc(43 * 100vw / var(--base-width-mobile));
+        height: calc(43 * 100vw / var(--base-width-mobile));
+        min-width: calc(43 * 100vw / var(--base-width-mobile));
+        min-height: calc(43 * 100vw / var(--base-width-mobile));
+        max-width: calc(43 * 100vw / var(--base-width-mobile));
+        max-height: calc(43 * 100vw / var(--base-width-mobile));
+
+        border-radius: calc(12 * 100vw / var(--base-width-mobile));
+    }
+
+    .link img {
+        width: calc(12 * 100vw / var(--base-width-mobile));
+        height: calc(12 * 100vw / var(--base-width-mobile));
+        min-width: calc(12 * 100vw / var(--base-width-mobile));
+        min-height: calc(12 * 100vw / var(--base-width-mobile));
+        max-width: calc(12 * 100vw / var(--base-width-mobile));
+        max-height: calc(12 * 100vw / var(--base-width-mobile));
+    }
+
+    .text {
+        gap: calc(12 * 100vw / var(--base-width-mobile));
+    }
+
+    .title {
+        font-size: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .subtitle {
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
 }

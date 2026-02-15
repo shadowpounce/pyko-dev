@@ -1,11 +1,12 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { PykoHoverCard, PykoHoverCardProps } from "../PykoHoverCard/PykoHoverCard"
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 import { gsap } from 'gsap'
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/free-mode';
+// import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import styles from './PykoHoverCardsSwiper.module.css'
 
@@ -21,27 +22,69 @@ export const PykoHoverCardsSwiper = ({ cards, animationDelay = null }: PykoHover
     const containerRef = useRef<HTMLDivElement>(null)
     const hasAnimatedRef = useRef(false)
 
-    // Simplified: No internal animation logic here, just passing the delay
-    // The cards handle their own animation now.
+    const [isMobile, setIsMobile] = useState(false)
+    const [swiper, setSwiper] = useState<SwiperType | null>(null)
+    const [activeIndex, setActiveIndex] = useState(0)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 767)
+        }
+
+        handleResize()
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
     return (
         <div className={styles.pykoHoverCardsSwiper} ref={containerRef}>
-            <Swiper
-                slidesPerView={3}
-                spaceBetween={30}
-                freeMode={true}
-                modules={[FreeMode]}
-                className={styles.swiper}
-            >
-                {cards.map((card, index) => (
-                    <SwiperSlide className={styles.slide} key={index}>
-                        <PykoHoverCard
-                            {...card}
-                            animationDelay={animationDelay !== null ? animationDelay + index * 0.2 : null}
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            {!isMobile ? (
+                <Swiper
+                    key="desktop"
+                    slidesPerView={2.5}
+                    spaceBetween={(30 * window.innerWidth) / 1440}
+                    freeMode={true}
+                    modules={[FreeMode]}
+                    className={styles.swiper}
+                    onSwiper={(s) => setSwiper(s)}
+                    onSlideChange={(s) => setActiveIndex(s.activeIndex)}
+                >
+                    {cards.map((card, index) => (
+                        <SwiperSlide className={styles.slide} key={index}>
+                            <PykoHoverCard
+                                {...card}
+                                animationDelay={animationDelay !== null ? animationDelay + index * 0.2 : null}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            ) : (
+                <Swiper
+                    key="mobile"
+                    slidesPerView={1.1}
+                    freeMode={false}
+                    spaceBetween={(8 * window.innerWidth) / 390}
+                    className={styles.swiper}
+                    onSwiper={(s) => {
+                        setSwiper(s)
+                        setActiveIndex(s.activeIndex)
+                    }}
+                    onSlideChange={(s) => setActiveIndex(s.activeIndex)}
+                >
+                    {cards.map((card, index) => (
+                        <SwiperSlide className={styles.slide} key={index}>
+                            <PykoHoverCard
+                                active={activeIndex === index}
+                                {...card}
+                                animationDelay={animationDelay !== null ? animationDelay + index * 0.2 : null}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
         </div>
     )
 }

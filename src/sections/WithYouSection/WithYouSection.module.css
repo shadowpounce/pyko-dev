@@ -30,7 +30,7 @@
     justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .withYou {
         height: 100svh;
         max-height: 100svh;

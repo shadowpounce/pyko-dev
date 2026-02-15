@@ -6,19 +6,35 @@ export interface PykoHoverCardProps {
     img: string
     bg: string
     url?: string
+    active?: boolean
 }
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './PykoHoverCard.module.css'
 import { gsap } from 'gsap'
-import { createBlurAnimation } from '@/utils/animations'
 
-export const PykoHoverCard = ({ title, subtitle, img, bg, url, animationDelay = null }: PykoHoverCardProps & { animationDelay?: number | null }) => {
+export const PykoHoverCard = ({ title, subtitle, img, bg, url, animationDelay = null, active = false }: PykoHoverCardProps & { animationDelay?: number | null }) => {
     const cardRef = useRef<HTMLDivElement>(null)
     const textRef = useRef<HTMLDivElement>(null)
     const imageRef = useRef<HTMLDivElement>(null)
     const hasAnimatedRef = useRef(false)
+
+    const [isTablet, setIsTablet] = useState(false)
+
+    useEffect(() => {
+        if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
+            setIsTablet(true)
+        }
+    }, [])
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
+                setIsTablet(true)
+            }
+        })
+    }, [])
 
     useEffect(() => {
         if (
@@ -88,7 +104,7 @@ export const PykoHoverCard = ({ title, subtitle, img, bg, url, animationDelay = 
                 backgroundSize: 'cover',
                 backgroundAttachment: 'fixed',
             }}
-            className={`${styles.pykoHoverCard} ${animationDelay !== null ? 'init-hidden' : ''}`}
+            className={`${styles.pykoHoverCard} ${active ? styles.active : ''} ${animationDelay !== null ? 'init-hidden' : ''}`}
         >
             <div className={styles.wrapper}>
                 <div className={styles.image} ref={imageRef}>

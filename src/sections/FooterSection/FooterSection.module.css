@@ -201,12 +201,15 @@
     justify-content: space-between;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .footer {
         height: 100svh;
         max-height: 100svh;
         min-height: 100svh;
     }
+}
+
+@media (max-width: 767px) {
 
     .container {
         padding: calc(48 * 100vw / var(--base-width-mobile)) calc(18 * 100vw / var(--base-width-mobile));
@@ -249,7 +252,7 @@
     }
 
     .footerDescription {
-        font-size: calc(11 * 100vw / var(--base-width-mobile));
+        font-size: calc(14 * 100vw / var(--base-width-mobile));
         line-height: 150% !important;
     }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { SectionLabel } from '@/components/ui/SectionLabel'
@@ -12,6 +12,8 @@ import {
 } from '@/hooks/useSectionAnimationTrigger'
 import styles from './WhyPykoSection.module.css'
 import { PykoCard } from '@/components/ui/PykoCard/PykoCard'
+import clsx from 'clsx'
+import { SwiperSlide, Swiper } from 'swiper/react'
 
 const whyPykoCards = [
     {
@@ -60,32 +62,54 @@ export const WhyPykoSection: React.FC<WhyPykoSectionProps> = ({
     const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
     const cardsDelay = useElementAnimationDelay(baseDelay, 3)
 
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth <= 767)
+    }, [])
+
     return (
         <Section className={styles.section}>
             <Container className={styles.container}>
                 <div className={styles.text}>
                     <SectionLabel animationDelay={labelDelay}>Why Pyko</SectionLabel>
-                    <SectionTitle level={2} serif={['ship with focus']} serifOnNewLine={true} animationDelay={titleDelay}>
+                    <SectionTitle level={2} className={styles.title} serif={['ship with focus']} serifOnNewLine={true} animationDelay={titleDelay}>
                         Work with purpose,
                     </SectionTitle>
-                    <BodyText opacity={0.8} animationDelay={bodyTextDelay}>
+                    <BodyText className={'desktop-only'} opacity={0.8} animationDelay={bodyTextDelay}>
+                        A small team with high ownership,
+                        clear priorities, and real
+                        student impact.
+                    </BodyText>
+                    <BodyText className={clsx('mobile-only', styles.mobileText)} opacity={0.8} animationDelay={bodyTextDelay}>
                         A small team with high ownership,
                         clear priorities, and real
                         student impact.
                     </BodyText>
                 </div>
                 <div className={styles.content}>
-                    {
-                        whyPykoCards.map((card, index) => (
-                            <PykoCard
-                                key={index}
-                                {...card}
-                                animationDelay={useElementAnimationDelay(cardsDelay, index)}
-                            />
-                        ))
-                    }
+                    {!isMobile && whyPykoCards ? (
+                        <>
+                            {whyPykoCards.map((card, index) => (
+                                <PykoCard
+                                    key={index}
+                                    {...card}
+                                    animationDelay={useElementAnimationDelay(cardsDelay, index)}
+                                />
+                            ))}</>
+                    ) : <Swiper slidesPerView={1.15} spaceBetween={(12 * window.innerWidth) / 390} className={styles.swiper} >
+                        {whyPykoCards.map((card, index) => (
+                            <SwiperSlide className={styles.slide}>
+                                <PykoCard
+                                    key={index}
+                                    {...card}
+                                    animationDelay={useElementAnimationDelay(cardsDelay, index)}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>}
                 </div>
             </Container>
-        </Section>
+        </Section >
     )
 }

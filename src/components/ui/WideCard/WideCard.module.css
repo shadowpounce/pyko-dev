@@ -113,3 +113,69 @@
 .active .wideCardBg img {
     transform: scale(1);
 }
+
+@media (max-width: 1024px) {
+    .wideCard {
+        min-width: calc(580 * 100vw / var(--base-width-tablet));
+        width: calc(580 * 100vw / var(--base-width-tablet));
+        max-width: calc(580 * 100vw / var(--base-width-tablet));
+        min-height: calc(310 * 100vw / var(--base-width-tablet));
+        height: calc(310 * 100vw / var(--base-width-tablet));
+        max-height: calc(310 * 100vw / var(--base-width-tablet));
+    }
+
+    .wideCardWrapper::after {
+        height: calc(160 * 100vw / var(--base-width-tablet));
+    }
+
+    .wideCardContainer {
+        padding: calc(24 * 100vw / var(--base-width-tablet));
+        gap: calc(13 * 100vw / var(--base-width-tablet));
+    }
+
+    .label {
+        font-size: calc(12 * 100vw / var(--base-width-tablet));
+    }
+
+    .title {
+        font-size: calc(28 * 100vw / var(--base-width-tablet));
+    }
+
+    .subtitle {
+        font-size: calc(12 * 100vw / var(--base-width-tablet));
+        max-width: calc(300 * 100vw / var(--base-width-tablet));
+    }
+}
+
+@media (max-width: 767px) {
+    .wideCard {
+        min-width: calc(310 * 100vw / var(--base-width-mobile));
+        width: calc(310 * 100vw / var(--base-width-mobile));
+        max-width: calc(310 * 100vw / var(--base-width-mobile));
+        min-height: calc(350 * 100vw / var(--base-width-mobile));
+        height: calc(350 * 100vw / var(--base-width-mobile));
+        max-height: calc(350 * 100vw / var(--base-width-mobile));
+    }
+
+    .wideCardWrapper::after {
+        height: calc(100 * 100vw / var(--base-width-mobile));
+    }
+
+    .wideCardContainer {
+        padding: calc(16 * 100vw / var(--base-width-mobile));
+        gap: calc(8 * 100vw / var(--base-width-mobile));
+    }
+
+    .label {
+        font-size: calc(10 * 100vw / var(--base-width-mobile));
+    }
+
+    .title {
+        font-size: calc(20 * 100vw / var(--base-width-mobile));
+    }
+
+    .subtitle {
+        font-size: calc(10 * 100vw / var(--base-width-mobile));
+        max-width: calc(200 * 100vw / var(--base-width-mobile));
+    }
+}

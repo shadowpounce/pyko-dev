@@ -6,11 +6,11 @@
 
 @media (max-width: 1024px) {
   .container {
-    padding: calc(60 * 100vw / var(--base-width-tablet));
+    padding: calc(30 * 100vw / var(--base-width-tablet));
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .container {
     padding-left: calc(18 * 100vw / var(--base-width-mobile));
     padding-right: calc(18 * 100vw / var(--base-width-mobile));

@@ -264,12 +264,131 @@
     width: calc(255 * 100vw / var(--base-width-mobile));
     max-width: calc(255 * 100vw / var(--base-width-mobile));
     min-width: calc(255 * 100vw / var(--base-width-mobile));
+    height: calc(250 * 100vw / var(--base-width-mobile));
+    max-height: calc(250 * 100vw / var(--base-width-mobile));
+    min-height: calc(250 * 100vw / var(--base-width-mobile));
+    scale: 0.75;
+    bottom: 0%;
+    order: 2;
+  }
+
+  .mainCard {
+    border-radius: calc(16 * 100vw / var(--base-width-mobile));
+    height: calc(325 * 100vw / var(--base-width-mobile))
+  }
+
+  .mainCardContent {
+    gap: calc(4 * 100vw / var(--base-width-mobile));
+    padding: calc(32 * 100vw / var(--base-width-mobile)) calc(16 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardTitle28 {
+    font-size: calc(22 * 100vw / var(--base-width-mobile));
+    line-height: calc(24 * 100vw / var(--base-width-mobile));
+  }
+
+  .borderedLine {
+    height: calc(1 * 100vw / var(--base-width-mobile));
+    width: 100%;
+    border-radius: calc(1 * 100vw / var(--base-width-mobile));
+  }
+
+  .mainCard::after {
+    height: calc(150 * 100vw / var(--base-width-mobile));
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%);
+  }
+
+  .cardLeft {
+
+    width: calc(175 * 100vw / var(--base-width-mobile));
+    padding: calc(4 * 100vw / var(--base-width-mobile));
+    border-radius: calc(17 * 100vw / var(--base-width-mobile));
+    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
+
+    scale: 0.9 !important;
+  }
+
+  .cardLeftFirst {
+    top: calc(20 * 100vw / var(--base-width-mobile));
+    left: -20%;
+  }
+
+  .cardLeftBackground {
+    border-radius: calc(17 * 100vw / var(--base-width-mobile));
+    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
+  }
+
+  .cardLeftFirstDiv {
+    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
+    line-height: calc(110%);
+  }
+
+  .cardLeftSecondDiv {
+    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
+    font-size: calc(12 * 100vw / var(--base-width-mobile));
+    line-height: calc(105%);
+    border-radius: calc(12 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardRight {
+    top: 45% !important;
+    right: -20% !important;
+    transform: translateY(-50%) !important;
+    border-radius: calc(16 * 100vw / var(--base-width-mobile));
+    padding: calc(12 * 100vw / var(--base-width-mobile));
+    gap: calc(12 * 100vw / var(--base-width-mobile));
+
+    scale: 0.9 !important;
+
+  }
+
+  .icon {
+    width: calc(20 * 100vw / var(--base-width-mobile));
+    height: calc(20 * 100vw / var(--base-width-mobile));
+    max-width: calc(20 * 100vw / var(--base-width-mobile));
+    min-width: calc(20 * 100vw / var(--base-width-mobile));
+    max-height: calc(20 * 100vw / var(--base-width-mobile));
+    min-height: calc(20 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardRightContent {
+    gap: calc(12 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardRightText {
+    gap: calc(4 * 100vw / var(--base-width-mobile));
+  }
+
+  .gsapPercentage {
+    font-size: calc(18 * 100vw / var(--base-width-mobile));
+  }
+
+  .gsapLabel {
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
+  }
+}
+
+
+@media (max-width: 767px) {
+  .wrapper {
+    position: relative;
+    transform: translateX(0);
+    height: auto;
+    left: 0;
+    transform-origin: center center;
+    translate: 0 -15% !important;
+    width: calc(255 * 100vw / var(--base-width-mobile));
+    max-width: calc(255 * 100vw / var(--base-width-mobile));
+    min-width: calc(255 * 100vw / var(--base-width-mobile));
     height: calc(336 * 100vw / var(--base-width-mobile));
     max-height: calc(336 * 100vw / var(--base-width-mobile));
     min-height: calc(336 * 100vw / var(--base-width-mobile));
-    scale: 0.7;
-    bottom: -5%;
-    order: 2;
+    scale: 0.85;
+    bottom: -7.5%;
   }
 
   .mainCard {
@@ -371,119 +490,9 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) and (max-height: 700px) {
   .wrapper {
-    position: relative;
-    transform: translateX(0);
-    height: auto;
-    left: 0;
-    transform-origin: center center;
-    translate: 0 -15% !important;
-    width: calc(255 * 100vw / var(--base-width-mobile));
-    max-width: calc(255 * 100vw / var(--base-width-mobile));
-    min-width: calc(255 * 100vw / var(--base-width-mobile));
-    height: calc(336 * 100vw / var(--base-width-mobile));
-    max-height: calc(336 * 100vw / var(--base-width-mobile));
-    min-height: calc(336 * 100vw / var(--base-width-mobile));
     scale: 0.7;
-    bottom: -1%;
-  }
-
-  .mainCard {
-    border-radius: calc(16 * 100vw / var(--base-width-mobile));
-  }
-
-  .mainCardContent {
-    gap: calc(4 * 100vw / var(--base-width-mobile));
-    padding: calc(32 * 100vw / var(--base-width-mobile)) calc(16 * 100vw / var(--base-width-mobile));
-  }
-
-  .cardTitle28 {
-    font-size: calc(22 * 100vw / var(--base-width-mobile));
-    line-height: calc(24 * 100vw / var(--base-width-mobile));
-  }
-
-  .borderedLine {
-    height: calc(1 * 100vw / var(--base-width-mobile));
-    width: 100%;
-    border-radius: calc(1 * 100vw / var(--base-width-mobile));
-  }
-
-  .mainCard::after {
-    height: calc(150 * 100vw / var(--base-width-mobile));
-    background: linear-gradient(to top,
-        rgba(0, 0, 0, 0.9) 0%,
-        rgba(0, 0, 0, 0.7) 50%,
-        transparent 100%);
-  }
-
-  .cardLeft {
-
-    width: calc(175 * 100vw / var(--base-width-mobile));
-    padding: calc(4 * 100vw / var(--base-width-mobile));
-    border-radius: calc(17 * 100vw / var(--base-width-mobile));
-    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
-
-    scale: 0.9 !important;
-  }
-
-  .cardLeftFirst {
-    top: calc(20 * 100vw / var(--base-width-mobile));
-    left: -20%;
-  }
-
-  .cardLeftBackground {
-    border-radius: calc(17 * 100vw / var(--base-width-mobile));
-    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
-  }
-
-  .cardLeftFirstDiv {
-    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
-    font-size: calc(14 * 100vw / var(--base-width-mobile));
-    line-height: calc(110%);
-  }
-
-  .cardLeftSecondDiv {
-    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
-    font-size: calc(12 * 100vw / var(--base-width-mobile));
-    line-height: calc(105%);
-    border-radius: calc(12 * 100vw / var(--base-width-mobile));
-  }
-
-  .cardRight {
-    top: 45% !important;
-    right: -20% !important;
-    transform: translateY(-50%) !important;
-    border-radius: calc(16 * 100vw / var(--base-width-mobile));
-    padding: calc(12 * 100vw / var(--base-width-mobile));
-    gap: calc(12 * 100vw / var(--base-width-mobile));
-
-    scale: 0.9 !important;
-
-  }
-
-  .icon {
-    width: calc(20 * 100vw / var(--base-width-mobile));
-    height: calc(20 * 100vw / var(--base-width-mobile));
-    max-width: calc(20 * 100vw / var(--base-width-mobile));
-    min-width: calc(20 * 100vw / var(--base-width-mobile));
-    max-height: calc(20 * 100vw / var(--base-width-mobile));
-    min-height: calc(20 * 100vw / var(--base-width-mobile));
-  }
-
-  .cardRightContent {
-    gap: calc(12 * 100vw / var(--base-width-mobile));
-  }
-
-  .cardRightText {
-    gap: calc(4 * 100vw / var(--base-width-mobile));
-  }
-
-  .gsapPercentage {
-    font-size: calc(18 * 100vw / var(--base-width-mobile));
-  }
-
-  .gsapLabel {
-    font-size: calc(14 * 100vw / var(--base-width-mobile));
+    bottom: -5%;
   }
 }

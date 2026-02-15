@@ -5,7 +5,7 @@ import { MOBILE_BREAKPOINT } from '@/config/animations.config'
 
 /**
  * Хук для определения мобильного устройства
- * @param breakpoint - Breakpoint для определения мобильного (по умолчанию 768px)
+ * @param breakpoint - Breakpoint для определения мобильного (по умолчанию 767px)
  * @returns boolean - true если ширина экрана меньше breakpoint
  */
 export const useIsMobile = (breakpoint: number = MOBILE_BREAKPOINT): boolean => {

@@ -99,6 +99,7 @@
   background-color: var(--color-bg-glass-light);
   border-radius: calc(14 * 100vw / var(--base-width-mobile));
   position: relative;
+  opacity: 0;
 }
 
 .burgerLine {
@@ -195,7 +196,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .header {
     padding-top: calc(20 * 100vw / var(--base-width-mobile));
     padding-bottom: calc(20 * 100vw / var(--base-width-mobile));

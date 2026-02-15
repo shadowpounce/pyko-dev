@@ -47,13 +47,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
 
     // Refs: .footerColumnLinks
     const exploreTitleRef = useRef<HTMLSpanElement>(null)
-    const linkRefs = [
-        useRef<HTMLAnchorElement>(null),
-        useRef<HTMLAnchorElement>(null),
-        useRef<HTMLAnchorElement>(null),
-        useRef<HTMLAnchorElement>(null),
-        useRef<HTMLAnchorElement>(null),
-    ]
+    const linkRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
     // Refs: .contactsColumn
     const stayInTouchRef = useRef<HTMLSpanElement>(null)
@@ -61,12 +55,7 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
     const inputWrapperRef = useRef<HTMLDivElement>(null)
     const emailInputRef = useRef<HTMLInputElement>(null)
     const followTitleRef = useRef<HTMLSpanElement>(null)
-    const socialRefs = [
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null),
-    ]
+    const socialRefs = useRef<(HTMLDivElement | null)[]>([])
 
     const animateEl = (
         el: gsap.TweenTarget | null,
@@ -100,14 +89,13 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
         setInitial(logoRef.current)
         setInitial(titleRef.current)
         setInitial(descRef.current)
-        setInitial(contactBtnRef.current)
         setInitial(exploreTitleRef.current)
-        linkRefs.forEach((r) => setInitial(r.current))
+        linkRefs.current.forEach((r) => setInitial(r))
         setInitial(stayInTouchRef.current)
         setInitial(subscribeLabelRef.current)
         setInitial(inputWrapperRef.current)
         setInitial(followTitleRef.current)
-        socialRefs.forEach((r) => setInitial(r.current))
+        socialRefs.current.forEach((r) => setInitial(r))
         if (emailInputRef.current) {
             gsap.set(emailInputRef.current, { width: 0 })
         }
@@ -115,15 +103,14 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
         let idx = 0
         const d = () => baseDelay + idx++ * DELAY_BETWEEN
 
-        // .footerText
         animateEl(logoRef.current, d())
         animateEl(titleRef.current, d())
         animateEl(descRef.current, d())
-        animateEl(contactBtnRef.current, d())
+        idx++ // Increment delay index to skip button but maintain sequence for links
 
         // .footerColumnLinks
         animateEl(exploreTitleRef.current, d())
-        linkRefs.forEach((r) => animateEl(r.current, d()))
+        linkRefs.current.forEach((r) => animateEl(r, d()))
 
         // .contactsColumn: stay in touch, Subscribe label
         animateEl(stayInTouchRef.current, d())
@@ -154,18 +141,19 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
         // Follow us on, then social buttons (one by one)
         const followDelay = inputWidthStart + 0.5
         animateEl(followTitleRef.current, followDelay)
-        socialRefs.forEach((r, i) => animateEl(r.current, followDelay + DELAY_BETWEEN + i * DELAY_BETWEEN))
+        socialRefs.current.forEach((r, i) => animateEl(r, followDelay + DELAY_BETWEEN + i * DELAY_BETWEEN))
 
         // Cleanup: kill all tweens on unmount
         return () => {
             const allRefs = [
                 logoRef, titleRef, descRef, contactBtnRef, exploreTitleRef,
                 stayInTouchRef, subscribeLabelRef, inputWrapperRef, emailInputRef, followTitleRef,
-                ...linkRefs, ...socialRefs
             ]
             allRefs.forEach(ref => {
                 if (ref.current) gsap.killTweensOf(ref.current)
             })
+            linkRefs.current.forEach(r => { if (r) gsap.killTweensOf(r) })
+            socialRefs.current.forEach(r => { if (r) gsap.killTweensOf(r) })
         }
     }, [baseDelay])
 
@@ -185,19 +173,25 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
                             Real-time awareness, adaptive intelligence, <br />
                             and personalized study systems for every learner.
                         </p>
-                        <div ref={contactBtnRef} className={styles.footerAnimated}>
-                            <Button variant="primary" withArrow>Contact us</Button>
+                        <div>
+                            <Button
+                                variant="primary"
+                                withArrow
+                                animationDelay={baseDelay !== null ? (baseDelay + 3 * DELAY_BETWEEN) : null}
+                            >
+                                Contact us
+                            </Button>
                         </div>
                     </div>
                     <div className={styles.footerColumns}>
                         <div className={clsx(styles.footerColumn, styles.footerColumnLinks)}>
                             <span ref={exploreTitleRef} className={clsx(styles.footerColumnTitle, styles.footerAnimated)}>explore</span>
                             <ul className={styles.footerList}>
-                                <a ref={linkRefs[0]} href="/" className={clsx(styles.footerListItem, styles.footerAnimated)}>Home Page</a>
-                                <a ref={linkRefs[1]} href="/about-us" className={clsx(styles.footerListItem, styles.footerAnimated)}>About Us</a>
-                                <a ref={linkRefs[2]} href="/contacts" className={clsx(styles.footerListItem, styles.footerAnimated)}>Contacts</a>
-                                <a ref={linkRefs[3]} href="/pricing" className={clsx(styles.footerListItem, styles.footerAnimated)}>Pricing</a>
-                                <a ref={linkRefs[4]} href="/careers" className={clsx(styles.footerListItem, styles.footerAnimated)}>Careers</a>
+                                <a ref={el => { linkRefs.current[0] = el }} href="/" className={clsx(styles.footerListItem, styles.footerAnimated)}>Home Page</a>
+                                <a ref={el => { linkRefs.current[1] = el }} href="/about-us" className={clsx(styles.footerListItem, styles.footerAnimated)}>About Us</a>
+                                <a ref={el => { linkRefs.current[2] = el }} href="/contacts" className={clsx(styles.footerListItem, styles.footerAnimated)}>Contacts</a>
+                                <a ref={el => { linkRefs.current[3] = el }} href="/pricing" className={clsx(styles.footerListItem, styles.footerAnimated)}>Pricing</a>
+                                <a ref={el => { linkRefs.current[4] = el }} href="/careers" className={clsx(styles.footerListItem, styles.footerAnimated)}>Careers</a>
                             </ul>
                         </div>
                         <div className={clsx(styles.footerColumn, styles.contactsColumn)}>
@@ -223,16 +217,16 @@ export const FooterSection: React.FC<FooterSectionProps> = ({ sectionIndex }) =>
                             <div className={styles.footerSocials}>
                                 <span ref={followTitleRef} className={clsx(styles.footerColumnTitle, 'desktop-only', styles.footerAnimated)}>Follow us on</span>
                                 <div className={styles.footerSocialsButtons}>
-                                    <div ref={socialRefs[0]} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
+                                    <div ref={el => { socialRefs.current[0] = el }} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
                                         <Image src="/images/icons/inst.svg" alt="Facebook" width={24} height={24} />
                                     </div>
-                                    <div ref={socialRefs[1]} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
+                                    <div ref={el => { socialRefs.current[1] = el }} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
                                         <Image src="/images/icons/x.svg" alt="X" width={24} height={24} />
                                     </div>
-                                    <div ref={socialRefs[2]} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
+                                    <div ref={el => { socialRefs.current[2] = el }} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
                                         <Image src="/images/icons/in.svg" alt="LinkedIn" width={24} height={24} />
                                     </div>
-                                    <div ref={socialRefs[3]} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
+                                    <div ref={el => { socialRefs.current[3] = el }} className={clsx(styles.footerSocialsButton, styles.footerAnimated)}>
                                         <Image src="/images/icons/yt.svg" alt="YouTube" width={24} height={24} />
                                     </div>
                                 </div>
