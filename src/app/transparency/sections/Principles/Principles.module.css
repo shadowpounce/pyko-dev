@@ -1,0 +1,199 @@
+.container {
+   height: 100%;
+   padding-top: 86px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   @media (max-width: 767px) {
+      padding-top: 107px;
+   }
+   & .textContainer {
+      --inline-padding: 16px;
+      --inner-width: 750px;
+      padding-top: max(20px, 9vh);
+      padding-inline: var(--inline-padding);
+      width: 100%;
+      max-width: calc(var(--inner-width) + var(--inline-padding) * 2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5vh;
+
+      @media (max-width: 1200px) {
+         padding-top: max(20px, 6vh);
+         gap: 2vh;
+      }
+
+      @media (max-width: 767px) {
+         gap: 1vh;
+         text-wrap: pretty;
+      }
+
+      & .label {
+         font-size: clamp(0.625rem, 1.6vh, 0.875rem);
+         line-height: 1.2;
+         letter-spacing: 0.02em;
+      }
+
+      & .title {
+         text-align: center;
+         font-size: clamp(3rem, 8vh, 4.5rem);
+         line-height: 1;
+         letter-spacing: -0.03em;
+
+         @media (max-width: 1200px) {
+            font-size: clamp(3rem, 6.5vh, 3.75rem);
+         }
+
+         @media (max-width: 767px) {
+            font-size: clamp(2rem, 5vh, 2.75rem);
+            letter-spacing: -0.05em;
+         }
+
+         @media (max-width: 380px) {
+            font-size: clamp(1.75rem, 4vh, 2.25rem);
+         }
+
+         & .serif {
+            line-height: 1;
+            font-size: clamp(3.75rem, 9vh, 5rem);
+            letter-spacing: -0.03em;
+
+            @media (max-width: 1200px) {
+               font-size: clamp(3rem, 7vh, 4.5rem);
+               letter-spacing: -0.05em;
+            }
+
+            @media (max-width: 767px) {
+               font-size: clamp(2.5rem, 6vh, 3.125rem);
+
+               font-style: normal;
+            }
+
+            @media (max-width: 380px) {
+               font-size: clamp(2rem, 5vh, 2.75rem);
+            }
+         }
+      }
+
+      & .description {
+         font-weight: 500;
+         font-family: var(--font-sans);
+         color: var(--color-text-secondary);
+         opacity: 0.5;
+         font-size: clamp(1rem, 2.5vh, 1.25rem);
+         line-height: 1.2;
+         max-width: 508px;
+         letter-spacing: -0.01em;
+         text-align: center;
+
+         @media (max-width: 1200px) {
+            font-size: 1rem;
+            line-height: 1.3;
+         }
+
+         @media (max-width: 767px) {
+            text-wrap: pretty;
+            margin-top: 7px;
+         }
+      }
+   }
+   & .slider {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 5.5vh;
+      & .slide {
+         width: 278px;
+         height: 220px;
+         position: relative;
+         overflow: hidden;
+         border-radius: 24px;
+         @media (width <= 480px) {
+            width: 335px;
+            height: 230px;
+            max-width: calc(100vw - 32px);
+         }
+         & .slideContainer {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 24px;
+            overflow: hidden;
+            & .bg {
+               position: absolute;
+               &.slide1 {
+                  top: 0%;
+                  right: 100%;
+                  transform: rotate(-90deg);
+                  transform-origin: top right;
+                  width: 220px;
+                  height: auto;
+                  @media (width <= 480px) {
+                     width: 300px;
+                  }
+               }
+               &.slide2 {
+                  top: -0%;
+                  right: -0%;
+                  transform: rotate(90deg) scaleX(-1);
+                  transform-origin: top right;
+                  width: 253px;
+                  height: auto;
+               }
+               &.slide3 {
+                  top: 0%;
+                  left: -0%;
+                  transform: rotate(-90deg) scaleX(-1);
+                  width: 253px;
+                  transform-origin: top left;
+                  height: 500px;
+               }
+            }
+            & .slideContent {
+               position: relative;
+               z-index: 2;
+               height: 100%;
+               display: flex;
+               flex-direction: column;
+               justify-content: space-between;
+               border: 1px solid rgba(255, 255, 255, 0.13);
+               border-radius: 24px;
+               padding: 24px;
+               & .icon {
+                  width: 29px;
+                  height: 29px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+               }
+               & .slideText {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 6px;
+                  & .slideTitle {
+                     font-family: var(--font-serif);
+                     font-style: italic;
+                     font-size: 1.5rem;
+                     letter-spacing: -0.02em;
+                     line-height: 1.2;
+                     font-weight: 400;
+                  }
+                  & .slideDescription {
+                     font-size: 0.75rem;
+                     font-weight: 500;
+                     letter-spacing: -0.01em;
+                     line-height: 1.3;
+                     font-family: var(--font-sans);
+                     opacity: 0.7;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
