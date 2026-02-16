@@ -35,17 +35,7 @@
   z-index: 2;
 }
 
-.trackCardsContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 
-.trackCardsContainer>* {
-  position: absolute;
-}
 
 .trackCardWrapper {
   position: absolute;
@@ -86,7 +76,7 @@
   /* pointer-events: none; */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .track {
     height: 100svh;
     min-height: 100svh;
@@ -94,8 +84,28 @@
   }
 
   .container {
-    padding-block: calc(120 * 100vw / var(--base-width-mobile)) calc(60 * 100vw / var(--base-width-mobile));
+    padding-top: calc(120 * 100vw / var(--base-width-tablet));
+    pointer-events: none !important;
+    user-select: none !important;
+  }
+
+  .trackCardWrapper1 {
+    top: 45%;
+    left: 5%;
+
+  }
+
+  .trackCardWrapper2 {
+    bottom: 10%;
+    right: 5%;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-block: calc(80 * 100vw / var(--base-width-mobile)) calc(60 * 100vw / var(--base-width-mobile));
     gap: calc(35 * 100vw / var(--base-width-mobile));
+    justify-content: start;
   }
 
   .swiper {
@@ -103,31 +113,15 @@
   }
 
   .text {
-    gap: calc(16 * 100vw / var(--base-width-mobile));
+    gap: calc(14 * 100vw / var(--base-width-mobile));
     height: fit-content;
   }
-
-  .trackCardsContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .trackCardsContainer>* {
-    left: unset;
-    right: unset;
-    bottom: unset;
-    top: unset;
-    translate: unset;
-  }
-
 
 
   .trackCardWrapper {
     left: unset !important;
     right: unset !important;
-    bottom: unset !important;
+    bottom: 10% !important;
     top: unset !important;
     translate: unset !important;
   }

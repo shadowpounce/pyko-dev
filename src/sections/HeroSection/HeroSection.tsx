@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
           <SectionTitle
             level={1}
             className="mobile-only"
-            serif={['version', 'of yourself']}
+            serif={['version of yourself']}
             animationDelay={titleDelay}
           >
             Become the most aware{' '}

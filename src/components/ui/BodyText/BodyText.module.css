@@ -19,7 +19,8 @@
 
 @media (max-width: 767px) {
   .bodyText {
-    font-size: calc(16 * 100vw / var(--base-width-mobile));
+    font-size: calc(12 * 100vw / var(--base-width-mobile));
+    line-height: 150%;
     max-width: 100%;
     width: 100%;
   }

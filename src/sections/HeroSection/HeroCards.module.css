@@ -1,19 +1,18 @@
 .wrapper {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1vw;
+  position: relative;
   z-index: 1;
+  flex: 1;
   max-width: calc(340 * 100vw / var(--base-width));
   width: 100%;
   min-width: calc(340 * 100vw / var(--base-width));
-  height: calc(440 * 100vw / var(--base-width));
-  min-height: calc(440 * 100vw / var(--base-width));
-  max-height: calc(440 * 100vw / var(--base-width));
+  height: 100%;
+  min-height: unset;
+  max-height: 80vw;
   perspective: 1000px;
   transform-style: preserve-3d;
   transform-origin: center left;
   pointer-events: auto;
+  order: 2;
 }
 
 .wrapper:hover .mainCard {
@@ -21,12 +20,6 @@
   transition: transform 1s ease-in-out;
 }
 
-@media (min-width: 769px) {
-  .wrapper {
-    bottom: 0vw;
-    scale: 0.9;
-  }
-}
 
 .mainCard {
   width: 100%;
@@ -237,26 +230,136 @@
   object-position: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .wrapper {
     position: relative;
-    transform: translateX(0);
+    left: unset !important;
+    bottom: unset !important;
+    transform: none !important;
     height: auto;
-    left: 0;
     transform-origin: center center;
-    translate: 0 -15% !important;
-    width: calc(255 * 100vw / var(--base-width-mobile));
-    max-width: calc(255 * 100vw / var(--base-width-mobile));
-    min-width: calc(255 * 100vw / var(--base-width-mobile));
-    height: calc(336 * 100vw / var(--base-width-mobile));
-    max-height: calc(336 * 100vw / var(--base-width-mobile));
-    min-height: calc(336 * 100vw / var(--base-width-mobile));
-    scale: 0.7;
-    bottom: -1%;
+    width: 100%;
+    max-width: 50%;
+    min-width: 50%;
+    height: unset;
+    max-height: 70vw;
+    min-height: unset;
+    flex: 1;
   }
 
   .mainCard {
     border-radius: calc(16 * 100vw / var(--base-width-mobile));
+  }
+
+  .mainCardContent {
+    gap: calc(4 * 100vw / var(--base-width-mobile));
+    padding: calc(16 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardTitle28 {
+    font-size: calc(52 * 100vw / var(--base-width-tablet));
+    line-height: 120%;
+  }
+
+  .borderedLine {
+    height: calc(1 * 100vw / var(--base-width-mobile));
+    width: 100%;
+    border-radius: calc(1 * 100vw / var(--base-width-mobile));
+  }
+
+  .mainCard::after {
+    height: calc(150 * 100vw / var(--base-width-mobile));
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%);
+  }
+
+  .cardLeft {
+    top: calc(20 * 100vw / var(--base-width-mobile));
+    left: -40%;
+    width: calc(175 * 100vw / var(--base-width-mobile));
+    padding: calc(4 * 100vw / var(--base-width-mobile));
+    border-radius: calc(17 * 100vw / var(--base-width-mobile));
+    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
+
+    scale: 0.7 !important;
+  }
+
+  .cardLeftBackground {
+    border-radius: calc(17 * 100vw / var(--base-width-mobile));
+    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
+  }
+
+  .cardLeftFirstDiv {
+    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
+    line-height: calc(110%);
+  }
+
+  .cardLeftSecondDiv {
+    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
+    font-size: calc(12 * 100vw / var(--base-width-mobile));
+    line-height: calc(105%);
+    border-radius: calc(12 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardRight {
+    top: 45% !important;
+    right: -40% !important;
+    transform: translateY(-50%) !important;
+    border-radius: calc(16 * 100vw / var(--base-width-mobile));
+    padding: calc(12 * 100vw / var(--base-width-mobile));
+    gap: calc(12 * 100vw / var(--base-width-mobile));
+
+    scale: 0.7 !important;
+
+  }
+
+  .icon {
+    width: calc(20 * 100vw / var(--base-width-mobile));
+    height: calc(20 * 100vw / var(--base-width-mobile));
+    max-width: calc(20 * 100vw / var(--base-width-mobile));
+    min-width: calc(20 * 100vw / var(--base-width-mobile));
+    max-height: calc(20 * 100vw / var(--base-width-mobile));
+    min-height: calc(20 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardRightContent {
+    gap: calc(12 * 100vw / var(--base-width-mobile));
+  }
+
+  .cardRightText {
+    gap: calc(4 * 100vw / var(--base-width-mobile));
+  }
+
+  .gsapPercentage {
+    font-size: calc(18 * 100vw / var(--base-width-mobile));
+  }
+
+  .gsapLabel {
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
+  }
+
+  .progressLabel {
+    font-size: calc(24 * 100vw / var(--base-width-mobile));
+  }
+
+  .gsapLabel {
+    font-size: calc(14 * 100vw / var(--base-width-mobile));
+  }
+
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    max-width: 75%;
+    min-width: 75%;
+    max-height: 100vw;
+  }
+
+  .mainCard {
+    border-radius: calc(24 * 100vw / var(--base-width-mobile));
   }
 
   .mainCardContent {
@@ -284,44 +387,11 @@
   }
 
   .cardLeft {
-    top: calc(20 * 100vw / var(--base-width-mobile));
-    left: -20%;
-    width: calc(175 * 100vw / var(--base-width-mobile));
-    padding: calc(4 * 100vw / var(--base-width-mobile));
-    border-radius: calc(17 * 100vw / var(--base-width-mobile));
-    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
-
-    scale: 0.9 !important;
-  }
-
-  .cardLeftBackground {
-    border-radius: calc(17 * 100vw / var(--base-width-mobile));
-    backdrop-filter: blur(calc(68.535 * 100vw / var(--base-width-mobile)));
-  }
-
-  .cardLeftFirstDiv {
-    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
-    font-size: calc(14 * 100vw / var(--base-width-mobile));
-    line-height: calc(110%);
-  }
-
-  .cardLeftSecondDiv {
-    padding: calc(7 * 100vw / var(--base-width-mobile)) calc(12 * 100vw / var(--base-width-mobile));
-    font-size: calc(12 * 100vw / var(--base-width-mobile));
-    line-height: calc(105%);
-    border-radius: calc(12 * 100vw / var(--base-width-mobile));
+    left: -20% !important;
   }
 
   .cardRight {
-    top: 45% !important;
     right: -20% !important;
-    transform: translateY(-50%) !important;
-    border-radius: calc(16 * 100vw / var(--base-width-mobile));
-    padding: calc(12 * 100vw / var(--base-width-mobile));
-    gap: calc(12 * 100vw / var(--base-width-mobile));
-
-    scale: 0.9 !important;
-
   }
 
   .icon {

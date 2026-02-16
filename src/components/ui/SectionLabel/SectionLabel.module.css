@@ -4,7 +4,7 @@
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 2%;
-  font-size: calc(14 * 100vw / var(--base-width));
+  font-size: calc(12 * 100vw / var(--base-width));
   opacity: 0;
 }
 
@@ -18,7 +18,7 @@
 
 @media (max-width: 767px) {
   .label {
-    font-size: calc(14 * 100vw / var(--base-width-mobile));
+    font-size: calc(10 * 100vw / var(--base-width-mobile));
     letter-spacing: -2%;
   }
 }
