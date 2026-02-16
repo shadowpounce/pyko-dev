@@ -3,6 +3,7 @@ import { Hero } from "./sections/Hero/Hero";
 import path from "path";
 import { Principles } from "./sections/Principles/Principles";
 import { LiveStatus } from "./sections/LiveStatus/LiveStatus";
+import { TrustCompliance } from "./sections/TrustCompliance/TrustCompliance";
 
 
 /**
@@ -20,6 +21,10 @@ export const transparencySections = [
 	{
 		path: '#live-status',
 		component: LiveStatus
+	},
+	{
+		path: '#trust-compliance',
+		component: TrustCompliance
 	},
 	{
 		path: '#footer',

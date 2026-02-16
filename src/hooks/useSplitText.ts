@@ -17,7 +17,7 @@ export const useSplitText = <T extends HTMLParagraphElement>({ animationDelay = 
 			type: splitType,
 			autoSplit: true,
 			onSplit(self) {
-				return gsap.from(self.lines, {
+				return gsap.from(self[splitType], {
 					duration: 0.4,
 					y: animationConfig.y.from,
 					autoAlpha: 0,
