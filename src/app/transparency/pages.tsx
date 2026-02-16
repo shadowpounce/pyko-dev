@@ -4,6 +4,7 @@ import path from "path";
 import { Principles } from "./sections/Principles/Principles";
 import { LiveStatus } from "./sections/LiveStatus/LiveStatus";
 import { TrustCompliance } from "./sections/TrustCompliance/TrustCompliance";
+import { DataGovernance } from "./sections/DataGovernance/DataGovernance";
 
 
 /**
@@ -25,6 +26,10 @@ export const transparencySections = [
 	{
 		path: '#trust-compliance',
 		component: TrustCompliance
+	},
+	{
+		path: '#data-governance',
+		component: DataGovernance
 	},
 	{
 		path: '#footer',

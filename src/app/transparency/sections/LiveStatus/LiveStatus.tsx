@@ -54,7 +54,7 @@ export const LiveStatus = ({ sectionIndex }: { sectionIndex: number }) => {
 	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
 	const slidesDelay = useElementAnimationDelay(baseDelay, 3)
 
-	const descriptionTextRef = useSplitText({ animationDelay: bodyTextDelay })
+	const descriptionTextRef = useSplitText({ animationDelay: bodyTextDelay, splitType: 'words', stagger: 0.07 })
 	useGSAP(() => {
 		if (!isInView) return
 		const slideAnimationDelay = slidesDelay || 1

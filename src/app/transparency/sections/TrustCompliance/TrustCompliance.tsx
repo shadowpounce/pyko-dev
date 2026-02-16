@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import 'swiper/css'
 import Connects from '@/assets/icons/principles-card-icon-1.svg'
 import Loader from '@/assets/icons/loader-icon.svg'
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 const slides = [
 	{
 		id: 1,
@@ -65,53 +67,55 @@ export const TrustCompliance = ({ sectionIndex }: { sectionIndex: number }) => {
 
 	const titleTextRef = useSplitText({ animationDelay: titleDelay, splitType: 'words' })
 	const descriptionTextRef = useSplitText({ animationDelay: bodyTextDelay })
-	// useGSAP(() => {
-	// 	if (!isInView) return
-	// 	const slideAnimationDelay = slidesDelay || 1
-	// 	const slidesElements = gsap.utils.toArray(`.${s.slide}`)
-	// 	const slidesTitles = gsap.utils.toArray(`.${s.slideTitle}`)
-	// 	const slidesValues = gsap.utils.toArray(`.${s.slideValue}`)
-	// 	const progressBars = gsap.utils.toArray(`.${s.progressBar}`)
-	// 	const slidesDescriptions = gsap.utils.toArray(`.${s.slideDescription}`)
-	// 	const tl = gsap.timeline({
-	// 		defaults: {
-	// 			duration: 0.6,
-	// 			ease: 'power2.out'
-	// 		}
-	// 	})
-	// 	tl.from(slidesElements, {
-	// 		opacity: 0,
-	// 		scale: 0.8,
-	// 		y: 20,
-	// 		filter: 'blur(5px)',
-	// 		stagger: 0.1,
-	// 		delay: slideAnimationDelay,
-	// 	})
-	// 	tl.from(slidesTitles, {
-	// 		opacity: 0,
-	// 		y: 30,
-	// 		filter: 'blur(5px)',
-	// 		stagger: 0.1,
-	// 	}, '<+=0.15')
-	// 	tl.from(slidesValues, {
-	// 		opacity: 0,
-	// 		y: 30,
-	// 		filter: 'blur(5px)',
-	// 		stagger: 0.1,
-	// 	}, '<+=0.15')
-	// 	tl.from(progressBars, {
-	// 		opacity: 0,
-	// 		y: 30,
-	// 		filter: 'blur(5px)',
-	// 		stagger: 0.1,
-	// 	}, '<+=0.15')
-	// 	tl.from(slidesDescriptions, {
-	// 		opacity: 0,
-	// 		y: 30,
-	// 		filter: 'blur(5px)',
-	// 		stagger: 0.1,
-	// 	}, '<+=0.15')
-	// }, { dependencies: [isInView, slidesDelay], scope: containerRef })
+	useGSAP(() => {
+		if (!isInView) return
+		const slideAnimationDelay = slidesDelay || 1
+		const slidesElements = gsap.utils.toArray(`.${s.slide}`)
+		const slidesHeaders = gsap.utils.toArray(`.${s.slideHeader}`)
+		const slidesBody = gsap.utils.toArray(`.${s.bodyContainer}`)
+		const slide1ListItems = gsap.utils.toArray(`.${s.slide1} .${s.bodyItem}`)
+		const slide2ListItems = gsap.utils.toArray(`.${s.slide2} .${s.bodyItem}`)
+
+		const tl = gsap.timeline({
+			defaults: {
+				duration: 0.6,
+				ease: 'power2.out'
+			}
+		})
+		tl.from(slidesElements, {
+			opacity: 0,
+			scale: 0.8,
+			y: 20,
+			filter: 'blur(5px)',
+			stagger: 0.1,
+			delay: slideAnimationDelay,
+		})
+		tl.from(slidesHeaders, {
+			opacity: 0,
+			y: 30,
+			filter: 'blur(5px)',
+			stagger: 0.1,
+		}, '<+=0.15')
+		tl.from(slidesBody, {
+			opacity: 0,
+			y: 30,
+			scale: 0.8,
+			filter: 'blur(5px)',
+			stagger: 0.1,
+		}, '<+=0.15')
+		tl.from(slide1ListItems, {
+			opacity: 0,
+			y: 30,
+			filter: 'blur(5px)',
+			stagger: 0.1,
+		}, '<+=0.15')
+		tl.from(slide2ListItems, {
+			opacity: 0,
+			y: 30,
+			filter: 'blur(5px)',
+			stagger: 0.1,
+		}, '<+=0.15')
+	}, { dependencies: [isInView, slidesDelay], scope: containerRef })
 	return (
 		<Section>
 			<div ref={containerRef} className={s.container}>

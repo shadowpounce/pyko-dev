@@ -37,7 +37,7 @@ export const Principles = ({ sectionIndex }: { sectionIndex: number }) => {
 	const isInView = !!baseDelay
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
-	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
+	const bodyTextDelay = useElementAnimationDelay(baseDelay, 3)
 	const slidesDelay = useElementAnimationDelay(baseDelay, 3)
 
 	const descriptionTextRef = useSplitText({ animationDelay: bodyTextDelay })
