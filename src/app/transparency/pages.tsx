@@ -13,26 +13,26 @@ import { Accountability } from "./sections/Accountability/Accountability";
  * Конфигурация секций для страницы "Transparency".
  */
 export const transparencySections = [
-	// {
-	// 	path: '#hero',
-	// 	component: Hero
-	// },
-	// {
-	// 	path: '#principles',
-	// 	component: Principles
-	// },
-	// {
-	// 	path: '#live-status',
-	// 	component: LiveStatus
-	// },
-	// {
-	// 	path: '#trust-compliance',
-	// 	component: TrustCompliance
-	// },
-	// {
-	// 	path: '#data-governance',
-	// 	component: DataGovernance
-	// },
+	{
+		path: '#hero',
+		component: Hero
+	},
+	{
+		path: '#principles',
+		component: Principles
+	},
+	{
+		path: '#live-status',
+		component: LiveStatus
+	},
+	{
+		path: '#trust-compliance',
+		component: TrustCompliance
+	},
+	{
+		path: '#data-governance',
+		component: DataGovernance
+	},
 	{
 		path: '#third-party-services',
 		component: ThirdPartyServices
