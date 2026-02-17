@@ -1,310 +1,305 @@
 .pykoHoverCard {
-   min-width: calc(370 * 100vw / var(--base-width));
-   max-width: calc(370 * 100vw / var(--base-width));
-   width: calc(370 * 100vw / var(--base-width));
-   min-height: calc(245 * 100vw / var(--base-width));
-   height: calc(245 * 100vw / var(--base-width));
-   max-height: calc(382 * 100vw / var(--base-width));
-   position: relative;
-   overflow: hidden;
-   border-radius: calc(32 * 100vw / var(--base-width));
+    min-width: calc(370 * 100vw / var(--base-width));
+    max-width: calc(370 * 100vw / var(--base-width));
+    width: calc(370 * 100vw / var(--base-width));
+    min-height: calc(245 * 100vw / var(--base-width));
+    height: calc(245 * 100vw / var(--base-width));
+    max-height: calc(382 * 100vw / var(--base-width));
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(32 * 100vw / var(--base-width));
 
-   transition: height 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: height 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .wrapper {
-   width: 100%;
-   height: 100%;
-   position: relative;
-   z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
 
-   padding: calc(12 * 100vw / var(--base-width));
+    padding: calc(12 * 100vw / var(--base-width));
 
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .text {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   text-align: center;
-   gap: calc(12 * 100vw / var(--base-width));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: calc(12 * 100vw / var(--base-width));
 
-   translate: 0 -75%;
-   transition: translate 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    translate: 0 -75%;
+    transition: translate 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .title {
-   font-size: calc(28 * 100vw / var(--base-width));
-   font-family: var(--font-serif);
-   line-height: 1.2;
+    font-size: calc(28 * 100vw / var(--base-width));
+    font-family: var(--font-serif);
+    line-height: 1.2;
 }
 
 .subtitle {
-   margin-top: 2px;
-   color: var(--color-text-muted);
-	font-size: calc(14 * 100vw / var(--base-width));
-	font-weight: 500;
-	letter-spacing: -0.01em;
-	font-family: var(--font-sans);
-}
-
-.description {
-   font-size: calc(18 * 100vw / var(--base-width));
-   font-family: var(--font-sans);
-   line-height: 1.2;
-   opacity: 0.6;
+    font-size: calc(18 * 100vw / var(--base-width));
+    font-family: var(--font-sans);
+    line-height: 1.2;
+    opacity: 0.6;
 }
 
 .bg {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
 .bg img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
-   object-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .image {
-   height: 0;
-   position: relative;
+    height: 0;
+    position: relative;
 
-   border-radius: calc(24 * 100vw / var(--base-width));
-   overflow: hidden;
-   transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: calc(24 * 100vw / var(--base-width));
+    overflow: hidden;
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .image img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
-   object-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 
-   position: static !important;
+    position: static !important;
+
 }
 
 .link {
-   position: absolute;
-   top: calc(12 * 100vw / var(--base-width));
-   right: calc(12 * 100vw / var(--base-width));
-   width: calc(43 * 100vw / var(--base-width));
-   height: calc(43 * 100vw / var(--base-width));
-   min-width: calc(43 * 100vw / var(--base-width));
-   min-height: calc(43 * 100vw / var(--base-width));
-   max-width: calc(43 * 100vw / var(--base-width));
-   max-height: calc(43 * 100vw / var(--base-width));
+    position: absolute;
+    top: calc(12 * 100vw / var(--base-width));
+    right: calc(12 * 100vw / var(--base-width));
+    width: calc(43 * 100vw / var(--base-width));
+    height: calc(43 * 100vw / var(--base-width));
+    min-width: calc(43 * 100vw / var(--base-width));
+    min-height: calc(43 * 100vw / var(--base-width));
+    max-width: calc(43 * 100vw / var(--base-width));
+    max-height: calc(43 * 100vw / var(--base-width));
 
-   border-radius: calc(12 * 100vw / var(--base-width));
-   background-color: #fff;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+    border-radius: calc(12 * 100vw / var(--base-width));
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-   scale: 0.7;
-   opacity: 0;
-   transition-property: scale, opacity;
-   transition-duration: 1s;
-   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    scale: 0.7;
+    opacity: 0;
+    transition-property: scale, opacity;
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .link a {
-   width: 100%;
-   height: 100%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .link img {
-   position: static !important;
-   width: calc(12 * 100vw / var(--base-width));
-   height: calc(12 * 100vw / var(--base-width));
-   min-width: calc(12 * 100vw / var(--base-width));
-   min-height: calc(12 * 100vw / var(--base-width));
-   max-width: calc(12 * 100vw / var(--base-width));
-   max-height: calc(12 * 100vw / var(--base-width));
+    position: static !important;
+    width: calc(12 * 100vw / var(--base-width));
+    height: calc(12 * 100vw / var(--base-width));
+    min-width: calc(12 * 100vw / var(--base-width));
+    min-height: calc(12 * 100vw / var(--base-width));
+    max-width: calc(12 * 100vw / var(--base-width));
+    max-height: calc(12 * 100vw / var(--base-width));
 }
 
 @media (max-width: 1024px) {
-   .pykoHoverCard {
-      min-width: calc(370 * 100vw / var(--base-width-tablet));
-      max-width: calc(370 * 100vw / var(--base-width-tablet));
-      width: calc(370 * 100vw / var(--base-width-tablet));
-      min-height: calc(245 * 100vw / var(--base-width-tablet));
-      height: calc(245 * 100vw / var(--base-width-tablet));
-      max-height: calc(382 * 100vw / var(--base-width-tablet));
+    .pykoHoverCard {
+        min-width: calc(370 * 100vw / var(--base-width-tablet));
+        max-width: calc(370 * 100vw / var(--base-width-tablet));
+        width: calc(370 * 100vw / var(--base-width-tablet));
+        min-height: calc(245 * 100vw / var(--base-width-tablet));
+        height: calc(245 * 100vw / var(--base-width-tablet));
+        max-height: calc(382 * 100vw / var(--base-width-tablet));
 
-      border-radius: calc(24 * 100vw / var(--base-width-tablet));
-   }
+        border-radius: calc(24 * 100vw / var(--base-width-tablet));
+    }
 
-   .wrapper {
-      padding: calc(12 * 100vw / var(--base-width-tablet));
-   }
+    .wrapper {
+        padding: calc(12 * 100vw / var(--base-width-tablet));
+    }
 
-   .image {
-      border-radius: calc(24 * 100vw / var(--base-width-tablet));
-   }
+    .image {
+        border-radius: calc(24 * 100vw / var(--base-width-tablet));
+    }
 
-   .link {
-      top: calc(12 * 100vw / var(--base-width-tablet));
-      right: calc(12 * 100vw / var(--base-width-tablet));
-      width: calc(43 * 100vw / var(--base-width-tablet));
-      height: calc(43 * 100vw / var(--base-width-tablet));
-      min-width: calc(43 * 100vw / var(--base-width-tablet));
-      min-height: calc(43 * 100vw / var(--base-width-tablet));
-      max-width: calc(43 * 100vw / var(--base-width-tablet));
-      max-height: calc(43 * 100vw / var(--base-width-tablet));
+    .link {
+        top: calc(12 * 100vw / var(--base-width-tablet));
+        right: calc(12 * 100vw / var(--base-width-tablet));
+        width: calc(43 * 100vw / var(--base-width-tablet));
+        height: calc(43 * 100vw / var(--base-width-tablet));
+        min-width: calc(43 * 100vw / var(--base-width-tablet));
+        min-height: calc(43 * 100vw / var(--base-width-tablet));
+        max-width: calc(43 * 100vw / var(--base-width-tablet));
+        max-height: calc(43 * 100vw / var(--base-width-tablet));
 
-      border-radius: calc(12 * 100vw / var(--base-width-tablet));
-   }
+        border-radius: calc(12 * 100vw / var(--base-width-tablet));
+    }
 
-   .link img {
-      width: calc(12 * 100vw / var(--base-width-tablet));
-      height: calc(12 * 100vw / var(--base-width-tablet));
-      min-width: calc(12 * 100vw / var(--base-width-tablet));
-      min-height: calc(12 * 100vw / var(--base-width-tablet));
-      max-width: calc(12 * 100vw / var(--base-width-tablet));
-      max-height: calc(12 * 100vw / var(--base-width-tablet));
-   }
+    .link img {
+        width: calc(12 * 100vw / var(--base-width-tablet));
+        height: calc(12 * 100vw / var(--base-width-tablet));
+        min-width: calc(12 * 100vw / var(--base-width-tablet));
+        min-height: calc(12 * 100vw / var(--base-width-tablet));
+        max-width: calc(12 * 100vw / var(--base-width-tablet));
+        max-height: calc(12 * 100vw / var(--base-width-tablet));
+    }
 
-   .text {
-      gap: calc(12 * 100vw / var(--base-width-tablet));
-   }
+    .text {
+        gap: calc(12 * 100vw / var(--base-width-tablet));
+    }
 
-   .title {
-      font-size: calc(24 * 100vw / var(--base-width-tablet));
-   }
+    .title {
+        font-size: calc(24 * 100vw / var(--base-width-tablet));
+    }
 
-   .subtitle {
-      font-size: calc(16 * 100vw / var(--base-width-tablet));
-   }
+    .subtitle {
+        font-size: calc(16 * 100vw / var(--base-width-tablet));
+    }
 }
 
+
 @media (min-width: 1025px) {
-   .pykoHoverCard:hover {
-      height: calc(382 * 100vw / var(--base-width));
-      transition-delay: 0s;
-   }
+    .pykoHoverCard:hover {
+        height: calc(382 * 100vw / var(--base-width));
+        transition-delay: 0s;
+    }
 
-   .pykoHoverCard:hover .image {
-      opacity: 1;
-      height: calc(223 * 100vw / var(--base-width));
-   }
+    .pykoHoverCard:hover .image {
+        opacity: 1;
+        height: calc(223 * 100vw / var(--base-width));
+    }
 
-   .pykoHoverCard:hover .link {
-      scale: 1;
-      opacity: 1;
-      transition-delay: 0.5s;
-   }
+    .pykoHoverCard:hover .link {
+        scale: 1;
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
 
-   .pykoHoverCard:hover .text {
-      translate: 0 -25%;
-   }
+    .pykoHoverCard:hover .text {
+        translate: 0 -25%;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-   .pykoHoverCard:hover {
-      height: calc(382 * 100vw / var(--base-width-tablet));
-      transition-delay: 0s;
-   }
+    .pykoHoverCard:hover {
+        height: calc(382 * 100vw / var(--base-width-tablet));
+        transition-delay: 0s;
+    }
 
-   .pykoHoverCard:hover .image {
-      opacity: 1;
-      height: calc(223 * 100vw / var(--base-width-tablet));
-   }
+    .pykoHoverCard:hover .image {
+        opacity: 1;
+        height: calc(223 * 100vw / var(--base-width-tablet));
+    }
 
-   .pykoHoverCard:hover .link {
-      scale: 1;
-      opacity: 1;
-      transition-delay: 0.5s;
-   }
+    .pykoHoverCard:hover .link {
+        scale: 1;
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
 
-   .pykoHoverCard:hover .text {
-      translate: 0 -25%;
-   }
+    .pykoHoverCard:hover .text {
+        translate: 0 -25%;
+    }
 }
 
+
 @media (max-width: 767px) {
-   .pykoHoverCard.active {
-      height: calc(382 * 100vw / var(--base-width-mobile));
-      transition-delay: 0s;
-   }
 
-   .pykoHoverCard.active .image {
-      opacity: 1;
-      height: calc(223 * 100vw / var(--base-width-mobile));
-   }
+    .pykoHoverCard.active {
+        height: calc(382 * 100vw / var(--base-width-mobile));
+        transition-delay: 0s;
+    }
 
-   .pykoHoverCard.active .link {
-      scale: 1;
-      opacity: 1;
-      transition-delay: 0.5s;
-   }
+    .pykoHoverCard.active .image {
+        opacity: 1;
+        height: calc(223 * 100vw / var(--base-width-mobile));
+    }
 
-   .pykoHoverCard.active .text {
-      translate: 0 -25%;
-   }
+    .pykoHoverCard.active .link {
+        scale: 1;
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
 
-   .pykoHoverCard {
-      min-width: 100%;
-      max-width: 100%;
-      width: 100%;
-      min-height: calc(245 * 100vw / var(--base-width-mobile));
-      height: calc(245 * 100vw / var(--base-width-mobile));
-      max-height: calc(382 * 100vw / var(--base-width-mobile));
+    .pykoHoverCard.active .text {
+        translate: 0 -25%;
+    }
 
-      border-radius: calc(24 * 100vw / var(--base-width-mobile));
-   }
+    .pykoHoverCard {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        min-height: calc(245 * 100vw / var(--base-width-mobile));
+        height: calc(245 * 100vw / var(--base-width-mobile));
+        max-height: calc(382 * 100vw / var(--base-width-mobile));
 
-   .wrapper {
-      padding: calc(12 * 100vw / var(--base-width-mobile));
-   }
+        border-radius: calc(24 * 100vw / var(--base-width-mobile));
+    }
 
-   .image {
-      border-radius: calc(24 * 100vw / var(--base-width-mobile));
-   }
+    .wrapper {
+        padding: calc(12 * 100vw / var(--base-width-mobile));
+    }
 
-   .link {
-      top: calc(12 * 100vw / var(--base-width-mobile));
-      right: calc(12 * 100vw / var(--base-width-mobile));
-      width: calc(43 * 100vw / var(--base-width-mobile));
-      height: calc(43 * 100vw / var(--base-width-mobile));
-      min-width: calc(43 * 100vw / var(--base-width-mobile));
-      min-height: calc(43 * 100vw / var(--base-width-mobile));
-      max-width: calc(43 * 100vw / var(--base-width-mobile));
-      max-height: calc(43 * 100vw / var(--base-width-mobile));
+    .image {
+        border-radius: calc(24 * 100vw / var(--base-width-mobile));
+    }
 
-      border-radius: calc(12 * 100vw / var(--base-width-mobile));
-   }
+    .link {
+        top: calc(12 * 100vw / var(--base-width-mobile));
+        right: calc(12 * 100vw / var(--base-width-mobile));
+        width: calc(43 * 100vw / var(--base-width-mobile));
+        height: calc(43 * 100vw / var(--base-width-mobile));
+        min-width: calc(43 * 100vw / var(--base-width-mobile));
+        min-height: calc(43 * 100vw / var(--base-width-mobile));
+        max-width: calc(43 * 100vw / var(--base-width-mobile));
+        max-height: calc(43 * 100vw / var(--base-width-mobile));
 
-   .link img {
-      width: calc(12 * 100vw / var(--base-width-mobile));
-      height: calc(12 * 100vw / var(--base-width-mobile));
-      min-width: calc(12 * 100vw / var(--base-width-mobile));
-      min-height: calc(12 * 100vw / var(--base-width-mobile));
-      max-width: calc(12 * 100vw / var(--base-width-mobile));
-      max-height: calc(12 * 100vw / var(--base-width-mobile));
-   }
+        border-radius: calc(12 * 100vw / var(--base-width-mobile));
+    }
 
-   .text {
-      gap: calc(12 * 100vw / var(--base-width-mobile));
-   }
+    .link img {
+        width: calc(12 * 100vw / var(--base-width-mobile));
+        height: calc(12 * 100vw / var(--base-width-mobile));
+        min-width: calc(12 * 100vw / var(--base-width-mobile));
+        min-height: calc(12 * 100vw / var(--base-width-mobile));
+        max-width: calc(12 * 100vw / var(--base-width-mobile));
+        max-height: calc(12 * 100vw / var(--base-width-mobile));
+    }
 
-   .title {
-      font-size: calc(24 * 100vw / var(--base-width-mobile));
-   }
+    .text {
+        gap: calc(12 * 100vw / var(--base-width-mobile));
+    }
 
-   .subtitle {
-      font-size: calc(16 * 100vw / var(--base-width-mobile));
-   }
+    .title {
+        font-size: calc(24 * 100vw / var(--base-width-mobile));
+    }
+
+    .subtitle {
+        font-size: calc(16 * 100vw / var(--base-width-mobile));
+    }
 }

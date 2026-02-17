@@ -6,6 +6,7 @@ import { LiveStatus } from "./sections/LiveStatus/LiveStatus";
 import { TrustCompliance } from "./sections/TrustCompliance/TrustCompliance";
 import { DataGovernance } from "./sections/DataGovernance/DataGovernance";
 import { ThirdPartyServices } from "./sections/ThirdPartyServices/ThirdPartyServices";
+import { Accountability } from "./sections/Accountability/Accountability";
 
 
 /**
@@ -35,6 +36,10 @@ export const transparencySections = [
 	{
 		path: '#third-party-services',
 		component: ThirdPartyServices
+	},
+	{
+		path: '#accountability',
+		component: Accountability
 	},
 	{
 		path: '#footer',

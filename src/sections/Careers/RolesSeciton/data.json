@@ -2,28 +2,28 @@
 	"roles": [
 		{
 			"title": "Frontend Engineer",
-			"description": "React + TypeScript, Tailwind, shadcn/ui. Own polished experiences.",
+			"subtitle": "React + TypeScript, Tailwind, shadcn/ui. Own polished experiences.",
 			"img": "/images/sections/roles/img1.png",
 			"bg": "/images/sections/roles/bg1.png",
 			"url": "/careers/frontend"
 		},
 		{
 			"title": "Backend Engineer",
-			"description": "Python, FastAPI, MongoDB. Data models and reliability.",
+			"subtitle": "Python, FastAPI, MongoDB. Data models and reliability.",
 			"img": "/images/sections/roles/img1.png",
 			"bg": "/images/sections/roles/bg2.png",
 			"url": "/careers/backend"
 		},
 		{
 			"title": "Product Designer",
-			"description": "System‑level thinking, calm motion, premium dark surfaces.",
+			"subtitle": "System‑level thinking, calm motion, premium dark surfaces.",
 			"img": "/images/sections/roles/img1.png",
 			"bg": "/images/sections/roles/bg3.png",
 			"url": "/careers/product-designer"
 		},
 		{
 			"title": "Campus Lead (Part‑time)",
-			"description": "Activate early communities, shape pilots, capture feedback.",
+			"subtitle": "Activate early communities, shape pilots, capture feedback.",
 			"img": "/images/sections/roles/img1.png",
 			"bg": "/images/sections/roles/bg4.png",
 			"url": "/careers/campus-lead"
