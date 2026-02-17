@@ -8,37 +8,19 @@ import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import { WideCardSwiper } from '@/components/ui/WideCardSwiper/WideCardSwiper'
 import { useGSAP } from '@gsap/react'
+import { useSplitText } from '@/hooks/useSplitText'
 
 export const OurStory = ({ sectionIndex }: { sectionIndex: number }) => {
-	const descriptionText = useRef<HTMLParagraphElement>(null)
-
-	const SECTION_INDEX = sectionIndex
-
-	const START_DELAY = 0.8
 
 	const baseDelay = useSectionAnimationTrigger({
-		sectionIndex: SECTION_INDEX,
-		startDelay: START_DELAY,
+		sectionIndex: sectionIndex,
+		startDelay: 0.8,
 	})
 	const labelDelay = useElementAnimationDelay(baseDelay, 0)
 	const titleDelay = useElementAnimationDelay(baseDelay, 1)
 	const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
-	useGSAP(() => {
-		SplitText.create(descriptionText.current, {
-			type: "lines",
-			autoSplit: true,
-			onSplit(self) {
-				return gsap.from(self.lines, {
-					duration: 0.6,
-					y: animationConfig.y.from,
-					autoAlpha: 0,
-					filter: 'blur(5px)',
-					stagger: animationConfig.delays.lineDelay,
-					delay: bodyTextDelay || 1
-				});
-			}
-		});
-	}, [bodyTextDelay])
+	const descriptionText = useSplitText({ animationDelay: bodyTextDelay })
+
 	return <Section>
 		<div className={s.container}>
 			<div className={s.textContainer}>

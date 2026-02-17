@@ -1,32 +1,32 @@
 {
-    "roles": [
-        {
-            "title": "Frontend Engineer",
-            "subtitle": "React + TypeScript, Tailwind, shadcn/ui. Own polished experiences.",
-            "img": "/images/sections/roles/img1.png",
-            "bg": "/images/sections/roles/bg1.png",
-            "url": "/careers/frontend"
-        },
-        {
-            "title": "Backend Engineer",
-            "subtitle": "Python, FastAPI, MongoDB. Data models and reliability.",
-            "img": "/images/sections/roles/img1.png",
-            "bg": "/images/sections/roles/bg2.png",
-            "url": "/careers/backend"
-        },
-        {
-            "title": "Product Designer",
-            "subtitle": "System‑level thinking, calm motion, premium dark surfaces.",
-            "img": "/images/sections/roles/img1.png",
-            "bg": "/images/sections/roles/bg3.png",
-            "url": "/careers/product-designer"
-        },
-        {
-            "title": "Campus Lead (Part‑time)",
-            "subtitle": "Activate early communities, shape pilots, capture feedback.",
-            "img": "/images/sections/roles/img1.png",
-            "bg": "/images/sections/roles/bg4.png",
-            "url": "/careers/campus-lead"
-        }
-    ]
+	"roles": [
+		{
+			"title": "Frontend Engineer",
+			"subtitle": "React + TypeScript, Tailwind, shadcn/ui. Own polished experiences.",
+			"img": "/images/sections/roles/img1.png",
+			"bg": "/images/sections/roles/bg1.png",
+			"url": "/careers/frontend"
+		},
+		{
+			"title": "Backend Engineer",
+			"subtitle": "Python, FastAPI, MongoDB. Data models and reliability.",
+			"img": "/images/sections/roles/img1.png",
+			"bg": "/images/sections/roles/bg2.png",
+			"url": "/careers/backend"
+		},
+		{
+			"title": "Product Designer",
+			"subtitle": "System‑level thinking, calm motion, premium dark surfaces.",
+			"img": "/images/sections/roles/img1.png",
+			"bg": "/images/sections/roles/bg3.png",
+			"url": "/careers/product-designer"
+		},
+		{
+			"title": "Campus Lead (Part‑time)",
+			"subtitle": "Activate early communities, shape pilots, capture feedback.",
+			"img": "/images/sections/roles/img1.png",
+			"bg": "/images/sections/roles/bg4.png",
+			"url": "/careers/campus-lead"
+		}
+	]
 }

@@ -1,0 +1,208 @@
+.container {
+   height: 100%;
+   padding-top: 86px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   @media (max-width: 767px) {
+      padding-top: 107px;
+   }
+   & .textContainer {
+      --inline-padding: 16px;
+      --inner-width: 750px;
+      padding-top: max(20px, 9vh);
+      padding-inline: var(--inline-padding);
+      width: 100%;
+      max-width: calc(var(--inner-width) + var(--inline-padding) * 2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5vh;
+
+      @media (max-width: 1200px) {
+         padding-top: max(20px, 6vh);
+         gap: 2vh;
+      }
+
+      @media (max-width: 767px) {
+         gap: 1vh;
+         text-wrap: pretty;
+      }
+
+      & .label {
+         font-size: clamp(0.625rem, 1.6vh, 0.875rem);
+         line-height: 1.2;
+         letter-spacing: 0.02em;
+      }
+
+      & .title {
+         text-align: center;
+         font-size: clamp(3rem, 8vh, 4.5rem);
+         line-height: 1;
+         letter-spacing: -0.03em;
+
+         @media (max-width: 1200px) {
+            font-size: clamp(3rem, 6.5vh, 3.75rem);
+         }
+
+         @media (max-width: 767px) {
+            font-size: clamp(2rem, 5vh, 2.75rem);
+            letter-spacing: -0.05em;
+         }
+
+         @media (max-width: 380px) {
+            font-size: clamp(1.75rem, 4vh, 2.25rem);
+         }
+
+         & .serif {
+            line-height: 1;
+            font-size: clamp(3.75rem, 9vh, 5rem);
+            letter-spacing: -0.03em;
+
+            @media (max-width: 1200px) {
+               font-size: clamp(3rem, 7vh, 4.5rem);
+               letter-spacing: -0.05em;
+            }
+
+            @media (max-width: 767px) {
+               font-size: clamp(2.5rem, 6vh, 3.125rem);
+
+               font-style: normal;
+            }
+
+            @media (max-width: 380px) {
+               font-size: clamp(2rem, 5vh, 2.75rem);
+            }
+         }
+      }
+
+      & .description {
+         font-weight: 500;
+         font-family: var(--font-sans);
+         color: var(--color-text-secondary);
+         opacity: 0.5;
+         font-size: clamp(1rem, 2.5vh, 1.25rem);
+         line-height: 1.2;
+         max-width: 508px;
+         letter-spacing: -0.01em;
+         text-align: center;
+
+         @media (max-width: 1200px) {
+            font-size: 1rem;
+            line-height: 1.3;
+            padding-top: 4px;
+         }
+
+         @media (max-width: 767px) {
+            text-wrap: pretty;
+            margin-top: 7px;
+         }
+      }
+   }
+   & .slider {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 4.2vh;
+      & .slide {
+         width: 340px;
+         height: 356px;
+         position: relative;
+         overflow: hidden;
+         border-radius: 24px;
+         max-width: calc(100vw - 32px);
+
+         & .slideContainer {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: end;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            background-color: rgba(4, 5, 4, 1);
+            & .imageWrapper {
+               position: absolute;
+               inset: 0;
+               width: 100%;
+               height: 100%;
+               -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+               mask-image: linear-gradient(to bottom, black 50%, transparent 65%);
+               & .bg {
+                  position: absolute;
+                  width: auto !important;
+                  height: auto !important;
+
+                  &.slide1 {
+                     inset: 50% auto auto 50% !important;
+                     top: 50%;
+                     left: 0;
+                     transform: translate(-50%, -50%) rotate(90deg);
+                     /* transform-origin: top left; */
+                     width: 350px !important;
+                     height: auto !important;
+                     @media (width <= 480px) {
+                        width: 300px;
+                     }
+                  }
+                  &.slide2 {
+                     inset: 50% auto auto 65% !important;
+                     transform: translate(-50%, -50%) rotate(30deg) scaleY(-1);
+                     width: 800px !important;
+                     height: auto !important;
+                     filter: brightness(0.5);
+                  }
+                  &.slide3 {
+                     inset: 40% auto auto 50% !important;
+                     transform: translate(-50%, -50%) rotate(-30deg) scale(-1, -1);
+                     width: 800px !important;
+                     height: auto !important;
+                  }
+               }
+            }
+            & .slideContent {
+               width: 100%;
+               position: relative;
+               z-index: 2;
+               display: flex;
+               flex-direction: column;
+               gap: 10px;
+               border-radius: 24px;
+               padding: 20px;
+               padding-bottom: 22px;
+               & .slideText {
+                  display: flex;
+                  gap: 6px;
+                  justify-content: space-between;
+                  font-family: var(--font-serif);
+                  font-style: italic;
+                  font-size: 1.5rem;
+                  letter-spacing: -0.02em;
+                  line-height: 1.2;
+                  color: white;
+                  & .slideTitle {
+                     font-weight: 400;
+                  }
+                  & .slideValue {
+                     span {
+                        font-size: 1rem;
+                     }
+                  }
+               }
+               & .progressBar {
+               }
+               & .slideDescription {
+                  font-size: 0.75rem;
+                  font-weight: 500;
+                  letter-spacing: -0.01em;
+                  line-height: 1.3;
+                  font-family: var(--font-sans);
+                  opacity: 0.7;
+               }
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,27 @@
+<svg viewBox="0 0 29.5547 29.5557" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29.554688" height="29.555664" fill="none">
+	<defs>
+		<clipPath id="clipPath_0">
+			<rect width="26.999998" height="26.999998" x="0.777344" y="0.777832" fill="rgb(255,255,255)" />
+		</clipPath>
+		<clipPath id="clipPath_1">
+			<rect width="26.999998" height="26.999998" x="0.777344" y="0.777832" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<rect id="rectangle-small-with-blocks-18px" width="27.999998" height="27.999998" x="0.777344" y="0.777832" fill="rgb(52,52,52)" fill-opacity="0" />
+	<rect id="rectangle-small-with-blocks-18px" width="27.999998" height="27.999998" x="0.777344" y="0.777832" stroke="rgb(0,0,0)" stroke-opacity="0" stroke-width="1.555555" />
+	<g id="loader-18px" clip-path="url(#clipPath_0)" customFrame="url(#clipPath_0)">
+		<rect id="loader-18px" width="26.999998" height="26.999998" x="0.777344" y="0.777832" stroke="rgb(0,0,0)" stroke-opacity="0" stroke-width="1.500000" />
+		<g id="Icon Frame" opacity="0" customFrame="url(#clipPath_1)">
+			<rect id="Icon Frame" width="26.999998" height="26.999998" x="0.777344" y="0.777832" opacity="0" fill="rgb(255,255,255)" fill-opacity="0" />
+			<g id="Group 46">
+				<line id="Line 3" x1="0" x2="25.4558449" y1="0" y2="0" stroke="rgb(155,81,224)" stroke-width="0.100000" transform="matrix(0.707107,0.707107,-0.707107,0.707107,0.8125,0.742676)" />
+				<line id="Line 4" x1="0" x2="25.455843" y1="0" y2="0" stroke="rgb(155,81,224)" stroke-width="0.100000" transform="matrix(-0.707107,0.707107,0.707107,0.707107,18.7422,0.742676)" />
+				<circle id="Ellipse 2" cx="9.77734375" cy="9.77783203" r="7" stroke="rgb(155,81,224)" stroke-width="0.100000" />
+				<rect id="Rectangle 4" width="12.000000" height="12.000000" x="3.777344" y="3.777832" stroke="rgb(155,81,224)" stroke-width="0.100000" />
+				<rect id="Rectangle 5" width="14.000000" height="10.000000" x="2.777344" y="4.777832" stroke="rgb(155,81,224)" stroke-width="0.100000" />
+				<rect id="Rectangle 6" width="14.000000" height="9.999999" x="0.000000" y="0.000000" stroke="rgb(155,81,224)" stroke-width="0.100000" transform="matrix(-4.37114e-08,1,-1,-4.37114e-08,14.7773,2.77783)" />
+			</g>
+		</g>
+		<path id="Vector 72" d="M14.2773 6.6945L14.2773 4.52783M14.2773 24.0278L14.2773 21.8612M6.69401 14.2778L4.52734 14.2778M24.0273 14.2778L21.8607 14.2778M21.319 7.23617L19.694 8.86117M8.86068 19.6945L7.23568 21.3195M19.694 19.6945L21.319 21.3195M8.86068 8.86117L7.23568 7.23617" stroke="rgb(255,255,255)" stroke-linecap="round" stroke-width="1.890000" />
+	</g>
+</svg>
