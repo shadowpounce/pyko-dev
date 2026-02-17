@@ -29,14 +29,15 @@
     gap: calc(24 * 100vw / var(--base-width));
 }
 
-@media (max-width: 767px) {
-
+@media (max-width: 1024px) {
     .plans {
         height: 100svh;
         max-height: 100svh;
         min-height: 100svh;
     }
+}
 
+@media (max-width: 767px) {
     .container {
         padding-top: calc(100 * 100vw / var(--base-width-mobile));
     }

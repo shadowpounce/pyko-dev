@@ -46,7 +46,7 @@
   user-select: none;
 
   @media (max-width: 1200px) {
-    font-size: 12.5rem;
+    font-size: 8.5rem;
   }
 }
 
@@ -60,8 +60,16 @@
   text-align: left;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    padding-top: calc(300 * 100vw / var(--base-width-tablet));
+    justify-content: start;
+  }
 
-@media (max-width: 767px) {
+  .marquee {
+    top: calc(100 * 100vw / var(--base-width-tablet));
+  }
+
   .platform {
     height: 100svh;
     max-height: 100svh;
@@ -69,7 +77,15 @@
   }
 
   .text {
-    max-width: 100%;
+    max-width: calc(1000 * 100vw / var(--base-width-tablet));
+    gap: calc(40 * 100vw / var(--base-width-tablet));
+  }
+}
+
+
+@media (max-width: 767px) {
+  .text {
+    max-width: 80%;
     gap: calc(20 * 100vw / var(--base-width-mobile));
     padding-inline: calc(18 * 100vw / var(--base-width-mobile));
   }
@@ -79,19 +95,15 @@
   }
 
   .marqueeText {
-    font-size: calc(100 * 100vw / var(--base-width-mobile));
+    font-size: calc(80 * 100vw / var(--base-width-mobile));
   }
 
   .container {
     padding-inline: 0;
-    padding-top: calc(80 * 100vw / var(--base-width-mobile));
-    justify-content: start;
-    gap: calc(30 * 100vw / var(--base-width-mobile));
+    padding-top: calc(40 * 100vw / var(--base-width-mobile));
+    gap: calc(60 * 100vw / var(--base-width-mobile));
   }
-
-  .bodyText {
-    font-size: calc(14 * 100vw / var(--base-width-mobile));
-  }
+  
 
   .platformList {
     gap: calc(20 * 100vw / var(--base-width-mobile));

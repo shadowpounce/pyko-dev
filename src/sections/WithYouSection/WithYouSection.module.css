@@ -30,12 +30,19 @@
     justify-content: center;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
     .withYou {
         height: 100svh;
         max-height: 100svh;
         min-height: 100svh;
     }
+
+    .text {
+        gap: calc(24 * 100vw / var(--base-width-tablet));
+    }
+}
+
+@media (max-width: 767px) {
 
     .title {
         max-width: 100%;
