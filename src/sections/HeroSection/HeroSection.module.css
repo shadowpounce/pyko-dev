@@ -13,7 +13,7 @@
 }
 
 .container {
-  padding-top: calc(110 * 100vw / var(--base-width)) !important;
+  padding-top: calc(80 * 100vw / var(--base-width)) !important;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,7 @@
   justify-content: space-between;
   position: relative;
   z-index: 2;
+  gap: calc(20 * 100vw / var(--base-width));
 }
 
 .text {
@@ -28,18 +29,10 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: calc(20 * 100vw / var(--base-width));
+  gap: calc(15 * 100vw / var(--base-width));
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-@media (min-width: 769px) {
-  .text {
-    scale: 0.85;
-    transform-origin: top center;
-    translate: 0 -2vw;
-  }
 }
 
 .footer {
@@ -47,6 +40,14 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  order: 3;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: calc(20 * 100vw / var(--base-width));
 }
 
 .footerLeft {
@@ -88,6 +89,7 @@
   line-height: 100%;
   letter-spacing: -2%;
   color: #fff;
+  text-align: right;
 }
 
 @media (max-width: 1024px) {
@@ -97,20 +99,44 @@
     max-height: 100svh;
   }
 
+  .text {
+    max-width: 100%;
+  }
+
   .container {
     padding-top: calc(120 * 100vw / var(--base-width-tablet)) !important;
-    padding-bottom: calc(120 * 100vw / var(--base-width-tablet)) !important;
-
+    padding-bottom: calc(200 * 100vw / var(--base-width-tablet)) !important;
+    gap: calc(30 * 100vw / var(--base-width-tablet));
     height: 100svh;
     min-height: 100svh;
     max-height: 100svh;
+  }
+
+  .footerLeft {
+    max-width: 100%;
+  }
+
+
+
+  .scrollText {
+    font-size: calc(25 * 100vw / var(--base-width-tablet));
+  }
+
+  .scrollIcon {
+    width: calc(25 * 100vw / var(--base-width-tablet));
+    height: calc(25 * 100vw / var(--base-width-tablet));
+    max-width: calc(25 * 100vw / var(--base-width-tablet));
+    min-width: calc(25 * 100vw / var(--base-width-tablet));
+    max-height: calc(25 * 100vw / var(--base-width-tablet));
+    min-height: calc(25 * 100vw / var(--base-width-tablet));
   }
 }
 
 @media (max-width: 767px) {
 
   .container {
-    padding-top: calc(120 * 100vw / var(--base-width-mobile)) !important;
+    padding-block: calc(80 * 100vw / var(--base-width-mobile)) calc(60 * 100vw / var(--base-width-mobile)) !important;
+    gap: calc(20 * 100vw / var(--base-width-mobile));
 
   }
 

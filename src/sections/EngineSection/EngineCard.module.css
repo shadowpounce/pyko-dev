@@ -55,6 +55,39 @@
   opacity: 0;
 }
 
+@media (max-width: 1024px) {
+  .engineCard {
+    max-height: unset;
+    min-height: unset;
+    height: unset;
+    border-radius: calc(22 * 100vw / var(--base-width-tablet));
+  }
+
+  .engineCardContainer {
+    padding: calc(18 * 100vw / var(--base-width-tablet));
+    gap: calc(18 * 100vw / var(--base-width-tablet));
+    height: 100%;
+  }
+
+  .engineCardLottie {
+    max-height: calc(200 * 100vw / var(--base-width-tablet));
+    height: calc(200 * 100vw / var(--base-width-tablet));
+  }
+
+  .engineCardText {
+    gap: calc(8 * 100vw / var(--base-width-tablet));
+  }
+
+  .engineCardTitle {
+    font-size: calc(30 * 100vw / var(--base-width-tablet));
+    opacity: 0.8;
+  }
+
+  .engineCardSubtitle {
+    font-size: calc(20 * 100vw / var(--base-width-tablet));
+  }
+}
+
 
 @media (max-width: 767px) {
   .engineCard {
@@ -72,6 +105,7 @@
 
   .engineCardLottie {
     max-height: calc(136 * 100vw / var(--base-width-mobile));
+    height: calc(136 * 100vw / var(--base-width-mobile));
   }
 
   .engineCardText {

@@ -637,9 +637,6 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
             data into simple, <br /> actionable awareness
           </BodyText>
         </div>
-        <div className={styles.trackCardsContainer}>
-         
-        </div>
         {/* Swiper для обработки свайпов - всегда в DOM */}
         <Swiper
           onSwiper={(swiper) => {

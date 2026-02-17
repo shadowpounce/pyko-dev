@@ -1,9 +1,11 @@
 .predict {
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* NOTE: predict-bg.png не существовал — ссылка удалена */
 }
 
 .container {
@@ -27,35 +29,36 @@
   text-align: center;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .text {
     scale: 0.7;
     translate: 0 5vw;
   }
-
-  .predict {
-    height: 100vh;
-  }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .predict {
     height: 100svh;
     min-height: 100svh;
     max-height: 100svh;
   }
 
+  .text {
+    max-width: 100%;
+    width: 100%;
+    scale: 1;
+    translate: 0 0;
+  }
+
+  .container {
+    padding-block: calc(100 * 100vw / var(--base-width-tablet));
+  }
+}
+
+@media (max-width: 767px) {
   .container {
     padding-top: calc(100 * 100vw / var(--base-width-mobile));
     gap: calc(24 * 100vw / var(--base-width-mobile));
-  }
-
-  .title {
-    font-size: calc(38 * 100vw / var(--base-width-mobile)) !important;
-  }
-
-  .bodyText {
-    font-size: calc(14 * 100vw / var(--base-width-mobile)) !important;
   }
 
   .text {

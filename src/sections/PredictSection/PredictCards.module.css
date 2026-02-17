@@ -564,6 +564,14 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .wrapper {
+    scale: 1;
+    translate: 0 0;
+    flex: unset;
+  }
+}
+
 @media (max-width: 767px) {
   .wrapper {
     overflow-x: auto;
