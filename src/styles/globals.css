@@ -199,8 +199,33 @@ body {
    display: none;
 }
 
+.desktop-and-tablet-only {
+   display: none;
+}
+
+.strong-mobile-only {
+   display: none;
+}
+
+
 @media (max-width: 1024px) {
    .mobile-only {
+      display: unset;
+   }
+}
+
+@media (max-width: 767px) {
+   .desktop-and-tablet-only {
+      display: none;
+   }
+
+   .strong-mobile-only {
+      display: unset;
+   }
+}
+
+@media (min-width: 768px) {
+   .desktop-and-tablet-only {
       display: unset;
    }
 }

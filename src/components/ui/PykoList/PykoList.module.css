@@ -1,11 +1,26 @@
 .pykoList {
     list-style: none;
     display: flex;
-    flex-direction: column;
     gap: calc(20 * 100vw / var(--base-width));
     align-items: start;
     text-align: left;
     margin-top: calc(20 * 100vw / var(--base-width));
+}
+
+.pykoList.row {
+    flex-direction: row;
+}
+
+.pykoList.column {
+    flex-direction: column;
+}
+
+.pykoList.row .item {
+    align-items: start;
+}
+
+.pykoList.row .circle {
+    translate: 0 30% !important;
 }
 
 .pykoList.withDesc .item {
@@ -45,7 +60,6 @@
     height: calc(10 * 100vw / var(--base-width));
     min-width: calc(10 * 100vw / var(--base-width));
     min-height: calc(10 * 100vw / var(--base-width));
-    background-color: #97cd06;
     border-radius: 50%;
     flex-shrink: 0;
 }

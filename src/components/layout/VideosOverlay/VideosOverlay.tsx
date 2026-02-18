@@ -7,6 +7,7 @@ import { useVideoLoader } from '@/hooks/useVideoLoader'
 import { isSafari } from 'react-device-detect';
 import { useHomeVideos } from './logic/useHomeVideos'
 import { useAboutVideos } from './logic/useAboutVideos'
+import { useInvestorsVideos } from './logic/useInvestorsVideos'
 import { VideosOverlayProps } from './types'
 import { useCareersVideos } from './logic/useCareersVideos'
 
@@ -33,6 +34,7 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 		home: useHomeVideos,
 		about: useAboutVideos,
 		careers: useCareersVideos,
+		investors: useInvestorsVideos
 	}
 
 	const useVideoLogic = HOOKS[page] || useHomeVideos

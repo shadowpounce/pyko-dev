@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import styles from './PredictCards.module.css'
+import { StatusLabel } from '@/components/ui'
 import clsx from 'clsx'
 import gsap from 'gsap'
 import {
@@ -884,23 +885,16 @@ export const PredictCards: React.FC<PredictCardsProps> = ({
                     : ''
                 )}
               >
-                <div
+                <StatusLabel
                   ref={card3BalancedLabelRef}
-                  className={clsx(
-                    styles.bluredFooterLabel,
+                  label="Balanced"
+                  icon={true}
+                  className={
                     animationDelay !== null && hasAnimatedRef.current === false
                       ? 'init-scale'
                       : ''
-                  )}
-                >
-                  <Image
-                    src="/images/icons/balance.svg"
-                    alt="Icon"
-                    width={8}
-                    height={10}
-                  />
-                  <span>Balanced</span>
-                </div>
+                  }
+                />
               </div>
             </div>
           </div>

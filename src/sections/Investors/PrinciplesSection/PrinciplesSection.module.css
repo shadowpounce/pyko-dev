@@ -1,0 +1,54 @@
+.principles {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+.principlesList {
+    max-width: calc(975 * 100vw / var(--base-width));
+}
+
+.container {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: calc(30 * 100vw / var(--base-width));
+}
+
+.textInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: calc(12 * 100vw / var(--base-width));
+}
+
+@media (max-width: 1024px) {
+    .principles {
+        height: 100svh;
+        min-height: 100svh;
+        max-height: 100svh;
+    }
+
+    .textInner {
+        gap: calc(24 * 100vw / var(--base-width-tablet));
+    }
+}
+
+@media (max-width: 767px) {
+    .textInner {
+        gap: calc(8 * 100vw / var(--base-width-mobile));
+    }
+}

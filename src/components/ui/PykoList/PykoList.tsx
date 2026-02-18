@@ -13,9 +13,11 @@ interface PykoListProps {
         description?: string
     }[]
     animationDelay?: number | null
+    direction?: 'row' | 'column'
+    accent?: string
 }
 
-export const PykoList = ({ items, animationDelay = null }: PykoListProps) => {
+export const PykoList = ({ items, accent = '#97cd06', animationDelay = null, direction = 'column' }: PykoListProps) => {
     const listItemRefs = useRef<(HTMLLIElement | null)[]>([])
     const circleRefs = useRef<(HTMLSpanElement | null)[]>([])
     const textRefs = useRef<(HTMLSpanElement | null)[]>([])
@@ -56,7 +58,7 @@ export const PykoList = ({ items, animationDelay = null }: PykoListProps) => {
     }, [animationDelay])
 
     return (
-        <ul className={clsx(styles.pykoList, items[0].description && styles.withDesc)}>
+        <ul className={clsx(styles.pykoList, items[0].description && styles.withDesc, styles[direction])}>
             {items.map((item, index) => (
                 <li
                     key={index}
@@ -68,6 +70,9 @@ export const PykoList = ({ items, animationDelay = null }: PykoListProps) => {
                     <span
                         ref={(el) => {
                             circleRefs.current[index] = el
+                        }}
+                        style={{
+                            backgroundColor: accent
                         }}
                         className={styles.circle}
                     />
