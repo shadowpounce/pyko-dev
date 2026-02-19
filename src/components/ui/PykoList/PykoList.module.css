@@ -93,6 +93,10 @@
         gap: calc(20 * 100vw / var(--base-width-mobile));
     }
 
+    .pykoList.row {
+        flex-direction: column;
+    }
+
     .item {
         font-size: calc(14 * 100vw / var(--base-width-mobile));
         gap: calc(8 * 100vw / var(--base-width-mobile));

@@ -1,11 +1,15 @@
-.principles {
+.traction {
     height: 100vh;
     min-height: 100vh;
     max-height: 100vh;
 }
 
-.principlesList {
-    max-width: calc(975 * 100vw / var(--base-width));
+.tractionBody {
+    display: flex;
+    align-items: stretch;
+    gap: calc(18 * 100vw / var(--base-width));
+
+    max-width: calc(800 * 100vw / var(--base-width));
 }
 
 .container {
@@ -13,7 +17,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     padding-top: calc(100 * 100vw / var(--base-width));
@@ -28,17 +32,8 @@
     gap: calc(30 * 100vw / var(--base-width));
 }
 
-.textInner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: calc(12 * 100vw / var(--base-width));
-}
-
 @media (max-width: 1024px) {
-    .principles {
+    .traction {
         height: 100svh;
         min-height: 100svh;
         max-height: 100svh;
@@ -49,9 +44,6 @@
         padding-bottom: calc(100 * 100vw / var(--base-width-tablet));
     }
 
-    .principlesList {
-        max-width: 100%;
-    }
 
     .textInner {
         gap: calc(24 * 100vw / var(--base-width-tablet));
@@ -59,8 +51,14 @@
 }
 
 @media (max-width: 767px) {
+    .tractionBody {
+        flex-direction: column;
+        gap: calc(13 * 100vw / var(--base-width-mobile));
+    }
+
     .container {
         padding-top: calc(120 * 100vw / var(--base-width-mobile));
+        justify-content: space-between;
     }
 
     .textInner {

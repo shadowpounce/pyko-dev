@@ -5,6 +5,7 @@ import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { SectionTitle } from '@/components/ui/SectionTitle'
+
 import { BodyText } from '@/components/ui/BodyText'
 import {
     useSectionAnimationTrigger,
@@ -13,7 +14,7 @@ import {
 import styles from './PrinciplesSection.module.css'
 import clsx from 'clsx'
 import { PykoList } from '@/components/ui/PykoList/PykoList'
-import { HeroFooter } from '@/app/about/components/HeroFooter'
+import { StudentsLogos } from '@/components/ui/StudentsLogos/StudentsLogos'
 
 interface PrinciplesSectionProps {
     sectionIndex: number
@@ -36,7 +37,7 @@ export const PrinciplesSection: React.FC<PrinciplesSectionProps> = ({ sectionInd
     const labelDelay = useElementAnimationDelay(baseDelay, 0)
     const titleDelay = useElementAnimationDelay(baseDelay, 1)
     const bodyTextDelay = useElementAnimationDelay(baseDelay, 2)
-    const buttonDelay = useElementAnimationDelay(baseDelay, 3)
+    const labelTwoDelay = useElementAnimationDelay(baseDelay, 3)
 
     return (
         <Section className={styles.principles}>
@@ -74,11 +75,13 @@ export const PrinciplesSection: React.FC<PrinciplesSectionProps> = ({ sectionInd
                             {
                                 title: 'Evolves over time - making your Pyko experience uniquely your',
                             },
-                        ]} />
+                        ]}
+                            animationDelay={baseDelay ? baseDelay + 0.8 : null}
+                        />
                     </div>
                 </div>
                 <div className={styles.principlesFooter}>
-                    <HeroFooter />
+                    <StudentsLogos animationDelay={labelTwoDelay} />
                 </div>
             </Container>
         </Section>
