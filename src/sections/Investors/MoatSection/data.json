@@ -1,0 +1,32 @@
+{
+    "moat": [
+        {
+            "title": "Clarity engine",
+            "subtitle": "Precise grade targets and next‑step guidance.",
+            "img": "/images/sections/moat/img1.png",
+            "bg": "/images/sections/moat/bg1.png",
+            "url": "/careers/frontend"
+        },
+        {
+            "title": "Privacy‑first",
+            "subtitle": "Canadian‑hosted, compliance‑aligned from day one.",
+            "img": "/images/sections/moat/img1.png",
+            "bg": "/images/sections/moat/bg2.png",
+            "url": "/careers/backend"
+        },
+        {
+            "title": "Data advantage",
+            "subtitle": "Structured academic data powering insights.",
+            "img": "/images/sections/moat/img1.png",
+            "bg": "/images/sections/moat/bg3.png",
+            "url": "/careers/product-designer"
+        },
+        {
+            "title": "Velocity",
+            "subtitle": "Student‑founders shipping weekly with a tight loop.",
+            "img": "/images/sections/moat/img1.png",
+            "bg": "/images/sections/moat/bg4.png",
+            "url": "/careers/campus-lead"
+        }
+    ]
+}

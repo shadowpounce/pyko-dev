@@ -49,9 +49,9 @@ export const Link: React.FC<LinkProps> = ({
 
   return (
     <div ref={containerRef} style={{ display: 'inline-block' }}>
-      <NextLink href={href} className={linkClass} {...props}>
+      <a href={href} className={linkClass} {...props}>
         {children}
-      </NextLink>
+      </a>
     </div>
   )
 }

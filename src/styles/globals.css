@@ -383,6 +383,7 @@ body {
    mask-composite: exclude;
    animation: rotate-border 8s linear infinite;
    pointer-events: none;
+   opacity: 0.5;
    /* Ensure clicks pass through */
    z-index: 2;
    /* Place on top of background but below interactive content if needed */

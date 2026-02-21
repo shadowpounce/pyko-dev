@@ -62,6 +62,10 @@ export const VideosOverlay: React.FC<VideosOverlayProps> = ({ page = 'home' }) =
 	}
 
 
+	useEffect(() => {
+		console.log(page)
+	}, [page])
+
 
 	return (
 		<div className={clsx(styles.videosOverlay, page === 'home' && styles.homeVideos, page === 'careers' && styles.careersVideos)}>

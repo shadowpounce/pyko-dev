@@ -1,0 +1,25 @@
+{
+    "cards": [
+        {
+            "titleWithNum": {
+                "num": "1.2",
+                "text": "k+"
+            },
+            "subtitle": "Early signups across campuses"
+        },
+        {
+            "titleWithNum": {
+                "num": "38",
+                "text": "%"
+            },
+            "subtitle": "Pilot conversion to weekly active"
+        },
+        {
+            "titleWithNum": {
+                "num": "20",
+                "text": "+ campuses"
+            },
+            "subtitle": "Students on waitlist"
+        }
+    ]
+}

@@ -22,6 +22,8 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
   const leftCardFirstDivRef = useRef<HTMLDivElement>(null)
   const leftCardSecondDivRef = useRef<HTMLDivElement>(null)
   const leftCardBackgroundRef = useRef<HTMLDivElement>(null)
+  const cardBlocksRef = useRef<HTMLDivElement>(null)
+  const counterRef = useRef<HTMLSpanElement>(null)
   const hasAnimatedRef = useRef(false)
   const timelineRef = useRef<gsap.core.Timeline | null>(null)
 
@@ -207,6 +209,8 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
     const leftCardFirstDiv = leftCardFirstDivRef.current
     const leftCardSecondDiv = leftCardSecondDivRef.current
     const leftCardBackground = leftCardBackgroundRef.current
+    const cardBlocksContainer = cardBlocksRef.current
+    const counterElement = counterRef.current
 
     // 1. MainCard - вылетает из дали (translateZ) с opacity и scale
     const mainScaleObj = { value: 0.75 }
@@ -307,6 +311,42 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
       '<'
     )
 
+    // 5. CardBlocks staggered fade-in
+    if (cardBlocksContainer) {
+      const blocks = cardBlocksContainer.children
+      gsap.set(blocks, { opacity: 0, y: 15 })
+      timeline.to(
+        blocks,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power2.out',
+        },
+        '-=0.3'
+      )
+    }
+
+    // 6. GSAP counter for 88%
+    if (counterElement) {
+      const counterTarget = { val: 0 }
+      timeline.to(
+        counterTarget,
+        {
+          val: 88,
+          duration: 1.5,
+          ease: 'power3.out',
+          onUpdate: () => {
+            if (counterElement) {
+              counterElement.innerText = `${Math.floor(counterTarget.val)}%`
+            }
+          },
+        },
+        '<'
+      )
+    }
+
     // Cleanup: kill timeline on unmount
     return () => {
       if (timelineRef.current) {
@@ -333,7 +373,7 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
           </p>
           <ProgressBar label="" value={80} variant="orange" />
           <div className={styles.borderedLine}></div>
-          <div className={styles.cardBlocks}>
+          <div ref={cardBlocksRef} className={styles.cardBlocks}>
             <div className={styles.cardBlock}>
               <div className={styles.cardBlockHeader}>
                 <span>
@@ -341,8 +381,8 @@ export const HeroCards: React.FC<HeroCardsProps> = ({
                 </span>
               </div>
               <div className={styles.cardBlockBody}>
-                <span>
-                  88%
+                <span ref={counterRef}>
+                  0%
                 </span>
               </div>
             </div>

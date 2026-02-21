@@ -10,6 +10,10 @@
     gap: calc(18 * 100vw / var(--base-width));
 
     max-width: calc(800 * 100vw / var(--base-width));
+    width: 100%;
+
+    max-height: calc(200 * 100vw / var(--base-width));
+    height: 100%;
 }
 
 .container {
@@ -19,6 +23,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    gap: calc(24 * 100vw / var(--base-width));
 
     padding-top: calc(100 * 100vw / var(--base-width));
 }
@@ -42,11 +48,20 @@
     .container {
         padding-top: calc(200 * 100vw / var(--base-width-tablet));
         padding-bottom: calc(100 * 100vw / var(--base-width-tablet));
+
+        gap: calc(24 * 100vw / var(--base-width-tablet));
     }
 
 
     .textInner {
         gap: calc(24 * 100vw / var(--base-width-tablet));
+    }
+
+    .tractionBody {
+        max-width: calc(800 * 100vw / var(--base-width-tablet));
+        max-height: calc(200 * 100vw / var(--base-width-tablet));
+        height: 100%;
+        gap: calc(18 * 100vw / var(--base-width-tablet));
     }
 }
 
@@ -54,11 +69,15 @@
     .tractionBody {
         flex-direction: column;
         gap: calc(13 * 100vw / var(--base-width-mobile));
+        max-width: 100%;
+
+        max-height: unset;
     }
 
     .container {
-        padding-top: calc(120 * 100vw / var(--base-width-mobile));
+        padding-top: calc(100 * 100vw / var(--base-width-mobile));
         justify-content: space-between;
+        gap: calc(24 * 100vw / var(--base-width-mobile));
     }
 
     .textInner {

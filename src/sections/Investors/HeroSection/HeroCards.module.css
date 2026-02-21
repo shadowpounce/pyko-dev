@@ -7,7 +7,7 @@
   min-width: calc(300 * 100vw / var(--base-width));
   height: 100%;
   min-height: unset;
-  max-height: 80vw;
+  max-height: 30vw;
   perspective: 1000px;
   transform-style: preserve-3d;
   transform-origin: center left;
@@ -197,6 +197,7 @@
 .cardLeftFirstDiv {
   position: relative;
   z-index: 1;
+  max-width: 80%;
   width: 100%;
   font-family: var(--font-serif);
   font-weight: 400;
@@ -205,6 +206,7 @@
   letter-spacing: -1%;
   color: #fff;
   padding: calc(10 * 100vw / var(--base-width)) calc(22 * 100vw / var(--base-width));
+
 }
 
 .cardLeftSecondDiv {
@@ -343,6 +345,10 @@
     max-width: 75%;
     min-width: 75%;
     max-height: 100vw;
+  }
+
+  .cardLeftFirstDiv {
+    max-width: 100%;
   }
 
   .mainCard {

@@ -44,13 +44,18 @@ export const PykoHoverCardsSwiper = ({ cards, animationDelay = null }: PykoHover
             {!isMobile ? (
                 <Swiper
                     key="desktop"
-                    slidesPerView={2.5}
+                    // slidesPerView={2.5}
                     spaceBetween={(30 * window.innerWidth) / 1440}
                     freeMode={true}
                     modules={[FreeMode]}
                     className={styles.swiper}
                     onSwiper={(s) => setSwiper(s)}
                     onSlideChange={(s) => setActiveIndex(s.activeIndex)}
+
+                    slidesPerView={'auto'}
+					slidesOffsetAfter={16}
+					slidesOffsetBefore={16}
+					centerInsufficientSlides
                 >
                     {cards.map((card, index) => (
                         <SwiperSlide className={styles.slide} key={index}>

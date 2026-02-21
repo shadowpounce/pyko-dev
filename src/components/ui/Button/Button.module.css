@@ -15,8 +15,8 @@
    font-size: calc(16 * 100vw / var(--base-width));
    line-height: 100%;
    letter-spacing: -1%;
-   transition: opacity var(--transition-fast);
    opacity: 0;
+
 }
 
 .button a {

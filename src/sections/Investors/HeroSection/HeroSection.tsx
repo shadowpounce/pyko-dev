@@ -73,9 +73,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
           >
             We turn messy course data into a live operational <br /> picture: targets, projections, and next‑step <br />recommendations. Students see exactly where <br /> they stand—and what to do next.
           </BodyText>
-          <Button variant="primary" withArrow animationDelay={buttonDelay}>
-            Get Started
+          <div className={styles.buttons}>
+            <Button variant="primary" withArrow animationDelay={buttonDelay}>
+            Request deck
           </Button>
+          <Button variant="tertiary" withArrow animationDelay={buttonDelay}>
+            Data room
+          </Button>
+          </div>
         </div>
         <div className={styles.footer}>
           <div className={styles.footerLeft}>

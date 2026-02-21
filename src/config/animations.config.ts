@@ -31,8 +31,8 @@ export const animationConfig = {
     label: 0.8,
     title: 0.6,
     body: 0.8,
-    button: 0.4,
-    buttonSpring: 0.2, // Длительность возврата после пружинного эффекта
+    button: 0.6,
+    buttonSpring: 0.8, // Длительность возврата после пружинного эффекта
     card: 0.8, // Длительность появления карточки
     cardText: 0.6, // Длительность появления текста в карточке
     cardSpring: 0.2, // Длительность пружинки карточки
@@ -50,10 +50,10 @@ export const animationConfig = {
     to: 0, // Конечное положение по Y
   },
 
-  // Настройки кнопки (пружинный эффект)
+  // Настройки кнопки
   button: {
-    initialScale: 0,
-    springScale: 1.1,
+    initialScale: 0.7,
+    springScale: 1.025,
     finalScale: 1,
   },
 
@@ -67,8 +67,8 @@ export const animationConfig = {
   // Настройки easing
   easing: {
     default: 'power3.out',
-    button: 'back.out(1.7)',
-    buttonSpring: 'power2.out',
+    button: 'power3.out',
+    buttonSpring: 'elastic.out(1, 0.6)',
     card: 'back.out(1.4)',
     cardSpring: 'power2.out',
   },

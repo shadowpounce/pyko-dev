@@ -192,6 +192,14 @@ const FullPageProviderInner: React.FC<FullPageProviderProps> = ({
 				if (fullpageApi && fullpageApiRef.current !== fullpageApi) {
 					fullpageApiRef.current = fullpageApi
 					setFullpageApi(fullpageApi)
+
+					// Отключаем скролл на 1.5 секунды при инициализации страницы
+					fullpageApi.setAllowScrolling(false)
+					fullpageApi.setKeyboardScrolling(false)
+					setTimeout(() => {
+						fullpageApi.setAllowScrolling(true)
+						fullpageApi.setKeyboardScrolling(true)
+					}, 1500)
 				}
 
 				return (

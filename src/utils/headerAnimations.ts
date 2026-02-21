@@ -1,4 +1,5 @@
 import { gsap } from 'gsap'
+import { animationConfig } from '@/config/animations.config'
 
 // Анимация хедера: меню появляется из кружочка, мигрирует в прямоугольник
 export const animateHeader = (
@@ -46,7 +47,13 @@ export const animateHeader = (
   // Скрываем ссылки и другие элементы изначально
   gsap.set(menuLinks, { opacity: 0 })
   gsap.set(logo, { opacity: 0 })
-  if (getStartedButton) gsap.set(getStartedButton, { opacity: 0 })
+  if (getStartedButton) {
+    gsap.set(getStartedButton, {
+      opacity: 0,
+      scale: animationConfig.button.initialScale,
+      filter: 'blur(2px)'
+    })
+  }
   if (loginLink) gsap.set(loginLink, { opacity: 0 })
 
   // 1. Оболочка появляется из кружочка (opacity + scale)
@@ -103,14 +110,15 @@ export const animateHeader = (
       getStartedButton,
       {
         opacity: 1,
-        scale: 1.1,
-        duration: 0.3,
-        ease: 'back.out(1.7)',
+        scale: animationConfig.button.springScale,
+        filter: 'blur(0px)',
+        duration: animationConfig.durations.button,
+        ease: animationConfig.easing.button,
         onComplete: () => {
           gsap.to(getStartedButton, {
-            scale: 1,
-            duration: 0.15,
-            ease: 'power2.out',
+            scale: animationConfig.button.finalScale,
+            duration: animationConfig.durations.buttonSpring,
+            ease: animationConfig.easing.buttonSpring,
           })
         },
       },

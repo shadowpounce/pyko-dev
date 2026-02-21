@@ -5,7 +5,8 @@ import { Section } from '@/components/ui/Section'
 import { Container } from '@/components/ui/Container'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-
+import { cards } from './data.json'
+import { BluredCard } from '@/components/ui/BluredCard'
 import { BodyText } from '@/components/ui/BodyText'
 import {
     useSectionAnimationTrigger,
@@ -59,11 +60,21 @@ export const TractionSection: React.FC<TractionSectionProps> = ({ sectionIndex }
                         We are validating demand through pilot programs and growing our <br /> waitlist, showing strong early momentum:
                     </BodyText>
                     <BodyText className={clsx(styles.bodyText, 'strong-mobile-only')} opacity={0.6} animationDelay={bodyTextDelay}>
-                        We are validating demand through pilot programs and growing our waitlist, showing strong early momentum:
+                        We are validating demand through pilot programs <br /> and growing our waitlist, showing strong early <br /> momentum:
                     </BodyText>
 
                 </div>
                 <div className={styles.tractionBody}>
+                    {cards.map((card, index) => (
+                        <BluredCard
+                            key={index}
+                            titleWithNum={card.titleWithNum}
+                            subtitle={card.subtitle}
+                            animationDelay={
+                                baseDelay !== null ? baseDelay + 0.4 + index * 0.25 : null
+                            }
+                        />
+                    ))}
                 </div>
             </Container>
         </Section>

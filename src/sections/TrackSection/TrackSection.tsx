@@ -626,7 +626,7 @@ export const TrackSection: React.FC<TrackSectionProps> = ({ sectionIndex }) => {
           >
             Smarter way to
           </SectionTitle>
-          <BodyText className={clsx(styles.bodyText, 'desktop-only')} animationDelay={bodyTextDelay}>
+          <BodyText opacity={0.6} className={clsx(styles.bodyText, 'desktop-only')} animationDelay={bodyTextDelay}>
             See the truth behind your learning - instantly. Your central space{' '}
             <br /> of clarity. The Awarenss Dashboard transforms complex academic{' '}
             <br /> data into simple, actionable awareness

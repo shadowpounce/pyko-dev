@@ -275,14 +275,14 @@
 @media (max-width: 767px) {
 
     .container {
-        padding: calc(48 * 100vw / var(--base-width-mobile)) calc(18 * 100vw / var(--base-width-mobile));
+        padding: calc(20 * 100vw / var(--base-width-mobile)) calc(18 * 100vw / var(--base-width-mobile));
         align-items: end;
     }
 
     .footerWrapper {
         flex-direction: column;
-        gap: calc(32 * 100vw / var(--base-width-mobile));
-        padding: calc(24 * 100vw / var(--base-width-mobile));
+        gap: calc(24 * 100vw / var(--base-width-mobile));
+        padding: calc(20 * 100vw / var(--base-width-mobile));
         border-radius: calc(32 * 100vw / var(--base-width-mobile));
         backdrop-filter: blur(calc(32 * 100vw / var(--base-width-mobile)));
         border: calc(1 * 100vw / var(--base-width-mobile)) solid #FFFFFF21;
@@ -298,12 +298,12 @@
     }
 
     .footerText {
-        gap: calc(16 * 100vw / var(--base-width-mobile));
+        gap: calc(12 * 100vw / var(--base-width-mobile));
         width: 100%;
     }
 
     .footerText>*:last-child {
-        margin-top: calc(32 * 100vw / var(--base-width-mobile));
+        margin-top: calc(24 * 100vw / var(--base-width-mobile));
     }
 
     .footerTitle {
@@ -311,11 +311,11 @@
     }
 
     .footerTitle span {
-        font-size: calc(34 * 100vw / var(--base-width-mobile));
+        font-size: calc(32 * 100vw / var(--base-width-mobile));
     }
 
     .footerDescription {
-        font-size: calc(14 * 100vw / var(--base-width-mobile));
+        font-size: calc(13 * 100vw / var(--base-width-mobile));
         line-height: 150% !important;
         max-width: 100%
     }
@@ -327,7 +327,7 @@
 
     .footerColumns {
         flex-direction: column;
-        gap: calc(32 * 100vw / var(--base-width-mobile));
+        gap: calc(24 * 100vw / var(--base-width-mobile));
         width: 100%;
     }
 
@@ -340,18 +340,18 @@
     }
 
     .footerColumnLinks {
-        gap: calc(24 * 100vw / var(--base-width-mobile));
+        gap: calc(20 * 100vw / var(--base-width-mobile));
     }
 
     .footerList {
-        row-gap: calc(24 * 100vw / var(--base-width-mobile));
+        row-gap: calc(20 * 100vw / var(--base-width-mobile));
         column-gap: calc(0 * 100vw / var(--base-width-mobile));
         flex-direction: row;
         flex-wrap: wrap;
     }
 
     .footerListItem {
-        font-size: calc(14 * 100vw / var(--base-width-mobile));
+        font-size: calc(12 * 100vw / var(--base-width-mobile));
         /* нужно что бы в ряд вмещалось 2 элемента*/
         flex: 0 0 45%;
     }
@@ -402,7 +402,7 @@
     }
 
     .contactsColumn {
-        gap: calc(32 * 100vw / var(--base-width-mobile));
+        gap: calc(16 * 100vw / var(--base-width-mobile));
         justify-content: flex-start;
     }
 }

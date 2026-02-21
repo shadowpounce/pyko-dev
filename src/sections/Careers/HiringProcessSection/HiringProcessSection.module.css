@@ -46,7 +46,7 @@
     .container {
         padding-inline: 0;
         padding-top: calc(100 * 100vw / var(--base-width-tablet));
-        justify-content: start;
+        justify-content: center;
     }
 
     .bodyText {
@@ -62,6 +62,7 @@
 
     .container {
         padding-top: calc(100 * 100vw / var(--base-width-mobile));
+        justify-content: start;
     }
 
     .bodyText {

@@ -16,6 +16,10 @@ export const useInvestorsVideos = (
 
     const video1TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
     const video2TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const video3TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const video4TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+    const video5TweenRef = useRef<gsap.core.Tween | gsap.core.Timeline | null>(null)
+
 
 
     useEffect(() => {
@@ -31,12 +35,24 @@ export const useInvestorsVideos = (
 
     // определение активного текущего видео
     useEffect(() => {
-        if (currentSectionIndex === 4) {
+        if (currentSectionIndex === 0) {
             setCurrentVideoIndex(0)
             return
         }
-        if (currentSectionIndex >= 5) {
+        if (currentSectionIndex === 1) {
             setCurrentVideoIndex(1)
+            return
+        }
+        if (currentSectionIndex === 2) {
+            setCurrentVideoIndex(2)
+            return
+        }
+        if (currentSectionIndex === 4) {
+            setCurrentVideoIndex(3)
+            return
+        }
+        if (currentSectionIndex >= 5) {
+            setCurrentVideoIndex(4)
             return
         }
 
@@ -80,11 +96,73 @@ export const useInvestorsVideos = (
 
             if (video) {
 
-                if (currentSectionIndex === 4) {
+                if (currentSectionIndex === 0) {
                     video.pause()
 
                     const tl = gsap.timeline()
                     video1TweenRef.current = tl
+
+
+                    setTimeout(() => {
+                        tl.fromTo(video, {
+                            currentTime: 0,
+                        }, {
+                            currentTime: video.duration - 0.25,
+                            duration: video.duration - 0.25,
+                            ease: "none",
+                        })
+                    }, 500)
+                } else {
+                    video.pause()
+                }
+            }
+        }
+
+        if (currentVideoIndex === 1) {
+            const video = videoRefs[1]?.current
+
+            if (video) {
+                if (currentSectionIndex === 1) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video2TweenRef.current = tl
+
+                    video.play()
+                } else {
+                    video.pause()
+                }
+            }
+        }
+
+        if (currentVideoIndex === 2) {
+            const video = videoRefs[2]?.current
+
+            if (video) {
+                if (currentSectionIndex === 2) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video3TweenRef.current = tl
+
+                    video.play()
+                } else {
+                    video.pause()
+                }
+            }
+        }
+
+        if (currentVideoIndex === 3) {
+
+            const video = videoRefs[3]?.current
+
+
+            if (video) {
+                if (currentSectionIndex === 4) {
+                    video.pause()
+
+                    const tl = gsap.timeline()
+                    video4TweenRef.current = tl
 
 
                     tl.fromTo(video, {
@@ -108,21 +186,16 @@ export const useInvestorsVideos = (
                 } else {
                     video.pause()
                 }
-
             }
         }
 
-        if (currentVideoIndex === 1) {
-            const video = videoRefs[1]?.current
+        if (currentVideoIndex === 4) {
+            const video = videoRefs[4]?.current
 
             const tl = gsap.timeline()
             const tl2 = gsap.timeline()
 
-
             if (video) {
-
-
-
                 if (currentSectionIndex === 5) {
                     video.pause()
 
@@ -198,18 +271,35 @@ export const useInvestorsVideos = (
 
     return {
         videos: [
-            // {
-            //     id: 0,
-            //     src: 'videos/sec7/sec7-480p.mp4',
-            // },
-            // {
-            //     id: 1,
-            //     src: 'videos/sec8-9-10/sec8-9-10-720p.mp4',
-            // },
+            {
+                id: 0,
+                src: 'videos/investors/hero/480p.mp4',
+            },
+            {
+                id: 1,
+                src: 'videos/investors/principles/720p.mp4',
+                loop: true,
+            },
+            {
+                id: 2,
+                src: 'videos/investors/traction/720p.mp4',
+                loop: true
+            },
+            {
+                id: 3,
+                src: 'videos/sec7/sec7-480p.mp4',
+            },
+            {
+                id: 4,
+                src: 'videos/sec8-9-10/sec8-9-10-720p.mp4',
+            },
         ] as VideoConfig[],
         videoSources: [
-            // 'videos/sec7/sec7-480p.mp4',
-            // 'videos/sec8-9-10/sec8-9-10-720p.mp4',
+            'videos/investors/hero/480p.mp4',
+            'videos/investors/principles/720p.mp4',
+            'videos/investors/traction/720p.mp4',
+            'videos/sec7/sec7-480p.mp4',
+            'videos/sec8-9-10/sec8-9-10-720p.mp4',
         ]
     }
 }

@@ -48,11 +48,19 @@ export const createBlurAnimation = (
 
 // Анимация кнопки с пружинным эффектом
 export const animateButton = (element: gsap.TweenTarget, delay: number = 0) => {
+  // Начальное состояние
+  gsap.set(element, {
+    scale: animationConfig.button.initialScale,
+    opacity: 0,
+    filter: 'blur(2px)' // Легкий блюр, как хотел юзер
+  })
+
   return gsap.to(
     element,
     {
       opacity: 1,
       scale: animationConfig.button.springScale,
+      filter: 'blur(0px)',
       duration: animationConfig.durations.button,
       delay,
       ease: animationConfig.easing.button,
@@ -206,9 +214,9 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0, options
   const delayBetweenParts = animationConfig.delays.lineDelay
   const originalHTML = element.innerHTML
 
-  // Разбиваем по запятым, вопросительным знакам, дефисам и слешам
+  // Разбиваем по знакам препинания: запятым, точкам, вопросам, восклицательным знакам
   // Используем захватывающую группу, чтобы сохранить разделители
-  const regex = /([,?\-\/])/g
+  const regex = /([,.\?!])/g
   const rawParts = originalHTML.split(regex)
   const parts: string[] = []
 
@@ -225,23 +233,16 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0, options
       }
     } else {
       // Это текстовый фрагмент
-      // Если фрагмент не пустой (или содержит только пробелы, которые мы хотим схлопнуть/обработать)
-      // В текущей логике мы делаем trim()
       const trimmed = part.trim()
       if (trimmed) {
-        parts.push(trimmed)
+        parts.push(part) // Сохраняем оригинальное форматирование
       }
     }
   }
 
-  // Если частей нет или всего одна (и это не разделитель), анимируем как цельный блок
+  // Если частей нет или всего одна (нет знаков препинания), фолбэк на слова
   if (parts.length === 0 || (parts.length === 1 && !regex.test(parts[0]))) {
-    return animateBodyText(element, delay, options)
-  }
-
-  // Если текст просто не содержит разделителей, но не пустой
-  if (parts.length === 0 && originalHTML.trim()) {
-    return animateBodyText(element, delay, options)
+    return animateWords(element, delay, delayBetweenParts)
   }
 
   // Если элемент был скрыт, показываем его
@@ -251,11 +252,9 @@ export const animateByCommas = (element: HTMLElement, delay: number = 0, options
   }
 
   element.innerHTML = parts
-    .map((part, index) => {
-      // const isLast = index === parts.length - 1
-      // В новой логике разделитель уже включен в part, если он был
-      // Но нам нужно убедиться, что мы не потеряли контент
-      return `<span class="init-blur-up" style="display: inline-block; margin-right: 0.3em;">${part}</span>`
+    .map((part) => {
+      // Удаляем лишние пробелы по краям, но сохраняем их для спана с помощью margin, если нужно
+      return `<span class="init-blur-up" style="display: inline-block;">${part.trim()}&nbsp;</span>`
     })
     .join('')
 

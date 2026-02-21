@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { Link } from '@/components/ui/Link'
 import { Button } from '@/components/ui/Button'
 import { animateHeader } from '@/utils/headerAnimations'
@@ -27,6 +28,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
   const headerRef = useRef<HTMLElement>(null)
   const menuBackgroundRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     if (headerRef.current && menuBackgroundRef.current) {
@@ -34,10 +36,21 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
     }
   }, [])
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/') {
+      e.preventDefault()
+      if (typeof window !== 'undefined' && (window as any).fullpage_api) {
+        (window as any).fullpage_api.moveTo(1)
+      } else {
+        window.scrollTo(0, 0)
+      }
+    }
+  }
+
   return (
     <header ref={headerRef} className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.logo}>
+        <a href='/' className={styles.logo} onClick={handleLogoClick}>
           <svg
             width="87"
             height="35"
@@ -85,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
               </clipPath>
             </defs>
           </svg>
-        </div>
+        </a>
         <nav className={styles.menu}>
           <div ref={menuBackgroundRef} className={styles.menuBackground}></div>
           {menuItems.map((item) => (

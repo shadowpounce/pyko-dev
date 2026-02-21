@@ -90,7 +90,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ sectionIndex }) => {
                         <Button variant="primary" withArrow animationDelay={buttonDelay}>
                             Open roles
                         </Button>
-                        <Button variant="secondary" transparent withArrow animationDelay={buttonDelay}>Email us</Button>
+                        <Button variant="tertiary" transparent withArrow animationDelay={buttonDelay}>Email us</Button>
                     </div>
                 </div>
                 <div className={styles.footer}>
